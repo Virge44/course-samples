@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-08-19T13:36:04-04:00",
-  "asOfLabel": "2026-08-19 13:36 ET",
+  "asOf": "2026-08-19T13:37:06-04:00",
+  "asOfLabel": "2026-08-19 13:37 ET",
   "person": {
     "name": "Virgil Renfroe",
     "zone": "America/New_York",
@@ -323,6 +323,10 @@
     {
       "date": "2026-08-19",
       "line": "Proof LIVE \u2014 CW 101 + AR 101 player clickable on first screen. No LLM. No apply."
+    },
+    {
+      "date": "2026-08-19",
+      "line": "Proof LIVE \u2014 Listen button in flight (speechSynthesis, no API). CW+AR first. No apply."
     }
   ],
   "faders": [
@@ -340,9 +344,9 @@
       "key": "proof",
       "label": "PROOF",
       "sub": "packets",
-      "value": 96,
+      "value": 97,
       "muted": false,
-      "formula": "CW+AR player live on Pages \u2192 96"
+      "formula": "Listen button in flight after CW+AR player \u2192 97"
     },
     {
       "ch": "03",
@@ -672,5 +676,11 @@
     ],
     "started": "2026-08-19 13:33 ET",
     "live": "2026-08-19 13:36 ET"
+  },
+  "proofListen": {
+    "what": "Listen button via speechSynthesis",
+    "rules": "no live API, no hosted MP3s, English first, CW+AR first",
+    "status": "in flight",
+    "started": "2026-08-19 13:37 ET"
   }
 }
