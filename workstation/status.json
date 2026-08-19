@@ -1,5 +1,5 @@
 {
-  "asOf": "2026-08-19T13:28:15-04:00",
+  "asOf": "2026-08-19T13:28:54-04:00",
   "asOfLabel": "2026-08-19 13:28 ET",
   "person": {
     "name": "Virgil Renfroe",
@@ -295,6 +295,10 @@
     {
       "date": "2026-08-19",
       "line": "Archive heartbeat back \u2014 job-search and builds Drive stay unmixed"
+    },
+    {
+      "date": "2026-08-19",
+      "line": "Studio heartbeat back \u2014 Nestlight local /workspace/nestlight/ \u00b7 prod untouched"
     }
   ],
   "faders": [
@@ -321,9 +325,9 @@
       "key": "studio",
       "label": "STUDIO",
       "sub": "apps",
-      "value": 67,
+      "value": 72,
       "muted": false,
-      "formula": "min(100, appBlocks*8) + nestlightLocal*10 - tunnelMaybeDead*15 \u2192 72+10-15 = 67"
+      "formula": "dummy heartbeat back \u2192 72 (was 67)"
     },
     {
       "ch": "04",
@@ -439,7 +443,7 @@
     "traces": 34,
     "tracesLabel": "34 live traces",
     "heartbeatsOut": 6,
-    "heartbeatsBack": 2
+    "heartbeatsBack": 3
   },
   "traces": [
     {
@@ -627,7 +631,8 @@
     ],
     "back": [
       "Market",
-      "Archive"
+      "Archive",
+      "Studio"
     ],
     "note": "dummy only \u2014 no scan, no letter, no listing, no Drive move"
   }
