@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-08-19T13:27:34-04:00",
-  "asOfLabel": "2026-08-19 13:27 ET",
+  "asOf": "2026-08-19T13:28:15-04:00",
+  "asOfLabel": "2026-08-19 13:28 ET",
   "person": {
     "name": "Virgil Renfroe",
     "zone": "America/New_York",
@@ -291,6 +291,10 @@
     {
       "date": "2026-08-19",
       "line": "Market heartbeat back \u2014 Greensboro pickup, approve listings, sign-in Thu 10:00"
+    },
+    {
+      "date": "2026-08-19",
+      "line": "Archive heartbeat back \u2014 job-search and builds Drive stay unmixed"
     }
   ],
   "faders": [
@@ -335,9 +339,9 @@
       "key": "archive",
       "label": "ARCHV",
       "sub": "drive",
-      "value": 22,
+      "value": 32,
       "muted": false,
-      "formula": "heartbeat in flight \u2192 22 (was 12 MUTE)"
+      "formula": "dummy heartbeat back \u2192 32"
     },
     {
       "ch": "06",
@@ -435,7 +439,7 @@
     "traces": 34,
     "tracesLabel": "34 live traces",
     "heartbeatsOut": 6,
-    "heartbeatsBack": 1
+    "heartbeatsBack": 2
   },
   "traces": [
     {
@@ -622,7 +626,8 @@
       "Market"
     ],
     "back": [
-      "Market"
+      "Market",
+      "Archive"
     ],
     "note": "dummy only \u2014 no scan, no letter, no listing, no Drive move"
   }
