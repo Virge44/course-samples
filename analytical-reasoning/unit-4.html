@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-course="ar101" data-unit="4">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -326,6 +326,8 @@ footer a { color: var(--accent-ink); }
 }
 
 </style>
+<link rel="stylesheet" href="interact.css" />
+<script src="interact.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -390,9 +392,14 @@ footer a { color: var(--accent-ink); }
     <div class="feedback" id="study1fb" role="status"></div>
   </div>
 
-  <h2>Homework</h2>
-  <blockquote class="prompt">Find one number in the wild this week: a posted campus survey, a budget or enrollment figure, a city or county agenda packet, a news story you can link or name. Copy the sentence that uses the number. Then, in 150–220 words: (1) What is the number a percent or count <em>of</em>? If the source does not say, write that. (2) What comparison is missing? (3) What claim can the number actually buy, and what claim is too large? Do not invent a study to fill the gap.</blockquote>
-  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+    <div class="homework" id="homework">
+    <h2>Homework</h2>
+    <blockquote class="prompt">Find one number in the wild this week: a posted campus survey, a budget or enrollment figure, a city or county agenda packet, a news story you can link or name. Copy the sentence that uses the number. Then, in 150–220 words: (1) What is the number a percent or count <em>of</em>? If the source does not say, write that. (2) What comparison is missing? (3) What claim can the number actually buy, and what claim is too large? Do not invent a study to fill the gap.</blockquote>
+    <label class="field" for="hw4">Draft here — saved in this browser only. Nothing is uploaded.</label>
+    <textarea id="hw4" rows="8" placeholder="Write it here. Leave and come back in this browser — it will still be here."></textarea>
+    <p class="wc" id="hw4wc"></p>
+    <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+  </div>
 
   <nav class="pager" aria-label="Unit">
     <a href="unit-3.html">← Unit 3: Valid vs sound</a>

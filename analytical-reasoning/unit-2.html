@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-course="ar101" data-unit="2">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -326,6 +326,8 @@ footer a { color: var(--accent-ink); }
 }
 
 </style>
+<link rel="stylesheet" href="interact.css" />
+<script src="interact.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -390,10 +392,15 @@ footer a { color: var(--accent-ink); }
     <div class="feedback" id="assume1fb" role="status"></div>
   </div>
 
-  <h2>Homework</h2>
-  <p>Turn this in if you have a section that wants it. Do not invent the argument.</p>
-  <blockquote class="prompt">Take one short argument from a posted campus notice, a city or county agenda item you can point to, a roommate, or a class discussion. Quote or paraphrase it in two sentences (claim + because). Then write the load-bearing assumption in one sentence: “This argument assumes that…” Then write one sentence saying what happens to the argument if that assumption is false. 150–220 words. Do not attack the speaker. Name the plank.</blockquote>
-  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+    <div class="homework" id="homework">
+    <h2>Homework</h2>
+    <p>Turn this in if you have a section that wants it. Do not invent the argument.</p>
+    <blockquote class="prompt">Take one short argument from a posted campus notice, a city or county agenda item you can point to, a roommate, or a class discussion. Quote or paraphrase it in two sentences (claim + because). Then write the load-bearing assumption in one sentence: “This argument assumes that…” Then write one sentence saying what happens to the argument if that assumption is false. 150–220 words. Do not attack the speaker. Name the plank.</blockquote>
+    <label class="field" for="hw2">Draft here — saved in this browser only. Nothing is uploaded.</label>
+    <textarea id="hw2" rows="8" placeholder="Write it here. Leave and come back in this browser — it will still be here."></textarea>
+    <p class="wc" id="hw2wc"></p>
+    <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+  </div>
 
   <nav class="pager" aria-label="Unit">
     <a href="unit-1.html">← Unit 1: Reasons</a>

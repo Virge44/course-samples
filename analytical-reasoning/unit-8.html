@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-course="ar101" data-unit="8">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -326,6 +326,8 @@ footer a { color: var(--accent-ink); }
 }
 
 </style>
+<link rel="stylesheet" href="interact.css" />
+<script src="interact.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -388,9 +390,14 @@ footer a { color: var(--accent-ink); }
     <div class="feedback" id="close8fb" role="status"></div>
   </div>
 
-  <h2>Homework</h2>
-  <blockquote class="prompt">Close a short case (300–450 words) on a civic or campus issue you can point to. At the top, give the pointer: URL, agenda packet title and date, photo of a door notice (if your section allows), or syllabus line. Then label: Claim. Reasons. Assumption if one is load-bearing. Objection. Reply. Next step. Rules: do not invent news, quotes, or studies. If a number is missing, say so. Adult tone. A classmate who disagrees should still be able to check your steps. This is the course close, not a research paper.</blockquote>
-  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+    <div class="homework" id="homework">
+    <h2>Homework</h2>
+    <blockquote class="prompt">Close a short case (300–450 words) on a civic or campus issue you can point to. At the top, give the pointer: URL, agenda packet title and date, photo of a door notice (if your section allows), or syllabus line. Then label: Claim. Reasons. Assumption if one is load-bearing. Objection. Reply. Next step. Rules: do not invent news, quotes, or studies. If a number is missing, say so. Adult tone. A classmate who disagrees should still be able to check your steps. This is the course close, not a research paper.</blockquote>
+    <label class="field" for="hw8">Draft here — saved in this browser only. Nothing is uploaded.</label>
+    <textarea id="hw8" rows="8" placeholder="Write it here. Leave and come back in this browser — it will still be here."></textarea>
+    <p class="wc" id="hw8wc"></p>
+    <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+  </div>
 
   <nav class="pager" aria-label="Unit">
     <a href="unit-7.html">← Unit 7: Short case</a>

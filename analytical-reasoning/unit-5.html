@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-course="ar101" data-unit="5">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -326,6 +326,8 @@ footer a { color: var(--accent-ink); }
 }
 
 </style>
+<link rel="stylesheet" href="interact.css" />
+<script src="interact.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -388,9 +390,14 @@ footer a { color: var(--accent-ink); }
     <div class="feedback" id="bin1fb" role="status"></div>
   </div>
 
-  <h2>Homework</h2>
-  <blockquote class="prompt">Catch one analogy or category in the wild: a syllabus policy, a roommate argument, a public comment, a posted comparison (“this is just like…”). In 150–220 words: (1) quote or paraphrase the comparison; (2) name the shared feature that would have to travel; (3) name one difference that would break it; (4) rewrite the claim without the picture, using only the feature you are willing to defend. Do not invent the original comparison.</blockquote>
-  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+    <div class="homework" id="homework">
+    <h2>Homework</h2>
+    <blockquote class="prompt">Catch one analogy or category in the wild: a syllabus policy, a roommate argument, a public comment, a posted comparison (“this is just like…”). In 150–220 words: (1) quote or paraphrase the comparison; (2) name the shared feature that would have to travel; (3) name one difference that would break it; (4) rewrite the claim without the picture, using only the feature you are willing to defend. Do not invent the original comparison.</blockquote>
+    <label class="field" for="hw5">Draft here — saved in this browser only. Nothing is uploaded.</label>
+    <textarea id="hw5" rows="8" placeholder="Write it here. Leave and come back in this browser — it will still be here."></textarea>
+    <p class="wc" id="hw5wc"></p>
+    <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+  </div>
 
   <nav class="pager" aria-label="Unit">
     <a href="unit-4.html">← Unit 4: Numbers</a>

@@ -4,7 +4,7 @@ A playable eight-unit first-year course: a claim someone else can test. Draft sa
 
 Written in the grain of the Critical Writing course the author co-created and taught as Lecturer, University Studies, NC A&T (2004–2016). It is not that course. It is not currently taught at A&T.
 
-**Open the course:** keep this folder together. Double-click `index.html` in Chrome, Safari, Firefox, or Edge. Do not rely on a Google Drive (or similar) in-browser preview — the practice activities will not run. No server, no login, relative links only. `styles.css` must sit next to the HTML files.
+**Open the course:** keep this folder together. Double-click `index.html` in Chrome, Safari, Firefox, or Edge. Do not rely on a Google Drive (or similar) in-browser preview — the practice activities will not run. No server, no login, relative links only. `styles.css`, `interact.js`, and `interact.css` must sit next to the HTML files. Practice and homework run in the browser. Progress and drafts stay in this tab’s storage. Nothing is uploaded.
 
 ## Honesty
 
@@ -18,6 +18,7 @@ The author is an educator and online-learning lead who designs learning and ship
 | --- | --- |
 | `index.html` | Syllabus / course home. Start here. |
 | `styles.css` | Shared look (Georgia / teal / ink). |
+| `interact.js` / `interact.css` | Course player: sticky progress, jump to practice, saved homework. |
 | `unit-1.html` | Who you’re writing to (~35 min) |
 | `unit-2.html` | Reading as a writer (~35 min) |
 | `unit-3.html` | A claim that can be wrong (~40 min) |

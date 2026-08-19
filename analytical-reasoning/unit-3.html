@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-course="ar101" data-unit="3">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -326,6 +326,8 @@ footer a { color: var(--accent-ink); }
 }
 
 </style>
+<link rel="stylesheet" href="interact.css" />
+<script src="interact.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -392,9 +394,14 @@ footer a { color: var(--accent-ink); }
     <div class="feedback" id="fix1fb" role="status"></div>
   </div>
 
-  <h2>Homework</h2>
-  <blockquote class="prompt">Find one short argument (posted notice, class discussion, roommate, a public comment on a city or campus agenda you can point to). Write it as two or three sentences: reasons, then claim. Diagnose it in 150–220 words: (1) If the reasons were true, must the claim be true? (pipe) (2) Should we grant the reasons? (water) (3) If the claim is too big, rewrite a smaller claim the reasons could actually buy. Do not invent facts to “help” the speaker.</blockquote>
-  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+    <div class="homework" id="homework">
+    <h2>Homework</h2>
+    <blockquote class="prompt">Find one short argument (posted notice, class discussion, roommate, a public comment on a city or campus agenda you can point to). Write it as two or three sentences: reasons, then claim. Diagnose it in 150–220 words: (1) If the reasons were true, must the claim be true? (pipe) (2) Should we grant the reasons? (water) (3) If the claim is too big, rewrite a smaller claim the reasons could actually buy. Do not invent facts to “help” the speaker.</blockquote>
+    <label class="field" for="hw3">Draft here — saved in this browser only. Nothing is uploaded.</label>
+    <textarea id="hw3" rows="8" placeholder="Write it here. Leave and come back in this browser — it will still be here."></textarea>
+    <p class="wc" id="hw3wc"></p>
+    <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+  </div>
 
   <nav class="pager" aria-label="Unit">
     <a href="unit-2.html">← Unit 2: Assumptions</a>

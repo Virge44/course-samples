@@ -1,5 +1,7 @@
 # Facilitator note — Critical Writing 101 (draft sample)
 
+Practice and homework run in this browser. Nothing is uploaded. Unit progress and homework drafts stay in this tab’s storage.
+
 For an instructor who might run this async or hybrid. A colleague page, not a vendor deck. **Not official NC A&T curriculum. Not a live institutional course.**
 
 **Author frame (say this if asked; do not make it the opener).** Educator and online-learning lead. Co-created Critical Writing and taught it as Lecturer, University Studies, NC A&T (2004–2016). Director of Online Learning, 2008–2012 (Blackboard, faculty PD, online/hybrid). MFA, Creative Writing, UNCG. Designs learning and ships working prototypes by directing AI coding agents; not a software engineer. This sample is written in the grain of that Critical Writing course. It is not that course. It is not currently taught at A&T. Do not imply it is.

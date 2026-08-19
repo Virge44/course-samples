@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-course="ar101" data-unit="6">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -326,6 +326,8 @@ footer a { color: var(--accent-ink); }
 }
 
 </style>
+<link rel="stylesheet" href="interact.css" />
+<script src="interact.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -400,9 +402,14 @@ footer a { color: var(--accent-ink); }
     <div class="feedback" id="fix6fb" role="status"></div>
   </div>
 
-  <h2>Homework</h2>
-  <blockquote class="prompt">Catch one of the five moves in ordinary talk this week — a comment thread, a class discussion, a roommate, a public meeting clip you can point to. Do not invent a villain. In 150–220 words: (1) quote or paraphrase the sentence; (2) name the move in plain language; (3) write the repaired version; (4) say what a classmate could now check. If you are not sure it is a fallacy, say which unit it might belong to instead (assumption, leaky pipe, missing base).</blockquote>
-  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+    <div class="homework" id="homework">
+    <h2>Homework</h2>
+    <blockquote class="prompt">Catch one of the five moves in ordinary talk this week — a comment thread, a class discussion, a roommate, a public meeting clip you can point to. Do not invent a villain. In 150–220 words: (1) quote or paraphrase the sentence; (2) name the move in plain language; (3) write the repaired version; (4) say what a classmate could now check. If you are not sure it is a fallacy, say which unit it might belong to instead (assumption, leaky pipe, missing base).</blockquote>
+    <label class="field" for="hw6">Draft here — saved in this browser only. Nothing is uploaded.</label>
+    <textarea id="hw6" rows="8" placeholder="Write it here. Leave and come back in this browser — it will still be here."></textarea>
+    <p class="wc" id="hw6wc"></p>
+    <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+  </div>
 
   <nav class="pager" aria-label="Unit">
     <a href="unit-5.html">← Unit 5: Analogies</a>

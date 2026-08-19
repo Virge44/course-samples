@@ -2,7 +2,7 @@
 
 A playable eight-unit college 101 for first-year / gen-ed students. Draft sample by Virgil Renfroe. Not a live institutional course. Not official NC A&T curriculum. Do not apply anywhere. No student data. No invented school partners.
 
-**Open the course:** keep this folder together and double-click `index.html` in Chrome, Safari, or Firefox. Do not rely on a Google Drive (or similar) in-browser preview — the practice activities will not run. No server, no login, relative links only.
+**Open the course:** keep this folder together and double-click `index.html` in Chrome, Safari, or Firefox. Do not rely on a Google Drive (or similar) in-browser preview — the practice activities will not run. No server, no login, relative links only. `interact.js` and `interact.css` must sit next to the HTML files. Practice and homework run in the browser. Progress and drafts stay in this tab’s storage. Nothing is uploaded.
 
 ## Honesty
 
@@ -15,6 +15,7 @@ The author is an educator and online-learning lead who designs learning and ship
 | File | What it is |
 | --- | --- |
 | `index.html` | Syllabus / course home. Start here. |
+| `interact.js` / `interact.css` | Course player: sticky progress, jump to practice, saved homework. |
 | `unit-1.html` | What counts as a reason (claim vs because) |
 | `unit-2.html` | Hidden assumptions |
 | `unit-3.html` | Valid vs sound (pipe and water) |

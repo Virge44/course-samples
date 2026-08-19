@@ -1,0 +1,241 @@
+/* Shared course player — Critical Writing / Analytical Reasoning.
+   Uses page --accent tokens. No unlock chrome. No live API. */
+
+:root {
+  --ix-ink: var(--ink, #1c1916);
+  --ix-muted: var(--muted, #5c564c);
+  --ix-rule: var(--rule, #d4cfc4);
+  --ix-paper: var(--paper, #f7f4ee);
+  --ix-panel: var(--panel, #efeae1);
+  --ix-card: var(--card, #ffffff);
+  --ix-accent: var(--accent, #1f5c56);
+  --ix-accent-ink: var(--accent-ink, #143d39);
+  --ix-accent-soft: var(--accent-soft, #dceae7);
+  --ix-ok: var(--ok, #1b5e3b);
+  --ix-ok-bg: var(--ok-bg, #e4f3ea);
+  --ix-bad: var(--bad, #8b2e2e);
+  --ix-bad-bg: var(--bad-bg, #f8e6e4);
+  --ix-warn: var(--warn, #8a4b12);
+  --ix-focus: var(--focus, #0d6e66);
+  --ix-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+.ix-bar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.75rem;
+  padding: 0.5rem 1.15rem;
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--ix-rule);
+  font-family: var(--ix-sans);
+  font-size: 0.8rem;
+  color: var(--ix-ink);
+  backdrop-filter: blur(6px);
+}
+.ix-bar a {
+  color: var(--ix-accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.ix-bar a:hover, .ix-bar a:focus { border-bottom-color: var(--ix-accent); }
+.ix-bar .ix-who {
+  display: flex;
+  flex-direction: column;
+  min-width: 9rem;
+  line-height: 1.25;
+}
+.ix-bar .ix-who strong { font-size: 0.86rem; }
+.ix-bar .ix-who span { color: var(--ix-muted); font-size: 0.74rem; }
+.ix-prog {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.55rem;
+  margin-left: auto;
+}
+.ix-count {
+  color: var(--ix-muted);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.ix-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.28rem;
+}
+.ix-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--ix-rule);
+  background: #fff;
+  color: var(--ix-accent-ink);
+  font-family: var(--ix-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0;
+}
+.ix-dot:hover, .ix-dot:focus { border-color: var(--ix-accent); }
+.ix-dot.is-done {
+  background: var(--ix-ok-bg);
+  border-color: var(--ix-ok);
+  color: var(--ix-ok);
+}
+.ix-dot.is-now {
+  border-color: var(--ix-accent);
+  background: var(--ix-accent);
+  color: #fff;
+  box-shadow: 0 0 0 2px var(--ix-accent-soft);
+}
+.ix-dot[aria-current="page"] { font-weight: 800; }
+
+.ix-bar button.ix-jump,
+.ix-jumpbox button {
+  font-family: var(--ix-sans);
+  font-size: 0.86rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--ix-rule);
+  background: var(--ix-panel);
+  color: var(--ix-ink);
+  padding: 0.48rem 0.85rem;
+}
+.ix-bar button.ix-jump.primary,
+.ix-jumpbox button.primary {
+  background: var(--ix-accent);
+  color: #fff;
+  border-color: var(--ix-accent);
+  font-weight: 700;
+}
+.ix-bar button.ix-jump:focus,
+.ix-jumpbox button:focus,
+.ix-dot:focus {
+  outline: 2px solid var(--ix-focus);
+  outline-offset: 2px;
+}
+
+.ix-jumpbox {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 1.15rem;
+  padding: 0.75rem 0.85rem;
+  background: var(--ix-accent-soft);
+  border: 1px solid var(--ix-accent);
+  border-radius: 8px;
+}
+.ix-jumpbox .ix-hint {
+  flex: 1 1 12rem;
+  margin: 0;
+  font-family: var(--ix-sans);
+  font-size: 0.82rem;
+  color: var(--ix-accent-ink);
+  line-height: 1.4;
+}
+
+.ix-flow { display: flex; flex-direction: column; }
+body.ix-practice-first .ix-lesson { order: 2; }
+body.ix-practice-first .ix-practice { order: 1; }
+
+.ix-homebox {
+  background: var(--ix-card);
+  border: 1px solid var(--ix-accent);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.85rem;
+  margin: 0 0 1.15rem;
+}
+.ix-homebox p { margin: 0 0 0.55rem; }
+.ix-homebox .ix-home-count {
+  font-family: var(--ix-sans);
+  font-size: 1.05rem;
+  margin: 0 0 0.45rem;
+}
+.ix-privacy {
+  font-family: var(--ix-sans);
+  font-size: 0.84rem;
+  color: var(--ix-muted);
+  margin: 0.55rem 0 0.75rem !important;
+}
+.ix-homebox .ix-dots { margin: 0.35rem 0 0.65rem; }
+.ix-saved {
+  font-family: var(--ix-sans);
+  font-size: 0.78rem;
+  color: var(--ix-ok);
+  margin: 0.2rem 0 0;
+}
+
+.ix-live {
+  margin: 0.45rem 0 0;
+  padding: 0.55rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid var(--ix-rule);
+  background: var(--ix-panel);
+  font-family: var(--ix-sans);
+  font-size: 0.86rem;
+  display: none;
+}
+.ix-live.show { display: block; }
+.ix-live.ok { border-color: var(--ix-ok); background: var(--ix-ok-bg); }
+.ix-live.bad { border-color: var(--ix-warn); background: #f8efe4; color: var(--ix-ink); }
+.ix-live ul { margin: 0.25rem 0 0; padding-left: 1.15rem; }
+.ix-live li { margin: 0.15rem 0; }
+
+.ix-chiprow { margin: 0 0 0.55rem; }
+.ix-chiprow .choice { margin-bottom: 0.4rem; }
+.ix-chiprow .choice.picked {
+  border-color: var(--ix-accent);
+  background: var(--ix-accent-soft);
+}
+
+.homework {
+  background: var(--ix-card);
+  border: 1px solid var(--ix-accent-ink);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.homework h2 {
+  border: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+.wc {
+  font-family: var(--ix-sans);
+  font-size: 0.75rem;
+  color: var(--ix-muted);
+  margin-top: 0.25rem;
+}
+
+@keyframes ix-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(31, 92, 86, 0.35); }
+  100% { box-shadow: 0 0 0 14px rgba(31, 92, 86, 0); }
+}
+.ix-pulse { animation: ix-pulse 0.85s ease; }
+
+@media print {
+  .ix-bar, .ix-jumpbox { display: none; }
+  body.ix-practice-first .ix-lesson,
+  body.ix-practice-first .ix-practice { order: unset; }
+}
+
+@media (max-width: 640px) {
+  .ix-bar { padding: 0.45rem 0.75rem; }
+  .ix-bar .ix-who { min-width: 0; flex: 1 1 100%; }
+  .ix-prog { margin-left: 0; width: 100%; }
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}

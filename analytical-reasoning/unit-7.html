@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-course="ar101" data-unit="7">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -326,6 +326,8 @@ footer a { color: var(--accent-ink); }
 }
 
 </style>
+<link rel="stylesheet" href="interact.css" />
+<script src="interact.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -394,9 +396,14 @@ footer a { color: var(--accent-ink); }
     <div class="feedback" id="case7fb" role="status"></div>
   </div>
 
-  <h2>Homework</h2>
-  <blockquote class="prompt">Build a short case (250–350 words) on a small campus-shaped claim you can point to — hours, a shuttle, a lab policy, a posted notice. Label four parts: Claim. Reasons. Objection. Reply. The objection must be one a real opponent would sign. Do not invent ridership, quotes, or a study. If a number is missing, say it is missing and name the check (a two-week count, a posted survey n). You will use this muscle in Unit 8 on an issue you choose.</blockquote>
-  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+    <div class="homework" id="homework">
+    <h2>Homework</h2>
+    <blockquote class="prompt">Build a short case (250–350 words) on a small campus-shaped claim you can point to — hours, a shuttle, a lab policy, a posted notice. Label four parts: Claim. Reasons. Objection. Reply. The objection must be one a real opponent would sign. Do not invent ridership, quotes, or a study. If a number is missing, say it is missing and name the check (a two-week count, a posted survey n). You will use this muscle in Unit 8 on an issue you choose.</blockquote>
+    <label class="field" for="hw7">Draft here — saved in this browser only. Nothing is uploaded.</label>
+    <textarea id="hw7" rows="8" placeholder="Write it here. Leave and come back in this browser — it will still be here."></textarea>
+    <p class="wc" id="hw7wc"></p>
+    <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+  </div>
 
   <nav class="pager" aria-label="Unit">
     <a href="unit-6.html">← Unit 6: Fallacies</a>

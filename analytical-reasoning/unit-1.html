@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-course="ar101" data-unit="1">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -326,6 +326,8 @@ footer a { color: var(--accent-ink); }
 }
 
 </style>
+<link rel="stylesheet" href="interact.css" />
+<script src="interact.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -372,6 +374,29 @@ footer a { color: var(--accent-ink); }
     <div class="pair"><div class="tag">Because (circle)</div>Students deserve weekend support. <span class="muted">Warmer. Not a reason yet.</span></div>
   </div>
 
+
+  <div class="practice" id="because-assembler">
+    <p class="eyebrow">Practice</p>
+    <h2>Assemble a because</h2>
+    <p>Claim: <strong>The dining hall should stay open until 9.</strong> Build a because a classmate could check. Pick one opening and one closer, then check. Immediate feedback. Not a score.</p>
+    <p class="stem">Opening</p>
+    <div class="ix-chiprow" role="group" aria-label="Because opening">
+      <button type="button" class="choice ix-pick" data-part="open" data-id="o1" data-ok="1">because the last class block ends at 8:10</button>
+      <button type="button" class="choice ix-pick" data-part="open" data-id="o2" data-ok="0">because students deserve a real dinner</button>
+      <button type="button" class="choice ix-pick" data-part="open" data-id="o3" data-ok="0">because everyone knows the food situation is a mess</button>
+    </div>
+    <p class="stem">Closer</p>
+    <div class="ix-chiprow" role="group" aria-label="Because closer">
+      <button type="button" class="choice ix-pick" data-part="close" data-id="c1" data-ok="1">and the line is still thirty people at closing.</button>
+      <button type="button" class="choice ix-pick" data-part="close" data-id="c2" data-ok="0">and people have feelings about this.</button>
+      <button type="button" class="choice ix-pick" data-part="close" data-id="c3" data-ok="0">which obviously matters.</button>
+    </div>
+    <p class="muted">Assembled sentence</p>
+    <div class="outbox" id="ba-preview">The dining hall should stay open until 9 …</div>
+    <div class="actions"><button type="button" class="btn primary" id="ba-check">Check this because</button></div>
+    <div class="feedback" id="ba-fb" role="status"></div>
+  </div>
+
   <div class="practice" id="p-split">
     <p class="eyebrow">Practice</p>
     <h2>Mark the claim</h2>
@@ -400,10 +425,15 @@ footer a { color: var(--accent-ink); }
     <div class="feedback" id="because1fb" role="status"></div>
   </div>
 
-  <h2>Homework</h2>
-  <p>You could turn this in on paper or paste it into a journal. This file does not collect it.</p>
-  <blockquote class="prompt">Find one claim in ordinary campus talk this week — dining hours, parking, attendance, a posted notice, a roommate argument. Do not invent a story. Copy or paraphrase the claim in one sentence. Then write a because-clause that would support it (or that the speaker seemed to mean). Then write one more sentence: how could a classmate check that because without already agreeing? 150–200 words. If you cannot find a checkable because, say so, and write the because the speaker would need.</blockquote>
-  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+    <div class="homework" id="homework">
+    <h2>Homework</h2>
+    <p>Turn this in if a section wants it. The box below stays in this browser only.</p>
+    <blockquote class="prompt">Find one claim in ordinary campus talk this week — dining hours, parking, attendance, a posted notice, a roommate argument. Do not invent a story. Copy or paraphrase the claim in one sentence. Then write a because-clause that would support it (or that the speaker seemed to mean). Then write one more sentence: how could a classmate check that because without already agreeing? 150–200 words. If you cannot find a checkable because, say so, and write the because the speaker would need.</blockquote>
+    <label class="field" for="hw1">Draft here — saved in this browser only. Nothing is uploaded.</label>
+    <textarea id="hw1" rows="8" placeholder="Write it here. Leave and come back in this browser — it will still be here."></textarea>
+    <p class="wc" id="hw1wc"></p>
+    <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+  </div>
 
   <nav class="pager" aria-label="Unit">
     <a href="index.html">← Course home</a>

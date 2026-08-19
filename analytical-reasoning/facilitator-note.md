@@ -1,5 +1,7 @@
 # Facilitator note — Analytical Reasoning 101 (draft sample)
 
+Practice and homework run in this browser. Nothing is uploaded. Unit progress and homework drafts stay in this tab’s storage.
+
 A colleague note, not a vendor deck and not official NC A&T curriculum. For someone who might run this compressed 101 as a sample, a bridge week, or a gen-ed lab. Do not treat it as a live institutional course. Do not apply it as credit.
 
 **Author frame (say this if asked; do not make it the opener).** Educator and online-learning lead. NC A&T Lecturer, University Studies (Analytical Reasoning at large enrollment — often 300–600 students a semester, many underprepared — Critical Writing, Humanities), 2004–2016. Director of Online Learning, 2008–2012. MFA, Creative Writing, UNCG. GRE/LSAT logic tutoring in the background; this sample is gen-ed, not test prep. Designs learning and ships working prototypes by directing AI coding agents; not a software engineer.
