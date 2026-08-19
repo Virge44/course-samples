@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  WORKSTATION — Virgil Renfroe  ·  2026-08-19 12:10 ET
+  WORKSTATION — Virgil Renfroe  ·  2026-08-19 13:26 ET
   Honest HUD: 7 teammates, 4 lecturer-true live, 6 science samples (not taught),
   5 packets (1 held), 3 boards, 9 app blocks, last Scout scan 1 weekday ago, 34 traces.
   Fader formulas are in the script comment below. No fake agent counts.
@@ -480,7 +480,7 @@
   </main>
 
   <footer class="foot">
-    <span>Draft · not submitted · numbers are live as of 2026-08-19 12:10 ET</span>
+    <span>Draft · not submitted · numbers are live as of 2026-08-19 13:26 ET</span>
     <b>educator / online-learning lead · apps = AI-literacy proof, not engineering tenure</b>
   </footer>
 </div>
@@ -503,8 +503,8 @@
   Particle density is visual (many dots per trace). HUD count is the real item count.
 */
 const FALLBACK = {
-  "asOf": "2026-08-19T12:10:00-04:00",
-  "asOfLabel": "2026-08-19 12:10 ET",
+  "asOf": "2026-08-19T13:26:16-04:00",
+  "asOfLabel": "2026-08-19 13:26 ET",
   "person": {
     "name": "Virgil Renfroe",
     "zone": "America/New_York",
@@ -783,6 +783,14 @@ const FALLBACK = {
     {
       "date": "2026-08-21",
       "line": "NEXT  send-to-users 14:00\u201314:45 ET"
+    },
+    {
+      "date": "2026-08-19",
+      "line": "COS dummy ping \u2192 Scout Proof Studio Applications Archive Market"
+    },
+    {
+      "date": "2026-08-19",
+      "line": "Heartbeats 6 out \u00b7 0 back \u2014 dummy only, no apply"
     }
   ],
   "faders": [
@@ -827,18 +835,18 @@ const FALLBACK = {
       "key": "archive",
       "label": "ARCHV",
       "sub": "drive",
-      "value": 12,
-      "muted": true,
-      "formula": "activityThisWindow ? 60 : 12 \u2192 12 MUTED"
+      "value": 22,
+      "muted": false,
+      "formula": "heartbeat in flight \u2192 22 (was 12 MUTE)"
     },
     {
       "ch": "06",
       "key": "market",
       "label": "MARKET",
       "sub": "fb-mkt",
-      "value": 8,
-      "muted": true,
-      "formula": "signedIn ? 70 : (retryScheduled ? 8 : 0) \u2192 8 MUTED"
+      "value": 18,
+      "muted": false,
+      "formula": "heartbeat in flight \u2192 18 (was 8 MUTE)"
     }
   ],
   "swatches": [
@@ -925,7 +933,9 @@ const FALLBACK = {
     "appBlocks": 9,
     "scoutScanWeekdaysAgo": 1,
     "traces": 34,
-    "tracesLabel": "34 live traces"
+    "tracesLabel": "34 live traces",
+    "heartbeatsOut": 6,
+    "heartbeatsBack": 0
   },
   "traces": [
     {
@@ -1100,7 +1110,20 @@ const FALLBACK = {
       "label": "NC trail-conditions",
       "kind": "app"
     }
-  ]
+  ],
+  "heartbeats": {
+    "sentAt": "2026-08-19 13:26 ET",
+    "out": [
+      "Scout",
+      "Proof",
+      "Studio",
+      "Applications",
+      "Archive",
+      "Market"
+    ],
+    "back": [],
+    "note": "dummy only \u2014 no scan, no letter, no listing, no Drive move"
+  }
 };
 
 function $(id) { return document.getElementById(id); }
@@ -1160,6 +1183,7 @@ function render(data) {
       '<div><b>' + h.packetsDraft + '</b> proof packets · <b>' + h.packetHeld + '</b> held</div>' +
       '<div><b>' + h.boardsSignedIn + '</b> boards signed in · <b>' + h.appBlocks + '</b> app blocks</div>' +
       '<div>last Scout scan · <b>' + h.scoutScanWeekdaysAgo + '</b> weekday ago</div>' +
+      '<div><b>' + (h.heartbeatsBack||0) + '</b> of <b>' + (h.heartbeatsOut||0) + '</b> dummy heartbeats back</div>' +
     '</div>';
 
   $("swatches").innerHTML = data.swatches.map(s =>

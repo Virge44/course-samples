@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-08-19T12:10:00-04:00",
-  "asOfLabel": "2026-08-19 12:10 ET",
+  "asOf": "2026-08-19T13:26:16-04:00",
+  "asOfLabel": "2026-08-19 13:26 ET",
   "person": {
     "name": "Virgil Renfroe",
     "zone": "America/New_York",
@@ -279,6 +279,14 @@
     {
       "date": "2026-08-21",
       "line": "NEXT  send-to-users 14:00\u201314:45 ET"
+    },
+    {
+      "date": "2026-08-19",
+      "line": "COS dummy ping \u2192 Scout Proof Studio Applications Archive Market"
+    },
+    {
+      "date": "2026-08-19",
+      "line": "Heartbeats 6 out \u00b7 0 back \u2014 dummy only, no apply"
     }
   ],
   "faders": [
@@ -323,18 +331,18 @@
       "key": "archive",
       "label": "ARCHV",
       "sub": "drive",
-      "value": 12,
-      "muted": true,
-      "formula": "activityThisWindow ? 60 : 12 \u2192 12 MUTED"
+      "value": 22,
+      "muted": false,
+      "formula": "heartbeat in flight \u2192 22 (was 12 MUTE)"
     },
     {
       "ch": "06",
       "key": "market",
       "label": "MARKET",
       "sub": "fb-mkt",
-      "value": 8,
-      "muted": true,
-      "formula": "signedIn ? 70 : (retryScheduled ? 8 : 0) \u2192 8 MUTED"
+      "value": 18,
+      "muted": false,
+      "formula": "heartbeat in flight \u2192 18 (was 8 MUTE)"
     }
   ],
   "swatches": [
@@ -421,7 +429,9 @@
     "appBlocks": 9,
     "scoutScanWeekdaysAgo": 1,
     "traces": 34,
-    "tracesLabel": "34 live traces"
+    "tracesLabel": "34 live traces",
+    "heartbeatsOut": 6,
+    "heartbeatsBack": 0
   },
   "traces": [
     {
@@ -596,5 +606,18 @@
       "label": "NC trail-conditions",
       "kind": "app"
     }
-  ]
+  ],
+  "heartbeats": {
+    "sentAt": "2026-08-19 13:26 ET",
+    "out": [
+      "Scout",
+      "Proof",
+      "Studio",
+      "Applications",
+      "Archive",
+      "Market"
+    ],
+    "back": [],
+    "note": "dummy only \u2014 no scan, no letter, no listing, no Drive move"
+  }
 }
