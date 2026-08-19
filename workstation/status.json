@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-08-19T13:54:08-04:00",
-  "asOfLabel": "2026-08-19 13:54 ET",
+  "asOf": "2026-08-19T14:04:46-04:00",
+  "asOfLabel": "2026-08-19 14:04 ET",
   "person": {
     "name": "Virgil Renfroe",
     "zone": "America/New_York",
@@ -215,10 +215,6 @@
     ],
     "next": [
       {
-        "when": "Thu Aug 20 10:00\u201310:30 ET",
-        "what": "Marketplace sign-in"
-      },
-      {
         "when": "Thu Aug 20 14:00\u201315:30 ET",
         "what": "BarPal"
       },
@@ -229,10 +225,13 @@
     ]
   },
   "marketplace": {
-    "signedIn": false,
-    "retry": "Thu Aug 20 10:00 ET",
-    "pickup": "Greensboro",
-    "rule": "He approves listings."
+    "signedIn": true,
+    "as": "Virgil",
+    "pickup": "Greensboro, NC within 40 mi",
+    "activeListings": 13,
+    "identityCheck": false,
+    "retry": null,
+    "rule": "He approves listings, meetups, and price drops. No closed sales without him."
   },
   "log": [
     {
@@ -338,6 +337,10 @@
     {
       "date": "2026-08-19",
       "line": "Proof LIVE \u2014 Listen on Pages (speechSynthesis). Open a unit in Chrome/Safari. No apply."
+    },
+    {
+      "date": "2026-08-19",
+      "line": "Market LIVE \u2014 Facebook signed in. Greensboro 40mi \u00b7 13 listings. Thu 10:00 retry cancelled."
     }
   ],
   "faders": [
@@ -391,9 +394,9 @@
       "key": "market",
       "label": "MARKET",
       "sub": "fb-mkt",
-      "value": 28,
+      "value": 70,
       "muted": false,
-      "formula": "dummy heartbeat back \u2192 28"
+      "formula": "signedIn \u2192 70"
     }
   ],
   "swatches": [
@@ -421,8 +424,8 @@
     {
       "key": "pending",
       "label": "PENDING",
-      "count": 1,
-      "unit": "FB Thu 10:00",
+      "count": 0,
+      "unit": "Marketplace signed in",
       "color": "#c45c26"
     },
     {
