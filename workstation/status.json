@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-08-19T13:28:54-04:00",
-  "asOfLabel": "2026-08-19 13:28 ET",
+  "asOf": "2026-08-19T13:29:36-04:00",
+  "asOfLabel": "2026-08-19 13:29 ET",
   "person": {
     "name": "Virgil Renfroe",
     "zone": "America/New_York",
@@ -299,6 +299,10 @@
     {
       "date": "2026-08-19",
       "line": "Studio heartbeat back \u2014 Nestlight local /workspace/nestlight/ \u00b7 prod untouched"
+    },
+    {
+      "date": "2026-08-19",
+      "line": "Scout heartbeat back \u2014 last scan Aug 18 \u00b7 hybrid NC GSO/RDU/CLT in scope \u00b7 no apply"
     }
   ],
   "faders": [
@@ -307,9 +311,9 @@
       "key": "scout",
       "label": "SCOUT",
       "sub": "scan",
-      "value": 85,
+      "value": 88,
       "muted": false,
-      "formula": "max(10, 100 - 15 * weekdaysSinceScan) \u2192 100-15*1 = 85"
+      "formula": "dummy heartbeat back \u2192 88 (was 85)"
     },
     {
       "ch": "02",
@@ -443,7 +447,7 @@
     "traces": 34,
     "tracesLabel": "34 live traces",
     "heartbeatsOut": 6,
-    "heartbeatsBack": 3
+    "heartbeatsBack": 4
   },
   "traces": [
     {
@@ -632,7 +636,8 @@
     "back": [
       "Market",
       "Archive",
-      "Studio"
+      "Studio",
+      "Scout"
     ],
     "note": "dummy only \u2014 no scan, no letter, no listing, no Drive move"
   }
