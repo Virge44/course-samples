@@ -1,0 +1,600 @@
+{
+  "asOf": "2026-08-19T12:10:00-04:00",
+  "asOfLabel": "2026-08-19 12:10 ET",
+  "person": {
+    "name": "Virgil Renfroe",
+    "zone": "America/New_York",
+    "frame": "educator and online-learning lead",
+    "linkedin": "https://www.linkedin.com/in/virgil-renfroe-61b9a46a",
+    "headline": "University Teaching \u00b7 Writing & Humanities \u00b7 Tech-Friendly Learning",
+    "search": "remote nationwide + hybrid Greensboro / Raleigh / Charlotte; $65k floor; not a software-engineer hire"
+  },
+  "accounts": {
+    "jobSearch": "virgilrenfroe@gmail.com",
+    "builds": "outcomesnft@gmail.com",
+    "rule": "never mix"
+  },
+  "team": [
+    {
+      "name": "Chief of Staff",
+      "id": null,
+      "role": "pipeline"
+    },
+    {
+      "name": "Scout",
+      "id": "c2aa9571-74f2-45eb-b704-9c46a11f6dc4",
+      "role": "scan",
+      "lastFullScan": "2026-08-18",
+      "note": "hybrid NC update sent 2026-08-19; next shortlist should re-check WGU ID (Raleigh) and Triangle/Charlotte hybrids"
+    },
+    {
+      "name": "Proof",
+      "id": "26e78235-bcea-461c-876e-23f783b98782",
+      "role": "packets + courses"
+    },
+    {
+      "name": "Studio",
+      "id": "5b2adcf3-359d-45a5-9a95-00e348c13433",
+      "role": "apps"
+    },
+    {
+      "name": "Applications",
+      "id": "b5dd8356-963b-457f-8d34-b4be49e81721",
+      "role": "letters"
+    },
+    {
+      "name": "Archive",
+      "id": "044eba0c-91af-4a0b-936c-56d4374bbede",
+      "role": "Drive librarian"
+    },
+    {
+      "name": "Market",
+      "id": "865a1e7e-06e9-4cab-aeb0-7203410f047d",
+      "role": "Facebook Marketplace"
+    }
+  ],
+  "courses": {
+    "hub": "https://virge44.github.io/course-samples/",
+    "repo": "https://github.com/Virge44/course-samples",
+    "local": "/workspace/job-search/college-101/",
+    "live": [
+      {
+        "name": "AI Literacy",
+        "url": "https://virge44.github.io/course-samples/ai-literacy/"
+      },
+      {
+        "name": "Critical Writing 101",
+        "url": "https://virge44.github.io/course-samples/critical-writing/"
+      },
+      {
+        "name": "Analytical Reasoning 101",
+        "url": "https://virge44.github.io/course-samples/analytical-reasoning/"
+      },
+      {
+        "name": "Humanities 101",
+        "url": "https://virge44.github.io/course-samples/humanities/"
+      }
+    ],
+    "draft": [
+      {
+        "name": "Physics",
+        "url": "https://virge44.github.io/course-samples/physics/",
+        "note": "design sample on Pages \u2014 not taught as lecturer"
+      },
+      {
+        "name": "Biology",
+        "url": "https://virge44.github.io/course-samples/biology/",
+        "note": "design sample on Pages \u2014 not taught as lecturer"
+      },
+      {
+        "name": "Chemistry",
+        "url": "https://virge44.github.io/course-samples/chemistry/",
+        "note": "design sample on Pages \u2014 not taught as lecturer"
+      },
+      {
+        "name": "Earth Science",
+        "url": "https://virge44.github.io/course-samples/earth-science/",
+        "note": "design sample on Pages \u2014 not taught as lecturer"
+      },
+      {
+        "name": "Astronomy",
+        "url": "https://virge44.github.io/course-samples/astronomy/",
+        "note": "design sample on Pages \u2014 not taught as lecturer"
+      },
+      {
+        "name": "Statistics",
+        "url": "https://virge44.github.io/course-samples/statistics/",
+        "note": "design sample on Pages \u2014 not taught as lecturer"
+      }
+    ],
+    "honesty": "He did not teach those sciences. Lecturer = Critical Writing, Humanities, Analytical Reasoning. DOL designed \u201cScientific Development & Social Change\u201d (design/ops, not a science appointment). No \u201cI taught this at A&T.\u201d Science 101s may appear on Pages as design samples only."
+  },
+  "packets": [
+    {
+      "name": "Claremont Lincoln",
+      "status": "draft"
+    },
+    {
+      "name": "AI for Education",
+      "status": "held"
+    },
+    {
+      "name": "Playlab",
+      "status": "draft"
+    },
+    {
+      "name": "Instructure Foundry",
+      "status": "draft"
+    },
+    {
+      "name": "Vanta",
+      "status": "draft"
+    }
+  ],
+  "held": {
+    "packet": "AI for Education",
+    "rule": "Do not apply. If apply: send ONLY the AI Literacy Pages URL, not Clear Kiln, not trycloudflare.",
+    "sendUrl": "https://virge44.github.io/course-samples/ai-literacy/",
+    "yearbook": "held (minors/photos)"
+  },
+  "applyOrder": [
+    "Beal",
+    "Claremont Lincoln",
+    "EKU",
+    "Cumberlands if NC remote confirmed"
+  ],
+  "boards": [
+    {
+      "name": "Indeed",
+      "signedIn": true,
+      "note": "remote + $65k, 7 jobs + both UNCG degrees saved. Skills incomplete (old marketing set; only Instructional design added)."
+    },
+    {
+      "name": "ZipRecruiter",
+      "signedIn": true,
+      "note": "private, Greensboro, remote, $65k, 2026 resume, 7 jobs, both degrees, 10 educator skills. No desired-titles field."
+    },
+    {
+      "name": "LinkedIn",
+      "signedIn": true,
+      "url": "https://www.linkedin.com/in/virgil-renfroe-61b9a46a",
+      "note": "Open to work: Recruiters only, Remote + Hybrid, Greensboro + Raleigh + Charlotte. On-site off."
+    }
+  ],
+  "studio": {
+    "nestlight": {
+      "path": "/workspace/nestlight/",
+      "note": "faith-pack slice local. Classroom | Nighttime (Christian) toggle.",
+      "prod": "https://nestlight-production.up.railway.app",
+      "prodRule": "Do not touch production."
+    },
+    "tunnel": {
+      "url": "https://entered-plane-maximize-consolidated.trycloudflare.com",
+      "status": "may be dead"
+    },
+    "appBlocks": [
+      {
+        "date": "2026-08-20",
+        "name": "BarPal"
+      },
+      {
+        "date": "2026-08-27",
+        "name": "Noctuary"
+      },
+      {
+        "date": "2026-09-03",
+        "name": "Nestlight"
+      },
+      {
+        "date": "2026-09-10",
+        "name": "HVAC/Custom Air"
+      },
+      {
+        "date": "2026-09-17",
+        "name": "Vows"
+      },
+      {
+        "date": "2026-09-24",
+        "name": "chord-theory helper"
+      },
+      {
+        "date": "2026-10-01",
+        "name": "Life Story"
+      },
+      {
+        "date": "2026-10-08",
+        "name": "demo-cleaner"
+      },
+      {
+        "date": "2026-10-15",
+        "name": "NC trail-conditions"
+      }
+    ],
+    "next": [
+      {
+        "when": "Thu Aug 20 10:00\u201310:30 ET",
+        "what": "Marketplace sign-in"
+      },
+      {
+        "when": "Thu Aug 20 14:00\u201315:30 ET",
+        "what": "BarPal"
+      },
+      {
+        "when": "Fri Aug 21 14:00\u201314:45 ET",
+        "what": "send-to-users"
+      }
+    ]
+  },
+  "marketplace": {
+    "signedIn": false,
+    "retry": "Thu Aug 20 10:00 ET",
+    "pickup": "Greensboro",
+    "rule": "He approves listings."
+  },
+  "log": [
+    {
+      "date": "2026-08-18",
+      "line": "Scout last full remote scan"
+    },
+    {
+      "date": "2026-08-18",
+      "line": "Proof queue closed: Claremont, AIFE, Playlab, Instructure, Vanta"
+    },
+    {
+      "date": "2026-08-18",
+      "line": "LinkedIn open-to-work: recruiters only"
+    },
+    {
+      "date": "2026-08-19",
+      "line": "LinkedIn flipped Remote+Hybrid \u00b7 GSO / RDU / CLT"
+    },
+    {
+      "date": "2026-08-19",
+      "line": "Pages live: AI Literacy, CW 101, AR 101, Humanities 101"
+    },
+    {
+      "date": "2026-08-19",
+      "line": "Nestlight faith-pack slice local (prod untouched)"
+    },
+    {
+      "date": "2026-08-19",
+      "line": "AIFE packet still HELD"
+    },
+    {
+      "date": "2026-08-19",
+      "line": "Scout hybrid NC note sent; next shortlist should recatch Triangle hybrids"
+    },
+    {
+      "date": "2026-08-19",
+      "line": "Marketplace sign-in on calendar Thu 10:00"
+    },
+    {
+      "date": "2026-08-19",
+      "line": "Six science 101s drafting locally \u2014 not taught as lecturer; not on Pages"
+    },
+    {
+      "date": "2026-08-20",
+      "line": "NEXT  BarPal build 14:00\u201315:30 ET"
+    },
+    {
+      "date": "2026-08-21",
+      "line": "NEXT  send-to-users 14:00\u201314:45 ET"
+    }
+  ],
+  "faders": [
+    {
+      "ch": "01",
+      "key": "scout",
+      "label": "SCOUT",
+      "sub": "scan",
+      "value": 85,
+      "muted": false,
+      "formula": "max(10, 100 - 15 * weekdaysSinceScan) \u2192 100-15*1 = 85"
+    },
+    {
+      "ch": "02",
+      "key": "proof",
+      "label": "PROOF",
+      "sub": "packets",
+      "value": 70,
+      "muted": false,
+      "formula": "min(100, packetsDraft*18) - packetHeld*20 \u2192 90-20 = 70"
+    },
+    {
+      "ch": "03",
+      "key": "studio",
+      "label": "STUDIO",
+      "sub": "apps",
+      "value": 67,
+      "muted": false,
+      "formula": "min(100, appBlocks*8) + nestlightLocal*10 - tunnelMaybeDead*15 \u2192 72+10-15 = 67"
+    },
+    {
+      "ch": "04",
+      "key": "applications",
+      "label": "APPL",
+      "sub": "letters",
+      "value": 75,
+      "muted": false,
+      "formula": "boardsSignedIn*25 + otwRecruitersOnly*10 - indeedSkillsIncomplete*10 \u2192 75+10-10 = 75"
+    },
+    {
+      "ch": "05",
+      "key": "archive",
+      "label": "ARCHV",
+      "sub": "drive",
+      "value": 12,
+      "muted": true,
+      "formula": "activityThisWindow ? 60 : 12 \u2192 12 MUTED"
+    },
+    {
+      "ch": "06",
+      "key": "market",
+      "label": "MARKET",
+      "sub": "fb-mkt",
+      "value": 8,
+      "muted": true,
+      "formula": "signedIn ? 70 : (retryScheduled ? 8 : 0) \u2192 8 MUTED"
+    }
+  ],
+  "swatches": [
+    {
+      "key": "live",
+      "label": "LIVE",
+      "count": 4,
+      "unit": "lecturer-true",
+      "color": "#e8c547"
+    },
+    {
+      "key": "draft",
+      "label": "SAMPLE",
+      "count": 6,
+      "unit": "science, not taught",
+      "color": "#6e5a2c"
+    },
+    {
+      "key": "held",
+      "label": "HELD",
+      "count": 1,
+      "unit": "AIFE packet",
+      "color": "#c4233a"
+    },
+    {
+      "key": "pending",
+      "label": "PENDING",
+      "count": 1,
+      "unit": "FB Thu 10:00",
+      "color": "#c45c26"
+    },
+    {
+      "key": "set",
+      "label": "SET",
+      "count": 3,
+      "unit": "signed in",
+      "color": "#d8d0c0"
+    }
+  ],
+  "bars": [
+    {
+      "key": "live",
+      "label": "COURSES LIVE",
+      "value": 4,
+      "max": 9,
+      "tone": "gold"
+    },
+    {
+      "key": "draft",
+      "label": "SCIENCE 101s",
+      "value": 6,
+      "max": 9,
+      "tone": "brass"
+    },
+    {
+      "key": "packets",
+      "label": "PROOF PACKETS",
+      "value": 5,
+      "max": 9,
+      "tone": "gold"
+    },
+    {
+      "key": "apps",
+      "label": "APP BLOCKS",
+      "value": 9,
+      "max": 9,
+      "tone": "bone"
+    },
+    {
+      "key": "boards",
+      "label": "BOARDS IN",
+      "value": 3,
+      "max": 9,
+      "tone": "bone"
+    }
+  ],
+  "hud": {
+    "teammates": 7,
+    "coursesLive": 4,
+    "coursesDraft": 6,
+    "packetsDraft": 5,
+    "packetHeld": 1,
+    "boardsSignedIn": 3,
+    "appBlocks": 9,
+    "scoutScanWeekdaysAgo": 1,
+    "traces": 34,
+    "tracesLabel": "34 live traces"
+  },
+  "traces": [
+    {
+      "id": "team-cos",
+      "label": "Chief of Staff",
+      "kind": "team"
+    },
+    {
+      "id": "team-scout",
+      "label": "Scout",
+      "kind": "team"
+    },
+    {
+      "id": "team-proof",
+      "label": "Proof",
+      "kind": "team"
+    },
+    {
+      "id": "team-studio",
+      "label": "Studio",
+      "kind": "team"
+    },
+    {
+      "id": "team-appl",
+      "label": "Applications",
+      "kind": "team"
+    },
+    {
+      "id": "team-arch",
+      "label": "Archive",
+      "kind": "team",
+      "mute": true
+    },
+    {
+      "id": "team-mkt",
+      "label": "Market",
+      "kind": "team",
+      "mute": true
+    },
+    {
+      "id": "live-ai",
+      "label": "AI Literacy",
+      "kind": "live"
+    },
+    {
+      "id": "live-cw",
+      "label": "Critical Writing 101",
+      "kind": "live"
+    },
+    {
+      "id": "live-ar",
+      "label": "Analytical Reasoning 101",
+      "kind": "live"
+    },
+    {
+      "id": "live-hum",
+      "label": "Humanities 101",
+      "kind": "live"
+    },
+    {
+      "id": "draft-phy",
+      "label": "Physics",
+      "kind": "draft"
+    },
+    {
+      "id": "draft-bio",
+      "label": "Biology",
+      "kind": "draft"
+    },
+    {
+      "id": "draft-che",
+      "label": "Chemistry",
+      "kind": "draft"
+    },
+    {
+      "id": "draft-ear",
+      "label": "Earth Science",
+      "kind": "draft"
+    },
+    {
+      "id": "draft-ast",
+      "label": "Astronomy",
+      "kind": "draft"
+    },
+    {
+      "id": "draft-sta",
+      "label": "Statistics",
+      "kind": "draft"
+    },
+    {
+      "id": "pkt-cl",
+      "label": "Claremont Lincoln",
+      "kind": "packet"
+    },
+    {
+      "id": "pkt-aife",
+      "label": "AI for Education",
+      "kind": "held"
+    },
+    {
+      "id": "pkt-pl",
+      "label": "Playlab",
+      "kind": "packet"
+    },
+    {
+      "id": "pkt-inf",
+      "label": "Instructure Foundry",
+      "kind": "packet"
+    },
+    {
+      "id": "pkt-va",
+      "label": "Vanta",
+      "kind": "packet"
+    },
+    {
+      "id": "brd-in",
+      "label": "Indeed",
+      "kind": "board"
+    },
+    {
+      "id": "brd-zr",
+      "label": "ZipRecruiter",
+      "kind": "board"
+    },
+    {
+      "id": "brd-li",
+      "label": "LinkedIn",
+      "kind": "board"
+    },
+    {
+      "id": "app-barpal",
+      "label": "BarPal",
+      "kind": "app"
+    },
+    {
+      "id": "app-noct",
+      "label": "Noctuary",
+      "kind": "app"
+    },
+    {
+      "id": "app-nest",
+      "label": "Nestlight",
+      "kind": "app"
+    },
+    {
+      "id": "app-hvac",
+      "label": "HVAC/Custom Air",
+      "kind": "app"
+    },
+    {
+      "id": "app-vows",
+      "label": "Vows",
+      "kind": "app"
+    },
+    {
+      "id": "app-chord",
+      "label": "chord-theory helper",
+      "kind": "app"
+    },
+    {
+      "id": "app-life",
+      "label": "Life Story",
+      "kind": "app"
+    },
+    {
+      "id": "app-demo",
+      "label": "demo-cleaner",
+      "kind": "app"
+    },
+    {
+      "id": "app-trail",
+      "label": "NC trail-conditions",
+      "kind": "app"
+    }
+  ]
+}
