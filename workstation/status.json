@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-08-19T13:37:06-04:00",
-  "asOfLabel": "2026-08-19 13:37 ET",
+  "asOf": "2026-08-19T13:53:06-04:00",
+  "asOfLabel": "2026-08-19 13:53 ET",
   "person": {
     "name": "Virgil Renfroe",
     "zone": "America/New_York",
@@ -164,9 +164,12 @@
   "studio": {
     "nestlight": {
       "path": "/workspace/nestlight/",
-      "note": "faith-pack slice local. Classroom | Nighttime (Christian) toggle.",
+      "note": "parent-editable child profiles + stacked notes; child is the star. Classroom | Nighttime toggle. Prod untouched.",
       "prod": "https://nestlight-production.up.railway.app",
-      "prodRule": "Do not touch production."
+      "prodRule": "Do not touch production.",
+      "tunnel": "https://entered-plane-maximize-consolidated.trycloudflare.com",
+      "tunnelStatus": "up as of 2026-08-19 13:53 ET",
+      "desktop": "pending Mac online"
     },
     "tunnel": {
       "url": "https://entered-plane-maximize-consolidated.trycloudflare.com",
@@ -327,6 +330,10 @@
     {
       "date": "2026-08-19",
       "line": "Proof LIVE \u2014 Listen button in flight (speechSynthesis, no API). CW+AR first. No apply."
+    },
+    {
+      "date": "2026-08-19",
+      "line": "Studio LIVE \u2014 Nestlight slice: editable child profiles + stacked notes. Prod untouched."
     }
   ],
   "faders": [
@@ -353,9 +360,9 @@
       "key": "studio",
       "label": "STUDIO",
       "sub": "apps",
-      "value": 72,
+      "value": 78,
       "muted": false,
-      "formula": "dummy heartbeat back \u2192 72 (was 67)"
+      "formula": "Nestlight slice updated (profiles + notes) \u2192 78"
     },
     {
       "ch": "04",
