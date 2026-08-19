@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-08-19T13:26:16-04:00",
-  "asOfLabel": "2026-08-19 13:26 ET",
+  "asOf": "2026-08-19T13:27:34-04:00",
+  "asOfLabel": "2026-08-19 13:27 ET",
   "person": {
     "name": "Virgil Renfroe",
     "zone": "America/New_York",
@@ -287,6 +287,10 @@
     {
       "date": "2026-08-19",
       "line": "Heartbeats 6 out \u00b7 0 back \u2014 dummy only, no apply"
+    },
+    {
+      "date": "2026-08-19",
+      "line": "Market heartbeat back \u2014 Greensboro pickup, approve listings, sign-in Thu 10:00"
     }
   ],
   "faders": [
@@ -340,9 +344,9 @@
       "key": "market",
       "label": "MARKET",
       "sub": "fb-mkt",
-      "value": 18,
+      "value": 28,
       "muted": false,
-      "formula": "heartbeat in flight \u2192 18 (was 8 MUTE)"
+      "formula": "dummy heartbeat back \u2192 28"
     }
   ],
   "swatches": [
@@ -431,7 +435,7 @@
     "traces": 34,
     "tracesLabel": "34 live traces",
     "heartbeatsOut": 6,
-    "heartbeatsBack": 0
+    "heartbeatsBack": 1
   },
   "traces": [
     {
@@ -617,7 +621,9 @@
       "Archive",
       "Market"
     ],
-    "back": [],
+    "back": [
+      "Market"
+    ],
     "note": "dummy only \u2014 no scan, no letter, no listing, no Drive move"
   }
 }
