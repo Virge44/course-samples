@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 6 · Climate as a measured argument · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f6f1e8;
+  --panel: #efe4d6;
+  --card: #ffffff;
+  --accent: #8a4d2f;
+  --accent-ink: #5c3018;
+  --accent-soft: #f0ddd0;
+  --banner: #2c211a;
+  --banner-ink: #f0e6dc;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #8a4d2f;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+.sample strong {
+  color: #e8c9a0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+footer a { color: var(--accent-ink); }
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+.pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #8a4d2f; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. First-year gen-ed instructional-design sample — he can structure a course. He did <em>not</em> teach earth science as a content expert. Lecturer courses were Critical Writing, Humanities, and Analytical Reasoning. As Director of Online Learning he designed an online course called Scientific Development &amp; Social Change — that is design/ops, not an earth-science appointment. Not a live institutional course. Not official NC A&amp;T curriculum. Do not invent labs, field trips, or credentials. Do not apply.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html">1 · Claims</a><a href="unit-2.html">2 · Rocks</a><a href="unit-3.html">3 · Plates</a><a href="unit-4.html">4 · Water</a><a href="unit-5.html">5 · Weather</a><a href="unit-6.html" aria-current="page">6 · Climate</a><a href="unit-7.html">7 · Resources</a><a href="unit-8.html">8 · Place</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 6 · Evidence, not a rant · ~40 minutes</p>
+  <h1>Climate as a measured argument</h1>
+  <p class="lede">Variable, window, method, uncertainty. Not a sermon. Not a hoax. A classmate should be able to check the series.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Define climate as a measured pattern over decades, not a mood and not a single storm.</li>
+    <li>Name two kinds of evidence used in climate claims (instrument record; a proxy such as ice cores or tree rings) and one limit of each.</li>
+    <li>Separate a measurement from a policy slogan — and refuse both a rant and a conspiracy.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+
+  <p>Climate is a measured argument. It is not a rant, and it is not a conspiracy. A climate claim says: over this stretch of years, in this place or for the globe, this variable (temperature, precipitation, ice, sea level, a gas) had this pattern, measured by this method, with this uncertainty. If you cannot name the variable, the window, and the method, you do not yet have a climate claim. You have a mood. Unit 5 already split weather from climate. This unit asks you to treat the long pattern as evidence a classmate could check, including the parts that are incomplete.</p>
+  <p>The instrument record is the first line. Thermometers, rain gauges, and, later, satellites and buoys. A global temperature series is not one backyard thermometer. It is many stations, processed, with known problems (station moves, urban heat, coverage gaps) that researchers try to correct and that skeptics are allowed to ask about. Asking “how was this homogenized?” is an evidence habit. Saying “they faked the thermometers, case closed” is a rant in the other direction. This sample will not walk you through a full reanalysis. It will insist that a number without a method is not yet a check.</p>
+  <p>Proxies extend the story past the instrument era. Tree rings, ice cores, corals, lake and ocean sediments, boreholes — each records something related to climate, with a calibration and a limit. Ice cores trap old air; they are a main reason we can speak about carbon dioxide before 1958. They are not a time machine with no error bar. A tree ring can track moisture or temperature depending on the site. A proxy is a stand-in. Unit 1’s incomplete record applies: you do not have a weather station in the year 1400. You have a substitute with a stated weakness. Name the weakness or you are preaching.</p>
+  <p>Carbon dioxide is a greenhouse gas. That is basic physics taught long before the modern culture fight: some gases absorb outgoing infrared radiation and change the energy budget. Water vapor is also a greenhouse gas; it responds quickly to temperature. CO<sub>2</sub> is well mixed and has a measured rise. The Keeling record from Mauna Loa begins in 1958. Ice cores extend CO<sub>2</sub> through earlier centuries and glacial cycles. The modern rise is large and fast compared with those ice-core swings. Those are conservative textbook sentences. They are not a party platform.</p>
+  <p>The Earth has warmed since the late nineteenth century in the instrument record. Multiple groups produce similar global curves. Attribution — how much of the recent warming is from human-emitted greenhouse gases versus other forcings (sun, volcanoes, internal variability) — is a scientific argument with a literature, not a vibe. 101 can say: greenhouse physics plus the measured CO<sub>2</sub> rise plus the observed warming is the core package; other forcings are studied and do not currently replace that package. 101 should also say: a single snowstorm does not refute a trend, and a single heat wave does not, by itself, prove one. Trends need windows.</p>
+  <p>Policy is a different kind of claim. “What the temperature did” is not the same sentence as “what a legislature should do.” You may care about policy. This unit grades the measured argument: what was measured, over what time, by what method, what would change your mind. Uncertainty is real. Uncertainty is not the same as “we know nothing” and not the same as “the debate is only political.” If a source will not tell you the window or the method, it is not helping you, whatever flag it flies.</p>
+  <p>The author did not teach climate science as a content expert. He taught students to split a claim from a because. That is the whole point of putting this unit in an ID sample. Practice will ask you to mark a measured sentence, reject a rant and a conspiracy, and write one climate claim with a method and a hole.</p>
+
+
+  <div class="split">
+    <div class="pair"><div class="tag">Rant</div>The planet is doomed and anyone who asks a method question is evil.</div>
+    <div class="pair"><div class="tag">Conspiracy</div>Every thermometer and ice core is a hoax, so no measurement counts.</div>
+  </div>
+  <div class="split">
+    <div class="pair"><div class="tag">Measured argument</div>Mauna Loa CO<sub>2</sub> has risen since 1958; ice cores show a lower pre-industrial range. Method named. Window named.</div>
+    <div class="pair"><div class="tag">Still a hole</div>One station is not the globe. A proxy has a calibration. Say so.</div>
+  </div>
+
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Which sentence is a measured climate claim?</h2>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Reject the rant and the hoax</h2>
+    <p>A thread says the globe cannot be warming because it snowed in April. What is the 101 reply?</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Write a climate claim with a method</h2>
+    <p>One or two sentences: variable, time window, method (instruments, ice core, tree ring, satellite). Then one clause that names a limit. No sermon. No hoax plot.</p>
+    <label class="field" for="cl6">Your climate sentence</label>
+    <textarea id="cl6" rows="4" placeholder="Over …, … was measured by … . A limit is …"></textarea>
+    <div class="actions"><button type="button" class="btn primary" id="checkCl">Check my sentence</button></div>
+    <div class="feedback" id="cl6fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>You could turn this in on paper or paste it into a journal. This file does not collect it.</p>
+  <blockquote class="prompt">Write 180–250 words as a measured argument, not a speech. Pick one public series you can point to (a national climate page, Mauna Loa CO2, a published global temperature graph, a local climate normal). State: variable, window, method. State one uncertainty or gap. State one thing that would change your mind. Do not write a manifesto. Do not write a hoax plot. Do not invent a lab you sat in.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="unit-5.html">← Unit 5: Weather</a>
+    <a href="unit-7.html">Next: Resources and waste →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185<br>He did not teach earth science as a content expert. Lecturer courses: Critical Writing, Humanities, Analytical Reasoning. <em>Scientific Development &amp; Social Change</em> was online-course design/ops, not an earth-science appointment. Do not apply.</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "It was freezing this morning, so the climate story is over.", ok: false, fb: "Weather, plus a rant. A morning is not a century." },
+    { t: "Global mean surface temperature records from multiple groups show warming since the late 1800s; methods and uncertainties are published.", ok: true, fb: "Yes. Variable, window, method. That is a measured argument." },
+    { t: "Anyone who mentions CO2 has sold their soul, so skip the graphs.", ok: false, fb: "Sermon. This unit will not grade souls. It will ask for a method." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "April snow disproves a long-term global temperature rise.", ok: false, fb: "A weather event is not a climate window. Unit 5 already split those." },
+    { t: "April snow proves every scientist is lying and the ice cores are props.", ok: false, fb: "Conspiracy. Name a method error if you have one. Do not invent a global prop department." },
+    { t: "April snow is weather. A climate claim needs a long window and a stated method; one storm does not carry that load.", ok: true, fb: "Yes. Keep the storm. Drop the sermon and the hoax. Ask for the series." }
+  ]);
+  document.getElementById("checkCl").addEventListener("click", () => {
+    const raw = document.getElementById("cl6").value.trim();
+    const t = raw.toLowerCase();
+    const fb = document.getElementById("cl6fb");
+    const method = /(thermometer|instrument|keeling|mauna|ice core|tree ring|proxy|satellite|gauge|record|station|sediment)/.test(t);
+    const window = /(year|decade|century|since|1850|1880|1900|1958|pre-industrial|glacial|\d{3,4})/.test(t);
+    const rant = /(doomed|hoax|fake news|sheep|wake up|traitor|save the planet in this sentence)/.test(t);
+    let cls = "bad";
+    let msg;
+    if (raw.length < 24) {
+      msg = "Too thin. Variable, window, method, and one limit.";
+    } else if (rant && !method) {
+      msg = "That is a rant or a hoax plot. Name a measurement and a method. Policy can wait.";
+    } else if (method && window) {
+      cls = "ok";
+      msg = "You named a method and a window. If you also named a limit (one station, a proxy calibration, coverage), you have the habit.";
+    } else if (method) {
+      msg = "Good method. Add a time window — since when, over how many years — and one hole in the record.";
+    } else {
+      msg = "Add a method word: instrument record, ice core, tree ring, satellite, station — and a span of years.";
+    }
+    fb.className = "feedback show " + cls;
+    fb.textContent = msg;
+  });
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 2 · The sky as a clock · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1b1916;
+  --muted: #5a564e;
+  --rule: #d3cfc4;
+  --paper: #f6f3ec;
+  --panel: #eeeae2;
+  --card: #ffffff;
+  --accent: #2a2d6b;
+  --accent-ink: #1c1f4a;
+  --accent-soft: #e2e3f0;
+  --banner: #121428;
+  --banner-ink: #e4e6f2;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #3a3d8c;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #c9c6e8;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag, .pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #2a2d6b; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. Not a live institutional course. Not official NC A&amp;T curriculum. He did not teach astronomy. Do not apply.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html">1 · Night sky</a><a href="unit-2.html" aria-current="page">2 · Clock</a><a href="unit-3.html">3 · Gravity</a><a href="unit-4.html">4 · Light</a><a href="unit-5.html">5 · Leftovers</a><a href="unit-6.html">6 · Stars</a><a href="unit-7.html">7 · Galaxies</a><a href="unit-8.html">8 · Log</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 2 · Rotation, seasons, Moon · ~40 minutes</p>
+  <h1>The sky as a clock</h1>
+  <p class="lede">Day, year, and Moon phase are geometry you can say in plain language. Mood is not a mechanism.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Explain day and night as Earth’s rotation, not as the sky turning on its own.</li>
+    <li>Explain seasons as tilt, and reject “Earth is closer to the Sun in summer.”</li>
+    <li>Describe Moon phase as the Sun–Earth–Moon angle, and separate phase from eclipse.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+  <p>The sky looks like it moves. Stars rise and set. The Sun crosses the day. The Moon changes shape over a month. Those appearances are real. The mechanisms are not “the sky is a wheel we live under.” The mechanisms are Earth’s spin, Earth’s tilt as it goes around the Sun, and the Moon’s place in sunlight.</p>
+  <p>Earth rotates once a day. The conservative classroom figure is about 24 hours for a solar day — noon to noon. Because Earth is also moving along its orbit, the rotation that brings the same star back overhead is about four minutes shorter. You do not need that distinction to pass this unit, but you should know it exists so you do not treat “a day” as one magic number. The useful claim is simpler: we spin. The Sun appears to move because we turn. Night is the half of the ball that faces away from the Sun. There is no separate dark fluid that pours over the ground.</p>
+  <p>If you watch stars for an hour, the whole pattern appears to shift together. That common motion is the same rotation. Planets still wander slowly against the pattern from night to night; that is their own motion around the Sun, seen from a moving Earth. One night of watching mostly shows our spin. Many nights start to show the other clocks.</p>
+  <p>Seasons are the next clock people get wrong. Earth is closest to the Sun in early January — perihelion, a public and ordinary fact — and farthest in July. If distance to the Sun ran the seasons, January would be the global hot month. It is not. Seasons come from tilt. Earth’s axis is tilted about 23 degrees relative to its path around the Sun. In June, the Northern Hemisphere leans toward the Sun: longer days, sunlight hitting the ground more squarely. In December, that hemisphere leans away: shorter days, sunlight spread thinner. The Southern Hemisphere runs the opposite calendar. Same Sun. Same orbit. Different lean.</p>
+  <p>Tilt also explains why polar summers can have very long days and polar winters very long nights. This course will not ask you to compute sunrise tables. It will ask you not to say “summer means we are closer.” That sentence is common and false.</p>
+  <p>The Moon is a third clock. It orbits Earth in about a month (a conservative figure: about 27 days to return to the same stars, about 29.5 days to return to the same phase). Half the Moon is always lit by the Sun, the way half of Earth is always in day. What changes is how much of that lit half faces us. New, crescent, quarter, gibbous, full — those words are geometry, not weather and not Earth’s shadow.</p>
+  <p>Earth’s shadow on the Moon is an eclipse, and it is rare compared with phases. A lunar eclipse can happen only near full Moon, when Sun, Earth, and Moon line up so Earth’s shadow falls on the Moon. A solar eclipse can happen only near new Moon, when the Moon passes in front of the Sun. Most months, the Moon’s path is a little above or below that line, so there is no eclipse. Phase happens every month. Eclipse does not. If someone says “the crescent is Earth’s shadow,” they have mixed the two.</p>
+  <p>You can check phase without a telescope. Look at the Moon, or at a public daytime photograph of it. Is a thin curve lit? A half disk? A full coin? Write the word. Then write what must be true: the Sun is lighting one side, and we are seeing a slice of that side. You do not need to stand on the Moon. You need the triangle: Sun, Moon, you.</p>
+  <p>Calendars grew from these clocks. Months remember the Moon. Years remember the orbit. Days remember the spin. Cultures named the patterns in many languages. Naming is not astrology. Astrology is the extra claim that a pattern governs a personality or a week. We will not make that claim. We will not spend class time on it.</p>
+  <p>If you live in the Northern Hemisphere, the north sky appears to turn around a point near Polaris. That is a useful local fact, not a universal center. In the Southern Hemisphere the story is a different pole. “The sky turns around the North Star” is a local description. It is not a claim that Earth is the middle of everything. Unit 7 will put us in a galaxy. For now: your local clock has a local pole.</p>
+  <p>Three tests again.</p>
+  <p><strong>First: Which clock?</strong> Spin (day), tilt-plus-orbit (season), or Moon angle (phase)? If you cannot name the clock, you are describing a mood.</p>
+  <p><strong>Second: Did you use Earth’s shadow for an ordinary crescent?</strong> If yes, restart. Shadow is eclipse. Phase is a lit half seen at an angle.</p>
+  <p><strong>Third: Did you put summer on a closer Sun?</strong> Check January. Then use tilt.</p>
+  <p>You will leave this unit able to run three clocks in plain language. That is the whole job. The sky will keep moving whether or not you romanticize it.</p>
+
+  <div class="split">
+    <div class="pair"><div class="tag">Phase</div>We see a slice of the Moon’s sunlit half.</div>
+    <div class="pair"><div class="tag">Eclipse</div>Earth’s shadow falls on the Moon — rare, and only near full.</div>
+  </div>
+
+  <div class="practice" id="p-season">
+    <p class="eyebrow">Practice</p>
+    <h2>Why is June warm in the Northern Hemisphere?</h2>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-phase">
+    <p class="eyebrow">Practice</p>
+    <h2>Crescent or shadow?</h2>
+    <p>Someone says the crescent Moon is dark because Earth is blocking the Sun. What do you say?</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-write">
+    <p class="eyebrow">Practice</p>
+    <h2>Name the clock</h2>
+    <p>In two or three sentences, explain either seasons <em>or</em> Moon phase. Use tilt or the lit-half angle. Do not use mood words as a mechanism.</p>
+    <label class="field" for="clock1">Your explanation</label>
+    <textarea id="clock1" rows="4" placeholder="The clock is…"></textarea>
+    <div class="actions"><button type="button" class="btn primary" id="checkClock">Check my explanation</button></div>
+    <div class="feedback" id="clock1fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>You could turn this in on paper or paste it into a journal. This file does not collect it.</p>
+  <blockquote class="prompt">Write 150–200 words. Pick one: (a) seasons or (b) Moon phase. Sketch in words a classmate could redraw: which way Earth leans, or how much of the Moon’s lit half we face. Then write one sentence that is a common false mechanism (closer Sun, or Earth’s shadow on a crescent) and cross it out by explaining why it fails. If you can see the Moon, name the phase. If you cannot, say so — do not invent a viewing.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="unit-1.html">← Unit 1: Night sky</a>
+    <a href="unit-3.html">Next: Gravity and orbits →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185<br />He did not teach astronomy as a content expert. Lecturer courses: Critical Writing, Humanities, Analytical Reasoning. <em>Scientific Development &amp; Social Change</em> was online-course design/ops, not an astronomy appointment. Do not apply.</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "Earth is closer to the Sun in June.", ok: false, fb: "Earth is closest in early January. Distance is the wrong clock. Tilt is the right one." },
+    { t: "The Northern Hemisphere is tilted toward the Sun, so days are longer and sunlight hits more squarely.", ok: true, fb: "Yes. Lean, not mileage. The Southern Hemisphere has the opposite season on the same date." },
+    { t: "The Sun burns hotter in June.", ok: false, fb: "The Sun’s output does not jump each June. The geometry of tilt does." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "They are right: every crescent is a little lunar eclipse.", ok: false, fb: "A lunar eclipse is Earth’s shadow on a full Moon, and it is uncommon. A crescent is a viewing angle on a lit half." },
+    { t: "They mixed phase with eclipse. Half the Moon is lit; we are seeing a thin slice of that half.", ok: true, fb: "Geometry, not a monthly shadow. Keep eclipse for the rare lineup." },
+    { t: "The dark part is painted on. Phase is only a human story.", ok: false, fb: "Phase is real geometry. The mistake was the shadow story, not the idea of phase." }
+  ]);
+  document.getElementById("checkClock").addEventListener("click", () => {
+    const raw = document.getElementById("clock1").value.trim();
+    const t = raw.toLowerCase();
+    const fb = document.getElementById("clock1fb");
+    const bad = /(closer to the sun|earth.?s shadow|earths shadow|shadow of earth|sun is hotter|mood|romance)/.test(t);
+    const good = /(tilt|lean|axis|lit half|sunlit|angle|phase|longer day|squarely|orbit)/.test(t);
+    let cls = "bad";
+    let msg;
+    if (raw.length < 40) {
+      msg = "Too thin. Give two or three sentences that name tilt or the lit-half angle.";
+    } else if (bad && !good) {
+      msg = "That still uses a false mechanism. Drop closer-Sun and Earth’s-shadow-on-a-crescent. Name tilt or the slice of the lit half.";
+    } else if (good) {
+      cls = "ok";
+      msg = "You named a real clock — tilt or Moon geometry. If you also said “closer Sun” or “Earth’s shadow” for an ordinary phase, strike that clause.";
+    } else {
+      msg = "Name the mechanism: axis tilt for seasons, or the angle of the sunlit half for phase.";
+    }
+    fb.className = "feedback show " + cls;
+    fb.textContent = msg;
+  });
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

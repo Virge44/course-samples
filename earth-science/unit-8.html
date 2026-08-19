@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 8 · A local-place writeup · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f6f1e8;
+  --panel: #efe4d6;
+  --card: #ffffff;
+  --accent: #8a4d2f;
+  --accent-ink: #5c3018;
+  --accent-soft: #f0ddd0;
+  --banner: #2c211a;
+  --banner-ink: #f0e6dc;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #8a4d2f;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+.sample strong {
+  color: #e8c9a0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+footer a { color: var(--accent-ink); }
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+.pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #8a4d2f; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. First-year gen-ed instructional-design sample — he can structure a course. He did <em>not</em> teach earth science as a content expert. Lecturer courses were Critical Writing, Humanities, and Analytical Reasoning. As Director of Online Learning he designed an online course called Scientific Development &amp; Social Change — that is design/ops, not an earth-science appointment. Not a live institutional course. Not official NC A&amp;T curriculum. Do not invent labs, field trips, or credentials. Do not apply.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html">1 · Claims</a><a href="unit-2.html">2 · Rocks</a><a href="unit-3.html">3 · Plates</a><a href="unit-4.html">4 · Water</a><a href="unit-5.html">5 · Weather</a><a href="unit-6.html">6 · Climate</a><a href="unit-7.html">7 · Resources</a><a href="unit-8.html" aria-current="page">8 · Place</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 8 · They pick a real place · ~40 minutes</p>
+  <h1>A local-place writeup</h1>
+  <p class="lede">A hill, a river, or a weather week you can point to. Three checkable Earth claims. One hole in the record. No invented field trip.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Choose a real hill, river reach, or weather week you can point to (a stand-there sentence, a USGS or NWS page, a dated observation).</li>
+    <li>Write three Earth claims about it a classmate could check — and refuse invented fossils, partners, and quotes.</li>
+    <li>Name one limit of the record: what you could not see or did not look up.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+
+  <p>This is the last unit of a compressed 101. A live semester would give you a textbook, more maps, and more drafts. The spine is the same: an Earth claim a classmate can check, plus a hole in the record. The close is not a performance and not a field trip this folder invented. You pick a real hill, a real river reach, or a real weather week you can point to. Real means a place you have stood, or a public page with a name and a date — a USGS topographic map, an NWS climate week, a gauge, a roadcut you can describe without fiction. If you cannot point to it, you do not have a place yet. You have a mood.</p>
+  <p>Do not invent a partner campus hike. Do not invent a school van. Do not write “our class walked the ravine with Dr. —” unless that actually happened in a section that exists without this file. This sample will not supply a headline hill. Greensboro, or wherever you are, has ordinary relief: a creek, a slope, a week of highs and lows. Ordinary is enough. Extraordinary claims need extraordinary checks.</p>
+  <p>Three Earth claims is the load. Not thirty. Not a research paper. Claim one can be materials or form: what the hill is made of, or how steep it is, or which way the creek runs, tied to a map or an outcrop. Claim two can be process: a river doing work, a slope shedding water, a front that moved through between Monday and Thursday. Claim three can be a limit: what you could not see — the water table, the age of the rock, the next basin, the climate window behind one week of weather. That third claim is Unit 1 finished in a place. Incomplete is not a confession of laziness. It is the working condition.</p>
+  <p>Use the earlier units as tools, not as labels to sprinkle. If you name sandstone, give a formation reason (Unit 2). If you mention a ridge of earthquakes two states away, do not drag it in to sound like a major; only use plates if the place actually sits on a story you can check (Unit 3). Water and weather will do more work for most students than a forced subduction sentence. Climate belongs if you have a normal or a multi-year record for that place, not if you want a sermon on a Tuesday afternoon (Units 5–6). A gravel path or a brick is a resource claim if you actually trace it (Unit 7).</p>
+  <p>Refuse extra furniture. Do not add a flood of record you did not look up. Do not add a quarry owner’s quote you did not hear. Do not add a fossil that would be nice. An honest hole — “I do not have a geologic map for this block; the county GIS would be the next check” — is a better close than a polished fiction. Adult tone. You may like the place. Liking is allowed. Purple nature writing is not a check.</p>
+  <p>About the author, once, at the end. Virgil Renfroe designed this as a first-year gen-ed sample to show he can structure a course. He did not teach earth science as a content expert. He taught Critical Writing, Humanities, and Analytical Reasoning. The online course <em>Scientific Development &amp; Social Change</em> was design and operations work as Director of Online Learning, not an earth-science appointment. The last move is the first move of those writing and reasoning rooms: say the claim, show the step, let someone else mark it. If you can do that on a real hill, creek, or weather week, you have finished the sample.</p>
+  <p>Practice here is a gate. You will mark whether a place is pointable, refuse a fake outcrop, and draft three labeled claims. Homework is the writeup itself — the thing you could turn in.</p>
+
+
+  <div class="split">
+    <div class="pair"><div class="tag">Pointable</div>Buffalo Creek at a named street bridge; USGS topo shows the channel. I stood there Tuesday.</div>
+    <div class="pair"><div class="tag">Not pointable</div>A secret gorge our partner high school uses. (This file has no partner. Do not invent one.)</div>
+  </div>
+
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Which place is pointable?</h2>
+    <p>You may write about any of these <em>topics</em>. Only one is already a place you could close without inventing furniture.</p>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Refuse the extra furniture</h2>
+    <p>You walked a city creek. You do <strong>not</strong> have a fossil or a professor’s quote. Which sentence belongs?</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Draft three labeled claims</h2>
+    <p>Use a real place you can point to — or, for this practice only, this public-style kit: <em>a named creek at a street you can stand on; a USGS contour; a week of highs and lows from a public NWS page.</em> Three short labeled lines: materials or form; process; limit. No fake quarry.</p>
+    <label class="field" for="place8">Your three claims</label>
+    <textarea id="place8" rows="6" placeholder="1 Form or materials: …&#10;2 Process: …&#10;3 Limit: …"></textarea>
+    <div class="actions"><button type="button" class="btn primary" id="checkPlace">Check my claims</button></div>
+    <div class="feedback" id="place8fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>You could turn this in on paper or paste it into a journal. This file does not collect it.</p>
+  <blockquote class="prompt">Write a 300–450 word local-place close. At the top, give the pointer: place name and street or lat-long; or USGS map name; or NWS/climate page and dates. Then three labeled Earth claims (form or materials; process; limit). Rules: do not invent a field trip, a partner school, a fossil, or a quote. If a map or a date is missing, say so. Adult tone. A classmate who was not there should still be able to check your steps. This is the course close, not a nature essay.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="unit-7.html">← Unit 7: Resources</a>
+    <a href="index.html">Course home →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185<br>He did not teach earth science as a content expert. Lecturer courses: Critical Writing, Humanities, Analytical Reasoning. <em>Scientific Development &amp; Social Change</em> was online-course design/ops, not an earth-science appointment. Do not apply.</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "The legendary gorge our partner magnet school hikes every fall.", ok: false, fb: "This sample has no partner school. Do not invent one. Pick a creek or hill you can point to." },
+    { t: "The creek under the named street bridge I can walk to, plus the contour on the USGS topo for that square.", ok: true, fb: "Yes. A place and a public check. Ordinary is enough." },
+    { t: "Whatever mountain people in this state always talk about, from memory, no map.", ok: false, fb: "Memory without a pointer is a mood. Name it and show a map or a stand-there sentence." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "Dr. Rivera confirmed the limestone is Ordovician, and I found a trilobite.", ok: false, fb: "You do not have that quote or that fossil. Extra furniture. Put the hole on the page." },
+    { t: "I do not have a geologic map or a fossil. The next check is the county or USGS map, not a story.", ok: true, fb: "Yes. An honest hole is a claim about the record. That is Unit 1 at the finish." },
+    { t: "The creek is a sacred gift, which completes the science.", ok: false, fb: "Meaning-talk. Allowed in your life. Not a substitute for a contour or a gauge." }
+  ]);
+  document.getElementById("checkPlace").addEventListener("click", () => {
+    const raw = document.getElementById("place8").value.trim();
+    const t = raw.toLowerCase();
+    const fb = document.getElementById("place8fb");
+    const three = raw.split(/\n/).filter(s => s.trim().length > 8).length >= 3;
+    const earth = /(creek|river|hill|slope|contour|sand|clay|rock|flood|rain|temp|week|gauge|map|usgs|water|weather|bank|channel)/.test(t);
+    const limit = /(cannot|could not|do not have|unknown|no map|no date|limit|gap|unseen|water table|age)/.test(t);
+    const fake = /(partner school|trilobite i found|dr\. rivera|class van|our field trip)/.test(t);
+    let cls = "bad";
+    let msg;
+    if (raw.length < 40) {
+      msg = "Too thin. Three labeled claims: form or materials, process, limit.";
+    } else if (fake) {
+      msg = "Extra furniture. Drop the invented partner, van, fossil, or quote. Use the creek, the contour, the week.";
+    } else if (three && earth && limit) {
+      cls = "ok";
+      msg = "Three lines, something checkable, and a named hole. That is the close. Homework is the full writeup.";
+    } else if (three && earth) {
+      msg = "You have place-talk. Add an explicit limit: what you could not see or did not look up.";
+    } else {
+      msg = "Label three lines. Put a hill, creek, map, or weather week in them. Put one gap on the page.";
+    }
+    fb.className = "feedback show " + cls;
+    fb.textContent = msg;
+  });
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Earth Science 101 — draft course · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f6f1e8;
+  --panel: #efe4d6;
+  --card: #ffffff;
+  --accent: #8a4d2f;
+  --accent-ink: #5c3018;
+  --accent-soft: #f0ddd0;
+  --banner: #2c211a;
+  --banner-ink: #f0e6dc;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #8a4d2f;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+.sample strong {
+  color: #e8c9a0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+footer a { color: var(--accent-ink); }
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+.pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #8a4d2f; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. First-year gen-ed instructional-design sample — he can structure a course. He did <em>not</em> teach earth science as a content expert. Lecturer courses were Critical Writing, Humanities, and Analytical Reasoning. As Director of Online Learning he designed an online course called Scientific Development &amp; Social Change — that is design/ops, not an earth-science appointment. Not a live institutional course. Not official NC A&amp;T curriculum. Do not invent labs, field trips, or credentials. Do not apply.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html" aria-current="page">Course home</a><a href="unit-1.html">1 · Claims</a><a href="unit-2.html">2 · Rocks</a><a href="unit-3.html">3 · Plates</a><a href="unit-4.html">4 · Water</a><a href="unit-5.html">5 · Weather</a><a href="unit-6.html">6 · Climate</a><a href="unit-7.html">7 · Resources</a><a href="unit-8.html">8 · Place</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">College 101 · 8 units · compressed semester · ~4–6 hours</p>
+  <h1>Earth Science 101</h1>
+  <p class="lede">A student-facing first-year gen-ed. Earth claims you can check, a record that is incomplete, a planet that is not finished. Open the file. Do the practice. Turn in the homework if you have a section that wants it.</p>
+  <div class="meta">
+    <span class="chip">Self-paced</span>
+    <span class="chip">No login</span>
+    <span class="chip">No server</span>
+    <span class="chip">First-year / gen-ed</span>
+    <span class="chip">ID sample</span>
+  </div>
+
+  <div class="blurb">
+    <p><strong>How to open this course.</strong> Keep the folder together. Double-click <code>index.html</code> in Chrome, Safari, or Firefox. You can also open any <code>unit-*.html</code> file alone. Do not rely on a Google Drive (or similar) in-browser preview — the practice activities will not run. Nothing is uploaded. Progress stays in this tab.</p>
+    <p style="margin-bottom:0"><strong>Honesty.</strong> Draft course sample by Virgil Renfroe. First-year gen-ed instructional-design sample showing he can structure a course. He did <em>not</em> teach earth science as a content expert. Lecturer courses were Critical Writing, Humanities, and Analytical Reasoning. As Director of Online Learning he designed an online course called <em>Scientific Development &amp; Social Change</em> — that is design/ops, not an earth-science appointment. Not a live institutional course. Not official NC A&amp;T curriculum. Do not invent labs, field trips, credentials, or “I taught this at A&amp;T.” Subject facts are conservative textbook 101. Do not apply anywhere. No student data. No invented school partners.</p>
+  </div>
+
+  <h2>Who this is for</h2>
+  <p>First-year and gen-ed college students, mixed preparation. Adult tone. You do not need a rock hammer or a forecast app. You need a habit: say what you claim about the Earth, name the check, and admit what the record cannot show.</p>
+  <p>This is not a geology major. It is not a climate sermon and not a conspiracy hunt. It is a compressed 101 about evidence: deep time, rocks, plates, water, weather, climate as a measured argument, resources, and one real place you can point to.</p>
+
+  <h2>What the course asks you to do</h2>
+  <p>Each unit has three measurable objectives, a lesson (read it; it is the work), clickable practice with feedback, and one homework you could turn in. If you do the practices, plan on about four to six hours for the whole sample. A live semester would slow this down, add a textbook, and give you more drafts. This folder is the spine, not fifteen weeks of coverage.</p>
+  <blockquote>An Earth claim is a sentence about the planet that a classmate could check. A vibe is not a claim. An incomplete record is not a failure of nerve. It is the working condition of the science.</blockquote>
+
+  <h2>Sequence</h2>
+  <table class="syllabus">
+    <thead>
+      <tr><th>Unit</th><th>Time</th><th>You leave able to</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="unit-1.html">1. What an Earth claim is</a><br /><span class="lede" style="margin:0">Deep time, incomplete record</span></td>
+        <td>~35 min</td>
+        <td>Split a vibe from a checkable Earth sentence, and name a hole in the record.</td>
+      </tr>
+      <tr>
+        <td><a href="unit-2.html">2. Minerals and rocks as evidence</a><br /><span class="lede" style="margin:0">Not decoration</span></td>
+        <td>~40 min</td>
+        <td>Tell mineral from rock, and match a rock to a formation story.</td>
+      </tr>
+      <tr>
+        <td><a href="unit-3.html">3. Plate tectonics</a><br /><span class="lede" style="margin:0">The ground is not finished</span></td>
+        <td>~40 min</td>
+        <td>Name three boundary types and why mountains and quakes are process, not scenery.</td>
+      </tr>
+      <tr>
+        <td><a href="unit-4.html">4. Water</a><br /><span class="lede" style="margin:0">Rivers, groundwater, the cheap-looking miracle</span></td>
+        <td>~40 min</td>
+        <td>Trace a drop, and distinguish river work from “water is important.”</td>
+      </tr>
+      <tr>
+        <td><a href="unit-5.html">5. Atmosphere and weather</a><br /><span class="lede" style="margin:0">Not a forecast app</span></td>
+        <td>~35 min</td>
+        <td>Separate weather from climate, and say what a weather claim needs.</td>
+      </tr>
+      <tr>
+        <td><a href="unit-6.html">6. Climate as a measured argument</a><br /><span class="lede" style="margin:0">Evidence, not a rant</span></td>
+        <td>~40 min</td>
+        <td>Treat climate as measurements and proxies, not a mood and not a sermon.</td>
+      </tr>
+      <tr>
+        <td><a href="unit-7.html">7. Earth resources and waste</a><br /><span class="lede" style="margin:0">Where stuff comes from</span></td>
+        <td>~35 min</td>
+        <td>Trace one object to a source, and name where waste goes as matter.</td>
+      </tr>
+      <tr>
+        <td><a href="unit-8.html">8. A local-place writeup</a><br /><span class="lede" style="margin:0">They pick a real hill, river, or weather week</span></td>
+        <td>~40 min</td>
+        <td>Write three checkable Earth claims about a place you can point to.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><a class="btn primary" href="unit-1.html">Start Unit 1</a></p>
+
+  <h2>How work is judged (if you have a section)</h2>
+  <p>If an instructor used this sample in a live class, the standard would be public, not clever. Did you name an Earth claim? Did you give a check someone else could run? Did you admit a gap in the record? Fluency is not the grade. The checkable step is the grade.</p>
+  <p>Homework lives in your own words. Paste the prompt into a journal, a discussion board, or a printed page. This file does not collect it. There is no invented field trip and no partner school. Unit 8 asks you to pick a real hill, river, or weather week you can actually point to.</p>
+
+  <h2>About the author</h2>
+  <p>Virgil Renfroe is an educator and online-learning lead. He taught Critical Writing, Humanities, and Analytical Reasoning in University Studies at NC A&amp;T (2004–2016) and served as Director of Online Learning (2008–2012). MFA, Creative Writing, UNCG. He designs learning and ships working prototypes by directing AI coding agents. He is not a software engineer. He is not an earth-science content expert and did not teach earth science. The online course <em>Scientific Development &amp; Social Change</em> was work he designed as Director of Online Learning — design and operations, not an earth-science faculty appointment.</p>
+  <p>A one-page note for someone running a section sits beside these files: <a href="facilitator-note.md">facilitator-note.md</a>.</p>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185<br>He did not teach earth science as a content expert. Lecturer courses: Critical Writing, Humanities, Analytical Reasoning. <em>Scientific Development &amp; Social Change</em> was online-course design/ops, not an earth-science appointment. Do not apply.</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+
+/* syllabus */
+})();
+</script>
+</body>
+</html>

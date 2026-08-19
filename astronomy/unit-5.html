@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 5 · The solar system as leftovers · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1b1916;
+  --muted: #5a564e;
+  --rule: #d3cfc4;
+  --paper: #f6f3ec;
+  --panel: #eeeae2;
+  --card: #ffffff;
+  --accent: #2a2d6b;
+  --accent-ink: #1c1f4a;
+  --accent-soft: #e2e3f0;
+  --banner: #121428;
+  --banner-ink: #e4e6f2;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #3a3d8c;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #c9c6e8;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag, .pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #2a2d6b; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. Not a live institutional course. Not official NC A&amp;T curriculum. He did not teach astronomy. Do not apply.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html">1 · Night sky</a><a href="unit-2.html">2 · Clock</a><a href="unit-3.html">3 · Gravity</a><a href="unit-4.html">4 · Light</a><a href="unit-5.html" aria-current="page">5 · Leftovers</a><a href="unit-6.html">6 · Stars</a><a href="unit-7.html">7 · Galaxies</a><a href="unit-8.html">8 · Log</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 5 · Disk leftovers · ~40 minutes</p>
+  <h1>The solar system as a family of leftovers</h1>
+  <p class="lede">Worlds are what remained after the Sun took the center of a disk. That is a family resemblance, not a floor plan.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Describe the planets as leftover material from a disk around the young Sun.</li>
+    <li>Separate the inner rocky worlds from the outer giant worlds in plain language.</li>
+    <li>Place asteroids and comets as leftover small bodies, not as failed decoration.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+  <p>The solar system looks arranged: a star, a set of planets, some small leftover pieces. Arrangement invites a designer story. The conservative public story is less flattering and more useful. About four and a half billion years ago, a cloud of gas and dust collapsed. Most of the mass that stayed together became the Sun. What did not fall all the way in flattened into a spinning disk. Planets, moons, asteroids, and comets are what that disk left behind. A family of leftovers, not a kit.</p>
+  <p>You do not need a research appointment to use that picture. You need to stop treating the eight planets as a planned set of personalities. They are what could build, where it could build, with the heat and ice the disk allowed.</p>
+  <p>Close to the young Sun, it was too warm for common ices (water, frozen gases) to stay as solids on small grains. Rock and metal could. The inner worlds — Mercury, Venus, Earth, Mars — are small and rocky by family resemblance. Farther out, past a frost line of a few astronomical units (an astronomical unit is the Earth–Sun distance), ices could join the solids. More solid stuff, plus a lot of leftover gas, helped build the giants. Jupiter and Saturn are the gas-rich giants. Uranus and Neptune are ice-rich giants, still large, farther out. The names “gas giant” and “ice giant” are classroom shorthand, not a claim that Uranus is a skating rink.</p>
+  <p>That inner/outer split is the claim this unit wants you to own. It is not a claim that we watched the disk. It is a claim that the worlds we have fit a leftover-disk pattern better than they fit a poster of eight unique destinies.</p>
+  <p>Small bodies are leftovers too. Between Mars and Jupiter, a belt of rocky asteroids never finished a planet — in part because Jupiter’s pull kept stirring the region. Beyond Neptune, icy bodies (the Kuiper belt is the public name) include worlds small enough that Pluto is now classed with them as a dwarf planet. That reclassification is public and ordinary: a round world that has not cleared its neighborhood. It is not a scandal and not a joke about Pluto’s feelings. Comets are icy leftovers that grow a tail of gas and dust when they come close enough to the Sun for ices to leave the surface. A tail is sunlight and solar wind acting on leftovers, not a sign.</p>
+  <p>Moons are mixed. Some may have formed in a smaller disk around a planet. Earth’s Moon is widely taught as the leftover of a giant impact: a Mars-sized body struck the young Earth, and the debris made the Moon. That is a conservative mainstream picture, not a lab you will run. Other moons look like captured leftovers. The point for a 101: moons are part of the same leftover family, not painted ornaments.</p>
+  <p>Order in the disk also explains orbits in the same plane, going the same way. Most large bodies share a flat family motion because they came from a flat spinning disk. A few odd tilts and backward cases exist; they are the exceptions that need extra history (a shove, a capture). Do not turn the exceptions into a claim that there was no disk.</p>
+  <p>What this unit will not do: treat the solar system as a horoscope. It will not assign personalities to planets. It will not invent a classified probe. Public spacecraft have photographed these worlds; those images are public science, not a secret. If you use one in Unit 8, use a labeled public image and say so.</p>
+  <p>A conservative caution about “habitable.” Earth has liquid water on the surface now. That is a fact about Earth. It is not a license to call every inner world a failed Earth or every outer moon a promised one. This sample will not run a life-detection lab. It will say: leftover ice and leftover rock are the materials; Earth is one outcome we know from the inside.</p>
+  <p>Three tests.</p>
+  <p><strong>First: Disk or design?</strong> If your sentence needs a planner picking eight types, restart. If it needs heat, ice, and leftover mass, you are in the unit.</p>
+  <p><strong>Second: Did you put ice on Mercury as if distance did not matter?</strong> Inner heat vs outer ice is the split. There can be polar exceptions; they do not erase the family pattern.</p>
+  <p><strong>Third: Are asteroids broken planets in a cartoon sense?</strong> Some are fragments of larger bodies. The belt as a whole is leftover material that did not finish. “Failed decoration” is still a designer story.</p>
+  <p>You can remember the family with a short roll call, not a mnemonic joke: four small rock worlds, two gas-rich giants, two ice-rich giants, then leftover belts and comets. The Sun is the leftover-of-the-collapse that got almost all the mass. That last clause matters. Planets are the scraps. Scraps can still be worlds. Earth is a scrap that learned to hold an ocean.</p>
+  <p>This is a first-year picture. Formation research is finer than this page. The sample will not pretend otherwise. You will leave able to say leftover disk, inner rock, outer ice and gas, small bodies as leftovers — and to refuse a designed-family story.</p>
+
+  <div class="split">
+    <div class="pair"><div class="tag">Inner</div>Rock and metal could stay. Worlds stayed small.</div>
+    <div class="pair"><div class="tag">Outer</div>Ices could join. Giants could keep gas.</div>
+  </div>
+
+  <div class="practice" id="p-disk">
+    <p class="eyebrow">Practice</p>
+    <h2>What is a planet, in this unit’s story?</h2>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-pluto">
+    <p class="eyebrow">Practice</p>
+    <h2>Pluto was recategorized. Conservative reading?</h2>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-write">
+    <p class="eyebrow">Practice</p>
+    <h2>Say leftover, not kit</h2>
+    <p>In three sentences, explain why Jupiter is not just “a bigger Earth.” Use disk, ice/gas, or distance from the young Sun.</p>
+    <label class="field" for="left1">Your explanation</label>
+    <textarea id="left1" rows="4" placeholder="Jupiter is…"></textarea>
+    <div class="actions"><button type="button" class="btn primary" id="checkLeft">Check my explanation</button></div>
+    <div class="feedback" id="left1fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>You could turn this in on paper or paste it into a journal. This file does not collect it.</p>
+  <blockquote class="prompt">Write 150–200 words. Draw the leftover family in prose: inner rocky, outer giants, one belt of small bodies. Then pick one common designer sentence (“the planets were placed…”) and rewrite it as a disk sentence. If you mention Pluto, use the dwarf-planet neighborhood rule, not a joke. No astrology. No invented spacecraft you did not look up in a public caption.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="unit-4.html">← Unit 4: Light</a>
+    <a href="unit-6.html">Next: Stars →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185<br />He did not teach astronomy as a content expert. Lecturer courses: Critical Writing, Humanities, Analytical Reasoning. <em>Scientific Development &amp; Social Change</em> was online-course design/ops, not an astronomy appointment. Do not apply.</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "A character in a set of twelve signs.", ok: false, fb: "Astrology is out of scope. A planet here is leftover disk material that became a world." },
+    { t: "Leftover disk material that built a world around the Sun.", ok: true, fb: "Family of leftovers. Not a kit, not a horoscope." },
+    { t: "Whatever a classified catalog lists as a target.", ok: false, fb: "This sample uses public worlds. No classified lists." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "Scientists demoted Pluto out of spite. Size is all that matters.", ok: false, fb: "The public rule is about clearing a neighborhood, not a grudge. Pluto is a round leftover among other outer leftovers." },
+    { t: "Pluto is a round world in a belt of leftovers that did not clear its neighborhood — a dwarf planet.", ok: true, fb: "Conservative and enough. Neighborhood, not personality." },
+    { t: "Pluto was never real. The disk story invented it.", ok: false, fb: "Pluto is real. The category shifted. The leftover family still includes it." }
+  ]);
+  document.getElementById("checkLeft").addEventListener("click", () => {
+    const raw = document.getElementById("left1").value.trim();
+    const t = raw.toLowerCase();
+    const fb = document.getElementById("left1fb");
+    const good = /(disk|ice|gas|frost|farther|outer|leftover|giant)/.test(t);
+    const bad = /(horoscope|placed there|designed|personality|just a bigger earth)/.test(t) && !good;
+    let cls = "bad";
+    let msg;
+    if (raw.length < 40) {
+      msg = "Too thin. Three sentences: disk, distance/ice, leftover gas — why Jupiter is not a scaled Earth.";
+    } else if (good) {
+      cls = "ok";
+      msg = "You used leftover-disk language. Jupiter kept gas out where ices could help a giant build.";
+    } else if (bad) {
+      msg = "That still sounds like a kit or a sign. Use disk, frost, leftover gas.";
+    } else {
+      msg = "Name the disk or the outer ices/gases. A bigger Earth would still be rock. Jupiter is a different leftover.";
+    }
+    fb.className = "feedback show " + cls;
+    fb.textContent = msg;
+  });
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

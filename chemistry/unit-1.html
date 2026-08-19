@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 1 · What a chemical claim is · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f7f4ee;
+  --panel: #efeae1;
+  --card: #ffffff;
+  --accent: #b45309;
+  --accent-ink: #9a3412;
+  --accent-soft: #fde8c8;
+  --banner: #1c1612;
+  --banner-ink: #f3e6d0;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #b45309;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #e8c9a0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+.pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.formula {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.85rem;
+  text-align: center;
+  font-size: 1.05rem;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #b45309; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Instructional-design sample by Virgil Renfroe. He did <em>not</em> teach chemistry as a content expert. Lecturer courses: Critical Writing, Humanities, Analytical Reasoning. Scientific Development &amp; Social Change was online-course design/ops, not a chemistry appointment. Not a live institutional course. Not official NC A&amp;T curriculum. Do not apply. No labs, no synthesis, no how-to-make.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html" aria-current="page">1 · Claims</a><a href="unit-2.html">2 · Atoms</a><a href="unit-3.html">3 · Bonding</a><a href="unit-4.html">4 · Moles</a><a href="unit-5.html">5 · Accounts</a><a href="unit-6.html">6 · pH</a><a href="unit-7.html">7 · Energy</a><a href="unit-8.html">8 · Labels</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 1 · Substance, change, evidence · ~35 minutes</p>
+  <h1>What a chemical claim is</h1>
+  <p class="lede">A chemical claim is a sentence about what a sample is made of, or whether it turned into something else, that a careful person could check. If you cannot name the substance and the check, you have a slogan.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+    <span class="chip">No lab</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Split a short passage into a sample, a claim about identity, and a check that is not a lab recipe.</li>
+    <li>Tell a physical change (identity survives) from a chemical change (new substances) in a written account.</li>
+    <li>Reject a slogan (“chemical-free,” “there was a reaction”) that does not name stuff or evidence.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+  <p>Chemistry starts as a habit of claims, not a closet of glassware. A chemical claim is a sentence about matter — what a sample is made of, or whether it turned into something else — that a careful person could check against evidence. “This bottle holds water” can be a chemical claim if we mean the compound with formula H<sub>2</sub>O. “Chemistry is cool” is a preference. “This cleaner is chemical-free” is usually marketing. Everything you can pour, eat, or wipe with is made of substances. The adult question is which ones, in what amounts, with what check.</p>
+  <p>This folder is a first-year gen-ed sample. It shows how an educator who designs courses can structure a 101: three measurable objectives, a lesson a tired student can finish, clickable practice with feedback, one homework you could turn in. Virgil Renfroe did not teach chemistry as a content expert. His lecturer courses were Critical Writing, Humanities, and Analytical Reasoning. As Director of Online Learning he designed an online course called Scientific Development &amp; Social Change — that is design and operations, not a chemistry appointment. Subject facts here stay conservative. Do not apply this as credit or a lab. There are no experiments to run in this file. There are sentences to split.</p>
+  <p>Three words do the work of the unit: substance, change, evidence.</p>
+  <p>A <strong>substance</strong> is a kind of matter with a definite composition. An element is a substance made of one kind of atom: gold in a ring, the oxygen in a tank labeled O<sub>2</sub>. A compound is a substance made of more than one element locked in a fixed ratio: water, carbon dioxide, sodium chloride. A <strong>mixture</strong> is more than one substance sharing a space without that fixed recipe: air, salt water, soil. The shaker on a cafeteria table may say “salt” and still be a mixture if anti-caking agents are listed. The compound sodium chloride is the substance. The jar is a sample. Read the label before you name the stuff. That habit is Unit 8; it starts now.</p>
+  <p><strong>Change</strong> comes in two public kinds. In a physical change, the substances you started with are still the substances you have. Ice melts; steam condenses; sugar dissolves in tea. The water is still water. The sugar is still sugar, now spread out. In a chemical change, you have new substances with new identities. Iron in a bike fender becomes rust, a different compound of iron and oxygen. A brown cut apple is not the same set of molecules as the pale flesh you sliced. You will not be asked to rust anything or slice anything for this course. You will be asked to read an account of a change and say whether the identity of the stuff survived.</p>
+  <p><strong>Evidence</strong> is what keeps a chemical claim from being a vibe. A color change is not automatically chemistry; two paints swirled together look new and remain a mixture. A temperature change is not automatically chemistry; a kettle on a coil gets hot because energy was added from outside. Stronger evidence that new substances formed is several signs traveling together: a color that does not look like blending, a solid appearing in a previously clear mixture, a gas forming when nothing was boiling, a lasting temperature change with no heater or freezer doing the work. None of those signs is magic by itself. A boiling pot makes a gas — steam — and that gas is still water. The question is identity, not drama.</p>
+  <p>This course will not give lab recipes, mixing instructions, extraction how-tos, or “how to make” steps. It will not discuss explosives, drugs, or weaponization. Household products will be named as things you already see on a shelf — vinegar, a cleaner, a commercial cold pack — so you can read what they claim. You will not combine them. If a label says do not mix, that sentence is the assignment, not a puzzle to solve.</p>
+  <p>A useful move from the writing classroom: split the sentence. What is the sample? What is being claimed about it? What would count as a check? “The liquid is acidic” is incomplete until you say how you would know — a printed pH value on a food label, a number someone recorded, a published typical range — not a dare to taste it. “There was a reaction” is incomplete until you name what you started with and what you think you have now.</p>
+  <p>You leave this unit able to hear a chemical claim, name the stuff, and ask for a check. Later units add tools: the periodic table, a counting word called the mole, an equation as a set of books, a pH number, an energy sign. They do not replace the question. If you cannot say what the substance is, whether it changed, and what would show it, you are not yet doing chemistry. You are decorating.</p>
+
+  <div class="split">
+    <div class="pair"><div class="tag">Physical (identity survives)</div>Ice on a sidewalk becomes liquid water. Still H<sub>2</sub>O. The account does not need a new name for the stuff.</div>
+    <div class="pair"><div class="tag">Chemical (new substances)</div>A bike fender, left in wet air for months, shows brown rust. Iron metal is no longer the only iron story on that surface.</div>
+  </div>
+  <div class="split">
+    <div class="pair"><div class="tag">Slogan</div>“This wipe is chemical-free.” <span class="muted">Matter is made of substances. The sentence hides the list.</span></div>
+    <div class="pair"><div class="tag">Claim with a door</div>“The bottle is labeled 5% acetic acid by volume.” <span class="muted">A classmate can read the same printed line.</span></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Which sentence is a chemical claim?</h2>
+    <p>Pick the sentence that names stuff or a change of identity in a way a classmate could check without running a lab.</p>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Did identity survive?</h2>
+    <p>Read the account. Is this written as a physical change or a chemical change?</p>
+    <blockquote>A pan of water is left on a warm stove until the liquid is gone. The cook says the water “turned into nothing.” A classmate says the water became steam, which is still H<sub>2</sub>O, now a gas.</blockquote>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Which checks are actually checks?</h2>
+    <p>A roommate says, “The brown spots on this old nail mean a chemical change.” Mark every item that could support that claim <em>as a sentence in a notebook</em>. Do not treat any item as a procedure to go try.</p>
+    <div class="checklist" id="q3"></div>
+    <div class="actions"><button type="button" class="btn primary" id="checkQ3">Check my marks</button></div>
+    <div class="feedback" id="q3fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>You could turn this in on paper or paste it into a journal. This file does not collect it. Do not mix anything. Do not open a lab.</p>
+  <blockquote class="prompt">Find one chemical claim in ordinary life this week — a food label, a cleaner label, a posted water-quality notice, a weather report about rust or ice. Do not invent a story and do not run a test. Copy or photograph the sentence (no other people in the frame). Then write: (1) what sample is named, (2) what identity or change is claimed, (3) what check is already on the page or what check would be needed. 150–200 words. If the sentence is a slogan, say so, and write the chemical claim it is pretending to be.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="index.html">← Course home</a>
+    <a href="unit-2.html">Next: Atoms and the periodic table →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185<br />He did not teach chemistry as a content expert. Lecturer: Critical Writing, Humanities, Analytical Reasoning. Scientific Development &amp; Social Change = design/ops, not a chemistry appointment. ID/course-design sample only. Do not apply.</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function checklist(boxId, items) {
+  const box = document.getElementById(boxId);
+  items.forEach((item) => {
+    const lab = document.createElement("label");
+    lab.innerHTML = '<input type="checkbox" /> <span>' + item.t + "</span>";
+    box.appendChild(lab);
+  });
+}
+function checkList(boxId, fbId, items, okMsg, badMsg) {
+  const box = document.getElementById(boxId);
+  let good = true;
+  [...box.querySelectorAll("input")].forEach((b, i) => {
+    if (items[i].must !== b.checked) good = false;
+  });
+  const fb = document.getElementById(fbId);
+  fb.className = "feedback show " + (good ? "ok" : "bad");
+  fb.textContent = good ? okMsg : badMsg;
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+function revealButtons() {
+  document.querySelectorAll("[data-reveal]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const el = document.getElementById(btn.getAttribute("data-reveal"));
+      el.classList.add("show", "ok");
+    });
+  });
+}
+
+
+  const q3items = [
+    { t: "The nail was silvery last year; a dated photo in a group chat shows it. Now the surface is brown and flaky.", must: true },
+    { t: "Rust is a different compound from iron metal — iron combined with oxygen — so brown flakes are not ‘still just iron.’", must: true },
+    { t: "Go mix the nail with a household cleaner to see if it fizzes.", must: false },
+    { t: "‘Nails always rust; everyone knows’ is enough; no sample and no before/after.", must: false }
+  ];
+  mc("q1", "q1fb", [
+    { t: "Chemistry is the most important class on campus.", ok: false, fb: "A ranking is not a claim about matter. No sample, no identity, no check." },
+    { t: "The bottle label reads ‘distilled water.’ Distilled water is the compound H2O, not a flavored drink.", ok: true, fb: "Yes. Sample (the bottle), identity (H2O), check (the printed line). A classmate can look at the same label." },
+    { t: "This soap is chemical-free, so it is safer.", ok: false, fb: "Slogan. Soap is made of substances. ‘Chemical-free’ hides the list instead of naming it." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "Chemical change: the water was destroyed, so identity did not survive.", ok: false, fb: "Ordinary boiling does not destroy water. Steam is still H2O. Identity survived; the form changed. Physical." },
+    { t: "Physical change: liquid water became water vapor. Same compound, different form. The ‘nothing’ line is the error.", ok: true, fb: "Yes. Mass did not vanish into a moral void. In a closed account, the water is still water, now a gas. Unit 5 will call that conservation. Here: identity survived." },
+    { t: "We cannot say until someone lights the steam on fire in the kitchen.", ok: false, fb: "This course does not ask you to ignite anything. The written account is already enough: boiling is a physical change of water." }
+  ]);
+  checklist("q3", q3items);
+  document.getElementById("checkQ3").addEventListener("click", () => {
+    checkList("q3", "q3fb", q3items,
+      "You marked the dated observation and the identity claim. You left the mixing dare and the ‘everyone knows’ line alone. That is the unit.",
+      "The supports are the dated before/after and the identity statement (rust ≠ iron metal). The mixing dare is not a check in this course. ‘Everyone knows’ is a crowd, not evidence.");
+  });
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

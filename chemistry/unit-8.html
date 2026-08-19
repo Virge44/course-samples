@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 8 · Reading a label · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f7f4ee;
+  --panel: #efeae1;
+  --card: #ffffff;
+  --accent: #b45309;
+  --accent-ink: #9a3412;
+  --accent-soft: #fde8c8;
+  --banner: #1c1612;
+  --banner-ink: #f3e6d0;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #b45309;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #e8c9a0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+.pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.formula {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.85rem;
+  text-align: center;
+  font-size: 1.05rem;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #b45309; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Instructional-design sample by Virgil Renfroe. He did <em>not</em> teach chemistry as a content expert. Lecturer courses: Critical Writing, Humanities, Analytical Reasoning. Scientific Development &amp; Social Change was online-course design/ops, not a chemistry appointment. Not a live institutional course. Not official NC A&amp;T curriculum. Do not apply. No labs, no synthesis, no how-to-make.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html">1 · Claims</a><a href="unit-2.html">2 · Atoms</a><a href="unit-3.html">3 · Bonding</a><a href="unit-4.html">4 · Moles</a><a href="unit-5.html">5 · Accounts</a><a href="unit-6.html">6 · pH</a><a href="unit-7.html">7 · Energy</a><a href="unit-8.html" aria-current="page">8 · Labels</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 8 · Ingredient list, not a synthesis · ~40 minutes</p>
+  <h1>Reading a label</h1>
+  <p class="lede">A label is a public chemical claim with a list attached. Your job is a short evidence writeup: what the list names, what it does not prove, and one check a classmate could run on the same printed lines. Not a recipe. Not a how-to-make.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+    <span class="chip">Close of the 101</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Separate an ingredient list and a printed amount from marketing language (“pure,” “natural,” “chemical-free”).</li>
+    <li>Name what a label does not tell you (how it was made, what mixing would do, whether “natural” is a test).</li>
+    <li>Write a short evidence paragraph a classmate could audit against the same label — the 101’s closing habit.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+  <p>You have spent seven units learning to hear a chemical claim, look up an element, say why something sticks, count with a mole, audit an equation, place a pH number, and pair a felt energy change with a sign. This last unit asks you to do that work on an object you already own: a label. Food, a sports drink, a bottle of vinegar, a vitamin panel, a cleaner’s ingredient line. The assignment is reading and writing. It is not reverse-engineering a formula, not a synthesis, not “how this was produced at plant 4.”</p>
+  <p>A useful label has parts with different jobs. An <strong>ingredient list</strong> names substances, often in descending order by weight for foods in the U.S. A <strong>nutrition facts</strong> or <strong>supplement facts</strong> or <strong>drug facts</strong> panel, when present, prints amounts, servings, and sometimes percent daily values. A <strong>concentration line</strong> (vinegar’s “5% acetic acid”) is a quantitative claim. A <strong>warning</strong> (“do not mix,” “keep out of eyes”) is part of the evidence record, not fine print you skip because you are in a chemistry class. Marketing — “natural,” “pure,” “clean,” “chemical-free,” “doctor-grade” — is a different speech act. It may sit next to the list. It is not the list.</p>
+  <p>Unit 1’s split still governs. Sample: this bottle. Claim: what identity or amount is printed. Check: a classmate looking at the same panel. “Contains water, sugar, citric acid” is a list you can copy. “Hydrates better because it is natural” is a slogan until someone names a substance, an amount, and a comparison. “Zero chemicals” is almost always false in the ordinary sense: water is a chemical substance; ascorbic acid is a chemical substance; sodium chloride is a chemical substance. The adult rewrite is “which substances, in what amounts, with what printed evidence.”</p>
+  <p>What a label typically will not give you: a balanced equation for how the product was made; a full impurity profile; permission to mix it with the bottle beside it; a pH if the producer chose not to print one; a ΔH. Unit 5’s books and Unit 7’s signs live in tables and papers, not on a cereal box. You may say “the label does not support that.” That sentence is a high-grade move in this course. Pretending the missing line is there is a low-grade move.</p>
+  <p>Active vs inactive, when a drug-facts panel uses those words, is a legal-and-label distinction: which listed substance is the one the product is sold as doing a named job, and which are there as other ingredients. It is not a moral ranking and not a synthesis map. On a cleaner, the hazard sentence can matter more than the brand story. You already practiced that refusal in Unit 6. Bring it here unchanged. If the close of this 101 produces even one student who writes a cleaner fan-fiction procedure, the sample has failed. The close should produce a paragraph that could be taped next to the bottle.</p>
+  <p>A short evidence writeup has a shape you can reuse. Sentence 1: name the product and the panel you used (ingredient list, nutrition facts, drug facts, warning block). Sentence 2: copy or carefully paraphrase two or three listed substances or one printed amount. Sentence 3: state one chemical claim those lines actually support (this is a mixture; acetic acid is present at 5%; citric acid appears on a food list, which is acid language from Unit 6). Sentence 4: state one claim the label does <em>not</em> support. Sentence 5: name the check (a roommate reading the same panel). That is 120–180 words if you do not decorate. Decorating is how “natural” sneaks back in.</p>
+  <p>Teaching example, invented as a sample panel, not a real brand: “CAMPUS VINEGAR — White vinegar. 5% acetic acid. Ingredients: water, acetic acid. Do not mix with bleach or other household chemicals. Not a cleaning-product substitute without reading a cleaner’s own label.” What you can write: a water solution of acetic acid at a printed 5%; an acid story; a mixing refusal. What you cannot write: a neutralization demo, a salad-dressing emulsion how-to, a claim about ‘purity’ the panel never defined, a plant-by-plant synthesis of acetic acid.</p>
+  <p>Virgil Renfroe did not teach chemistry as a content expert. This close is the same public habit as Analytical Reasoning: claim, because, a door a classmate can walk through — applied to matter on a package. Lecturer courses were Critical Writing, Humanities, and Analytical Reasoning. Scientific Development &amp; Social Change was online-course design/ops, not a chemistry appointment. Do not apply this 101 as credit or as a lab. Do not invent a school partner. Do not turn the writeup into a recipe.</p>
+  <p>You leave the course able to stand in an aisle, read a panel, and write five honest sentences. That is a gen-ed outcome. The periodic table, the mole, and ΔH were tools for those sentences. They were never a license to make the thing the label names.</p>
+
+  <div class="blurb">
+    <p class="eyebrow">Teaching panel (invented)</p>
+    <p style="margin-bottom:0"><strong>CAMPUS VINEGAR</strong> · White vinegar · 5% acetic acid · Ingredients: water, acetic acid · Warning: Do not mix with bleach or other household chemicals. This panel was written for the course. It is not a real brand and not a recipe.</p>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>List vs slogan</h2>
+    <p>Using the teaching panel above, which line is the chemical claim a classmate can audit?</p>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>What 5% acetic acid is (and is not)</h2>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Draft one evidence sentence</h2>
+    <p>Write one sentence that a roommate could check against the teaching panel. Name a substance or a printed amount. Do not give a use-instruction or a mixing step.</p>
+    <label class="field" for="ev1">Your sentence</label>
+    <textarea id="ev1" rows="3" placeholder="The panel lists…"></textarea>
+    <div class="actions"><button type="button" class="btn primary" id="checkEv">Check my sentence</button></div>
+    <div class="feedback" id="ev1fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>The close. This file does not collect it. No synthesis. No mixing. No invented news, no invented brand if you can reach a real label.</p>
+  <blockquote class="prompt">Choose one real label you can hold or photograph (food, drink, vinegar, OTC drug-facts, or a household cleaner). Do not use a lab reagent bottle you do not own. Transcribe the product name and the panel (ingredients and any amounts or warnings). Then write 180–220 words in the five-sentence shape from this lesson: panel used; two or three listed substances or one amount; one chemical claim the lines support; one claim they do not support; the check (a classmate with the same photo or bottle). Forbidden: how-to-make, extraction, mixing steps, ‘chemical-free’ as praise, medical advice, and any sentence that would only be useful as a recipe. If you cannot reach a real label, use the CAMPUS VINEGAR teaching panel and say that you did.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="unit-7.html">← Previous: Energy</a>
+    <a href="index.html">Course home →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185<br />He did not teach chemistry as a content expert. Lecturer: Critical Writing, Humanities, Analytical Reasoning. Scientific Development &amp; Social Change = design/ops, not a chemistry appointment. ID/course-design sample only. Do not apply.</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function checklist(boxId, items) {
+  const box = document.getElementById(boxId);
+  items.forEach((item) => {
+    const lab = document.createElement("label");
+    lab.innerHTML = '<input type="checkbox" /> <span>' + item.t + "</span>";
+    box.appendChild(lab);
+  });
+}
+function checkList(boxId, fbId, items, okMsg, badMsg) {
+  const box = document.getElementById(boxId);
+  let good = true;
+  [...box.querySelectorAll("input")].forEach((b, i) => {
+    if (items[i].must !== b.checked) good = false;
+  });
+  const fb = document.getElementById(fbId);
+  fb.className = "feedback show " + (good ? "ok" : "bad");
+  fb.textContent = good ? okMsg : badMsg;
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+function revealButtons() {
+  document.querySelectorAll("[data-reveal]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const el = document.getElementById(btn.getAttribute("data-reveal"));
+      el.classList.add("show", "ok");
+    });
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "‘5% acetic acid’ plus the ingredient list (water, acetic acid). A printed amount and two named substances.", ok: true, fb: "Yes. Sample, names, a percent. A classmate can point at the same lines. That is the close of the 101." },
+    { t: "‘This vinegar has good energy’ — implied by the campus name.", ok: false, fb: "The panel never said that. Brand tone is not ΔH and not a list." },
+    { t: "A homemade procedure for concentrating it.", ok: false, fb: "Extraction/concentration how-tos are out of bounds. The unit is reading, not making." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "A concentration claim: acetic acid is present at 5% as labeled, in water. Acid story from Unit 6. Not a synthesis map and not a mixing invitation.", ok: true, fb: "Amount, identity, solvent. You can refuse everything else the panel did not print." },
+    { t: "Proof the product is chemical-free because vinegar is food.", ok: false, fb: "Acetic acid is named. Food is made of substances. ‘Chemical-free’ contradicts the panel." },
+    { t: "Permission to combine it with a cleaner because both live under a sink.", ok: false, fb: "The warning says not to mix. Storage location is not a procedure. Unit 6’s refusal still holds." }
+  ]);
+  document.getElementById("checkEv").addEventListener("click", () => {
+    const raw = document.getElementById("ev1").value.trim();
+    const t = raw.toLowerCase();
+    const fb = document.getElementById("ev1fb");
+    const named = /(acetic|vinegar|water|5\s*%|percent|ingredient|warning|do not mix|bleach)/.test(t);
+    const bad = /(mix them|how to make|concentrate|extract|recipe|chemical-free|taste it|try this|combine with)/.test(t);
+    let cls = "bad";
+    let msg;
+    if (raw.length < 24) {
+      msg = "Too thin. One full sentence that names a substance or the 5% line from the panel.";
+    } else if (bad) {
+      msg = "That sentence turns the panel into a procedure, a slogan, or a dare. Stay with what is printed: water, acetic acid, 5%, the do-not-mix warning.";
+    } else if (named) {
+      cls = "ok";
+      msg = "You pointed at the panel. Next check: could a roommate find that same word or number without already agreeing with you? If yes, you have the close.";
+    } else {
+      msg = "Name something the panel actually prints — water, acetic acid, 5%, or the mixing warning. ‘It seems healthy’ is not an audit.";
+    }
+    fb.className = "feedback show " + cls;
+    fb.textContent = msg;
+  });
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

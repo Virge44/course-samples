@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 5 · Atmosphere and weather · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f6f1e8;
+  --panel: #efe4d6;
+  --card: #ffffff;
+  --accent: #8a4d2f;
+  --accent-ink: #5c3018;
+  --accent-soft: #f0ddd0;
+  --banner: #2c211a;
+  --banner-ink: #f0e6dc;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #8a4d2f;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+.sample strong {
+  color: #e8c9a0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+footer a { color: var(--accent-ink); }
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+.pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #8a4d2f; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. First-year gen-ed instructional-design sample — he can structure a course. He did <em>not</em> teach earth science as a content expert. Lecturer courses were Critical Writing, Humanities, and Analytical Reasoning. As Director of Online Learning he designed an online course called Scientific Development &amp; Social Change — that is design/ops, not an earth-science appointment. Not a live institutional course. Not official NC A&amp;T curriculum. Do not invent labs, field trips, or credentials. Do not apply.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html">1 · Claims</a><a href="unit-2.html">2 · Rocks</a><a href="unit-3.html">3 · Plates</a><a href="unit-4.html">4 · Water</a><a href="unit-5.html" aria-current="page">5 · Weather</a><a href="unit-6.html">6 · Climate</a><a href="unit-7.html">7 · Resources</a><a href="unit-8.html">8 · Place</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 5 · Not a forecast app · ~35 minutes</p>
+  <h1>Atmosphere and weather</h1>
+  <p class="lede">Weather is the atmosphere’s state now. Climate is the pattern over decades. An icon is not a mechanism.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Separate weather (state now or soon) from climate (pattern over decades).</li>
+    <li>Name what a weather claim needs: a time window plus temperature, pressure, moisture, wind, or precipitation.</li>
+    <li>Read a simple situation without treating a forecast-app icon as the explanation.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+
+  <p>Weather is the state of the atmosphere at a time and a place: temperature, pressure, humidity, wind, cloud, precipitation. Climate is the pattern of that weather over a long stretch — decades, not a weekend. If you mix the two, you will treat a cold morning as an argument about the century, or a forecast icon as an explanation. This unit is not a forecast app. An app can be useful. It does not tell you why a front lifts air, or why a clear night can be cold. The habit is the same as Unit 1: a weather claim names variables and a time window a classmate could check.</p>
+  <p>The atmosphere is a thin skin. Most of the mass that makes weather sits in the troposphere, the lowest layer — on the order of 8 to 18 kilometers, thinner over the poles, thicker in the tropics. Above that, other layers matter for ozone and for some research. For 101 weather, you live in the troposphere. Air has weight. That weight is pressure. Pressure is not a mood, and it is not “the air getting heavy because rain is sad.” It is a measurable force on a unit area. Highs and lows on a map are patterns of that measurement.</p>
+  <p>Air moves from higher toward lower pressure, then the rotating Earth turns the path. You do not need the full Coriolis derivation in this sample. You need the consequence: winds around highs and lows have a pattern; they do not blow in cartoon straight lines from H to L. Rising air cools; sinking air warms. Rising, cooling air can reach saturation and make cloud and rain. Sinking air often means clearer weather. That is energy and moisture, not an icon of a sun wearing sunglasses.</p>
+  <p>A front is a boundary between air masses with different temperature and moisture. A cold front can lift warm air quickly; showers and a wind shift are common textbook companions. A warm front lifts more gently; a longer shield of cloud is the usual picture. Real events are messier than the diagram. The diagram is still better than “it feels like rain.” Convection — warm air rising in a plume — builds thunderstorms when the air is unstable and moist. Lightning is a discharge, not a personality. Hail and tornadoes are specific, violent cases. This sample will not make you a storm chaser and will not invent a campus weather station.</p>
+  <p>Humidity is water vapor, a gas. Relative humidity is how close the air is to saturation at that temperature. Cold air holds less vapor before it saturates; that is why a humid night and a dry winter day are different sentences. Dew and frost are local saturation on a surface. Fog is cloud on the ground. None of these require a spiritual reading. They require a temperature, a moisture, and a check.</p>
+  <p>What first-years get wrong: treating the phone icon as the mechanism; treating “the weatherman was wrong” as a refutation of atmospheric science (a forecast is a short-range probability, and models have limits); treating one hot afternoon as climate (that is Unit 6). Another error: inventing a field trip to a TV studio or a partner NWS office. Public pages exist. A dated observation from a nearby ASOS or a printed newspaper high and low is enough.</p>
+  <p>Keep the author’s frame. This is gen-ed instructional design, not a meteorology appointment. Conservative facts: weather versus climate, pressure and moisture, rising air and clouds, fronts as boundaries. Practice will ask you to mark a weather claim, reject an app-as-explanation sentence, and write a short situation with a time window and at least one variable a roommate could look up.</p>
+
+
+  <div class="split">
+    <div class="pair"><div class="tag">App talk</div>The icon said sun, so nothing is happening in the air.</div>
+    <div class="pair"><div class="tag">Weather claim</div>Tonight’s forecast low is 38°F under clear sky; radiational cooling can drop the temperature after sunset.</div>
+  </div>
+
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Weather or climate?</h2>
+    <p>Which sentence is a <strong>weather</strong> claim?</p>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Not a forecast app</h2>
+    <p>A classmate says, “It will rain because the little cloud on my phone is dark.” What is the better 101 move?</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Write a weather claim</h2>
+    <p>One or two sentences: a time window, a place you can name, and at least one variable (temperature, wind, rain, pressure, cloud). Use a real day this week or a public observation. No invented station.</p>
+    <label class="field" for="wx5">Your weather sentence</label>
+    <textarea id="wx5" rows="3" placeholder="On [day] in [place], …"></textarea>
+    <div class="actions"><button type="button" class="btn primary" id="checkWx">Check my sentence</button></div>
+    <div class="feedback" id="wx5fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>You could turn this in on paper or paste it into a journal. This file does not collect it.</p>
+  <blockquote class="prompt">For one real day this week, write 150–220 words: the weather claim (time, place, two variables), what an app icon would have shown, and what the icon does not explain (a front, cooling at night, a wind shift). Use a public observation if you can. No invented campus weather station. No partner TV studio.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="unit-4.html">← Unit 4: Water</a>
+    <a href="unit-6.html">Next: Climate as evidence →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185<br>He did not teach earth science as a content expert. Lecturer courses: Critical Writing, Humanities, Analytical Reasoning. <em>Scientific Development &amp; Social Change</em> was online-course design/ops, not an earth-science appointment. Do not apply.</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "July afternoons in this city are usually hotter than January afternoons, over many years of records.", ok: false, fb: "That is climate: a pattern over years. Weather is the state now or soon." },
+    { t: "At 3 p.m. Tuesday the airport reported 87°F, southwest wind 12 mph, and no rain.", ok: true, fb: "Yes. Time, place, measured state. That is weather." },
+    { t: "The seasons have a spiritual rhythm you can feel in your bones.", ok: false, fb: "Mood. Unit 1 already refused this costume." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "Believe the icon. Icons are the mechanism.", ok: false, fb: "An icon is a summary, not a lifting mechanism or a moisture profile." },
+    { t: "Ask what the icon is standing in for: a front, a moist unstable layer, a chance of precipitation in a time window.", ok: true, fb: "Yes. Translate the picture back into variables. That is this unit." },
+    { t: "If the icon was wrong last Tuesday, atmospheric science is fake.", ok: false, fb: "A missed short-range forecast is not a refutation of the troposphere. Check the variables." }
+  ]);
+  document.getElementById("checkWx").addEventListener("click", () => {
+    const raw = document.getElementById("wx5").value.trim();
+    const t = raw.toLowerCase();
+    const fb = document.getElementById("wx5fb");
+    const time = /(today|tonight|yesterday|monday|tuesday|wednesday|thursday|friday|saturday|sunday|a\\.m|p\\.m|am |pm |hour|morning|afternoon|night|\d)/.test(t);
+    const varb = /(temp|°|degree|wind|rain|humid|pressure|cloud|storm|front|snow|fog|dew)/.test(t);
+    const app = /(the icon|my phone said|the app is always)/.test(t);
+    let cls = "bad";
+    let msg;
+    if (raw.length < 20) {
+      msg = "Too thin. Give a time window, a place, and a variable.";
+    } else if (app && !varb) {
+      msg = "You cited an icon. Translate it: temperature, wind, rain chance, a front, a time.";
+    } else if (time && varb) {
+      cls = "ok";
+      msg = "Time plus a variable. A classmate can look up that day. That is a weather claim, not an app screenshot.";
+    } else if (varb) {
+      msg = "You named weather. Add a time window and a place so someone can check it.";
+    } else {
+      msg = "Add a measurable: temperature, wind, rain, pressure, cloud — and when.";
+    }
+    fb.className = "feedback show " + cls;
+    fb.textContent = msg;
+  });
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

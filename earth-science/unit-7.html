@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 7 · Earth resources and waste · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f6f1e8;
+  --panel: #efe4d6;
+  --card: #ffffff;
+  --accent: #8a4d2f;
+  --accent-ink: #5c3018;
+  --accent-soft: #f0ddd0;
+  --banner: #2c211a;
+  --banner-ink: #f0e6dc;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #8a4d2f;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+.sample strong {
+  color: #e8c9a0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+footer a { color: var(--accent-ink); }
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+.pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #8a4d2f; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. First-year gen-ed instructional-design sample — he can structure a course. He did <em>not</em> teach earth science as a content expert. Lecturer courses were Critical Writing, Humanities, and Analytical Reasoning. As Director of Online Learning he designed an online course called Scientific Development &amp; Social Change — that is design/ops, not an earth-science appointment. Not a live institutional course. Not official NC A&amp;T curriculum. Do not invent labs, field trips, or credentials. Do not apply.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html">1 · Claims</a><a href="unit-2.html">2 · Rocks</a><a href="unit-3.html">3 · Plates</a><a href="unit-4.html">4 · Water</a><a href="unit-5.html">5 · Weather</a><a href="unit-6.html">6 · Climate</a><a href="unit-7.html" aria-current="page">7 · Resources</a><a href="unit-8.html">8 · Place</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 7 · Where stuff comes from · ~35 minutes</p>
+  <h1>Earth resources and waste</h1>
+  <p class="lede">An object has a source and a rate. Waste is still matter. Caring is allowed. A slogan is not a budget.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Trace one everyday object back to a rock, well, forest, or field — no invented mine tour.</li>
+    <li>Distinguish a renewable rate from “we can use it forever.”</li>
+    <li>Name where one waste stream goes (landfill, atmosphere, water, reuse) as an Earth claim, not a scold.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+
+  <p>Everything you are holding came from the Earth. The phone, the desk, the food, the asphalt, the drywall. Ore, petroleum, sand and gravel, timber, soil, groundwater. This unit is about stocks and flows, not a scold and not a shopping ban. A resource claim names a source and a rate. A waste claim names where the leftover matter goes — landfill, tailings, atmosphere, water, a reuse stream. “We should care more” is not yet either claim.</p>
+  <p>A nonrenewable resource, in 101 language, is one whose replacement rate is geologic. Coal, oil, gas, most metal ores: the Earth still makes them, on timescales that do not help a human budget. A renewable resource replaces on a human or near-human timescale if you do not take it faster than it returns: timber, some groundwater, soil in principle, sunlight as an energy flux. The trap is the word <em>renewable</em> used as “forever, no matter the rate.” A forest cut faster than it grows is a stock being mined. An aquifer pumped faster than it recharges is a stock being mined. Rate is the claim.</p>
+  <p>Where stuff comes from is often ugly in a quiet way. A copper wire began as a sulfide or oxide ore, blasted, crushed, concentrated, smelted. A concrete sidewalk is crushed rock plus cement; cement is cooked limestone and other materials, energy-heavy. A plastic bottle is a hydrocarbon chain from oil or gas. Phosphorus on a farm came from a mine. Sand for glass and for concrete is a rock product people forget to count. You do not need a mine tour this sample will not invent. You need to pick one object you already own and refuse to treat it as having appeared in a store by magic.</p>
+  <p>Waste is still matter. It does not vanish when the truck leaves. Landfills bury a mix; they leak if they are poorly built; they make methane as organics decay. Incineration moves much of the mass to the atmosphere and to ash. Mine tailings are crushed rock with leftover chemistry. Combustion of coal and gasoline puts carbon dioxide and other gases into the air — a Unit 6 measurement sitting on a Unit 7 flow. Nutrient runoff from fields is a water claim from Unit 4. Recycling is a real path for some materials (aluminum is the usual good example) and a thin path for others. “I recycled it” is not a complete Earth sentence if you cannot say whether that stream actually remakes the object.</p>
+  <p>Reserves versus resources: a conservative distinction. A resource is what is there. A reserve is what is economic to extract with current prices and technology. Those numbers move. They are not a conspiracy when they move. They are a budget that depends on price, law, and engineering. Peak-everything slogans and infinite-substitute slogans both skip the budget. This 101 wants the budget.</p>
+  <p>Energy is a flow sitting on those stocks. A coal plant and a gas plant burn geologic carbon and send waste to the air. A hydroelectric dam is a water-and-gravity machine with a drowned valley behind it. A wind turbine is steel, copper, concrete, and a wind resource; it is not “nothing from the ground.” None of those sentences is a vote. They are source-and-waste sentences. If you skip them, you will treat electricity as a mood that comes from a wall socket.</p>
+  <p>What first-years get wrong: treating “natural” as automatically kind; treating “chemical” as automatically evil (rocks are chemistry); inventing a partner landfill or a class mine visit; writing a sermon about other people’s consumption while skipping the object in their bag. The author is not a mining engineer. He is asking for the same public habit as the rest of the sample: source, rate, destination, a check. Practice will ask you to trace an object, mark a rate claim, and write where one waste stream goes without a scold.</p>
+
+
+  <div class="split">
+    <div class="pair"><div class="tag">Magic store</div>This bottle just exists. Waste is someone else’s later.</div>
+    <div class="pair"><div class="tag">Stock and flow</div>Petroleum feedstock → plastic → use → landfill or a thin recycle stream. Rate and destination named.</div>
+  </div>
+
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Where does it come from?</h2>
+    <p>A steel-and-glass phone. Which sentence is the 101 resource claim?</p>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Rate, not forever</h2>
+    <p>A town calls its groundwater “renewable, so we can pump without a budget.” What is the careful reply?</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Trace one object</h2>
+    <p>Name something you actually have (pen, can, shirt, phone, paper). Two or three short lines: likely Earth source, one process, likely waste path. No invented mine tour.</p>
+    <label class="field" for="res7">Your trace</label>
+    <textarea id="res7" rows="4" placeholder="Object: …&#10;Source: …&#10;Waste path: …"></textarea>
+    <div class="actions"><button type="button" class="btn primary" id="checkRes">Check my trace</button></div>
+    <div class="feedback" id="res7fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>You could turn this in on paper or paste it into a journal. This file does not collect it.</p>
+  <blockquote class="prompt">Pick one object you actually own. Write 150–220 words: likely Earth source, one process between ground and hand, likely waste path, and one number or rate you do not have (and would need). Do not invent a class visit to a landfill or a mine. Do not scold a stranger. Do not claim you assayed the ore.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="unit-6.html">← Unit 6: Climate</a>
+    <a href="unit-8.html">Next: A local place →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185<br>He did not teach earth science as a content expert. Lecturer courses: Critical Writing, Humanities, Analytical Reasoning. <em>Scientific Development &amp; Social Change</em> was online-course design/ops, not an earth-science appointment. Do not apply.</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "Phones are virtual, so they have no geology.", ok: false, fb: "A phone is metals, glass, plastics, and energy. Virtual is a sales word." },
+    { t: "Metals from ores, glass from silica, plastics from hydrocarbons — each with a mine or a well and an energy cost.", ok: true, fb: "Yes. Sources named. Still 101, not a bill of materials from a factory tour you did not take." },
+    { t: "If I feel guilty, the materials become ethical.", ok: false, fb: "Feeling is not a source. Unit 1 again." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "Renewable means the town can pump at any rate forever.", ok: false, fb: "Rate can exceed recharge. Then you are mining the aquifer." },
+    { t: "Groundwater is never renewable, so the word is a lie.", ok: false, fb: "Some aquifers recharge. The claim is the comparison of pump rate to recharge, not a slogan war." },
+    { t: "Call it renewable only if recharge can match the pump rate over the years that matter; measure both.", ok: true, fb: "Yes. Rate versus rate. That is the budget." }
+  ]);
+  document.getElementById("checkRes").addEventListener("click", () => {
+    const raw = document.getElementById("res7").value.trim();
+    const t = raw.toLowerCase();
+    const fb = document.getElementById("res7fb");
+    const src = /(ore|mine|oil|gas|petroleum|sand|silica|timber|wood|cotton|soil|clay|iron|copper|bauxite|well|quarry|rock|hydrocarbon|metal)/.test(t);
+    const waste = /(landfill|recycl|tailing|ash|atmosphere|co2|inciner|dump|wastewater|runoff|scrap)/.test(t);
+    const sermon = /(people should just stop|consumerism is|shame on)/.test(t);
+    let cls = "bad";
+    let msg;
+    if (raw.length < 20) {
+      msg = "Too thin. Object, source, waste path.";
+    } else if (sermon && !src) {
+      msg = "Scold without a source. Name the rock, well, or forest, and where the leftover matter goes.";
+    } else if (src && waste) {
+      cls = "ok";
+      msg = "Source and destination. A classmate can argue the exact ore. They cannot say the object appeared by magic.";
+    } else if (src) {
+      msg = "You named a source. Add a waste path: landfill, recycle stream, tailings, atmosphere, water.";
+    } else {
+      msg = "Name an Earth source (ore, well, quarry, timber, soil) and a destination for the leftover matter.";
+    }
+    fb.className = "feedback show " + cls;
+    fb.textContent = msg;
+  });
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

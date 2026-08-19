@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 3 · Bonding · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f7f4ee;
+  --panel: #efeae1;
+  --card: #ffffff;
+  --accent: #b45309;
+  --accent-ink: #9a3412;
+  --accent-soft: #fde8c8;
+  --banner: #1c1612;
+  --banner-ink: #f3e6d0;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #b45309;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #e8c9a0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+.pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.formula {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.85rem;
+  text-align: center;
+  font-size: 1.05rem;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #b45309; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Instructional-design sample by Virgil Renfroe. He did <em>not</em> teach chemistry as a content expert. Lecturer courses: Critical Writing, Humanities, Analytical Reasoning. Scientific Development &amp; Social Change was online-course design/ops, not a chemistry appointment. Not a live institutional course. Not official NC A&amp;T curriculum. Do not apply. No labs, no synthesis, no how-to-make.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html">1 · Claims</a><a href="unit-2.html">2 · Atoms</a><a href="unit-3.html" aria-current="page">3 · Bonding</a><a href="unit-4.html">4 · Moles</a><a href="unit-5.html">5 · Accounts</a><a href="unit-6.html">6 · pH</a><a href="unit-7.html">7 · Energy</a><a href="unit-8.html">8 · Labels</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 3 · Why things stick · ~40 minutes</p>
+  <h1>Bonding, in plain language</h1>
+  <p class="lede">Atoms stick because opposite charges attract and because a lower-energy arrangement beats a higher-energy one. Ionic and covalent are two common ways that happens — not two kinds of glue you can buy.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+    <span class="chip">No synthesis</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Explain ionic sticking as electron transfer plus a lattice of ions, using sodium chloride as a named compound, not as a recipe.</li>
+    <li>Explain covalent sticking as electron sharing in molecules such as water and carbon dioxide.</li>
+    <li>Use polarity in one careful sentence: why water is a good solvent for many ionic compounds, without a mixing how-to.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+  <p>Things stick. Salt stays a crystal until something dissolves it. A water molecule stays a water molecule in a glass. That is not because the universe applied craft glue. It is because charged pieces of atoms attract and because some arrangements of electrons have lower energy than others. Bonding language is a way to talk about those arrangements without pretending you can see them with a cafeteria lamp.</p>
+  <p><strong>Ionic bonding</strong> is the name for a common pattern: a metal atom and a nonmetal atom end up as ions — charged atoms — and those ions pack into a lattice. Sodium chloride, the compound in table salt, is the usual classroom example. A sodium atom tends to lose one electron and become Na<sup>+</sup>. A chlorine atom tends to gain one electron and become Cl<sup>−</sup>. Opposite charges attract. In the solid, you do not have a single “NaCl couple” holding hands. You have a three-dimensional stack of ions. That is why we speak of a formula unit, not a little salt molecule. You will not make sodium chloride from sodium metal and chlorine gas in this course. Those starting materials are hazardous and this sample does not give procedures. You will read the name of a compound that already exists in a shaker and say why it holds together.</p>
+  <p>Many ionic solids share a family of ordinary properties: they are crystalline, they often melt at high temperatures compared with everyday molecular stuff, and they do not conduct electricity as dry solids, but many do conduct when melted or dissolved in water because the ions can then move. Those are conservative textbook patterns, not dares. “Dissolved in water” here means a thought about what a label already describes (saline, seawater) — not a kitchen protocol.</p>
+  <p><strong>Covalent bonding</strong> is electron sharing. Nonmetal atoms can share pairs of electrons so that each atom has a more stable outer arrangement. Water is H<sub>2</sub>O: two hydrogen atoms each sharing with oxygen. Carbon dioxide is CO<sub>2</sub>: carbon sharing with two oxygens. Oxygen gas is O<sub>2</sub>: two oxygen atoms sharing. The result is a molecule, a discrete group of atoms that travel together. Molecular substances often melt and boil at lower temperatures than ionic lattices, which is why water is a liquid in a room where salt is a solid. That comparison is a property claim, not a ranking of moral worth.</p>
+  <p>Sharing is not always even. Oxygen pulls shared electrons more strongly than hydrogen does. In a water molecule the oxygen end is slightly negative and the hydrogen ends are slightly positive. That is <strong>polarity</strong>. Water’s bent shape keeps those partial charges from canceling. Polar water molecules can surround many ions and help an ionic solid dissolve. That is why salt water is a mixture you already know, and why a nutrition label can list sodium as dissolved ions in a soup. Oil is mostly nonpolar covalent molecules. Polar and nonpolar liquids often separate rather than mix. You have seen a salad dressing bottle do this. You do not need to invent a new mixture to understand the sentence.</p>
+  <p>Metallic bonding is a third pattern for metals: a lattice of metal ions in a sea of relatively mobile electrons, which is part of why metals conduct and can be shaped. One paragraph is enough. This 101 will not ask you to smelt anything.</p>
+  <p>A fair first-year error is to treat “ionic” and “covalent” as personality types, or to say “sodium wants to be like neon” as if atoms had wishes. Atoms do not want. Arrangements that lower energy are more common under given conditions. Another error is to change a subscript when you are thinking about a bond: water is H<sub>2</sub>O because that is the molecule, not because someone added a coefficient. Subscripts are the compound’s identity. Coefficients wait until Unit 5.</p>
+  <p>This unit is plain language on purpose. Virgil Renfroe did not teach chemistry as a content expert; this is an instructional-design sample with conservative facts. Lecturer courses were Critical Writing, Humanities, and Analytical Reasoning. Scientific Development &amp; Social Change was design/ops. Do not apply the sample as a lab. Do not look up “how to make” a salt or a gas and paste it into homework. The prompt will ask you to explain sticking the way you would explain a lock: what the pieces are, what attracts, what the ordinary properties hint — on paper.</p>
+  <p>You leave able to say, without theater, why a salt crystal is a lattice of ions and why a water molecule is a shared-electron group with a polar shape. That is enough bonding for a gen-ed spine. Organic mechanisms, crystal-field theory, and synthesis routes are someone else’s course, taught by a chemist, with safety training this file cannot and will not provide.</p>
+
+  <div class="split">
+    <div class="pair"><div class="tag">Ionic (plain)</div>Electrons transferred. Ions packed in a lattice. Example already on a table: NaCl. Not a molecule of two atoms holding hands.</div>
+    <div class="pair"><div class="tag">Covalent (plain)</div>Electrons shared. Discrete molecules. Examples already in air and taps: O<sub>2</sub>, CO<sub>2</sub>, H<sub>2</sub>O.</div>
+  </div>
+  <div class="formula">Polar water: oxygen a little δ−, hydrogens a little δ+. Bent shape. Good at surrounding many ions. Not a recipe.</div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Why does a salt crystal stay a crystal?</h2>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Water vs salt: what kind of sticking?</h2>
+    <p>Match the conservative description to the substance.</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Oil and vinegar in a bottle you already own</h2>
+    <p>A dressing bottle shows a layer of oil on a layer of vinegar. What is the chemistry sentence — without telling anyone to shake, heat, or add anything?</p>
+    <div id="q3"></div>
+    <div class="feedback" id="q3fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>This file does not collect the work. Do not synthesize, extract, or mix household products.</p>
+  <blockquote class="prompt">In 180–220 words, explain to a roommate why table salt (the compound sodium chloride) and tap water (mostly H2O) are both “stuck together” but not in the same way. Use the words ion, lattice, molecule, and polar once each, correctly. Do not include any steps for making salt, splitting water, or combining kitchen products. If you mention a bottle of dressing or a salt shaker, describe what is already there. End with one sentence a chemist could refuse: a property claim (melting, dissolving, conducting) you are not sure about, labeled as unsure.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="unit-2.html">← Previous: Atoms</a>
+    <a href="unit-4.html">Next: Moles →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185<br />He did not teach chemistry as a content expert. Lecturer: Critical Writing, Humanities, Analytical Reasoning. Scientific Development &amp; Social Change = design/ops, not a chemistry appointment. ID/course-design sample only. Do not apply.</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function checklist(boxId, items) {
+  const box = document.getElementById(boxId);
+  items.forEach((item) => {
+    const lab = document.createElement("label");
+    lab.innerHTML = '<input type="checkbox" /> <span>' + item.t + "</span>";
+    box.appendChild(lab);
+  });
+}
+function checkList(boxId, fbId, items, okMsg, badMsg) {
+  const box = document.getElementById(boxId);
+  let good = true;
+  [...box.querySelectorAll("input")].forEach((b, i) => {
+    if (items[i].must !== b.checked) good = false;
+  });
+  const fb = document.getElementById(fbId);
+  fb.className = "feedback show " + (good ? "ok" : "bad");
+  fb.textContent = good ? okMsg : badMsg;
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+function revealButtons() {
+  document.querySelectorAll("[data-reveal]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const el = document.getElementById(btn.getAttribute("data-reveal"));
+      el.classList.add("show", "ok");
+    });
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "Na+ and Cl− ions packed in a lattice; opposite charges attract. Not craft glue, and not a two-atom molecule.", ok: true, fb: "Yes. Ionic solid = stacked ions. The formula NaCl names the ratio, not a little couple." },
+    { t: "Sodium metal and chlorine gas are holding hands inside the shaker.", ok: false, fb: "The shaker does not contain sodium metal or chlorine gas. Those are different substances, and this course will not discuss producing them." },
+    { t: "Someone should melt the salt at home to prove it conducts.", ok: false, fb: "Out of bounds. High-temperature melts are not a homework move. Properties can be stated as textbook patterns without a procedure." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "H2O is a covalent molecule (shared electrons, polar). Solid NaCl is an ionic lattice (ions stacked).", ok: true, fb: "That split is the unit. Same campus cafeteria, two different kinds of sticking." },
+    { t: "Both are ionic because both come from a kitchen.", ok: false, fb: "Location is not a bond type. Water is molecular covalent. Salt is ionic." },
+    { t: "Both are metals because they are shiny when the light hits the glass.", ok: false, fb: "Shine on glass is not metallic bonding. Metals are a region of the table (Unit 2), not a lighting effect." }
+  ]);
+  mc("q3", "q3fb", [
+    { t: "Vinegar is mostly polar water plus acetic acid; oil is mostly nonpolar. Polar and nonpolar liquids often stay in separate layers. Observation, not a mixing assignment.", ok: true, fb: "Yes. You read a bottle that already exists. Polarity explains the layers. No new procedure." },
+    { t: "Shake in extra cleaner so the layers learn to get along.", ok: false, fb: "No mixing instructions. Cleaners are not a bonding demo kit." },
+    { t: "The oil has turned into vinegar; identity did not survive.", ok: false, fb: "Two layers means two identities still present — a mixture, not a chemical change of oil into vinegar." }
+  ]);
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

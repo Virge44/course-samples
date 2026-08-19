@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 1 · What you can claim from a night sky · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1b1916;
+  --muted: #5a564e;
+  --rule: #d3cfc4;
+  --paper: #f6f3ec;
+  --panel: #eeeae2;
+  --card: #ffffff;
+  --accent: #2a2d6b;
+  --accent-ink: #1c1f4a;
+  --accent-soft: #e2e3f0;
+  --banner: #121428;
+  --banner-ink: #e4e6f2;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #3a3d8c;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #c9c6e8;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag, .pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #2a2d6b; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. Not a live institutional course. Not official NC A&amp;T curriculum. He did not teach astronomy. Do not apply.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html" aria-current="page">1 · Night sky</a><a href="unit-2.html">2 · Clock</a><a href="unit-3.html">3 · Gravity</a><a href="unit-4.html">4 · Light</a><a href="unit-5.html">5 · Leftovers</a><a href="unit-6.html">6 · Stars</a><a href="unit-7.html">7 · Galaxies</a><a href="unit-8.html">8 · Log</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 1 · Scale and light delay · ~35 minutes</p>
+  <h1>What you can claim from a night sky</h1>
+  <p class="lede">One night of looking is a sample of light that left at different times. Brightness is not a tape measure. Delay comes before romance.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Name a conservative light-travel time for the Moon, the Sun, and a nearby star.</li>
+    <li>Reject “brighter means closer” as a claim one night can support.</li>
+    <li>Split a sky sentence into what the light allows and what is only a story.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+  <p>Stand outside on a clear night. You can see the Moon, a handful of bright planets if they are up, and a field of stars. That is already a lot. It is not a map of the universe, and it is not a clock that reads “now.” It is a mix of light that left its sources at different times and arrived together at your eye.</p>
+  <p>Light is fast — about 300,000 kilometers per second in empty space — and still not instant. The Moon is about 384,000 kilometers away. Light from the Moon’s sunlit face takes a little more than one second to reach you (about 1.3 seconds). The Sun is about 150 million kilometers away. Its light takes about eight minutes. The next star after the Sun is a few light-years away. A light-year is the distance light travels in one year, not a unit of time. A conservative classroom figure: more than four years. When you look at that star, you are looking at light that left before this academic year existed. Those three numbers — a second, eight minutes, a few years — are enough to start. You do not need a catalog of thousands of objects to learn the habit.</p>
+  <p>Apparent brightness is not distance. A nearby flashlight can outshine a distant stadium. A nearby modest star can look brighter than a distant giant. From one night, with one pair of eyes, you can say: this point is brighter than that point, to me, tonight, in this weather. You cannot yet say which one is closer. Distance in astronomy is earned with more than a glance — geometry over Earth’s orbit, or other methods this course will not pretend you can run in a parking lot. The honest move is to leave distance unmarked until you have a method.</p>
+  <p>You can claim a few other things without a telescope. Some bright points hold a fixed pattern relative to each other over a single night, while one or two wander against that pattern. The wanderers are planets; the word is old and public. The Moon changes shape over days, not over minutes. The sky as a whole appears to turn. Those are observations. They will get geometry in Unit 2. For now, notice that they are checkable: a classmate can look on the same night, or the next, and agree or disagree about the pattern, the wander, the shape.</p>
+  <p>You cannot claim fate, character, or a weekly forecast from a star’s position. That is astrology, and it is out of this course. You also cannot claim anything about classified or military space systems. This sample uses public, textbook-level facts: Moon, Sun, nearby stars, planets as wanderers. If a sentence needs a secret catalog, it does not belong here.</p>
+  <p>Scale is easier if you keep a short ladder and refuse to skip rungs. Earth is a ball you could, in principle, walk around — about 40,000 kilometers at the equator. The Moon is tens of Earth diameters away, not sitting on the atmosphere. The Sun is about four hundred times farther than the Moon, which is why they can look the same size in the sky and still be different objects. The next star is not “a little past the Sun.” It is a jump of hundreds of thousands of Sun-to-Earth distances. People skip that jump because the page looks flat. The page is lying. A light-year is how we keep the jump from turning into a pile of zeros.</p>
+  <p>Light delay follows the same ladder. Moon: about a second. Sun: about eight minutes. Nearby star: years. A galaxy we can see as a faint smudge, if the sky is dark enough, is millions of years of delay. You do not need the exact catalog number to use the idea. You need to stop saying “the universe tonight” as if every photon left this afternoon.</p>
+  <p>Three tests help, and they sound like the tests in a writing course because they are the same tests.</p>
+  <p><strong>First: Can you name the delay?</strong> If you mention an object, can you say whether its light is seconds, minutes, years, or longer? If you cannot, you are treating the sky as a stage set. The stage set is the trap.</p>
+  <p><strong>Second: Did you promote brightness to distance?</strong> If the only evidence is “it looks bright,” you do not have a distance. You have an appearance. Appearance is allowed. Distance is a further claim.</p>
+  <p><strong>Third: Could a skeptical classmate check the sentence without sharing your mood?</strong> “The Moon is a crescent tonight” is checkable. “The Moon looks lonely” is a feeling. Feelings can start a poem. They are not yet an astronomy claim. This course will not grade the poem. It will ask whether you know which one you wrote.</p>
+  <p>You will leave this unit able to say three delayed times and to refuse one bad shortcut. That is enough for a 101 opener. The sky will still be beautiful. Beauty does not need a false distance.</p>
+
+  <div class="split">
+    <div class="pair"><div class="tag">Checkable</div>Moonlight takes a little more than a second to reach Earth.</div>
+    <div class="pair"><div class="tag">Story</div>That bright star must be the closest one. <span class="muted">Brightness is not a tape measure.</span></div>
+  </div>
+
+  <div class="practice" id="p-delay">
+    <p class="eyebrow">Practice</p>
+    <h2>Name the delay</h2>
+    <p>Which pairing is the conservative classroom match?</p>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-bright">
+    <p class="eyebrow">Practice</p>
+    <h2>What can one night support?</h2>
+    <p>You step outside. One point is much brighter than another. Which sentence is allowed?</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-split">
+    <p class="eyebrow">Practice</p>
+    <h2>Split claim from story</h2>
+    <p>Write one checkable sentence about a night sky — a delay, a shape, or a comparison of brightness — and stop. Do not give a distance you did not measure. Do not write a horoscope.</p>
+    <label class="field" for="claim1">Your sentence</label>
+    <textarea id="claim1" rows="3" placeholder="Tonight I can claim…"></textarea>
+    <div class="actions"><button type="button" class="btn primary" id="checkClaim">Check my sentence</button></div>
+    <div class="feedback" id="claim1fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>You could turn this in on paper or paste it into a journal. This file does not collect it.</p>
+  <blockquote class="prompt">From memory or from one look outside (or, if the sky is closed, from a labeled public image of the Moon or Sun), write 150–200 words. Name one object. Give a conservative light-travel time for it (second / eight minutes / years — pick the right rung). Then write one sentence you are <em>not</em> allowed to claim from brightness alone. Then write one sentence a classmate could check. No astrology. No invented telescope session.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="index.html">← Course home</a>
+    <a href="unit-2.html">Next: The sky as a clock →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185<br />He did not teach astronomy as a content expert. Lecturer courses: Critical Writing, Humanities, Analytical Reasoning. <em>Scientific Development &amp; Social Change</em> was online-course design/ops, not an astronomy appointment. Do not apply.</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "Moon ~ eight minutes; Sun ~ a second; nearby star ~ a few days.", ok: false, fb: "Those times are swapped and the star is far too short. Moon ~1.3 seconds, Sun ~8 minutes, nearby star ~ years." },
+    { t: "Moon ~ 1.3 seconds; Sun ~ 8 minutes; nearby star ~ more than four years.", ok: true, fb: "Yes. Conservative classroom rungs. A light-year is a distance; the delay for the next star is years, not days." },
+    { t: "All starlight is from tonight, because light is instant on human scales.", ok: false, fb: "Light is fast and still delayed. Moonlight is about a second. Starlight is years or more." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "The brighter point is closer.", ok: false, fb: "That promotes appearance to distance. A distant giant can outshine a nearby ember." },
+    { t: "The brighter point is hotter.", ok: false, fb: "Color and spectrum speak to temperature later. Raw brightness does not." },
+    { t: "The brighter point looks brighter to me tonight. I do not yet know which is closer.", ok: true, fb: "Allowed. You reported appearance and refused the extra claim." }
+  ]);
+  document.getElementById("checkClaim").addEventListener("click", () => {
+    const raw = document.getElementById("claim1").value.trim();
+    const t = raw.toLowerCase();
+    const fb = document.getElementById("claim1fb");
+    const story = /(horoscope|destiny|sign|fortune|fate|my week|closer than|must be close|must be the closest)/.test(t);
+    const checkable = /(second|minute|year|crescent|gibbous|full moon|brightness|brighter|dimmer|wander|planet|delay|light)/.test(t);
+    let cls = "bad";
+    let msg;
+    if (raw.length < 20) {
+      msg = "Too thin. Write one full sentence a classmate could read aloud.";
+    } else if (story) {
+      msg = "That still walks into a story or a false distance. Drop fate, signs, and “must be closer.” Name a delay, a Moon shape, or a brightness comparison.";
+    } else if (checkable) {
+      cls = "ok";
+      msg = "You left something a classmate could check — a delay, a shape, or an appearance. Keep distance unmarked unless you have a method.";
+    } else {
+      msg = "Make the check visible: a time delay, a Moon phase word, or “brighter than” without “therefore closer.”";
+    }
+    fb.className = "feedback show " + cls;
+    fb.textContent = msg;
+  });
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

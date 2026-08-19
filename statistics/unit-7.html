@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 7 · Uncertainty and significant · Virgil Renfroe</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. Not a live institutional course. Not official NC A&amp;T curriculum. Do not apply. He did not teach a statistics department course. Lecturer courses were Critical Writing, Humanities, and Analytical Reasoning. GRE/LSAT tutoring is reasoning muscle, not a stats appointment. As Director of Online Learning he designed an online course called Scientific Development &amp; Social Change — that is design/ops, not a science appointment. This is a first-year gen-ed sample showing he can structure a course. It is not a claim that he taught Statistics at A&amp;T.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html">1 · Counted</a><a href="unit-2.html">2 · Center</a><a href="unit-3.html">3 · Pictures</a><a href="unit-4.html">4 · Samples</a><a href="unit-5.html">5 · Probability</a><a href="unit-6.html">6 · Correlation</a><a href="unit-7.html" aria-current="page">7 · Significant</a><a href="unit-8.html">8 · Argument</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 7 · Plain language, no theater · ~40 minutes</p>
+  <h1>Uncertainty and “significant”</h1>
+  <p class="lede">Significant does not mean important, proven, or big. It is a jargon word with parents: a model, a sample, a way of looking. Translate it. Do not hunt a star.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Restate a margin of error as a window samples like this would often land in.</li>
+    <li>Tell statistical unusualness from practical importance.</li>
+    <li>Translate “significant” into a plain sentence that names assumptions or flags that they are missing — without treating it as a trick to run.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+  
+  <p>“Significant” is a jargon word that escaped the lab and went to work as a gold star. In ordinary English it means important. In statistics it usually means something narrower: this pattern would be uncommon if there were nothing going on — <em>under these assumptions, with this sample, with this test</em>. Those last clauses are the job. Without them, “significant” is theater.</p>
+  <p>This unit will not teach you how to hunt a star. No p-hacking recipe, no “try these five tests until one lights up,” no instruction in squeezing a dataset until it confesses. That is the opposite of a public habit. You will translate. You will say what a small n cannot buy. You will distinguish a statistically unusual difference from a difference a person should care about.</p>
+  <p>Start with uncertainty you can see. A sample is a draw (Unit 4). Draw again, and the mean will move. A margin of error, in plain language, is a window: samples like this would often land here if we repeated the process. It is not a promise that the truth sits in the window, and it is not a force field around a poll. If the window is “44% to 52% support,” you do not have a majority. You have a cloud that includes majority and not-majority. Reporting 48% as a fact with no window is Unit 1’s orphan number wearing a suit.</p>
+  <p>Practical importance is a different question. A medicine that lowers blood pressure by a hair can be “statistically significant” in a huge sample and still not be a reason to change a life. A huge difference in a tiny sample can fail a significance test and still be a reason to look again. Size of effect and star-or-no-star are not synonyms. Ask both: is this unusual under a boring model, and is this large enough to matter for the decision?</p>
+  <p>A p-value, if you meet the phrase, is not the probability that the claim is true. It is not the probability that you lucked out. A usable 101 sentence: if there were no real difference, a result this extreme would be uncommon — given the model, the sample, and the choice to look this way. That sentence is already long. It should be. People want a shorter one so they can stop thinking. Do not give it to them.</p>
+  <p>Assumptions are the quiet parents of the number. Independent observations, a random sample, a model for noise, a single look at a pre-named question. If someone looked at twenty outcomes and published the one that sparkled, the “uncommon under a boring model” story is no longer the story they ran. Mentioning that is not a how-to. It is a warning label: a star you shopped for is not the same object as a star you predicted.</p>
+  <p>Small n makes windows wide. Eight commute times (Unit 2’s EXAMPLE) cannot pin a city’s typical trip. They can show a tail in that list. Precision is a thing you buy with design and with size, and even then only for the population you actually sampled. A huge biased sample can be precise about the wrong group. Precision plus tilt is a confident costume.</p>
+  <p>Not significant is not a proof of zero. It often means “this study could not tell,” especially when the sample is small or the effect is modest. “No effect” and “we did not detect an effect” are different claims. Analytical Reasoning 101 would call the swap a weaker restatement of the finding. Keep the weaker one if it is what you have.</p>
+  <p>The honest paragraph sounds like this: “In this sample, the difference would be uncommon if nothing were going on, under the assumptions the authors named. The size is ___. The window is ___. What it cannot buy is ___.” If the authors did not name assumptions, that is already a finding. You are not required to rerun their work. You are required not to repeat “significant” as if it meant important, proven, or big.</p>
+  <p>Practice: pick the honest translation, tell practical from statistical, and write a plain-language restatement. Homework: find “significant” in the wild and translate it. Do not invent a lab result.</p>
+
+
+  <div class="split">
+    <div class="pair"><div class="tag">Theater</div>“The result is significant, so it matters and it is proven.”</div>
+    <div class="pair"><div class="tag">Translation</div>If nothing were going on, a difference this large would be uncommon — under these assumptions, with this sample.</div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Which sentence is honest?</h2>
+    <p>A write-up says “the difference was significant (p &lt; .05).”</p>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Window or majority?</h2>
+    <p>EXAMPLE (invented teaching poll, not a school survey): 48% support, margin of error ±4 points. What can you fairly say?</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Translate “significant”</h2>
+    <p>Write one or two sentences that translate “the result was significant” without using important, proven, or gold star. You may use: uncommon if nothing were going on; under these assumptions; this sample.</p>
+    <label class="field" for="t1">Your translation</label>
+    <textarea id="t1" rows="4" placeholder="If there were no real difference…"></textarea>
+    <div class="actions"><button type="button" class="btn primary" id="checkT">Check my translation</button></div>
+    <div class="feedback" id="t1fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <blockquote class="prompt">Find one real public use of “significant,” “margin of error,” or a p-value: a news story about a study, a government release, a poll with a window printed. Do not invent a lab, and do not write a how-to for getting a star. Copy the sentence. Then, in 150–220 words: (1) Translate it in plain language. (2) What assumptions can you see, or what is missing? (3) Is there a size-of-effect question the star is being asked to skip? (4) What can the number not buy? If the piece treats not-significant as “no effect,” repair that too.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="unit-6.html">← Unit 6: Correlation</a>
+    <a href="unit-8.html">Next: A short data argument →</a>
+  </nav>
+
+<footer>
+<p>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185</p>
+<p>Draft sample only. Not a statistics appointment. Not official NC A&amp;T curriculum. Do not apply. Lecturer courses were Critical Writing, Humanities, and Analytical Reasoning. GRE/LSAT tutoring is reasoning muscle, not a stats appointment. Scientific Development &amp; Social Change was online-learning design/ops, not a science appointment. This folder is a first-year gen-ed sample showing he can structure a course — not a claim that he taught Statistics at A&amp;T.</p>
+</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "The finding is important and proven. Significant means both.", ok: false, fb: "Important is a practical question. Proven is a verdict. Neither is what the jargon usually buys." },
+    { t: "If there were no real difference, a result this extreme would be uncommon — under the test’s assumptions, with this sample.", ok: true, fb: "Yes. That is a translation, not a gold star. Assumptions and sample stay in the sentence." },
+    { t: "There is only a 5% chance the researchers are wrong.", ok: false, fb: "That is a common swap, and it is not what p < .05 says. Wrongness of the researchers is not the object." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "48% is a majority in spirit, so the policy has a mandate.", ok: false, fb: "48 is not a majority, and a ±4 window runs from 44 to 52. Majority and not-majority are both in the cloud." },
+    { t: "Samples like this would often land in a window from about 44% to 52%. You do not have a clean majority.", ok: true, fb: "Yes. The window is the story. 48% without it is an orphan." },
+    { t: "The margin of error means every person is 4% unsure.", ok: false, fb: "It is not a feeling inside each respondent. It is a window for the sampling process." }
+  ]);
+  document.getElementById("checkT").addEventListener("click", () => {
+    const raw = document.getElementById("t1").value.trim();
+    const t = raw.toLowerCase();
+    const fb = document.getElementById("t1fb");
+    const theater = /(important|proven|gold star|true|proves|matters)/.test(t) && !/(not important|does not mean important|not proven|not mean)/.test(t);
+    const trans = /(uncommon|unusual|if there were no|if nothing|assumptions|sample|model|nothing were going)/.test(t);
+    let cls = "bad";
+    let msg;
+    if (raw.length < 24) {
+      msg = "Too thin. Try: if there were no real difference, a result this large would be uncommon, under these assumptions, with this sample.";
+    } else if (theater && !trans) {
+      msg = "Important / proven / matters is the costume. Take it off. Translate the jargon; do not upgrade it.";
+    } else if (trans) {
+      cls = "ok";
+      msg = "You translated instead of starring. Keep assumptions and sample in the sentence whenever you can see them.";
+    } else {
+      msg = "Need the ‘if nothing were going on’ clause, or ‘uncommon under these assumptions.’ Do not hunt a method for getting a p-value.";
+    }
+    fb.className = "feedback show " + cls;
+    fb.textContent = msg;
+  });
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

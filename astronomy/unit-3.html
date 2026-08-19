@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 3 · Gravity and orbits · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1b1916;
+  --muted: #5a564e;
+  --rule: #d3cfc4;
+  --paper: #f6f3ec;
+  --panel: #eeeae2;
+  --card: #ffffff;
+  --accent: #2a2d6b;
+  --accent-ink: #1c1f4a;
+  --accent-soft: #e2e3f0;
+  --banner: #121428;
+  --banner-ink: #e4e6f2;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #3a3d8c;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #c9c6e8;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag, .pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #2a2d6b; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. Not a live institutional course. Not official NC A&amp;T curriculum. He did not teach astronomy. Do not apply.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html">1 · Night sky</a><a href="unit-2.html">2 · Clock</a><a href="unit-3.html" aria-current="page">3 · Gravity</a><a href="unit-4.html">4 · Light</a><a href="unit-5.html">5 · Leftovers</a><a href="unit-6.html">6 · Stars</a><a href="unit-7.html">7 · Galaxies</a><a href="unit-8.html">8 · Log</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 3 · Gravity and orbits · ~40 minutes</p>
+  <h1>Gravity and orbits in plain language</h1>
+  <p class="lede">An orbit is a fall that keeps missing the ground. “Zero gravity” is the wrong name for that fall.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>State gravity as a mutual pull that grows with mass and weakens with distance.</li>
+    <li>Describe an orbit as falling sideways fast enough to miss the world you are circling.</li>
+    <li>Reject “there is no gravity in space” as an explanation for floating in orbit.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+  <p>Gravity, in this 101, is a mutual pull. Earth pulls on you. You pull on Earth. The pulls are equal in size and opposite in direction; you notice Earth’s pull because Earth is the large mass. The conservative classroom rules are old and public: more mass, stronger pull; more distance, weaker pull. Double the distance between two centers and the pull is not half — it is a quarter. You do not need the algebraic costume to use the idea. You need to stop thinking gravity is a glue that ends at the atmosphere.</p>
+  <p>The atmosphere is air. Gravity is not air. Gravity does not switch off at the last cloud. It gets weaker as you go out, slowly. A person in a low orbit — a few hundred kilometers up — still feels most of the pull they would feel on the ground. That number is not zero. It is not even close to zero. If they “float,” something else is going on.</p>
+  <p>What is going on is a fall. Newton’s old thought-picture still teaches: fire a ball sideways from a high mountain. A slow ball hits the ground nearby. A faster ball hits farther away. A still faster ball falls on a curve that matches the curve of Earth, so the ground keeps dropping away. The ball is always falling and never landing. That path is an orbit. The International Space Station is not a mountain cannon, but the idea is the same. The station and the people inside it are falling around Earth together. They do not push on the floor, so they float. They are not outside gravity. They are in free fall with their house.</p>
+  <p>This is why “zero gravity” is a poor phrase for orbit. People say it because the body feels light. The feeling is real. The mechanism is fall, not absence. A better classroom phrase is weightlessness from free fall. Weight, in ordinary talk, is how hard a floor or a scale pushes back. In free fall the floor falls too, so the scale reads near zero. Gravity is still there, doing the bending of the path.</p>
+  <p>Mass is not weight. Mass is how much stuff; it does not change when you go to the Moon. Weight is the push or pull you feel in a particular place. On the Moon the pull is weaker because the Moon has less mass than Earth, so a scale would read less. Your mass is the same. This course will not ask you to memorize surface gravities. It will ask you not to mix the two words.</p>
+  <p>Orbits are not all circles. A conservative statement: they are closed curves that can be a bit stretched (ellipses). Planets in this solar system run paths that are close to circular but not perfect. A planet closer to the Sun moves faster; a planet farther out moves slower. That pairing — closer, faster — is public and old (Kepler). You can say it without a formula. Mercury has a shorter year than Earth; Earth has a shorter year than Jupiter. The Sun is not whipping them with a string. The Sun’s pull is stronger nearby, and the sideways speed that makes a stable path is higher there.</p>
+  <p>Escape is another place language goes wrong. To leave a world for good, you need enough sideways-or-outward speed that the path no longer closes. That does not mean gravity vanished. It means your path is no longer a closed loop around that world. Probes that leave Earth are still pulled by Earth, then more and more by the Sun. They do not enter a magic region called “no gravity.”</p>
+  <p>Moons orbit planets by the same rule. Earth pulls the Moon; the Moon pulls Earth. The Moon does not fall onto us because it has sideways speed.</p>
+  <p>What this unit will not do: classified launch systems, weapons, or military orbits. Public stations and public planets are enough. It will also not pretend you can design a mission from these paragraphs. You can say why a cup in a station does not spill toward the floor, and why a planet does not need a hook to stay on its path.</p>
+  <p>Three tests.</p>
+  <p><strong>First: Did you turn the atmosphere into a gravity switch?</strong> If yes, restart. Air ends. Pull does not.</p>
+  <p><strong>Second: Are the station and the person falling together?</strong> If you cannot say that, you do not yet have an orbit. You have a floating cartoon.</p>
+  <p><strong>Third: Closer, faster?</strong> If a world is nearer the Sun, its year is shorter. That is the check for this 101. You do not need the exact years.</p>
+  <p>A last plain picture. Throw a ball. It falls in a curve. Orbit is that curve, made long enough that the world curves under it. The romance of “defying gravity” is optional. The fall is not.</p>
+  <p>You will leave this unit able to replace two bad sentences — “no gravity in space,” “the atmosphere holds us down” — with one good one: we fall, and sometimes we miss.</p>
+
+  <div class="split">
+    <div class="pair"><div class="tag">Wrong phrase</div>Zero gravity — as if the pull stopped.</div>
+    <div class="pair"><div class="tag">Better phrase</div>Free fall — the station and the crew fall together.</div>
+  </div>
+
+  <div class="practice" id="p-float">
+    <p class="eyebrow">Practice</p>
+    <h2>Why does a pen float in the station?</h2>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-kepler">
+    <p class="eyebrow">Practice</p>
+    <h2>Closer, faster</h2>
+    <p>Earth takes one year to go around the Sun. What should you expect for a planet nearer the Sun?</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-write">
+    <p class="eyebrow">Practice</p>
+    <h2>Repair the sentence</h2>
+    <p>Repair this in two sentences: <em>“Astronauts float because space has no gravity.”</em> Use fall or miss-the-ground. Do not mention classified systems.</p>
+    <label class="field" for="grav1">Your repair</label>
+    <textarea id="grav1" rows="4" placeholder="They float because…"></textarea>
+    <div class="actions"><button type="button" class="btn primary" id="checkGrav">Check my repair</button></div>
+    <div class="feedback" id="grav1fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>You could turn this in on paper or paste it into a journal. This file does not collect it.</p>
+  <blockquote class="prompt">Write 150–200 words for a roommate who thinks orbit is “outside gravity.” Use the mountain-cannon or miss-the-ground picture. Say why a scale on the station would read near zero even though the pull is still strong. Then give one closer-faster comparison (Mercury vs Earth, or Earth vs Jupiter) without looking up extra numbers if you do not have them — the direction of the claim is enough. No invented mission. No military systems.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="unit-2.html">← Unit 2: Clock</a>
+    <a href="unit-4.html">Next: Light as data →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185<br />He did not teach astronomy as a content expert. Lecturer courses: Critical Writing, Humanities, Analytical Reasoning. <em>Scientific Development &amp; Social Change</em> was online-course design/ops, not an astronomy appointment. Do not apply.</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "There is no gravity a few hundred kilometers up, so nothing pulls the pen.", ok: false, fb: "The pull is still most of what you feel on the ground. The pen falls with the station." },
+    { t: "The pen and the station are both falling around Earth, so the pen does not press on a floor.", ok: true, fb: "Free fall together. That is the float. Gravity is the bend in the path." },
+    { t: "Air in the station cancels gravity.", ok: false, fb: "Air is for breathing. It does not cancel pull. The float is a fall, not a fan." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "A longer year, because nearby planets move more slowly.", ok: false, fb: "Opposite. Closer, faster, shorter year." },
+    { t: "A shorter year; it moves faster on a smaller path.", ok: true, fb: "Yes. Mercury’s year is shorter than Earth’s. You do not need the exact count." },
+    { t: "The same year, because a year is a human invention.", ok: false, fb: "The word is human. The lap time is a path around the Sun. Closer laps finish sooner." }
+  ]);
+  document.getElementById("checkGrav").addEventListener("click", () => {
+    const raw = document.getElementById("grav1").value.trim();
+    const t = raw.toLowerCase();
+    const fb = document.getElementById("grav1fb");
+    const bad = /(no gravity|zero gravity|gravity stops|outside gravity)/.test(t) && !/(not|wrong|isn't|is not|false)/.test(t);
+    const good = /(fall|falling|free fall|miss|sideways|together)/.test(t);
+    let cls = "bad";
+    let msg;
+    if (raw.length < 30) {
+      msg = "Too thin. Two sentences: they fall with the station; the pull did not switch off.";
+    } else if (good) {
+      cls = "ok";
+      msg = "You put the float on a fall. Keep “no gravity” only if you are naming it as the sentence you repaired.";
+    } else if (bad) {
+      msg = "The repair still sounds like gravity vanished. Use falling together, or missing the ground.";
+    } else {
+      msg = "Name the mechanism: free fall / falling sideways / missing the ground.";
+    }
+    fb.className = "feedback show " + cls;
+    fb.textContent = msg;
+  });
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

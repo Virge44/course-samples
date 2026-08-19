@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 6 · Acids, bases, and pH · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f7f4ee;
+  --panel: #efeae1;
+  --card: #ffffff;
+  --accent: #b45309;
+  --accent-ink: #9a3412;
+  --accent-soft: #fde8c8;
+  --banner: #1c1612;
+  --banner-ink: #f3e6d0;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #b45309;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #e8c9a0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+.pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.formula {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.85rem;
+  text-align: center;
+  font-size: 1.05rem;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #b45309; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Instructional-design sample by Virgil Renfroe. He did <em>not</em> teach chemistry as a content expert. Lecturer courses: Critical Writing, Humanities, Analytical Reasoning. Scientific Development &amp; Social Change was online-course design/ops, not a chemistry appointment. Not a live institutional course. Not official NC A&amp;T curriculum. Do not apply. No labs, no synthesis, no how-to-make.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html">1 · Claims</a><a href="unit-2.html">2 · Atoms</a><a href="unit-3.html">3 · Bonding</a><a href="unit-4.html">4 · Moles</a><a href="unit-5.html">5 · Accounts</a><a href="unit-6.html" aria-current="page">6 · pH</a><a href="unit-7.html">7 · Energy</a><a href="unit-8.html">8 · Labels</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 6 · Food and cleaning, conceptual · ~40 minutes</p>
+  <h1>Acids, bases, and everyday pH</h1>
+  <p class="lede">pH is a number about how acidic or basic a water solution is. Food labels and cleaner labels already publish clues. Reading them is the work. Mixing them is not.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+    <span class="chip">Do not mix products</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Place a pH number on a conservative scale: around 7 near-neutral; lower is more acidic; higher is more basic.</li>
+    <li>Match everyday labeled products to acid/base language (vinegar as an acetic-acid solution; many cleaners as bases) without a procedure.</li>
+    <li>Treat “do not mix with other household products” as a binding sentence — not as a puzzle, hint, or experiment prompt.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+  <p>In water, some substances donate hydrogen ions (H<sup>+</sup>, more carefully hydronium, H<sub>3</sub>O<sup>+</sup>). Those are <strong>acids</strong> in the Arrhenius picture this 101 will use. Some substances provide hydroxide ions (OH<sup>−</sup>). Those are <strong>bases</strong> in the same picture. There are broader definitions (Brønsted–Lowry: acids donate protons, bases accept them) that you can keep in a margin. You do not need a third named theory this week. You need a number and a refusal.</p>
+  <p>The number is <strong>pH</strong>. It is a compressed way to talk about how acidic or basic a water-based sample is. Pure water at ordinary room temperature sits near pH 7, called neutral in this introductory sense. Numbers below 7 are acidic; the farther below, the more acidic. Numbers above 7 are basic (alkaline); the farther above, the more basic. The scale is logarithmic, which is a conservative warning: a jump of one pH unit is a tenfold jump in that ion story, not a “one point” shrug. You do not need to compute logarithms here. You need to stop treating pH 3 and pH 5 as “pretty much the same.”</p>
+  <p>Typical published ranges, for reading, not for making: lemon juice often near pH 2; household vinegar (a water solution of acetic acid, often labeled 5%) often near 2–3; milk near 6–7; baking-soda solutions near 8; many glass-cleaner ammonia products near 11. Stomach gastric juice is strongly acidic; that is biology you may have heard, not a tasting assignment. Bleach-based cleaners are typically strongly basic. Those numbers are the sort of thing a chart or a label might already show. They are not invitations to line bottles up on a counter and combine them.</p>
+  <p>Food uses acid language you already speak. Sour often tracks with acids: acetic acid in vinegar, citric acid in citrus, lactic acid in yogurt. A nutrition or ingredient list will name those words. “Natural sour” is not a substitute for the name. Cleaning products use base language you should read as a warning as much as a description: many drain, oven, and some glass cleaners are strongly basic. The chemistry sentence is “this solution sits high on the pH scale and can damage skin and eyes.” The student sentence is “I read the hazard line.” It is not “I will see what happens if…”</p>
+  <p><strong>Do not mix household products.</strong> That is not a theme. It is a rule of this course and of ordinary adult life. Labels on bleach and on many acid cleaners say not to mix with other chemicals. You will not be told here what specific mixtures produce, including any gas. You will not be given a “why” that doubles as a recipe. If a label says do not mix, the assignment is to leave the bottles closed and uncombined. Curiosity that wants a reaction belongs in a supervised lab with a chemist, ventilation, and a protocol this file will not write.</p>
+  <p>Neutralization, as a thought: H<sup>+</sup> (from an acid) and OH<sup>−</sup> (from a base) can be written as accounting for water, H<sub>2</sub>O. That is Unit 5 language applied to ions. It is not a kitchen titration. It is not “dump the vinegar into the cleaner.” Antacids on a drugstore label are a commercial claim about neutralizing excess stomach acid; you may read the drug-facts panel. You may not design a homemade antacid from pantry goods for this class.</p>
+  <p>Indicators exist: papers or dyes that change color in different pH ranges. A thought experiment is allowed: “If a strip read 3, the sample would be on the acidic side.” Buying strips to test cleaners, pooling mystery liquids, or tasting anything to “check pH” is not the homework. Taste is not a laboratory instrument, and cleaners are not food.</p>
+  <p>Virgil Renfroe did not teach chemistry as a content expert. This unit is structured the way a writing teacher structures evidence: the label is the source; the pH number is a claim; mixing is not research. Lecturer courses were Critical Writing, Humanities, and Analytical Reasoning. Scientific Development &amp; Social Change was design/ops. Do not apply this as a lab. Subject facts stay conservative: scale direction, a few typical ranges, acetic acid as the named acid in vinegar, a hard no on combining products.</p>
+  <p>You leave able to read a number, name acid or base in plain language, and treat a warning line as an instruction to stop. That last skill is the one that keeps a gen-ed 101 from becoming an accident report.</p>
+
+  <div class="callout">
+    <p class="eyebrow">Safety</p>
+    <h2>Household products in this course</h2>
+    <p style="margin-bottom:0">Named only as labels and typical published values. No mixing instructions. No “try this with bleach.” No extraction. No tasting assignment. If two bottles are under the sink, they stay there, closed, uncombined.</p>
+  </div>
+
+  <div class="split">
+    <div class="pair"><div class="tag">Lower pH</div>More acidic. Lemon and vinegar sit low on typical charts. Named acids on food labels: acetic, citric, lactic.</div>
+    <div class="pair"><div class="tag">Higher pH</div>More basic. Many cleaners sit high. Read the hazard. Do not combine with other products.</div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Place the number</h2>
+    <p>A juice label’s published typical pH is about 3. A glass-cleaner chart shows about 11. Which reading is more acidic?</p>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Vinegar on a food label</h2>
+    <p>A bottle reads “white vinegar” and “5% acetic acid.” What is the chemistry claim you can actually defend in this course?</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>The warning line</h2>
+    <p>A cleaner label says: “Do not mix with other household products.” What is the student move in this 101?</p>
+    <div id="q3"></div>
+    <div class="feedback" id="q3fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>Read only. Do not taste cleaners. Do not mix bottles. Do not buy extra product to “test pH.”</p>
+  <blockquote class="prompt">Find one food label and one cleaning-product label in a home or store aisle (do not open industrial cabinets). Transcribe: product name, any acid or base-related ingredient words, any pH if printed, and any ‘do not mix’ or hazard sentence. Then 150–200 words: place each product on the acid/base story using only what the label (and this unit’s typical ranges, if the label is silent on pH) will support. One paragraph must be a refusal: what you will not do with these two bottles, and why that refusal is part of the chemistry, not a vibe. Do not combine them. Do not photograph other people’s faces or private addresses.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="unit-5.html">← Previous: Accounts</a>
+    <a href="unit-7.html">Next: Energy of reactions →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185<br />He did not teach chemistry as a content expert. Lecturer: Critical Writing, Humanities, Analytical Reasoning. Scientific Development &amp; Social Change = design/ops, not a chemistry appointment. ID/course-design sample only. Do not apply.</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function checklist(boxId, items) {
+  const box = document.getElementById(boxId);
+  items.forEach((item) => {
+    const lab = document.createElement("label");
+    lab.innerHTML = '<input type="checkbox" /> <span>' + item.t + "</span>";
+    box.appendChild(lab);
+  });
+}
+function checkList(boxId, fbId, items, okMsg, badMsg) {
+  const box = document.getElementById(boxId);
+  let good = true;
+  [...box.querySelectorAll("input")].forEach((b, i) => {
+    if (items[i].must !== b.checked) good = false;
+  });
+  const fb = document.getElementById(fbId);
+  fb.className = "feedback show " + (good ? "ok" : "bad");
+  fb.textContent = good ? okMsg : badMsg;
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+function revealButtons() {
+  document.querySelectorAll("[data-reveal]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const el = document.getElementById(btn.getAttribute("data-reveal"));
+      el.classList.add("show", "ok");
+    });
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "pH about 3 is more acidic. Lower number, more acidic. 11 is on the basic side.", ok: true, fb: "Direction of the scale is the whole first skill. 3 vs 11 is not a close call. Do not taste either sample to confirm." },
+    { t: "pH 11 is more acidic because 11 is a bigger, stronger-looking number.", ok: false, fb: "Bigger pH is more basic, not more acidic. Strength-as-size is the trap." },
+    { t: "They are equal because both are liquids.", ok: false, fb: "State of matter is not pH. Two liquids can sit at opposite ends of the scale." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "The bottle is a water solution that includes acetic acid at a labeled 5%. That is an acid-in-water claim you can point at.", ok: true, fb: "Sample, named substance, printed amount. Unit 1’s door is still the door. No mixing, no tasting required." },
+    { t: "Vinegar is chemical-free because it is food.", ok: false, fb: "Food is made of substances. Acetic acid is named on the line you just read." },
+    { t: "You should combine it with a cleaner to neutralize the house.", ok: false, fb: "Forbidden. Neutralization as an ion account is a sentence in a book, not a reason to mix products." }
+  ]);
+  mc("q3", "q3fb", [
+    { t: "Leave the product uncombined. The warning is the assignment. This course will not explain forbidden mixtures as a how-to.", ok: true, fb: "That is the adult move. Curiosity about reactions belongs in a supervised lab this file is not." },
+    { t: "Mix a capful with vinegar in the sink because pH homework needs a fizz.", ok: false, fb: "No. Fizz is not a homework requirement. Mixing instructions are out of bounds even when the internet offers them." },
+    { t: "Ignore warnings on food-safe brands; they do not count.", ok: false, fb: "Brand tone is not a safety classification. Read the line that is printed. If it says do not mix, do not mix." }
+  ]);
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

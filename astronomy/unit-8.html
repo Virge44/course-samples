@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 8 · A short observing log · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1b1916;
+  --muted: #5a564e;
+  --rule: #d3cfc4;
+  --paper: #f6f3ec;
+  --panel: #eeeae2;
+  --card: #ffffff;
+  --accent: #2a2d6b;
+  --accent-ink: #1c1f4a;
+  --accent-soft: #e2e3f0;
+  --banner: #121428;
+  --banner-ink: #e4e6f2;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #3a3d8c;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #c9c6e8;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag, .pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #2a2d6b; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. Not a live institutional course. Not official NC A&amp;T curriculum. He did not teach astronomy. Do not apply.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html">1 · Night sky</a><a href="unit-2.html">2 · Clock</a><a href="unit-3.html">3 · Gravity</a><a href="unit-4.html">4 · Light</a><a href="unit-5.html">5 · Leftovers</a><a href="unit-6.html">6 · Stars</a><a href="unit-7.html">7 · Galaxies</a><a href="unit-8.html" aria-current="page">8 · Log</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 8 · Naked-eye or a public image · ~40 minutes</p>
+  <h1>A short observing log</h1>
+  <p class="lede">Write what you saw, then what you infer. If you did not see it, do not log it. A labeled public image is allowed. A telescope is not required.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Fill a short log: date, time, place, sky conditions, object, source (eye or public image).</li>
+    <li>Split observation from inference in two labeled sentences.</li>
+    <li>Refuse a fake session — no invented telescope, no unlabeled picture, no horoscope.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+  <p>A course that talks about the sky and never asks you to look is only a pamphlet. This unit asks you to look, or to open a public image, and to write a log a classmate could check. A telescope is not required. A dark mountain is not required. Honesty about conditions is required.</p>
+  <p>A log, in this 101, is a short public record. It is not a diary of awe, though awe can sit in a last optional line. The required lines are dull on purpose:</p>
+  <p><strong>When.</strong> Local date and time, and a timezone if you know it. Night of the 12th is not enough if you mean 1 a.m. on the 13th.</p>
+  <p><strong>Where.</strong> A place a classmate could find: campus quad, a named park, a window facing east, or “this public web image,” with the title and the archive. City-level is enough. Do not publish a private address if you do not want it on a page.</p>
+  <p><strong>Conditions.</strong> Clear, haze, cloud, rain, indoor-only. Bright streetlights? Moon up? If you used an image, conditions means: what the caption says about filter, color, or exposure, in a phrase. “I imagined a desert” is not a condition.</p>
+  <p><strong>Object.</strong> Moon, a named bright planet if you can justify the name, a star pattern as a region of sky (not as a fate), the Sun only with safe public practice (never stare; a projected image or a public solar still is the safe 101 path), or a labeled public photograph of a leftover world, a nebula, or a galaxy.</p>
+  <p><strong>Source.</strong> Naked eye, or public image. If image, name the agency or archive and whether the page says public domain or similar reuse. NASA and ESA public galleries are the intended well. A random social post with no caption is not a source.</p>
+  <p>Then two sentences that this whole course has been training:</p>
+  <p><em>Observation:</em> what the light showed. “The Moon was a thin crescent, horns pointing left from my window.” “The public Hubble still shows a spiral disk with dark dust lanes; the caption says the color is close to true.”</p>
+  <p><em>Inference:</em> what you add from Units 1–7. “A crescent is a slice of the sunlit half, not Earth’s shadow.” “If this is a spiral galaxy, we are looking at another island, not a cloud in the Milky Way.” If you cannot tell observation from inference, write them on two lines and label the lines. The label is the skill.</p>
+  <p>What a good log refuses:</p>
+  <p>It refuses a telescope you did not use. “Through my 8-inch I saw the rings” is a fail if there was no 8-inch. It refuses a dark-sky band you did not see. It refuses astrology: no week, no sign, no compatibility. It refuses classified or military systems. It refuses a color claim a caption did not earn (Unit 4). It refuses a distance from brightness (Unit 1). It refuses a supernova Sun (Unit 6).</p>
+  <p>What a good log allows:</p>
+  <p>A failed outdoor attempt. “Clouds, 9:10 p.m., north quad; I opened a public Moon image instead” is a complete, honest log. A Sun image from a public solar observatory page. A classmate’s shared public still, if you cite it. Uncertainty: “Bright point in the west; I think it is a planet because it does not twinkle as much, but I am not sure.” Uncertainty is a claim with a hedge. A hedge is legal. A costume is not.</p>
+  <p>Safety, said once and plainly. Do not stare at the Sun. Do not use an ordinary telescope or binoculars on the Sun. This sample will not walk you through solar filters. If you want the Sun, use a public image or a projection method a live instructor has already set up. Night sky: watch your footing. That is the whole safety talk this file will give.</p>
+  <p>Why bother, if the image is already on the internet? Because the habit is not the picture. The habit is the split. The same split works on a campus argument (claim vs because) and on a sky (light vs story). This is a gen-ed close, not an observer’s certificate. The author did not teach astronomy and is not certifying you. He is asking whether you can leave a record someone else could audit.</p>
+  <p>Three tests for the close.</p>
+  <p><strong>First: Could a classmate redo the look?</strong> Time, place or URL, conditions. If those are missing, you have a mood.</p>
+  <p><strong>Second: Are the two sentences labeled?</strong> Observation / inference. If they are mixed, unmix them.</p>
+  <p><strong>Third: Did you invent an instrument?</strong> If yes, delete the instrument. The unit name said no telescope required. Believe it.</p>
+  <p>You will leave the course with a one-page log and a stack of conservative claims: delay, geometry, fall, light as data, leftovers, fuel, address. The log is where those claims have to sit down next to a real photon — from the sky or from a public archive. That is the whole close.</p>
+
+  <div class="split">
+    <div class="pair"><div class="tag">Observation</div>Thin crescent, 8:40 p.m., east window, some haze.</div>
+    <div class="pair"><div class="tag">Inference</div>We are seeing a slice of the sunlit half — phase, not eclipse.</div>
+  </div>
+
+  <div class="practice" id="p-log">
+    <p class="eyebrow">Practice</p>
+    <h2>Which log is allowed?</h2>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-split">
+    <p class="eyebrow">Practice</p>
+    <h2>Observation or inference?</h2>
+    <p>“The crescent means Earth’s shadow is covering most of the Moon.”</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-write">
+    <p class="eyebrow">Practice</p>
+    <h2>Draft two lines</h2>
+    <p>Write one observation line and one inference line. If you have nothing from tonight, use this public stand-in: <em>a labeled NASA public-domain still of a crescent Moon, caption silent on filters.</em> Do not add a telescope.</p>
+    <label class="field" for="log1">Observation / inference</label>
+    <textarea id="log1" rows="5" placeholder="Observation: …&#10;Inference: …"></textarea>
+    <div class="actions"><button type="button" class="btn primary" id="checkLog">Check my two lines</button></div>
+    <div class="feedback" id="log1fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>You could turn this in on paper or paste it into a journal. This file does not collect it.</p>
+  <blockquote class="prompt">Write a one-page observing log (150–250 words). Include when, where (or URL), conditions, object, and source (naked eye or public image). Then two labeled sentences: Observation / Inference. Then one refusal: a sentence you will not claim (false distance, fake telescope, horoscope, Sun-supernova, or unlabeled color). If the sky is closed, a labeled public image is a complete substitute. Do not invent a session. Do not stare at the Sun.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="unit-7.html">← Unit 7: Galaxies</a>
+    <a href="index.html">Course home →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185<br />He did not teach astronomy as a content expert. Lecturer courses: Critical Writing, Humanities, Analytical Reasoning. <em>Scientific Development &amp; Social Change</em> was online-course design/ops, not an astronomy appointment. Do not apply.</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "Last August, through my 10-inch, I saw every ring of Saturn from a secret site.", ok: false, fb: "Invented instrument and a vague date/place. This unit forbids the costume. No telescope required means do not fake one." },
+    { t: "April 3, 9:15 p.m. local, north quad, haze and streetlights. Naked eye: thin crescent in the west. Observation: thin lit curve. Inference: slice of the sunlit half.", ok: true, fb: "Checkable. Time, place, conditions, source, split. That is a log." },
+    { t: "The Moon was in my sign, so the week will turn.", ok: false, fb: "Astrology is out of scope. A log records light, not a forecast." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "Observation — it is just what the eye sees.", ok: false, fb: "The eye sees a crescent. Earth’s shadow is an extra story, and for a crescent it is the wrong story (Unit 2)." },
+    { t: "Inference — and a false one. Phase is a viewing angle; Earth’s shadow is eclipse.", ok: true, fb: "Labeled and repaired. Keep the crescent as observation; put geometry in inference." },
+    { t: "Neither; logs should only be feelings.", ok: false, fb: "Feelings can be a last optional line. The required split is seen vs added." }
+  ]);
+  document.getElementById("checkLog").addEventListener("click", () => {
+    const raw = document.getElementById("log1").value.trim();
+    const t = raw.toLowerCase();
+    const fb = document.getElementById("log1fb");
+    const fake = /(10-inch|8-inch|my telescope|secret site|my sign|horoscope)/.test(t);
+    const split = /(observation|i see|crescent|lit|image|caption)/.test(t) && /(inference|phase|sunlit|lit half|slice|not (earth.?s|earths) shadow)/.test(t);
+    let cls = "bad";
+    let msg;
+    if (raw.length < 30) {
+      msg = "Too thin. Two labeled lines: what the light showed, then what you add.";
+    } else if (fake) {
+      msg = "Drop the invented instrument or the horoscope. Eye or public image only.";
+    } else if (split || (/(crescent|moon|image)/.test(t) && /(phase|sunlit|slice|not)/.test(t))) {
+      cls = "ok";
+      msg = "You split seen from added. If the labels are missing, write Observation: and Inference: on the homework page.";
+    } else {
+      msg = "Label two lines. Observation = crescent or what the caption shows. Inference = phase geometry or another unit claim. No telescope.";
+    }
+    fb.className = "feedback show " + cls;
+    fb.textContent = msg;
+  });
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

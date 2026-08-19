@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Astronomy 101 — draft course · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1b1916;
+  --muted: #5a564e;
+  --rule: #d3cfc4;
+  --paper: #f6f3ec;
+  --panel: #eeeae2;
+  --card: #ffffff;
+  --accent: #2a2d6b;
+  --accent-ink: #1c1f4a;
+  --accent-soft: #e2e3f0;
+  --banner: #121428;
+  --banner-ink: #e4e6f2;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #3a3d8c;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #c9c6e8;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag, .pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #2a2d6b; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. Not a live institutional course. Not official NC A&amp;T curriculum. He did not teach astronomy. Do not apply.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html" aria-current="page">Course home</a><a href="unit-1.html">1 · Night sky</a><a href="unit-2.html">2 · Clock</a><a href="unit-3.html">3 · Gravity</a><a href="unit-4.html">4 · Light</a><a href="unit-5.html">5 · Leftovers</a><a href="unit-6.html">6 · Stars</a><a href="unit-7.html">7 · Galaxies</a><a href="unit-8.html">8 · Log</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">College 101 · 8 units · compressed semester · ~4–6 hours</p>
+  <h1>Astronomy 101</h1>
+  <p class="lede">A student-facing first-year gen-ed sample. What you can claim from a sky, a clock, leftover worlds, and a short log. Open the file. Do the practice. Turn in the homework if you have a section that wants it.</p>
+  <div class="meta">
+    <span class="chip">Self-paced</span>
+    <span class="chip">No login</span>
+    <span class="chip">No server</span>
+    <span class="chip">First-year / gen-ed</span>
+  </div>
+
+  <div class="blurb">
+    <p><strong>How to open this course.</strong> Keep the folder together. Double-click <code>index.html</code> in Chrome, Safari, Firefox, or Edge. You can also open any <code>unit-*.html</code> file alone. Do not rely on a Google Drive (or similar) in-browser preview — the practice activities will not run. Nothing is uploaded. Progress stays in this tab.</p>
+    <p style="margin-bottom:0"><strong>Honesty.</strong> Draft course sample by Virgil Renfroe. Not a live institutional course. Not official NC A&amp;T curriculum. <strong>He did not teach astronomy as a content expert.</strong> Lecturer courses were Critical Writing, Humanities, and Analytical Reasoning. As Director of Online Learning he designed an online course called <em>Scientific Development &amp; Social Change</em> — that is design and operations, not an astronomy appointment. Do not invent labs, credentials, or “I taught this at A&amp;T.” This folder shows he can structure a first-year gen-ed course. Subject facts are conservative public science. Do not apply anywhere. No student data. No invented school partners.</p>
+  </div>
+
+  <h2>Who this is for</h2>
+  <p>First-year and gen-ed college students, mixed preparation. Adult tone. You do not need a telescope, a night-sky app, or a physics course behind you. You need a habit: say what the light allows you to claim, and stop before the story outruns the evidence.</p>
+  <p>This is not a catalog astronomy course. It is not a lab sequence. It is a compressed 101: eight units plus this syllabus page. Astrology is out of scope. Classified or military space systems are out of scope. Public-domain, textbook-level facts only.</p>
+
+  <h2>What the course asks you to do</h2>
+  <p>Astronomy, in this sample, is a public habit of careful claim. A bright point is not yet a distance. A color is not yet a temperature unless you say what kind of object you are looking at. Each unit has three measurable objectives, a lesson, clickable practice with feedback, and one homework you could turn in. If you do the practices, plan on about four to six hours for the whole sample. A live semester would slow this down, add a textbook, and give you more sky time. This file is the spine, not the full term.</p>
+  <blockquote>Light takes time. The sky you see is a mix of then. Scale and delay come before romance.</blockquote>
+
+  <h2>Sequence</h2>
+  <table class="syllabus">
+    <thead>
+      <tr><th>Unit</th><th>Time</th><th>You leave able to</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="unit-1.html">1. What you can claim from a night sky</a><br /><span class="lede" style="margin:0">Scale, light delay</span></td>
+        <td>~35 min</td>
+        <td>Separate a checkable claim from a story, and name a light-travel time.</td>
+      </tr>
+      <tr>
+        <td><a href="unit-2.html">2. The sky as a clock</a><br /><span class="lede" style="margin:0">Rotation, seasons, Moon</span></td>
+        <td>~40 min</td>
+        <td>Explain day, season, and Moon phase as geometry, not mood.</td>
+      </tr>
+      <tr>
+        <td><a href="unit-3.html">3. Gravity and orbits</a><br /><span class="lede" style="margin:0">Plain language</span></td>
+        <td>~40 min</td>
+        <td>Say why something can fall forever sideways, and why “zero gravity” is the wrong phrase.</td>
+      </tr>
+      <tr>
+        <td><a href="unit-4.html">4. Light as data</a><br /><span class="lede" style="margin:0">Spectrum, color</span></td>
+        <td>~40 min</td>
+        <td>Say what a color can and cannot tell you about a star or a planet.</td>
+      </tr>
+      <tr>
+        <td><a href="unit-5.html">5. The solar system as leftovers</a><br /><span class="lede" style="margin:0">A family, not a design</span></td>
+        <td>~40 min</td>
+        <td>Place worlds as leftover disk material, not as a planned set.</td>
+      </tr>
+      <tr>
+        <td><a href="unit-6.html">6. Stars: fuel, lifetime, death</a><br /><span class="lede" style="margin:0">Death as a process</span></td>
+        <td>~40 min</td>
+        <td>Connect mass to lifetime, and name the Sun’s path without a supernova.</td>
+      </tr>
+      <tr>
+        <td><a href="unit-7.html">7. Galaxies and “where are we”</a><br /><span class="lede" style="margin:0">A nested address</span></td>
+        <td>~35 min</td>
+        <td>Give a conservative address: planet, star, disk, galaxy, group.</td>
+      </tr>
+      <tr>
+        <td><a href="unit-8.html">8. A short observing log</a><br /><span class="lede" style="margin:0">Naked-eye or a public image</span></td>
+        <td>~40 min</td>
+        <td>Write a log that splits what you saw from what you infer. No telescope required.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><a class="btn primary" href="unit-1.html">Start Unit 1</a></p>
+
+  <h2>How work is judged (if you have a section)</h2>
+  <p>If an instructor used this sample in a live class, the standard would be public, not clever. Did you name a delay? Did you refuse a brighter-means-closer shortcut? Did you split phase from eclipse? Did you leave a log a classmate could check? Fluency is not the grade. The conservative claim is the grade.</p>
+  <p>Homework lives in your own words. Paste the prompt into a journal, a discussion board, or a printed page. This file does not collect it.</p>
+
+  <h2>About the author</h2>
+  <p>Virgil Renfroe is an educator and online-learning lead. He taught Critical Writing, Humanities, and Analytical Reasoning as Lecturer, University Studies, NC A&amp;T (2004–2016) and served as Director of Online Learning (2008–2012). MFA, Creative Writing, UNCG. He designs learning and ships working prototypes by directing AI coding agents. He is not a software engineer. He is not an astronomer. He did not teach astronomy.</p>
+  <p>As Director of Online Learning he designed an online course called <em>Scientific Development &amp; Social Change</em>. That is course design and operations — not an astronomy appointment and not a credential in this subject.</p>
+  <p>A one-page note for someone running a section sits beside these files: <a href="facilitator-note.md">facilitator-note.md</a>.</p>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185<br />He did not teach astronomy as a content expert. Lecturer courses: Critical Writing, Humanities, Analytical Reasoning. <em>Scientific Development &amp; Social Change</em> was online-course design/ops, not an astronomy appointment. Do not apply.</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+
+})();
+</script>
+</body>
+</html>

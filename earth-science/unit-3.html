@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 3 · Plate tectonics · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f6f1e8;
+  --panel: #efe4d6;
+  --card: #ffffff;
+  --accent: #8a4d2f;
+  --accent-ink: #5c3018;
+  --accent-soft: #f0ddd0;
+  --banner: #2c211a;
+  --banner-ink: #f0e6dc;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #8a4d2f;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+.sample strong {
+  color: #e8c9a0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+footer a { color: var(--accent-ink); }
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+.pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #8a4d2f; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. First-year gen-ed instructional-design sample — he can structure a course. He did <em>not</em> teach earth science as a content expert. Lecturer courses were Critical Writing, Humanities, and Analytical Reasoning. As Director of Online Learning he designed an online course called Scientific Development &amp; Social Change — that is design/ops, not an earth-science appointment. Not a live institutional course. Not official NC A&amp;T curriculum. Do not invent labs, field trips, or credentials. Do not apply.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html">1 · Claims</a><a href="unit-2.html">2 · Rocks</a><a href="unit-3.html" aria-current="page">3 · Plates</a><a href="unit-4.html">4 · Water</a><a href="unit-5.html">5 · Weather</a><a href="unit-6.html">6 · Climate</a><a href="unit-7.html">7 · Resources</a><a href="unit-8.html">8 · Place</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 3 · The ground is not finished · ~40 minutes</p>
+  <h1>Plate tectonics</h1>
+  <p class="lede">Plates move. Ridges, trenches, and slide-past faults are process, not scenery. Centimeters per year times deep time is an ocean.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Name the three plate-boundary types and one thing each typically does.</li>
+    <li>Connect a pattern of earthquakes or volcanoes to a boundary without treating the map as a finished picture.</li>
+    <li>Explain “the ground is not finished” as an evidence claim (rate, belts, living measurements), not a slogan.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+
+  <p>The ground is not a finished stage set. The outer shell of the Earth — the lithosphere — is broken into plates that move a few centimeters a year. That rate sounds like nothing until you give it deep time. Centimeters per year times millions of years is an ocean, a mountain belt, a rift. Plate tectonics is the 101 name for that process. It is not a slogan. It is a claim with several independent checks: earthquake belts, volcano chains, seafloor age and magnetic stripes, the fit of continents, GPS velocities today.</p>
+  <p>Alfred Wegener argued that continents had moved. The fit and the fossils were real clues. He did not have a workable mechanism, and many geologists rejected the package. Mid-twentieth-century seafloor data — young crust at ridges, older crust farther away, symmetric magnetic stripes — supplied the mechanism: seafloor spreading, and later the wider plate model. That history is an evidence lesson, not a hero story. A good idea with a missing mechanism is incomplete. New measurements can reopen it. The author of this sample did not teach that history as a geophysicist. He is using it the way a reasoning course uses a repaired argument: show the step.</p>
+  <p>Three boundary types will carry a first-year load.</p>
+  <p><strong>Divergent.</strong> Plates move apart. At mid-ocean ridges, melt rises and new oceanic crust forms. On land, a rift can thin the crust and eventually become an ocean. Earthquakes here are usually shallower. Volcanism is common. The claim is not “the Atlantic is a pretty shape.” The claim is “the seafloor is younger near the ridge and older toward the continents,” which maps have shown.</p>
+  <p><strong>Convergent.</strong> Plates move together. If one plate is oceanic, it can sink — subduction — and you get a trench, a volcanic arc, and a deep earthquake zone. If two buoyant continents meet, subduction is harder and you get a thickened crust and high mountains (the Himalaya as the textbook case). Volcanoes and mountains are not decorations at the edge of a map. They are what happens when plates interact. “The ground is not finished” means those processes are still running.</p>
+  <p><strong>Transform.</strong> Plates slide past each other. Crust is neither created nor destroyed in the simple cartoon. Earthquakes are the main news. The San Andreas system is the usual example; you do not need a California field trip to use it. A transform claim is about relative motion and strain, not about a state personality.</p>
+  <p>Hotspots — volcanism that can punch through a plate and leave a chain of ages — sit beside the three-boundary cartoon. They are useful. They are also easy to overclaim. This sample will not make you a plume specialist. If a chain of islands gets older in one direction, that is a checkable pattern. The deep cause is a research argument.</p>
+  <p>What first-years get wrong: treating earthquakes as random punishment; treating volcanoes as entertainment; treating continents as permanently parked. Earthquakes cluster where strain is stored and released, especially at plate edges (and at some other faults). Intraplate quakes happen; they do not erase the belt pattern. A building code is a policy response to a process claim. This unit grades the process claim.</p>
+  <p>What can you check without inventing a lab? A public earthquake map (USGS) for a week of events. A world map of trenches and ridges. A sentence about rate: centimeters per year, not “drifting wildly.” A refusal: “I have not measured this plate; I am using the published velocity.” That last sentence is not weakness. It is the incomplete-record habit from Unit 1 applied to a living planet. Practice will ask you to name a boundary, reject a finished-scenery sentence, and write why the ground is not finished as an evidence claim, not a poster.</p>
+
+
+  <div class="split">
+    <div class="pair"><div class="tag">Finished-scenery talk</div>The mountains are just there. The map is done.</div>
+    <div class="pair"><div class="tag">Process claim</div>These mountains sit at a convergent boundary; uplift and erosion are both still running.</div>
+  </div>
+
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Name the boundary</h2>
+    <p>A deep ocean trench, a line of volcanoes inland, and a band of deep earthquakes. Which boundary type is the 101 fit?</p>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Why the ground is not finished</h2>
+    <p>Which sentence is an evidence claim rather than a poster?</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Write a plate sentence</h2>
+    <p>Use a real, public pattern: mid-Atlantic ridge, Himalaya, San Andreas, or a USGS earthquake map you can point to. One or two sentences: boundary type (or “I cannot tell from what I have”), plus one check. No invented field trip.</p>
+    <label class="field" for="plate3">Your plate sentence</label>
+    <textarea id="plate3" rows="3" placeholder="This is a … boundary because …"></textarea>
+    <div class="actions"><button type="button" class="btn primary" id="checkPlate">Check my sentence</button></div>
+    <div class="feedback" id="plate3fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>You could turn this in on paper or paste it into a journal. This file does not collect it.</p>
+  <blockquote class="prompt">Open a public earthquake map (USGS is fine) or a world map of ridges and trenches. Do not invent a campus seismometer. Describe one pattern you can actually see: a belt, a gap, a ridge, a trench. Name a likely boundary type or say you cannot tell. Write what measurement would change your mind. 150–220 words.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="unit-2.html">← Unit 2: Rocks</a>
+    <a href="unit-4.html">Next: Water →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185<br>He did not teach earth science as a content expert. Lecturer courses: Critical Writing, Humanities, Analytical Reasoning. <em>Scientific Development &amp; Social Change</em> was online-course design/ops, not an earth-science appointment. Do not apply.</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "Divergent — new crust, so trenches are where oceans are born.", ok: false, fb: "Trenches are the opposite cartoon: consumption, not birth. Ridges are the usual divergent signature." },
+    { t: "Convergent, likely subduction: trench + volcanic arc + deep quakes.", ok: true, fb: "Yes. That trio is the 101 subduction package. Still a pattern match, not a personal survey." },
+    { t: "Transform — anything with earthquakes is a slide-past boundary.", ok: false, fb: "Transforms have quakes, but deep quakes plus a trench plus volcanoes point to subduction." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "Never trust the ground. It is out to get you.", ok: false, fb: "Mood. Strain and release are process. Fear is not a check." },
+    { t: "Plates still move centimeters per year; GPS and earthquake belts are living measurements, not a finished painting.", ok: true, fb: "Yes. Rate plus a check. That is why the ground is not finished — as evidence, not as a poster." },
+    { t: "Wegener won, so the debate is over and we can stop measuring.", ok: false, fb: "The model is strongly supported. Measuring did not stop. GPS is a current check." }
+  ]);
+  document.getElementById("checkPlate").addEventListener("click", () => {
+    const raw = document.getElementById("plate3").value.trim();
+    const t = raw.toLowerCase();
+    const fb = document.getElementById("plate3fb");
+    const bound = /(divergent|convergent|transform|subduct|ridge|trench|rift|san andreas|himalay|atlantic|hotspot)/.test(t);
+    const check = /(quake|earthquake|volcano|gps|magnetic|stripe|usgs|cm|centimeter|age|seafloor|map)/.test(t);
+    let cls = "bad";
+    let msg;
+    if (raw.length < 20) {
+      msg = "Too thin. Name a boundary or a place plus one check.";
+    } else if (bound && check) {
+      cls = "ok";
+      msg = "Boundary plus a check. A classmate can open a map. They cannot say you treated the ground as scenery.";
+    } else if (bound) {
+      msg = "You named a type. Add a check: earthquakes, volcanoes, seafloor age, GPS, magnetic stripes, a published map.";
+    } else {
+      msg = "Name divergent, convergent, or transform — or a named place with a known type — and one measurement a skeptic could look up.";
+    }
+    fb.className = "feedback show " + cls;
+    fb.textContent = msg;
+  });
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

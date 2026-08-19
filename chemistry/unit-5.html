@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 5 · Reactions as accounts · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f7f4ee;
+  --panel: #efeae1;
+  --card: #ffffff;
+  --accent: #b45309;
+  --accent-ink: #9a3412;
+  --accent-soft: #fde8c8;
+  --banner: #1c1612;
+  --banner-ink: #f3e6d0;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #b45309;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #e8c9a0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+.pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.formula {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.85rem;
+  text-align: center;
+  font-size: 1.05rem;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #b45309; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Instructional-design sample by Virgil Renfroe. He did <em>not</em> teach chemistry as a content expert. Lecturer courses: Critical Writing, Humanities, Analytical Reasoning. Scientific Development &amp; Social Change was online-course design/ops, not a chemistry appointment. Not a live institutional course. Not official NC A&amp;T curriculum. Do not apply. No labs, no synthesis, no how-to-make.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html">1 · Claims</a><a href="unit-2.html">2 · Atoms</a><a href="unit-3.html">3 · Bonding</a><a href="unit-4.html">4 · Moles</a><a href="unit-5.html" aria-current="page">5 · Accounts</a><a href="unit-6.html">6 · pH</a><a href="unit-7.html">7 · Energy</a><a href="unit-8.html">8 · Labels</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 5 · What is conserved · ~40 minutes</p>
+  <h1>Reactions as accounts</h1>
+  <p class="lede">A chemical equation is a set of books: what you start with, what you end with, and a promise that atoms were not created or destroyed. Balancing is bookkeeping. It is not a recipe and not a dare.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+    <span class="chip">No how-to-make</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Read a chemical equation as an account of substances, not as instructions for producing them.</li>
+    <li>State what is conserved in ordinary chemistry: atoms and, in a closed account, mass — not “energy vibes,” not volume of gas by default.</li>
+    <li>Balance a simple equation by changing coefficients, never subscripts, and count atoms on each side to show the books match.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+  <p>A reaction is a story about identity: substances you start with (reactants) become different substances (products). An equation is how chemists write the account so another person can audit it. Left of the arrow: reactants. Right: products. Plus signs separate species. A triangle, a temperature, or a catalyst name, if present, is a condition note — still not a procedure for you to run in a kitchen.</p>
+  <p>The law you are auditing is conservative and old: in ordinary chemical change, atoms are not created or destroyed. They are rearranged. If two hydrogen atoms and one oxygen atom go into a water molecule, those nuclei are still on the page after the arrow. Mass follows the atoms in a closed account. That is why a sealed bottle’s total mass does not jump when a change happens inside it, and why an open pan of boiling water seems to “lose” mass — the water left as steam (Unit 1). The missing mass is a missing line in the books, not a hole in physics.</p>
+  <p>Take a sentence you may have seen on a stove: methane in a gas range burns in oxygen and the account is carbon dioxide and water. Chemists write</p>
+  <div class="formula">CH<sub>4</sub> + 2 O<sub>2</sub> → CO<sub>2</sub> + 2 H<sub>2</sub>O</div>
+  <p>Read it as books, not as a lab you should build. One methane molecule (or one mole of them) and two oxygen molecules account for one carbon dioxide and two water. Count atoms. Left: 1 C, 4 H, 4 O. Right: 1 C, 4 H, 4 O. The books match. The “2” in front of O<sub>2</sub> and H<sub>2</sub>O are <strong>coefficients</strong> — how many of those units. The little 2 and 4 inside the formulas are <strong>subscripts</strong> — the identity of the unit. If you changed CH<sub>4</sub> to CH<sub>3</sub> to “make it fit,” you would have written a different compound. That is cooking the books. Balance by coefficients only.</p>
+  <p>Water’s formation account is the same idea:</p>
+  <div class="formula">2 H<sub>2</sub> + O<sub>2</sub> → 2 H<sub>2</sub>O</div>
+  <p>Again: an account of atoms. This course will not ask you to produce hydrogen, store a gas, or light anything. Hydrogen gas is not a homework material. You may count the letters on the page. Left: 4 H, 2 O. Right: 4 H, 2 O. Match.</p>
+  <p>Rust as an account, simplified for a 101: iron and oxygen can be written toward iron(III) oxide, Fe<sub>2</sub>O<sub>3</sub>, the compound in many brown rust samples. A balanced form is 4 Fe + 3 O<sub>2</sub> → 2 Fe<sub>2</sub>O<sub>3</sub>. Count: 4 Fe and 6 O on each side. The bike fender from Unit 1 now has books. You still do not scrape a fender into a bottle to “test” it. You read the account and check the tally.</p>
+  <p>States in parentheses — (s), (l), (g), (aq) — tell you the form in the account: solid, liquid, gas, or dissolved in water. They are labels. “(aq)” does not mean “go dissolve this.” It means the writer is talking about a species already in water in that story. Photosynthesis as a reading, not a greenhouse build: 6 CO<sub>2</sub> + 6 H<sub>2</sub>O → C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + 6 O<sub>2</sub> (under light, in living plants). You can count atoms there too. You cannot treat it as a recipe for sugar in a dorm.</p>
+  <p>What is <em>not</em> automatically conserved: the number of molecules (coefficients can change the headcount), the volume of a gas (temperature and pressure matter), and “the vibe of energy” as a substitute for a number (Unit 7 will give the number a sign). What is conserved: atom identity and atom count of each element, in the ordinary chemistry this 101 will name.</p>
+  <p>This sample will not give synthesis routes, extraction how-tos, explosive accounts, drug chemistry, or chlorine-gas stories. If an equation would only be useful as a how-to, it does not belong here. Virgil Renfroe did not teach chemistry as a content expert. Lecturer courses: Critical Writing, Humanities, Analytical Reasoning. Scientific Development &amp; Social Change was design/ops. Frame: you are auditing a public account the way you would audit a budget line. A coefficient is a quantity. A subscript is a name. Mixing them up is how first-year books fail an audit.</p>
+  <p>You leave able to tally a simple equation, say what was conserved, and refuse the sentence “balance it by changing the formula.” That refusal is the unit’s whole professional habit.</p>
+
+  <div class="split">
+    <div class="pair"><div class="tag">Coefficient</div>How many of that unit. Allowed to change when you balance. The 2 in 2 H<sub>2</sub>O.</div>
+    <div class="pair"><div class="tag">Subscript</div>Identity of the unit. Not allowed to change when you balance. The 2 in H<sub>2</sub>O (water, not hydrogen peroxide).</div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>What is the equation doing?</h2>
+    <p>CH<sub>4</sub> + 2 O<sub>2</sub> → CO<sub>2</sub> + 2 H<sub>2</sub>O is printed in a textbook next to a sentence about a gas range. What is the honest use of that line in this course?</p>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Which move is legal bookkeeping?</h2>
+    <p>You are looking at H<sub>2</sub> + O<sub>2</sub> → H<sub>2</sub>O, which does not yet tally. What do you change?</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Count the atoms</h2>
+    <p>On 2 H<sub>2</sub>O, how many hydrogen atoms and oxygen atoms are represented?</p>
+    <div id="q3"></div>
+    <div class="feedback" id="q3fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>Paper or journal. No procedures. No other reactions than the ones named here.</p>
+  <blockquote class="prompt">Audit these three accounts. For each, list atom counts of every element on the left and on the right. If the books do not match, fix them by coefficients only, and show the new counts. (1) 2 H2 + O2 → 2 H2O  (2) Fe + O2 → Fe2O3  (3) CO2 + H2O → C6H12O6 + O2 (the photosynthesis reading; you may scale with a 6). Then 100–150 words: what would it mean, in Unit 1 language, if someone ‘balanced’ water by writing H2O2 instead of 2 H2O? Do not look up how to make any product. Do not add household chemicals to the page.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="unit-4.html">← Previous: Moles</a>
+    <a href="unit-6.html">Next: Acids, bases, pH →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185<br />He did not teach chemistry as a content expert. Lecturer: Critical Writing, Humanities, Analytical Reasoning. Scientific Development &amp; Social Change = design/ops, not a chemistry appointment. ID/course-design sample only. Do not apply.</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function checklist(boxId, items) {
+  const box = document.getElementById(boxId);
+  items.forEach((item) => {
+    const lab = document.createElement("label");
+    lab.innerHTML = '<input type="checkbox" /> <span>' + item.t + "</span>";
+    box.appendChild(lab);
+  });
+}
+function checkList(boxId, fbId, items, okMsg, badMsg) {
+  const box = document.getElementById(boxId);
+  let good = true;
+  [...box.querySelectorAll("input")].forEach((b, i) => {
+    if (items[i].must !== b.checked) good = false;
+  });
+  const fb = document.getElementById(fbId);
+  fb.className = "feedback show " + (good ? "ok" : "bad");
+  fb.textContent = good ? okMsg : badMsg;
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+function revealButtons() {
+  document.querySelectorAll("[data-reveal]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const el = document.getElementById(btn.getAttribute("data-reveal"));
+      el.classList.add("show", "ok");
+    });
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "An audit of atoms: methane and oxygen account for carbon dioxide and water. A description of a process that already happens in a range — not a build list.", ok: true, fb: "Yes. Books, not a kit. You may count C, H, and O. You may not treat the line as a how-to." },
+    { t: "Instructions for making a burner out of household parts.", ok: false, fb: "This course does not give assembly or ignition instructions. The equation is an account." },
+    { t: "Proof that mass is not conserved because a flame looks light.", ok: false, fb: "Looks are not an audit. If you could catch every gas, the atom count still has to match. Open flames lose products to the air — missing lines, not missing physics." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "Change coefficients to 2 H2 + O2 → 2 H2O. Leave subscripts alone. Water stays H2O.", ok: true, fb: "Legal books. 4 H and 2 O on each side. Identity of water survived the audit." },
+    { t: "Change H2O to H2O2 so the oxygen already matches.", ok: false, fb: "H2O2 is a different compound (hydrogen peroxide), not ‘balanced water.’ You cooked the name instead of the count." },
+    { t: "Go generate the gases until the leftover oxygen looks right.", ok: false, fb: "No generating gases. The tally is on the page. Procedures for hydrogen or oxygen are out of bounds." }
+  ]);
+  mc("q3", "q3fb", [
+    { t: "4 hydrogen atoms and 2 oxygen atoms. Coefficient 2 multiplies the whole H2O unit.", ok: true, fb: "2 × H2 = 4 H. 2 × O = 2 O. Coefficient times subscript, for each element." },
+    { t: "2 hydrogen and 2 oxygen, because you add the numbers you see.", ok: false, fb: "Adding 2 + 2 from ‘2 H2O’ as if they were the same element is not an audit. Separate the elements, then multiply." },
+    { t: "22, because you concatenate 2 and 2.", ok: false, fb: "Chemistry is not digit-stitching. Coefficients multiply; they do not glue numerals into a new integer." }
+  ]);
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

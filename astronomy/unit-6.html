@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 6 · Stars: fuel, lifetime, death · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1b1916;
+  --muted: #5a564e;
+  --rule: #d3cfc4;
+  --paper: #f6f3ec;
+  --panel: #eeeae2;
+  --card: #ffffff;
+  --accent: #2a2d6b;
+  --accent-ink: #1c1f4a;
+  --accent-soft: #e2e3f0;
+  --banner: #121428;
+  --banner-ink: #e4e6f2;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #3a3d8c;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #c9c6e8;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag, .pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #2a2d6b; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. Not a live institutional course. Not official NC A&amp;T curriculum. He did not teach astronomy. Do not apply.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html">1 · Night sky</a><a href="unit-2.html">2 · Clock</a><a href="unit-3.html">3 · Gravity</a><a href="unit-4.html">4 · Light</a><a href="unit-5.html">5 · Leftovers</a><a href="unit-6.html" aria-current="page">6 · Stars</a><a href="unit-7.html">7 · Galaxies</a><a href="unit-8.html">8 · Log</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 6 · Fuel, lifetime, death · ~40 minutes</p>
+  <h1>Stars: fuel, lifetime, death as a process</h1>
+  <p class="lede">A star is a long argument between gravity and fusion. Death is a sequence, not a firework you owe the Sun.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Name fusion of hydrogen into helium as the Sun’s main-sequence fuel.</li>
+    <li>Connect higher mass to a shorter lifetime, in plain language.</li>
+    <li>State the Sun’s future path without a supernova.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+  <p>A star is not a fire in the fireplace sense. A fireplace eats wood and needs air. A star holds itself up, for a long time, by fusing light nuclei into heavier ones in a hot, dense core. For the Sun, the main story is hydrogen becoming helium. Mass becomes energy in that process (a public Einstein relation; we will not compute it). The energy that leaks out is the sunlight of Unit 1 and the glow of Unit 4.</p>
+  <p>Gravity wants to squeeze the star. Fusion heats the core and pushes back. While those two balance, the star sits on what astronomers call the main sequence: a long, relatively stable stretch of life. The Sun has been there for about 4.6 billion years. A conservative classroom lifetime for a Sun-like star is about 10 billion years total on that stretch. We are not due for a surprise ending this century. That is not a pep talk. It is a fuel clock.</p>
+  <p>Mass runs the clock. A more massive star is brighter and spends its fuel faster. It lives a shorter main-sequence life — tens of millions of years for the heaviest, not billions. A less massive star is dimmer and can last many times longer than the Sun. This feels backward if you think “more fuel, longer life.” The extra mass is extra weight on the core. The furnace runs harder. Harder burns shorter. You can remember: massive, bright, brief; modest, dim, long.</p>
+  <p>Death is a process with branches, not a single explosion branded on every star.</p>
+  <p>For a Sun-like star, the conservative sequence taught in a 101 is: the core’s hydrogen runs low; the core shrinks and heats; the outer layers swell and cool at the surface — a red giant. Earth as a habitable place does not survive that swelling in any casual sense; this course will not narrate a disaster movie, but it will not promise a forever Earth either. Later, the outer layers drift off as a glowing shell (a planetary nebula — a bad historical name; it is not a planet). The leftover center is a white dwarf: Earth-sized, very dense, cooling for a long time. No supernova. The Sun does not have the mass for that.</p>
+  <p>For a much more massive star, the end can be a supernova: a core collapse and a brief, enormous brightening, leaving a neutron star or, if massive enough, a black hole. Those words are public. This sample will not give you classified stellar models or pretend you can time a particular explosion. It will ask you to keep the Sun out of that branch.</p>
+  <p>People skip the branch. They say “when the Sun explodes.” That sentence is common and wrong. Explode, in the supernova sense, is a high-mass death. The Sun’s death is swelling, shedding, cooling. Still dramatic on a geological clock. Not a bomb in the Jupiter sense.</p>
+  <p>A few conservative extras, kept short. Stars form in colder clouds when gravity wins on a clump — leftovers of leftover gas, in the language of Unit 5. Clusters of young stars can share a birthday. We will not map them. Color, from Unit 4, is a rough temperature tag on the glowing surface: massive hot stars look blue-white; long-lived modest stars look orange-red. A red giant is red because its swollen surface is cooler, even if the core is doing harder work. Same color word, different life stage. Name the stage.</p>
+  <p>What you can claim from a night sky (Unit 1) still applies. A bright star might be a nearby modest star or a distant giant. Death stage is not readable from a glance. A supernova in another galaxy can outshine its host for a while; that is a rare public event, not a weekly show. Do not log a supernova you did not see and did not take from a dated public report.</p>
+  <p>Three tests.</p>
+  <p><strong>First: What is the fuel?</strong> If you said burning like wood, restart. Fusion, hydrogen to helium, for the Sun’s long middle age.</p>
+  <p><strong>Second: Did you give the Sun a supernova?</strong> If yes, take it back. White-dwarf path.</p>
+  <p><strong>Third: Mass and time.</strong> More mass, shorter middle age. If you wrote the opposite because “more fuel,” you used a fireplace model.</p>
+  <p>This unit will not teach you to operate a telescope or a classified sky survey. It will teach you to refuse two stories: the Sun as a bomb, and a star as a mood. Fuel, mass, sequence. Death as a process with more than one door.</p>
+  <p>You will leave able to say the Sun’s fuel, the mass-lifetime link, and the Sun’s actual door. That is a full 101 on stellar death. The rest is a catalog you are not required to memorize.</p>
+
+  <div class="split">
+    <div class="pair"><div class="tag">Sun-like</div>Red giant → shed layers → white dwarf. No supernova.</div>
+    <div class="pair"><div class="tag">Very massive</div>Can end in a supernova; leftover neutron star or black hole.</div>
+  </div>
+
+  <div class="practice" id="p-sun">
+    <p class="eyebrow">Practice</p>
+    <h2>What happens to the Sun?</h2>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-mass">
+    <p class="eyebrow">Practice</p>
+    <h2>Mass and lifetime</h2>
+    <p>A star with many times the Sun’s mass is on the main sequence. What do you expect?</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-write">
+    <p class="eyebrow">Practice</p>
+    <h2>Death as a process</h2>
+    <p>In three sentences, tell the Sun’s future without a supernova. Use fuel, swell or shed, and leftover dwarf.</p>
+    <label class="field" for="star1">Your sequence</label>
+    <textarea id="star1" rows="4" placeholder="The Sun will…"></textarea>
+    <div class="actions"><button type="button" class="btn primary" id="checkStar">Check my sequence</button></div>
+    <div class="feedback" id="star1fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>You could turn this in on paper or paste it into a journal. This file does not collect it.</p>
+  <blockquote class="prompt">Write 150–200 words. Open with the Sun’s fuel (hydrogen to helium). Give the mass-lifetime link in one sentence. Then write the Sun’s death as a short process (giant, shed, white dwarf) and add one sentence that refuses the supernova. If you mention another star, do not invent a death date. Public facts only. No fireworks language that puts Earth in a movie you cannot source.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="unit-5.html">← Unit 5: Leftovers</a>
+    <a href="unit-7.html">Next: Galaxies →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185<br />He did not teach astronomy as a content expert. Lecturer courses: Critical Writing, Humanities, Analytical Reasoning. <em>Scientific Development &amp; Social Change</em> was online-course design/ops, not an astronomy appointment. Do not apply.</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "It will supernova in a few million years and leave a black hole.", ok: false, fb: "Wrong branch and wrong time. The Sun is a few billion years into a ~10-billion-year middle age, and it will not supernova." },
+    { t: "It will swell as a red giant, shed its outer layers, and leave a white dwarf.", ok: true, fb: "Process, not a bomb. That is the Sun-like door." },
+    { t: "It will burn out next winter when the hydrogen looks low from Earth.", ok: false, fb: "You cannot read the core’s fuel with the eye. The remaining middle age is billions of years." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "A longer life, because it has more fuel.", ok: false, fb: "Fireplace model. Extra mass makes a harder, shorter burn." },
+    { t: "A shorter life; it is brighter and spends fuel faster.", ok: true, fb: "Massive, bright, brief. Modest, dim, long." },
+    { t: "The same life as the Sun, because a year is a year.", ok: false, fb: "A year is Earth’s lap. A star’s middle age is a fuel clock set by mass." }
+  ]);
+  document.getElementById("checkStar").addEventListener("click", () => {
+    const raw = document.getElementById("star1").value.trim();
+    const t = raw.toLowerCase();
+    const fb = document.getElementById("star1fb");
+    const boom = /(supernova|explode|black hole)/.test(t) && !/(not|will not|won't|no supernova|does not)/.test(t);
+    const good = /(giant|swell|shed|white dwarf|helium|hydrogen|fusion)/.test(t);
+    let cls = "bad";
+    let msg;
+    if (raw.length < 40) {
+      msg = "Too thin. Fuel, swell or shed, leftover dwarf — three beats.";
+    } else if (boom) {
+      msg = "Take the supernova (or black hole) off the Sun. That is the high-mass door.";
+    } else if (good) {
+      cls = "ok";
+      msg = "You gave a process. Keep the supernova for stars much heavier than the Sun.";
+    } else {
+      msg = "Name hydrogen fuel, a red-giant swell or shed layers, and a white dwarf.";
+    }
+    fb.className = "feedback show " + cls;
+    fb.textContent = msg;
+  });
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>
