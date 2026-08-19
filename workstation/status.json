@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-08-19T13:31:22-04:00",
-  "asOfLabel": "2026-08-19 13:31 ET",
+  "asOf": "2026-08-19T13:33:10-04:00",
+  "asOfLabel": "2026-08-19 13:33 ET",
   "person": {
     "name": "Virgil Renfroe",
     "zone": "America/New_York",
@@ -315,6 +315,10 @@
     {
       "date": "2026-08-19",
       "line": "Heartbeats 6 of 6 back \u2014 dummy complete"
+    },
+    {
+      "date": "2026-08-19",
+      "line": "Proof LIVE \u2014 player layer on CW 101 + AR 101 (taught). No LLM. No apply."
     }
   ],
   "faders": [
@@ -332,9 +336,9 @@
       "key": "proof",
       "label": "PROOF",
       "sub": "packets",
-      "value": 90,
+      "value": 94,
       "muted": false,
-      "formula": "dummy heartbeat back \u2192 90 (was 70/88)"
+      "formula": "player layer in flight on CW+AR \u2192 94"
     },
     {
       "ch": "03",
@@ -654,5 +658,10 @@
       "Proof"
     ],
     "note": "dummy only \u2014 no scan, no letter, no listing, no Drive move"
+  },
+  "proofInFlight": {
+    "what": "player layer on Critical Writing 101 and Analytical Reasoning 101",
+    "rules": "practice-first, localStorage progress, no live LLM, no apply",
+    "started": "2026-08-19 13:33 ET"
   }
 }
