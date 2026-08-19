@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-08-19T13:53:06-04:00",
-  "asOfLabel": "2026-08-19 13:53 ET",
+  "asOf": "2026-08-19T13:54:08-04:00",
+  "asOfLabel": "2026-08-19 13:54 ET",
   "person": {
     "name": "Virgil Renfroe",
     "zone": "America/New_York",
@@ -334,6 +334,10 @@
     {
       "date": "2026-08-19",
       "line": "Studio LIVE \u2014 Nestlight slice: editable child profiles + stacked notes. Prod untouched."
+    },
+    {
+      "date": "2026-08-19",
+      "line": "Proof LIVE \u2014 Listen on Pages (speechSynthesis). Open a unit in Chrome/Safari. No apply."
     }
   ],
   "faders": [
@@ -351,9 +355,9 @@
       "key": "proof",
       "label": "PROOF",
       "sub": "packets",
-      "value": 97,
+      "value": 98,
       "muted": false,
-      "formula": "Listen button in flight after CW+AR player \u2192 97"
+      "formula": "Listen live on Pages \u2192 98"
     },
     {
       "ch": "03",
@@ -686,8 +690,12 @@
   },
   "proofListen": {
     "what": "Listen button via speechSynthesis",
-    "rules": "no live API, no hosted MP3s, English first, CW+AR first",
-    "status": "in flight",
-    "started": "2026-08-19 13:37 ET"
+    "rules": "no live API, no hosted MP3s, English first",
+    "status": "live",
+    "live": "2026-08-19 13:54 ET",
+    "urls": [
+      "https://virge44.github.io/course-samples/critical-writing/",
+      "https://virge44.github.io/course-samples/analytical-reasoning/"
+    ]
   }
 }
