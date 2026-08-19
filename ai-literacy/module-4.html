@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Module 4 · Classroom Activities That Hold · Virgil Renfroe</title>
+<style>
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f7f4ee;
+  --panel: #efeae1;
+  --card: #ffffff;
+  --accent: #1f5c56;
+  --accent-ink: #143d39;
+  --accent-soft: #dceae7;
+  --banner: #1f2a28;
+  --banner-ink: #e8eee9;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #0d6e66;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #f3d3b0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top {
+  background: #fff;
+  border-bottom: 1px solid var(--rule);
+}
+.course-nav {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.85rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.8rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.spectrum { display: grid; gap: 0.45rem; }
+.spec-row { display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.5rem; }
+@media (max-width: 560px) { .spec-row { grid-template-columns: 1fr; } }
+.spec-label {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  border: 1px solid #b7d0cb;
+  border-radius: 8px;
+  padding: 0.55rem 0.4rem;
+  text-align: center;
+}
+.crisp-row { display: grid; grid-template-columns: 5.4rem 1fr; gap: 0.5rem; margin-bottom: 0.55rem; }
+@media (max-width: 560px) { .crisp-row { grid-template-columns: 1fr; } }
+.letter {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-weight: 800;
+  font-size: 0.78rem;
+  border-radius: 8px;
+  padding: 0.5rem 0.3rem;
+  text-align: center;
+  border: 1px solid #b7d0cb;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #c45c26; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. Not a live institutional course. Not submitted. No student data.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="module-1.html">1 · Literacy</a><a href="module-2.html">2 · Ethics</a><a href="module-3.html">3 · Tools</a><a href="module-4.html" aria-current="page">4 · Practice</a><a href="module-5.html">5 · Adoption</a></nav></div>
+<article class="wrap" id="main">
+  <p class="eyebrow">Module 4 · Classroom practice · async · ~25 minutes</p>
+  <h1>Classroom Activities That Hold</h1>
+  <p class="lede">Design that survives contact with real students: a narrow AI role, a stop rule, disclosure, success evidence, and a stress test for equity and integrity. Not a demo for demos’ sake.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Activity card</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this module you will be able to:</p>
+  <ol>
+    <li>Assign AI a narrow role that serves a learning goal — or name when AI stays out.</li>
+    <li>Build an activity card with timing, student steps, disclosure, success evidence, and a stop rule.</li>
+    <li>Stress-test the card for equity and integrity (offline path; human performance still graded).</li>
+  </ol>
+
+  <h2>Lesson</h2>
+
+  <h3>Narrow the role</h3>
+  <p>Strong designs give AI one job. Weak designs let it do the assignment. If the goal is that students improve argument structure, the model may propose three revision strategies. It may not write the paragraph they submit. If the goal is that they evaluate a counterargument, the model may produce two opposing claims. The graded work is the critique.</p>
+  <p>If you cannot say in one line what the tool is <em>not</em> allowed to do, you do not have a role. You have a hope.</p>
+
+  <h3>When not to use AI</h3>
+  <div class="grid2">
+    <div class="bubble"><div class="tag">Skip AI when</div>You need clean evidence of unaided skill — a fluency sample, a cold write, an oral defense only.</div>
+    <div class="bubble"><div class="tag">Skip AI when</div>The task requires private data, secure items, or emotionally sensitive disclosure.</div>
+    <div class="bubble"><div class="tag">Skip AI when</div>Students lack access equity and the activity would widen gaps without an offline path.</div>
+    <div class="bubble"><div class="tag">Use AI when</div>You want more options to critique, faster first drafts of non-graded materials you will edit, or differentiated entry points.</div>
+  </div>
+  <p>A timed in-class diagnostic stays analog because you need a baseline, not because “AI is always unethical.” Detectors are not a design strategy.</p>
+
+  <h3>The card</h3>
+  <p>Write it so a substitute — or a tired you, on Thursday — could run it. Title. Time box. One-line AI role. Numbered student steps. A disclosure line students can actually write. What you will collect as success evidence. A stop rule: when AI leaves the room.</p>
+  <p>K–12: standards, pacing, guardians, mixed devices. Higher ed: outcomes, adult learners, syllabus alignment. Same card. Different constraints in the Context line.</p>
+
+  <h3>Stress test before you teach it</h3>
+  <p>Four mitigations, one trap. Narrow role. Disclosure students can write. Human performance still required for the grade. An offline or low-access path. Do not make detectors the integrity plan. If three students have no device, the card still has to work. If two students finish the AI step in a minute, the card still has a next move.</p>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Pick the job AI is allowed to do</h2>
+    <p>Goal: students improve argument structure in a short opinion paragraph. Tap the better role.</p>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>When not to use AI</h2>
+    <p>Best reason to keep AI out of a timed in-class diagnostic writing sample?</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Build the card</h2>
+    <p>Pick a lane. Write a one-sentence observable goal. Fill the card. Preview updates as you type.</p>
+    <div class="grid2">
+      <button type="button" class="lane" data-lane="k12"><strong>K–12</strong> Standards, pacing, guardians, mixed devices.</button>
+      <button type="button" class="lane" data-lane="he"><strong>Higher ed</strong> Outcomes, adult learners, syllabus alignment.</button>
+    </div>
+    <label class="field" for="goal">Learning goal (one sentence, observable)</label>
+    <input id="goal" type="text" placeholder="e.g., Students will revise a claim using two pieces of textual evidence." />
+    <label class="field" for="title">Activity title</label>
+    <input id="title" type="text" />
+    <label class="field" for="time">Time box</label>
+    <input id="time" type="text" placeholder="e.g., 25 minutes" />
+    <label class="field" for="airole">AI role (one line)</label>
+    <input id="airole" type="text" placeholder="e.g., Generate three revision strategies — not a full rewrite" />
+    <label class="field" for="steps">Student steps (numbered)</label>
+    <textarea id="steps" rows="5" placeholder="1.&#10;2.&#10;3."></textarea>
+    <label class="field" for="disclose">Student-facing disclosure line</label>
+    <textarea id="disclose" rows="2"></textarea>
+    <label class="field" for="evidence">What you will collect as success evidence</label>
+    <textarea id="evidence" rows="2"></textarea>
+    <label class="field" for="stop">Stop rule (when AI is not used)</label>
+    <input id="stop" type="text" />
+    <h3>Live card preview</h3>
+    <div class="outbox" id="preview">(Fill the fields to preview.)</div>
+    <div class="actions">
+      <button type="button" class="btn" id="fillCard">Fill demo card</button>
+      <button type="button" class="btn" id="copyCard">Copy card</button>
+    </div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Stress-test your design</h2>
+    <p>Check every risk you have already mitigated in the card above.</p>
+    <div class="checklist" id="stress"></div>
+    <div class="feedback" id="stfb" role="status"></div>
+    <div class="actions"><button type="button" class="btn" id="stcheck">Check</button></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Pilot snag</h2>
+    <p id="snag">Choose a lane and build (or fill) a card, then decide the first repair.</p>
+    <div id="q3"></div>
+    <div class="feedback" id="q3fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>Pilot that card in one class this term, or write why you will not. “Why not” is a complete answer — no device path, no approved tool, the goal needs a clean unaided sample. Do not invent a public showcase.</p>
+  <blockquote class="prompt">Homework: Name the class. Paste the activity card, or three sentences on why you will not run it this term. If you run it: what you will collect as evidence, and one thing you will change after the first try.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Module">
+    <a href="module-3.html">← Module 3: Tools That Transfer</a>
+    <a href="module-5.html">Next: Take It Back →</a>
+  </nav>
+  <footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185</footer>
+</article>
+<script>
+(function () {
+  function mc(boxId, fbId, opts) {
+    const box = document.getElementById(boxId);
+    const fb = document.getElementById(fbId);
+    opts.forEach((o) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "choice";
+      b.textContent = o.t;
+      b.addEventListener("click", () => {
+        [...box.children].forEach(c => c.disabled = true);
+        b.classList.add(o.ok ? "correct" : "wrong");
+        opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+        fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+        fb.textContent = o.fb;
+      });
+      box.appendChild(b);
+    });
+  }
+  mc("q1", "q1fb", [
+    { t: "AI writes a polished final paragraph the student submits.", ok: false, fb: "That outsources the learning goal. AI becomes the author." },
+    { t: "AI proposes three revision strategies; student chooses one and rewrites by hand; graded work is the revision + rationale.", ok: true, fb: "Narrow role + human performance = activity that holds." },
+    { t: "AI grades the paragraph so you save time.", ok: false, fb: "High-stakes judgment stays human unless you have a validated, disclosed system — and even then you own it." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "Because AI is always unethical.", ok: false, fb: "Too broad. The reason here is clean evidence of unaided skill." },
+    { t: "Because you need a clean baseline of student skill without assisted wording.", ok: true, fb: "Yes — diagnostic purpose drives the stop rule." },
+    { t: "Because detectors will catch everything later.", ok: false, fb: "Detectors are not a design strategy." }
+  ]);
+
+  const demos = {
+    k12: {
+      goal: "Students will support a claim about a short text with two quoted details and a warrant.",
+      title: "Evidence swap (AI options, human choose)",
+      time: "30 minutes",
+      airole: "Suggest three ways to tighten a warrant — never rewrite the whole paragraph.",
+      steps: "1. Write your claim + two quotes on paper (8 min).\n2. Optional: paste ONLY your warrant sentence into the school-approved tool; ask for three improvement strategies (not a full rewrite).\n3. Pick one strategy; revise on paper (10 min).\n4. Exit ticket: quote the strategy you used or rejected and why (5 min).",
+      disclose: "If I used AI: tool ___ ; I asked it for ___ ; I kept/changed ___ .",
+      evidence: "Paper paragraph + exit ticket rationale; spot oral check for two students.",
+      stop: "Final paragraph body stays handwritten; no AI during the first 8 minutes.",
+      snag: "Three students have no device. Two others finish AI steps in 60 seconds and chat.",
+      sc: [
+        { t: "Tell device-free students the activity is optional extra credit only.", ok: false, fb: "That bakes inequity into the design. Need a full offline path." },
+        { t: "Offer a paper strategy menu (same three moves) as the offline equivalent; stretch early finishers with a peer critique protocol.", ok: true, fb: "Equity + pacing both handled without abandoning the goal." },
+        { t: "Cancel AI for everyone forever after one messy pilot.", ok: false, fb: "Iterate the design; don’t throw out the goal." }
+      ]
+    },
+    he: {
+      goal: "Students will evaluate AI-generated counterarguments and strengthen their own thesis with one revised claim.",
+      title: "Counterargument clinic",
+      time: "40 minutes (seminar or async equivalent)",
+      airole: "Produce two opposing counterarguments to the student’s thesis for critique — student does not submit AI text as their essay.",
+      steps: "1. Post your working thesis (discussion or doc).\n2. Use approved AI to generate two counterarguments (paste thesis only).\n3. Annotate: which counterargument is strongest, what evidence you would need, and one revision to your thesis.\n4. Submit annotation + revised thesis + disclosure note.",
+      disclose: "Tool; prompt summary; I used outputs for critique only; revised thesis is mine.",
+      evidence: "Annotation quality + thesis revision; optional 2-min conference.",
+      stop: "No AI during midterm essay exam; process memo required if AI used on take-home drafts.",
+      snag: "A student submits AI prose as the “annotation,” barely changed.",
+      sc: [
+        { t: "Ignore it if the thesis looks fine.", ok: false, fb: "The goal was evaluation skill — product alone hid non-learning." },
+        { t: "Require a short oral or live rewrite of one annotation paragraph; clarify the rubric emphasizes critique moves.", ok: true, fb: "Process visibility repairs the design." },
+        { t: "Ban AI course-wide in the middle of term with no redesign.", ok: false, fb: "Whiplash without pedagogy. Fix the task structure." }
+      ]
+    }
+  };
+
+  let lane = null;
+  const fields = ["title","time","airole","steps","disclose","evidence","stop","goal"];
+  function cardText() {
+    const g = document.getElementById("goal").value.trim();
+    const v = Object.fromEntries(fields.filter(f => f !== "goal").map(id => [id, document.getElementById(id).value.trim()]));
+    return "ACTIVITY CARD\nTitle: " + (v.title || "—") + "\nLane: " + (lane === "he" ? "Higher ed" : "K–12") + "\nTime: " + (v.time || "—") + "\nLearning goal: " + (g || "—") + "\n\nAI role: " + (v.airole || "—") + "\nStop rule: " + (v.stop || "—") + "\n\nStudent steps:\n" + (v.steps || "—") + "\n\nDisclosure line:\n" + (v.disclose || "—") + "\n\nSuccess evidence:\n" + (v.evidence || "—");
+  }
+  function refresh() {
+    const ready = ["title","time","airole","steps","disclose","evidence","stop"].every(id => document.getElementById(id).value.trim().length > 2) && document.getElementById("goal").value.trim().length > 12;
+    document.getElementById("preview").textContent = ready ? cardText() : "(Fill all fields to preview.)";
+  }
+  fields.forEach(id => document.getElementById(id).addEventListener("input", refresh));
+
+  function applySnag() {
+    const d = demos[lane || "k12"];
+    document.getElementById("snag").textContent = d.snag;
+    const q3 = document.getElementById("q3");
+    q3.innerHTML = "";
+    document.getElementById("q3fb").className = "feedback";
+    d.sc.forEach((o) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "choice";
+      b.textContent = o.t;
+      b.addEventListener("click", () => {
+        [...q3.children].forEach(c => c.disabled = true);
+        b.classList.add(o.ok ? "correct" : "wrong");
+        d.sc.forEach((oo, j) => { if (oo.ok) q3.children[j].classList.add("correct"); });
+        const fb = document.getElementById("q3fb");
+        fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+        fb.textContent = o.fb;
+      });
+      q3.appendChild(b);
+    });
+  }
+  document.querySelectorAll(".lane").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".lane").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      lane = btn.dataset.lane;
+      applySnag();
+    });
+  });
+  document.getElementById("fillCard").addEventListener("click", () => {
+    if (!lane) lane = "k12";
+    const d = demos[lane];
+    document.querySelector('.lane[data-lane="' + lane + '"]').classList.add("active");
+    document.getElementById("goal").value = d.goal;
+    document.getElementById("title").value = d.title;
+    document.getElementById("time").value = d.time;
+    document.getElementById("airole").value = d.airole;
+    document.getElementById("steps").value = d.steps;
+    document.getElementById("disclose").value = d.disclose;
+    document.getElementById("evidence").value = d.evidence;
+    document.getElementById("stop").value = d.stop;
+    refresh();
+    applySnag();
+  });
+  document.getElementById("copyCard").addEventListener("click", async () => {
+    refresh();
+    try { await navigator.clipboard.writeText(cardText()); document.getElementById("copyCard").textContent = "Copied"; }
+    catch (_) {}
+  });
+
+  const stressItems = [
+    { t: "Narrow AI role (not “do the assignment”)", must: true },
+    { t: "Disclosure language students can actually write", must: true },
+    { t: "Human performance still required for the grade", must: true },
+    { t: "Offline / low-access path exists", must: true },
+    { t: "Rely on AI detectors as the main integrity plan", must: false }
+  ];
+  const st = document.getElementById("stress");
+  stressItems.forEach((it) => {
+    const lab = document.createElement("label");
+    lab.innerHTML = '<input type="checkbox"> <span>' + it.t + "</span>";
+    st.appendChild(lab);
+  });
+  document.getElementById("stcheck").addEventListener("click", () => {
+    let good = true;
+    [...st.querySelectorAll("input")].forEach((b, i) => { if (!!b.checked !== stressItems[i].must) good = false; });
+    const fb = document.getElementById("stfb");
+    fb.className = "feedback show " + (good ? "ok" : "bad");
+    fb.textContent = good
+      ? "Design stress checks passed. Detectors are optional tools — not the plan."
+      : "Tick the four real mitigations; leave “detectors as main plan” unchecked.";
+  });
+
+  document.getElementById("copyHw").addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(document.querySelector("blockquote.prompt").textContent); document.getElementById("copyHw").textContent = "Copied"; }
+    catch (_) {}
+  });
+  applySnag();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Module 5 · Take It Back · Virgil Renfroe</title>
+<style>
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f7f4ee;
+  --panel: #efeae1;
+  --card: #ffffff;
+  --accent: #1f5c56;
+  --accent-ink: #143d39;
+  --accent-soft: #dceae7;
+  --banner: #1f2a28;
+  --banner-ink: #e8eee9;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #0d6e66;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #f3d3b0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top {
+  background: #fff;
+  border-bottom: 1px solid var(--rule);
+}
+.course-nav {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.85rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.8rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.spectrum { display: grid; gap: 0.45rem; }
+.spec-row { display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.5rem; }
+@media (max-width: 560px) { .spec-row { grid-template-columns: 1fr; } }
+.spec-label {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  border: 1px solid #b7d0cb;
+  border-radius: 8px;
+  padding: 0.55rem 0.4rem;
+  text-align: center;
+}
+.crisp-row { display: grid; grid-template-columns: 5.4rem 1fr; gap: 0.5rem; margin-bottom: 0.55rem; }
+@media (max-width: 560px) { .crisp-row { grid-template-columns: 1fr; } }
+.letter {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-weight: 800;
+  font-size: 0.78rem;
+  border-radius: 8px;
+  padding: 0.5rem 0.3rem;
+  text-align: center;
+  border: 1px solid #b7d0cb;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #c45c26; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. Not a live institutional course. Not submitted. No student data.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="module-1.html">1 · Literacy</a><a href="module-2.html">2 · Ethics</a><a href="module-3.html">3 · Tools</a><a href="module-4.html">4 · Practice</a><a href="module-5.html" aria-current="page">5 · Adoption</a></nav></div>
+<article class="wrap" id="main">
+  <p class="eyebrow">Module 5 · Responsible adoption · async · ~20 minutes</p>
+  <h1>Take It Back</h1>
+  <p class="lede">How a tired educator implements this week without a committee. One class. Two weeks. A six-line note a colleague can read between periods.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Six-line note</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this module you will be able to:</p>
+  <ol>
+    <li>Tell a colleague, chair, or PD lead what you are trying, in plain language, and whether it is optional or required.</li>
+    <li>Name what you will tell students this week.</li>
+    <li>Sketch a two-week pilot you can actually run — or name why you will wait.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+
+  <h3>Without a committee</h3>
+  <p>You do not need a task force to try one verified draft or one activity card. You need a class you already teach, a rule you can say out loud, and one person who will know you are trying it. If your school has already named a tool and a policy, stay inside both. If it has not, stay inside Module 1’s red lines and Module 2’s talk-first habit. Do not wait for a rollout that is not coming this month.</p>
+  <p>This is not a campus partnership plan. There is no partner school in this module. There is you, your roster, and whoever sits down the hall.</p>
+
+  <h3>Optional vs required</h3>
+  <p>A first pilot should almost always be optional-with-disclosure, or teacher-side only (you use the tool; students do not). Required student use needs an offline path, an approved tool, and a reason that serves the learning goal. If you cannot name those three, do not require it.</p>
+  <p>Teacher-side use: you generate a discussion stem or an exit ticket, you verify, you own it. Students never have to open a chatbot. That is a complete week-one move.</p>
+  <p>Student-side use: they run one narrow step (three strategies, two counterarguments), they disclose, they still perform. That is a week-two move if devices and policy allow it.</p>
+
+  <h3>What to tell students</h3>
+  <p>Say it in the room, not only in a syllabus they will not reread. Four sentences are enough: what is allowed this week; what must be disclosed; what the tool may not write; that if you are unsure about authorship you will talk first. K–12: say it so a guardian could understand it in an email. Higher ed: say it so it matches the syllabus line you rewrote in Module 2.</p>
+  <p>Do not announce a new required tool on a Monday and grade with it on Wednesday. Do not announce a ban you cannot teach. Do not outsource the explanation to a detector warning.</p>
+
+  <h3>Talking to a colleague, a chair, a PD lead</h3>
+  <p>They do not need a framework deck. They need six lines they can read while the copier jams: what you are trying; which class; what is allowed and not; how you will check; what you need from them (often: nothing yet); when you will report back.</p>
+  <p>If you have no colleague to send it to, the note still works as an LMS journal. The point is to make the trial visible to one other adult — or to yourself in writing — so it does not evaporate after this file closes.</p>
+
+  <h3>A two-week sketch</h3>
+  <p><strong>Week 1.</strong> Tell students the rule for this class. Use the tool once on your side, or not at all. Verify before anything they see. Keep the red lines.</p>
+  <p><strong>Week 2.</strong> Run the Module 4 card, or run the unaided diagnostic you decided was the right stop rule. Send the six-line note. Keep one thing you will change after you see the student work.</p>
+  <p>If two weeks is too much — no approved tool, a high-stakes window, a class that needs a clean baseline — write that down. Waiting with a reason is adoption. Waiting for a committee that has not been named is not.</p>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Optional or required?</h2>
+    <p>Best default for a first two-week trial in a class with mixed device access and no new official policy this term?</p>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>What you tell students</h2>
+    <p>Which classroom announcement is ready to say this week?</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Write the six-line note</h2>
+    <p>A colleague should be able to read this between classes. No school names you do not work in. If you have no colleague, write it as a journal entry to yourself.</p>
+    <div class="grid2">
+      <button type="button" class="lane" data-lane="k12"><strong>K–12</strong> Team teacher, grade-level chair, or PD lead.</button>
+      <button type="button" class="lane" data-lane="he"><strong>Higher ed</strong> Colleague, chair, or faculty-dev lead.</button>
+    </div>
+    <label class="field" for="n1">1. What I’m trying</label>
+    <input id="n1" type="text" placeholder="One sentence." />
+    <label class="field" for="n2">2. With which class</label>
+    <input id="n2" type="text" placeholder="A class you actually teach." />
+    <label class="field" for="n3">3. What’s allowed / not</label>
+    <input id="n3" type="text" />
+    <label class="field" for="n4">4. How I’ll check</label>
+    <input id="n4" type="text" />
+    <label class="field" for="n5">5. What I need from you (or “nothing yet”)</label>
+    <input id="n5" type="text" />
+    <label class="field" for="n6">6. When I’ll report back</label>
+    <input id="n6" type="text" placeholder="A real date or “in two weeks.”" />
+    <h3>Note preview</h3>
+    <div class="outbox" id="notePreview">(Fill the six lines.)</div>
+    <div class="feedback" id="notefb" role="status"></div>
+    <div class="actions">
+      <button type="button" class="btn" id="fillNote">Show a strong sample</button>
+      <button type="button" class="btn" id="checkNote">Check my note</button>
+      <button type="button" class="btn" id="copyNote">Copy note</button>
+    </div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Two-week sketch</h2>
+    <p>Tick a plan you could keep if this week is already full.</p>
+    <div class="checklist" id="plan"></div>
+    <div class="feedback" id="planfb" role="status"></div>
+    <div class="actions"><button type="button" class="btn" id="planCheck">Check the sketch</button></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>Send that note to one real person — a colleague, a chair, a PD lead, a team partner. If you have no one to send it to, paste it into an LMS journal. Do not invent a recipient. Do not invent a school partner.</p>
+  <blockquote class="prompt">Homework: Send your six-line “what I’m trying” note to one real person this week, or paste it into an LMS journal if you have no colleague to send it to. Name the person or the journal. Do not invent a partner school.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <div class="callout">
+    <h2>You can stop here</h2>
+    <p style="margin-bottom:0">Five modules. A mental model, a spectrum, a prompt habit, a card, a note. That is enough to take back. If you do one thing after this file, send the note or run the verify loop on the next draft students will see.</p>
+  </div>
+
+  <nav class="pager" aria-label="Module">
+    <a href="module-4.html">← Module 4: Classroom Activities That Hold</a>
+    <a href="index.html">Course home →</a>
+  </nav>
+  <footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185</footer>
+</article>
+<script>
+(function () {
+  function mc(boxId, fbId, opts) {
+    const box = document.getElementById(boxId);
+    const fb = document.getElementById(fbId);
+    opts.forEach((o) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "choice";
+      b.textContent = o.t;
+      b.addEventListener("click", () => {
+        [...box.children].forEach(c => c.disabled = true);
+        b.classList.add(o.ok ? "correct" : "wrong");
+        opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+        fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+        fb.textContent = o.fb;
+      });
+      box.appendChild(b);
+    });
+  }
+  mc("q1", "q1fb", [
+    { t: "Require every student to use a chatbot this week so the pilot “counts.”", ok: false, fb: "Required use needs an approved tool, an offline path, and a learning reason. Mixed devices without a path is an equity failure." },
+    { t: "Teacher-side only, or optional-with-disclosure in one class. Keep a paper path.", ok: true, fb: "Yes. A first trial should be small enough to keep. Optional or teacher-side is enough." },
+    { t: "Wait until a district or campus committee publishes a full rollout.", ok: false, fb: "You can stay inside existing policy and red lines this week. A committee is not a prerequisite for one verified draft." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "“New tool this week, it will be on the quiz Friday, detectors will catch misuse.”", ok: false, fb: "Required-too-fast, plus detectors as the plan. Not ready." },
+    { t: "“This week you may use the approved tool to brainstorm if you disclose. It may not write the graded work. If I’m unsure we will talk. Devices optional — paper is fine.”", ok: true, fb: "Allowed, disclose, ban, talk-first, offline path. That is a week you can teach." },
+    { t: "Say nothing and watch what happens.", ok: false, fb: "Silence trains hide-it. Four sentences in the room are enough." }
+  ]);
+
+  const samples = {
+    k12: [
+      "I’m trying one verified AI draft for my own exit tickets, and one optional “three strategies” step.",
+      "7th-period English, one section, next two weeks.",
+      "Allowed: brainstorm with disclosure. Not allowed: the tool writes the paragraph. Paper path for anyone without a device.",
+      "I’ll check the exit-ticket claims against the chapter and collect the disclosure line.",
+      "Nothing yet — I’ll tell you if I need coverage or a policy check.",
+      "I’ll send you three sentences after the second week."
+    ],
+    he: [
+      "I’m trying a teacher-side verified discussion stem, then one optional counterargument critique.",
+      "UNST-style large-enrollment writing section, next two weeks.",
+      "Allowed: idea generation with disclosure when the assignment sheet says so. Not allowed: AI writes the graded analysis.",
+      "I’ll check the stem against the assigned reading and conference if authorship is unclear.",
+      "Nothing yet from the chair. I’ll copy you if a student asks for a program-level rule.",
+      "I’ll report back after two class meetings."
+    ]
+  };
+  let lane = "k12";
+  document.querySelectorAll(".lane").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".lane").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      lane = btn.dataset.lane;
+    });
+  });
+
+  const ids = ["n1","n2","n3","n4","n5","n6"];
+  function noteText() {
+    const lines = ids.map((id, i) => (i + 1) + ". " + document.getElementById(id).value.trim());
+    return "What I’m trying\n\n" + lines.join("\n");
+  }
+  function refresh() {
+    const filled = ids.every(id => document.getElementById(id).value.trim().length > 2);
+    document.getElementById("notePreview").textContent = filled ? noteText() : "(Fill the six lines.)";
+  }
+  ids.forEach(id => document.getElementById(id).addEventListener("input", refresh));
+  document.getElementById("fillNote").addEventListener("click", () => {
+    samples[lane].forEach((t, i) => document.getElementById(ids[i]).value = t);
+    document.querySelector('.lane[data-lane="' + lane + '"]').classList.add("active");
+    refresh();
+  });
+  document.getElementById("checkNote").addEventListener("click", () => {
+    const vals = ids.map(id => document.getElementById(id).value.trim());
+    const fb = document.getElementById("notefb");
+    const longEnough = vals.every(v => v.length > 8);
+    const namesClass = /class|period|section|course|english|history|writing|grade|comp/i.test(vals[1]);
+    const ok = longEnough;
+    fb.className = "feedback show " + (ok ? "ok" : "bad");
+    fb.textContent = ok
+      ? (namesClass
+        ? "Readable. A colleague can tell what, where, the rule, the check, the ask, and the date. Send it to a real person, or paste it into a journal."
+        : "Length is fine. Make line 2 a class you actually teach — title or period — so this cannot float away as a general intention.")
+      : "Six short lines, each specific. “TBD” on the class or the date is how this evaporates.";
+  });
+  document.getElementById("copyNote").addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(noteText()); document.getElementById("copyNote").textContent = "Copied"; }
+    catch (_) {}
+  });
+
+  const planItems = [
+    { t: "Week 1: tell students the rule for this class (allowed / disclose / not / talk-first)", must: true },
+    { t: "Week 1: one teacher-side verified draft, or a deliberate decision not to generate", must: true },
+    { t: "Week 2: run the activity card or the unaided diagnostic you chose as the stop rule", must: true },
+    { t: "Send the six-line note to a real person or an LMS journal", must: true },
+    { t: "Require a new student-facing tool course-wide before the first trial", must: false }
+  ];
+  const plan = document.getElementById("plan");
+  planItems.forEach((it) => {
+    const lab = document.createElement("label");
+    lab.innerHTML = '<input type="checkbox"> <span>' + it.t + "</span>";
+    plan.appendChild(lab);
+  });
+  document.getElementById("planCheck").addEventListener("click", () => {
+    let good = true;
+    [...plan.querySelectorAll("input")].forEach((b, i) => { if (!!b.checked !== planItems[i].must) good = false; });
+    const fb = document.getElementById("planfb");
+    fb.className = "feedback show " + (good ? "ok" : "bad");
+    fb.textContent = good
+      ? "That is a two-week plan a tired educator can keep. Leave course-wide required tools unchecked until the trial has taught you something."
+      : "Tick the four small moves. Leave “require a new tool course-wide” unchecked.";
+  });
+
+  document.getElementById("copyHw").addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(document.querySelector("blockquote.prompt").textContent); document.getElementById("copyHw").textContent = "Copied"; }
+    catch (_) {}
+  });
+})();
+</script>
+</body>
+</html>

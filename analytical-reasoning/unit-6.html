@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 6 · Fallacies that actually show up · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f7f4ee;
+  --panel: #efeae1;
+  --card: #ffffff;
+  --accent: #2a4a6e;
+  --accent-ink: #1a334d;
+  --accent-soft: #dce6f0;
+  --banner: #1a2433;
+  --banner-ink: #e6edf3;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #2a5a8c;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #e8c9a0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+.pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #2a4a6e; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. Not a live institutional course. Not official NC A&amp;T curriculum.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html">1 · Reasons</a><a href="unit-2.html">2 · Assumptions</a><a href="unit-3.html">3 · Valid/sound</a><a href="unit-4.html">4 · Numbers</a><a href="unit-5.html">5 · Analogies</a><a href="unit-6.html" aria-current="page">6 · Fallacies</a><a href="unit-7.html">7 · Short case</a><a href="unit-8.html">8 · Close</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 6 · Five moves that show up · ~40 minutes</p>
+  <h1>Fallacies that actually show up</h1>
+  <p class="lede">Not a Latin bingo card. Five patterns from campus and civic talk. Name the move. Repair the sentence. Leave a step someone can check.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Name five common moves: weaker restatement, attacking the speaker, fake either/or, unchecked chain, and “everyone knows.”</li>
+    <li>Mark which move a short campus or civic sentence is using.</li>
+    <li>Rewrite one sentence so the claim stands without the trick.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+  <p>A fallacy list can become a sport. Students collect Latin names and pin them on people they already dislike. That is not this unit. Five moves show up in hallways, comment threads, and public comment periods. You will learn their plain names, what they hide, and how to put a real because back on the page. If you already know the Latin, you may keep it in a footnote. The grade, in a live section, would be the repair.</p>
+  <p><strong>1. Weaker restatement</strong> (often called straw person). You recast the other side as something easier to knock down, then knock that down. “They want the library open later, so they must think staff should never go home.” Nobody said never. The live claim was a posted hour. Repair: quote the actual claim, then answer <em>that</em>. Kindness is not the point. Accuracy is. If you cannot write the other side so they would nod, you are not yet arguing with them.</p>
+  <p><strong>2. Attacking the speaker</strong> instead of the claim. “Of course she wants a late shuttle — she lives off campus.” Maybe she does. The schedule gap in Unit 1 does not become false because of her address. Motive can be a later question (who benefits). It is not a substitute for checking the because. Repair: grant the biography in a clause, then return to the times. “She is a commuter. The last lab still lets out after the last run.”</p>
+  <p><strong>3. Fake either/or</strong>. “Either we require attendance or students will never learn.” Those are not the only bins. A course can take attendance in lab, not in lecture; can grade process work; can drop the lowest day. Fake either/or hides the menu. Repair: name a third option, even if you will reject it. The point is to show that the fork was carved too early.</p>
+  <p><strong>4. Unchecked chain</strong> (the slide). “If we allow one make-up, we will have to allow them all, and then grades will mean nothing.” Sometimes a line really does not hold. Sometimes the speaker skipped the differences that would stop the slide (Unit 5). Repair: name the stopping rule. “One make-up with documentation, already on the syllabus, is not ‘all.’” If you cannot name a stopping rule, say that. Honesty about a thin line is better than a prophecy.</p>
+  <p><strong>5. “Everyone knows.”</strong> A crowd is asked to do the work of a because. “Everyone knows the dining hall is a disaster.” Maybe many people are unhappy. You still need a checkable piece: a time, a wait, a posted survey with an n. Popularity can be evidence <em>that a feeling is common</em>. It is not evidence that a policy is right. Repair: replace the crowd with one thing a roommate could look up.</p>
+  <p>These five share a habit: they hide the step. Weaker restatement hides the real claim. Attacking the speaker hides the because. Fake either/or hides the other options. The slide hides the stopping rule. “Everyone knows” hides the base (Unit 4). Once you see the hide, you do not need a poster of twenty Latin names. You need a rewrite.</p>
+  <p>Two cautions for a large first-year section. First, do not hunt fallacies in people you already oppose and forgive them in people you like. The move is the move. Second, not every short sentence is a fallacy. “I don’t buy the first premise” is Unit 3. “What has to be true?” is Unit 2. Save the fallacy label for a hidden step, not for a disagreement.</p>
+  <p>Logic tutoring uses these patterns because they show up on tests. They show up in life because they are fast. Fast is not the same as checkable. In a public habit of reasoning, speed is allowed. Invisibility is not. Say which move you think you are seeing, then offer the repaired sentence. Let someone disagree about the label. The repaired sentence is what they can work with.</p>
+  <p>Practice: match a sentence to a move, choose a fair repair, and rewrite one yourself. Homework: catch one in the wild and repair it without inventing a worse opponent.</p>
+
+  <div class="card">
+    <p class="eyebrow" style="margin-top:0">The five, on one card</p>
+    <ul>
+      <li><strong>Weaker restatement</strong> — answer the claim they made, not a smaller one you handed them.</li>
+      <li><strong>Attack the speaker</strong> — biography is not a because.</li>
+      <li><strong>Fake either/or</strong> — name a third option.</li>
+      <li><strong>Unchecked chain</strong> — name the stopping rule.</li>
+      <li><strong>“Everyone knows”</strong> — replace the crowd with a checkable piece.</li>
+    </ul>
+  </div>
+
+  <div class="practice" id="p-match">
+    <p class="eyebrow">Practice</p>
+    <h2>Name the move</h2>
+    <p>“They want a late dining line, so they must think staff should work all night with no say.”</p>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-which">
+    <p class="eyebrow">Practice</p>
+    <h2>Same five, different sentence</h2>
+    <p>“Of course he wants the lot lights fixed — he’s always complaining.”</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-fix">
+    <p class="eyebrow">Practice</p>
+    <h2>Repair the sentence</h2>
+    <p>Original: <em>“Everyone knows the attendance policy is unfair, so we should drop it.”</em></p>
+    <p>Rewrite it so the claim can stand without the crowd. Give a because a classmate could check, or shrink the claim. One or two sentences.</p>
+    <label class="field" for="fix6">Your repair</label>
+    <textarea id="fix6" rows="4" placeholder="The attendance policy should… because…"></textarea>
+    <div class="actions"><button type="button" class="btn primary" id="checkFix6">Check my repair</button></div>
+    <div class="feedback" id="fix6fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <blockquote class="prompt">Catch one of the five moves in ordinary talk this week — a comment thread, a class discussion, a roommate, a public meeting clip you can point to. Do not invent a villain. In 150–220 words: (1) quote or paraphrase the sentence; (2) name the move in plain language; (3) write the repaired version; (4) say what a classmate could now check. If you are not sure it is a fallacy, say which unit it might belong to instead (assumption, leaky pipe, missing base).</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="unit-5.html">← Unit 5: Analogies</a>
+    <a href="unit-7.html">Next: Short case →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function checklist(boxId, items) {
+  const box = document.getElementById(boxId);
+  items.forEach((item) => {
+    const lab = document.createElement("label");
+    lab.innerHTML = '<input type="checkbox" /> <span>' + item.t + "</span>";
+    box.appendChild(lab);
+  });
+}
+function checkList(boxId, fbId, items, okMsg, badMsg) {
+  const box = document.getElementById(boxId);
+  let good = true;
+  [...box.querySelectorAll("input")].forEach((b, i) => {
+    if (items[i].must !== b.checked) good = false;
+  });
+  const fb = document.getElementById(fbId);
+  fb.className = "feedback show " + (good ? "ok" : "bad");
+  fb.textContent = good ? okMsg : badMsg;
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+function revealButtons() {
+  document.querySelectorAll("[data-reveal]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const el = document.getElementById(btn.getAttribute("data-reveal"));
+      el.classList.add("show", "ok");
+    });
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "Weaker restatement — the live claim was a later line, not “staff never go home.”", ok: true, fb: "Yes. Repair: quote the hour they asked for, then argue staffing, cost, or the posted survey. Do not hand them a worse claim." },
+    { t: "Fake either/or — only two dining options exist in the world.", ok: false, fb: "The sentence is not offering two options. It is recasting the other side as extreme." },
+    { t: "Everyone knows — a crowd is doing the work.", ok: false, fb: "No crowd here. The hide is a smaller, worse version of their claim." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "Unchecked chain — one complaint leads to the collapse of the university.", ok: false, fb: "There is no chain of consequences. The sentence goes after the person." },
+    { t: "Attacking the speaker — his habit of complaining is asked to settle the lights.", ok: true, fb: "Yes. Repair: grant that he complains. Then return to the posted outage and the walk from the late lab." },
+    { t: "Weaker restatement — nobody asked for lights.", ok: false, fb: "The claim (fix the lights) is not being recast. The speaker is being dismissed." }
+  ]);
+  document.getElementById("checkFix6").addEventListener("click", () => {
+    const raw = document.getElementById("fix6").value.trim();
+    const t = raw.toLowerCase();
+    const fb = document.getElementById("fix6fb");
+    const crowd = /(everyone knows|everybody knows|it's obvious|obviously unfair)/.test(t);
+    const check = /(because|syllabus|lab|lecture|posted|section|absent|makeup|make-up|percent|%|\d|policy)/.test(t);
+    let cls = "bad";
+    let msg;
+    if (raw.length < 20) {
+      msg = "Write the repaired claim. One or two sentences. No crowd.";
+    } else if (crowd) {
+      msg = "The crowd is still in the sentence. Replace “everyone knows” with a checkable because — a clash with the syllabus, a lab vs lecture difference, a count — or shrink the claim to “we should review the policy.”";
+    } else if (check) {
+      cls = "ok";
+      msg = "You took the crowd off the clock. A strong repair names a specific clash (lab attendance vs recorded lecture; a rule that was not on the syllabus) or shrinks to “review,” which a committee can actually do.";
+    } else {
+      msg = "Add a because someone can check, or shrink the claim. “The policy should be dropped” still needs a reason. What rule, in what section, clashes with what posted promise?";
+    }
+    fb.className = "feedback show " + cls;
+    fb.textContent = msg;
+  });
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

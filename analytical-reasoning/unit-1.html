@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 1 · What counts as a reason · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f7f4ee;
+  --panel: #efeae1;
+  --card: #ffffff;
+  --accent: #2a4a6e;
+  --accent-ink: #1a334d;
+  --accent-soft: #dce6f0;
+  --banner: #1a2433;
+  --banner-ink: #e6edf3;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #2a5a8c;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #e8c9a0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+.pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #2a4a6e; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. Not a live institutional course. Not official NC A&amp;T curriculum.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html" aria-current="page">1 · Reasons</a><a href="unit-2.html">2 · Assumptions</a><a href="unit-3.html">3 · Valid/sound</a><a href="unit-4.html">4 · Numbers</a><a href="unit-5.html">5 · Analogies</a><a href="unit-6.html">6 · Fallacies</a><a href="unit-7.html">7 · Short case</a><a href="unit-8.html">8 · Close</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 1 · Claim vs because · ~35 minutes</p>
+  <h1>What counts as a reason</h1>
+  <p class="lede">A claim asks to be believed. A reason tries to earn that belief. If you cannot say the because, you have a take, not an argument.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Split a short passage into a claim and a because-clause.</li>
+    <li>Mark a “because” that only restates the claim instead of supporting it.</li>
+    <li>Write a because-clause a classmate could check without already agreeing with you.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+  <p>A claim is a sentence that asks to be believed. A reason is a sentence that tries to earn that belief. The word that usually sits between them is <em>because</em>. If you cannot say the because, you do not yet have an argument. You have a take.</p>
+  <p>This course is written in the grain of a large-enrollment Analytical Reasoning class: first-year and gen-ed students, mixed preparation, a room that could hold a few hundred people. It is a draft sample, not a live institutional course and not official NC A&amp;T curriculum. The habit it teaches is public. You say why. You show the step. You leave something a classmate could check.</p>
+  <p>People often treat the because as decoration. They write “The dining hall should stay open later because students deserve better” and think they have argued. <em>Deserve better</em> restates the claim in warmer language. It does not give a fact, a principle, or a comparison someone else can test. A reason a classmate can check sounds more like: “The dining hall should stay open later because the last class block ends at 8:10 and the line still has thirty people at 8:40.” Now there are times and a count. Someone can go look.</p>
+  <p>Three tests help.</p>
+  <p><strong>First: Can you split the sentence?</strong> Put the claim on one line and the because on the next. If you cannot find a second line, you do not have a reason yet. “Late labs are a problem” is a claim looking for work. “Late labs are a problem because the last campus shuttle listed on the posted schedule leaves before the 8:00 section lets out” is an argument. Thin, but an argument. A peer can check the schedule.</p>
+  <p><strong>Second: Does the because say something the claim does not already say?</strong> “We should require attendance because showing up matters” fails this test. Showing up <em>is</em> attendance. You have circled. The same circle shows up in civic talk: “The city should fund the library because libraries matter.” Maybe they do. The sentence has not yet said why <em>this</em> budget line, <em>this</em> year, against <em>these</em> other lines. A reason has to add a piece of the world, or a standard, that the claim itself did not already contain.</p>
+  <p><strong>Third: Could a skeptical person check the because without first agreeing with the claim?</strong> If the only way to accept the reason is to already want the conclusion, the reason is doing no work. “We should keep the late lab because it is obviously the right thing” asks the skeptic to join the choir. “We should keep the late lab because the posted waitlist for the daytime section is forty names and the room seats twenty-four” gives the skeptic a door. They can dispute the numbers. They cannot say you hid the step.</p>
+  <p>You will hear people say “I feel like” and then a policy. Feeling can start a question. It is not, by itself, a reason. “I feel unsafe walking from the late lab” can become a reason if you add what would have to be true: lighting on that path, time of night, a posted report, a pattern you can point to. The feeling names the stake. The because has to name the world.</p>
+  <p>This is not a course in winning. It is a course in making the step visible. In a 400-person section, the instructor cannot sit beside every draft. The check has to live on the page: claim, because, something a peer can mark. That is why this unit will not grade you on how strongly you feel. It will ask whether a roommate who disagrees could still see what you are asking them to check.</p>
+  <p>A claim can be a fact-claim (“the shuttle skipped two stops Tuesday”) or a should-claim (“the shuttle should run after 10”). Both need because-clauses. Fact-claims need sources or observations. Should-claims need a fact plus a standard: what counts as enough service, enough safety, enough time. If you skip the standard, people will fight about taste when they could be fighting about a rule. “Enough” is not a vibe. “Enough” is a line you are willing to let someone else apply.</p>
+  <p>GRE and LSAT tutoring uses this same split under heavier costumes: conclusion, premise, a gap. You do not need the costume. You need the split. Practice here is not a quiz you pass once. You will mark a claim, reject a fake because, and write a because-clause that could survive a roommate who disagrees. That last move is the one this course keeps asking for.</p>
+
+  <div class="split">
+    <div class="pair"><div class="tag">Claim</div>The writing center should add Sunday hours.</div>
+    <div class="pair"><div class="tag">Because (checkable)</div>The Sunday sign-in sheet last month listed 28 names for a space that was closed.</div>
+  </div>
+  <div class="split">
+    <div class="pair"><div class="tag">Claim again</div>The writing center should add Sunday hours.</div>
+    <div class="pair"><div class="tag">Because (circle)</div>Students deserve weekend support. <span class="muted">Warmer. Not a reason yet.</span></div>
+  </div>
+
+  <div class="practice" id="p-split">
+    <p class="eyebrow">Practice</p>
+    <h2>Mark the claim</h2>
+    <p>Read the short passage. Which sentence is the <strong>claim</strong> — the thing the speaker wants you to believe?</p>
+    <blockquote>The last chemistry lab lets out at 8:05. The posted shuttle schedule shows the last run at 7:50. The university should add a late shuttle on lab nights.</blockquote>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-fake">
+    <p class="eyebrow">Practice</p>
+    <h2>Which because is doing work?</h2>
+    <p>Same claim: <em>The dining hall should stay open until 9.</em> Pick the because-clause that a classmate could actually check.</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-write">
+    <p class="eyebrow">Practice</p>
+    <h2>Write a because-clause</h2>
+    <p>Claim: <strong>The library should keep the second floor open until midnight during exam week.</strong></p>
+    <p>Write one sentence that starts with <em>because</em> and gives something a roommate could check — a time, a count, a posted rule, a comparison. Do not restate “students need a quiet place.” That is the claim in a softer coat.</p>
+    <label class="field" for="because1">Your because-clause</label>
+    <textarea id="because1" rows="3" placeholder="because …"></textarea>
+    <div class="actions"><button type="button" class="btn primary" id="checkBecause">Check my because</button></div>
+    <div class="feedback" id="because1fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>You could turn this in on paper or paste it into a journal. This file does not collect it.</p>
+  <blockquote class="prompt">Find one claim in ordinary campus talk this week — dining hours, parking, attendance, a posted notice, a roommate argument. Do not invent a story. Copy or paraphrase the claim in one sentence. Then write a because-clause that would support it (or that the speaker seemed to mean). Then write one more sentence: how could a classmate check that because without already agreeing? 150–200 words. If you cannot find a checkable because, say so, and write the because the speaker would need.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="index.html">← Course home</a>
+    <a href="unit-2.html">Next: Hidden assumptions →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function checklist(boxId, items) {
+  const box = document.getElementById(boxId);
+  items.forEach((item) => {
+    const lab = document.createElement("label");
+    lab.innerHTML = '<input type="checkbox" /> <span>' + item.t + "</span>";
+    box.appendChild(lab);
+  });
+}
+function checkList(boxId, fbId, items, okMsg, badMsg) {
+  const box = document.getElementById(boxId);
+  let good = true;
+  [...box.querySelectorAll("input")].forEach((b, i) => {
+    if (items[i].must !== b.checked) good = false;
+  });
+  const fb = document.getElementById(fbId);
+  fb.className = "feedback show " + (good ? "ok" : "bad");
+  fb.textContent = good ? okMsg : badMsg;
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+function revealButtons() {
+  document.querySelectorAll("[data-reveal]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const el = document.getElementById(btn.getAttribute("data-reveal"));
+      el.classList.add("show", "ok");
+    });
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "The last chemistry lab lets out at 8:05.", ok: false, fb: "That is support — a time someone could check. The claim is the should-sentence at the end." },
+    { t: "The posted shuttle schedule shows the last run at 7:50.", ok: false, fb: "Also support. It sits next to the lab time so the gap is visible. The claim is what they want done." },
+    { t: "The university should add a late shuttle on lab nights.", ok: true, fb: "Yes. That is the sentence asking to be believed. The first two lines try to earn it." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "…because students deserve a real dinner after class.", ok: false, fb: "Deserve restates the should-claim. Warm, and not yet a reason. What time does class end? What is open now?" },
+    { t: "…because the last class block ends at 8:10 and the line is still thirty people at closing.", ok: true, fb: "Checkable. Times and a count. A skeptic can dispute the count. They cannot say you hid the step." },
+    { t: "…because everyone knows the food situation is a mess.", ok: false, fb: "Everyone knows is a crowd, not a because. Unit 6 will name that move. For now: no one can check a crowd." }
+  ]);
+  document.getElementById("checkBecause").addEventListener("click", () => {
+    const raw = document.getElementById("because1").value.trim();
+    const t = raw.toLowerCase();
+    const fb = document.getElementById("because1fb");
+    const checkable = /(hour|midnight|night|exam|sign.?in|waitlist|seat|room|posted|schedule|count|%|percent|\d)/.test(t);
+    const circle = /(deserve|need a quiet|students need|obviously|everyone knows|just makes sense)/.test(t);
+    let cls = "bad";
+    let msg;
+    if (raw.length < 20) {
+      msg = "Too thin. Write a full because-clause — one sentence a roommate could read aloud.";
+    } else if (circle && !checkable) {
+      msg = "That still restates the claim. Drop deserve / need / obviously. Add a time, a count, a posted rule, or a comparison someone can look up.";
+    } else if (checkable) {
+      cls = "ok";
+      msg = "You gave the skeptic a door — a time, a count, a posted rule, or a number. Next: could a classmate check it without already agreeing? If yes, you have a reason.";
+    } else {
+      msg = "You have a sentence. Make the check visible: a time, a headcount, a posted exam-week schedule, a comparison with another floor. Feeling can start it. The because has to name the world.";
+    }
+    fb.className = "feedback show " + cls;
+    fb.textContent = msg;
+  });
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 5 · Analogies and categories · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f7f4ee;
+  --panel: #efeae1;
+  --card: #ffffff;
+  --accent: #2a4a6e;
+  --accent-ink: #1a334d;
+  --accent-soft: #dce6f0;
+  --banner: #1a2433;
+  --banner-ink: #e6edf3;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #2a5a8c;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #e8c9a0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+.pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #2a4a6e; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. Not a live institutional course. Not official NC A&amp;T curriculum.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html">1 · Reasons</a><a href="unit-2.html">2 · Assumptions</a><a href="unit-3.html">3 · Valid/sound</a><a href="unit-4.html">4 · Numbers</a><a href="unit-5.html" aria-current="page">5 · Analogies</a><a href="unit-6.html">6 · Fallacies</a><a href="unit-7.html">7 · Short case</a><a href="unit-8.html">8 · Close</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 5 · When the comparison holds · ~35 minutes</p>
+  <h1>Analogies and categories</h1>
+  <p class="lede">A comparison is a reason only if the shared feature is the one the claim needs. If the feature that matters is different, the analogy is a picture, not a pipe.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Name the shared feature an analogy is asking you to treat as the one that matters.</li>
+    <li>Say when a comparison breaks — which difference would change the conclusion.</li>
+    <li>Sort a case into a category and state the rule you used to sort it.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+  <p>People reason with likeness. “This attendance policy is just like a job. If you don’t show, you don’t get paid.” That sentence is doing two jobs at once. It is painting a picture, and it is smuggling a rule: <em>class is the kind of thing where absence costs you the good the meeting was for.</em> If that rule is the one we should use, the analogy holds. If class is also the kind of thing where the meeting is practice, and the grade is supposed to measure the skill, not the chair time, the analogy leaks. Same picture. Different rule.</p>
+  <p>An analogy is not automatically cheap. It is cheap when no one names the shared feature. Your job is to write that feature in a sentence. “Both are scheduled obligations with other people waiting on you” is a candidate. “Both involve a building you walk into” is not. The second one is true and idle. The first one might actually carry the claim.</p>
+  <p>Then apply Unit 2’s test. <strong>If the shared feature were missing, would the conclusion still follow?</strong> If we imagine a class that is self-paced, recorded, and graded only on a portfolio, does “it’s like a job” still force an attendance dock? Probably not. The feature that was doing the work was the live dependence on other people, or the claim that showing up <em>is</em> the work. Name which one you mean. A classmate can now accept or reject the feature instead of fighting the picture.</p>
+  <p>Categories are analogies that have been given a rule. When you say “this is a safety issue, not a convenience issue,” you are placing a case in a bin that already has a policy attached. Bins are useful. They are also where arguments hide. If late lighting on one path is a safety issue, the bin may buy a work order. If every inconvenience is recoded as safety, the bin stops meaning anything. Ask: <em>what has to be true of a case for it to go in this bin?</em> Write the rule. Then see whether this case meets it.</p>
+  <p>Campus talk loves two bins in particular: <em>fairness</em> and <em>respect</em>. Both matter. Neither is a substitute for a rule. “It isn’t fair that the 8 a.m. section has no open lab” might mean (a) the two sections were promised the same access, or (b) I wanted a later seat and did not get one. Those are different categories. (a) points to a posted promise. (b) points to a preference. If you leave “fair” unspecified, people will argue about character when they could be reading the schedule.</p>
+  <p>A comparison also breaks when the <strong>scale</strong> is wrong. “If we allow one make-up quiz, we have to allow them all” treats one case as a category. Sometimes that is honest: you do not have a way to tell the cases apart. Sometimes it is a slide (Unit 6). The check is whether you can name a difference that would matter — documented conflict, a posted policy already on the syllabus, a second chance you already gave everyone. If you can name a difference that would change the decision, you do not have to swallow the all-or-nothing bin.</p>
+  <p>Logic tests like to call this “parallel reasoning.” Keep the gen-ed version. You are not matching puzzle stems. You are asking: what feature is supposed to travel from A to B, and does it? “Treating a residence-hall quiet hours policy like a city noise ordinance” might hold if the shared feature is other people’s sleep in a shared building. It breaks if the ordinance assumes a police power and a fine schedule the hall does not have. The picture can still help you think. It cannot, by itself, buy the sanction.</p>
+  <p>Write analogies so they can be checked. A checkable analogy names (1) A, (2) B, (3) the feature that is supposed to be the same, and (4) the claim that feature is supposed to support. If you cannot get (3) onto the page, you have a vibe. If you can get (3) onto the page and a classmate can show that (3) is false of B, the analogy did honest work: it failed in public.</p>
+  <p>Practice: mark the feature that would have to travel, say when a comparison breaks, and sort one case with an explicit rule. Homework: take a real comparison you heard — do not invent one — and test whether the feature holds.</p>
+
+  <div class="practice" id="p-feature">
+    <p class="eyebrow">Practice</p>
+    <h2>What has to travel?</h2>
+    <p>“Lab attendance should work like a job: if you don’t show, you lose the day’s pay (credit).”</p>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-break">
+    <p class="eyebrow">Practice</p>
+    <h2>When does it break?</h2>
+    <p>Which difference would most weaken the job analogy for a lecture that is recorded and graded only on two exams?</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-bin">
+    <p class="eyebrow">Practice</p>
+    <h2>Sort with a rule</h2>
+    <p>Case: a posted notice says the east-lot lights are out on the walk from the late lab. Someone calls it a <em>safety</em> issue; someone else calls it a <em>convenience</em> issue.</p>
+    <p>Write one rule for the safety bin — what has to be true of a case to go in it — and say whether this case meets it. Two sentences.</p>
+    <label class="field" for="bin1">Your rule and sort</label>
+    <textarea id="bin1" rows="4" placeholder="A case is a safety issue when… This case…"></textarea>
+    <div class="actions"><button type="button" class="btn primary" id="checkBin">Check my sort</button></div>
+    <div class="feedback" id="bin1fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <blockquote class="prompt">Catch one analogy or category in the wild: a syllabus policy, a roommate argument, a public comment, a posted comparison (“this is just like…”). In 150–220 words: (1) quote or paraphrase the comparison; (2) name the shared feature that would have to travel; (3) name one difference that would break it; (4) rewrite the claim without the picture, using only the feature you are willing to defend. Do not invent the original comparison.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="unit-4.html">← Unit 4: Numbers</a>
+    <a href="unit-6.html">Next: Fallacies →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function checklist(boxId, items) {
+  const box = document.getElementById(boxId);
+  items.forEach((item) => {
+    const lab = document.createElement("label");
+    lab.innerHTML = '<input type="checkbox" /> <span>' + item.t + "</span>";
+    box.appendChild(lab);
+  });
+}
+function checkList(boxId, fbId, items, okMsg, badMsg) {
+  const box = document.getElementById(boxId);
+  let good = true;
+  [...box.querySelectorAll("input")].forEach((b, i) => {
+    if (items[i].must !== b.checked) good = false;
+  });
+  const fb = document.getElementById(fbId);
+  fb.className = "feedback show " + (good ? "ok" : "bad");
+  fb.textContent = good ? okMsg : badMsg;
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+function revealButtons() {
+  document.querySelectorAll("[data-reveal]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const el = document.getElementById(btn.getAttribute("data-reveal"));
+      el.classList.add("show", "ok");
+    });
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "Both happen in a building with a clock on the wall.", ok: false, fb: "True and idle. The clock does not buy a credit dock. Name the feature the sanction needs." },
+    { t: "Showing up is the work other people are owed — the day’s credit is like the day’s pay.", ok: true, fb: "That is the feature asked to travel. Now you can accept or reject it. A recorded, exam-only lecture may not share it." },
+    { t: "Jobs are more important than classes, so the comparison is disrespectful.", ok: false, fb: "That argues importance, not likeness. Analogies fail when the needed feature does not travel, not when someone likes one domain more." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "The lecture hall is nicer than most job sites.", ok: false, fb: "A difference that does not touch the rule. Comfort is not the feature the attendance dock needs." },
+    { t: "The grade already measures the skill on exams, and the meeting is not live work other people depend on.", ok: true, fb: "Yes. If pay-for-showing-up was the traveling feature, this course does not share it. The analogy breaks in public. Good." },
+    { t: "Students are adults, so no analogy to work is allowed.", ok: false, fb: "Adults use analogies. The question is the feature, not a ban on pictures." }
+  ]);
+  document.getElementById("checkBin").addEventListener("click", () => {
+    const raw = document.getElementById("bin1").value.trim();
+    const t = raw.toLowerCase();
+    const fb = document.getElementById("bin1fb");
+    const rule = /(when|if|means|risk|harm|injury|dark|light|night|walk|path|safe)/.test(t);
+    const sort = /(this case|the notice|the lights|meets|does not|safety|convenience)/.test(t);
+    let cls = "bad";
+    let msg;
+    if (raw.length < 30) {
+      msg = "Two sentences. First the rule for the bin. Then whether this walk meets it.";
+    } else if (rule && sort) {
+      cls = "ok";
+      msg = "You put a rule on the table. A strong version: a case is a safety issue when a reasonably careful person faces a foreseeable risk of harm — here, an unlit walk from a late lab. Convenience is a longer route when a lit one exists. Classmates can now argue the rule, not each other’s seriousness.";
+    } else {
+      msg = "Make the rule portable. “A case goes in the safety bin when… (risk of harm, time of night, no lit alternative).” Then apply it to the outage on that walk. Avoid “it’s obviously safety.” That is the bin without a rule.";
+    }
+    fb.className = "feedback show " + cls;
+    fb.textContent = msg;
+  });
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

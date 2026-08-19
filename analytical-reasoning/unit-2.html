@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 2 · Hidden assumptions · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f7f4ee;
+  --panel: #efeae1;
+  --card: #ffffff;
+  --accent: #2a4a6e;
+  --accent-ink: #1a334d;
+  --accent-soft: #dce6f0;
+  --banner: #1a2433;
+  --banner-ink: #e6edf3;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #2a5a8c;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #e8c9a0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+.pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #2a4a6e; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. Not a live institutional course. Not official NC A&amp;T curriculum.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html">1 · Reasons</a><a href="unit-2.html" aria-current="page">2 · Assumptions</a><a href="unit-3.html">3 · Valid/sound</a><a href="unit-4.html">4 · Numbers</a><a href="unit-5.html">5 · Analogies</a><a href="unit-6.html">6 · Fallacies</a><a href="unit-7.html">7 · Short case</a><a href="unit-8.html">8 · Close</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 2 · What has to be true · ~35 minutes</p>
+  <h1>Hidden assumptions</h1>
+  <p class="lede">Every short argument leaves something unsaid. The assumption is the unsaid piece the argument needs. If it fails, the because no longer reaches the claim.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Name the unstated premise a short argument needs in order to reach its claim.</li>
+    <li>Distinguish a load-bearing assumption from a restated conclusion or a side fact.</li>
+    <li>Say what happens to the argument if that assumption is false.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+  <p>Unit 1 asked you to put a because on the table. Unit 2 asks what else has to be true for that because to reach the claim. That missing piece is the assumption. It is not a guess about the speaker’s secret motives. It is the plank the argument stands on and does not mention.</p>
+  <p>Take a campus sentence: “The rec center is packed at 5, so we should build another gym.” The because is a crowd at 5. The claim is a building. What has to be true? At least this: that the 5 o’clock crowd is typical, not a one-week spike; that the problem is space, not staffing or hours; that another building is a better fix than stretching the hours you already have. If any of those is false, the packed room can still be real and the building still does not follow.</p>
+  <p>That last sentence is the whole unit. A true because can sit next to a claim it does not earn. The gap is the assumption. Your job is to say the gap in a sentence a classmate could accept or reject.</p>
+  <p>A useful test: <strong>if this were false, would the because still get you to the claim?</strong> If the answer is no, you found a load-bearing assumption. If the answer is yes, you found something the speaker might also believe, but the argument does not need it. “People like gyms” might be true. The packed-at-5 argument does not stand or fall on whether people like gyms. It stands or falls on whether the crowd means we lack space that another building would fix.</p>
+  <p>Students sometimes confuse the assumption with the conclusion. The conclusion is what the speaker wants. The assumption is what they skipped. “We should build another gym” is not the assumption. It is the claim. The assumption is quieter: <em>the current building, used as it is now, cannot absorb the 5 o’clock demand.</em> Write that sentence. Now someone can argue with the quiet part instead of just liking or hating the building.</p>
+  <p>Another mix-up: treating a background fact as the assumption. “There is a rec center” is background. Everyone in the argument already granted it. Assumptions worth marking are the ones a reasonable opponent could deny. In a large first-year section, this is the move that separates a recap from an analysis. Recap repeats what was said. Analysis says what had to be true.</p>
+  <p>Assumptions come in two everyday flavors. One is a <strong>fact that was skipped</strong>: the 5 o’clock crowd is typical; the waitlist is still there on Fridays; the shuttle that “always” skips stops skipped them this week. The other is a <strong>standard that was skipped</strong>: packed means we must build, not shift hours; a twenty-minute wait is too long; “enough” dining means a hot line after 8. Fact-assumptions you check against the world. Standard-assumptions you put on the table so people can argue about the rule instead of about each other’s taste.</p>
+  <p>Logic tutoring likes to call these necessary assumptions and then dress them in extra vocabulary. Keep the plain version. Ask: what has to be true? Then ask: what happens if it isn’t? If the argument dies, you found the plank. If the argument limps but still walks, you found a helper, not the plank.</p>
+  <p>You do not have to agree with the assumption to name it. Naming it is a public service. In civic talk this is how a conversation gets less personal. “You just want to spend money” is a motive story. “Your argument assumes the 5 o’clock crowd is typical year-round” is a check. The first one starts a fight. The second one starts a look at the calendar.</p>
+  <p>Be careful not to invent a worse version of the speaker. That is a later unit (straw person). The assumption you write should be the <em>kindest load-bearing sentence</em> that still has to be true. Not the dumbest one you can pin on them. If they said the rec is packed at 5, do not write “they assume nobody has anything better to do.” Write the sentence their because actually needs.</p>
+  <p>Practice here: mark the assumption, say which one is load-bearing, and write the missing premise so a classmate could accept or reject it. Homework asks you to do the same to a real short argument you did not invent.</p>
+
+  <div class="practice" id="p-mark">
+    <p class="eyebrow">Practice</p>
+    <h2>Mark the assumption</h2>
+    <p>Argument: <em>“Office hours are empty on Friday afternoon, so the instructor must not be helpful.”</em> What has to be true for emptiness to mean “not helpful”?</p>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-load">
+    <p class="eyebrow">Practice</p>
+    <h2>Which plank is load-bearing?</h2>
+    <p>Argument: <em>“The wait for tutoring is forty minutes on Sunday, so we should hire three more tutors.”</em></p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-write">
+    <p class="eyebrow">Practice</p>
+    <h2>Write the missing premise</h2>
+    <p>Argument: <em>“Almost no one voted in the student-government election, so the senate does not represent us.”</em></p>
+    <p>Write one sentence that starts with <strong>This argument assumes that…</strong> Make it load-bearing. If your sentence were false, the low turnout would no longer get you to “does not represent us.”</p>
+    <label class="field" for="assume1">The missing premise</label>
+    <textarea id="assume1" rows="3" placeholder="This argument assumes that…"></textarea>
+    <div class="actions"><button type="button" class="btn primary" id="checkAssume">Check my assumption</button></div>
+    <div class="feedback" id="assume1fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>Turn this in if you have a section that wants it. Do not invent the argument.</p>
+  <blockquote class="prompt">Take one short argument from a posted campus notice, a city or county agenda item you can point to, a roommate, or a class discussion. Quote or paraphrase it in two sentences (claim + because). Then write the load-bearing assumption in one sentence: “This argument assumes that…” Then write one sentence saying what happens to the argument if that assumption is false. 150–220 words. Do not attack the speaker. Name the plank.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="unit-1.html">← Unit 1: Reasons</a>
+    <a href="unit-3.html">Next: Valid vs sound →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function checklist(boxId, items) {
+  const box = document.getElementById(boxId);
+  items.forEach((item) => {
+    const lab = document.createElement("label");
+    lab.innerHTML = '<input type="checkbox" /> <span>' + item.t + "</span>";
+    box.appendChild(lab);
+  });
+}
+function checkList(boxId, fbId, items, okMsg, badMsg) {
+  const box = document.getElementById(boxId);
+  let good = true;
+  [...box.querySelectorAll("input")].forEach((b, i) => {
+    if (items[i].must !== b.checked) good = false;
+  });
+  const fb = document.getElementById(fbId);
+  fb.className = "feedback show " + (good ? "ok" : "bad");
+  fb.textContent = good ? okMsg : badMsg;
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+function revealButtons() {
+  document.querySelectorAll("[data-reveal]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const el = document.getElementById(btn.getAttribute("data-reveal"));
+      el.classList.add("show", "ok");
+    });
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "The instructor is not helpful. (That is the conclusion.)", ok: false, fb: "That is the claim, not the assumption. Assumptions are the skipped plank, not the thing they want you to believe." },
+    { t: "If office hours were useful, people would show up on Friday afternoon.", ok: true, fb: "Yes. Emptiness only means “not helpful” if helpful hours would be full at that time. Maybe Friday at 3 is when people work. Maybe the useful hour is Tuesday." },
+    { t: "There is a building where office hours happen.", ok: false, fb: "Background, not a plank. Nobody in the argument is denying that a room exists." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "People like tutoring.", ok: false, fb: "Maybe true. The hiring claim does not stand or fall on liking. It stands on whether forty minutes means we lack tutors that three hires would fix." },
+    { t: "A forty-minute wait is typical, and more tutors (not different hours or a different sign-up) would cut it.", ok: true, fb: "Load-bearing. If Sunday is a one-off, or if the bottleneck is the sign-up form, three hires do not follow." },
+    { t: "The senate should fund student success.", ok: false, fb: "A nearby value. The argument as stated does not need a senate. It needs the wait to mean a tutor shortage." }
+  ]);
+  document.getElementById("checkAssume").addEventListener("click", () => {
+    const raw = document.getElementById("assume1").value.trim();
+    const t = raw.toLowerCase();
+    const fb = document.getElementById("assume1fb");
+    const hits = /(turnout|vote|voted|represent|mandate|consent|low|percent|ballot|eligible|voice)/.test(t);
+    const restates = /(does not represent|doesn't represent|senate is bad|they don't care)/.test(t) && !/(assume|if|would|means|only if)/.test(t);
+    let cls = "bad";
+    let msg;
+    if (raw.length < 25) {
+      msg = "Too thin. Write a full sentence. Start with “This argument assumes that…”";
+    } else if (restates) {
+      msg = "That restates the conclusion. The assumption is the skipped rule: that low turnout means the people who hold seats do not represent the body. Say that rule.";
+    } else if (hits) {
+      cls = "ok";
+      msg = "You named a plank: something about turnout and what it is allowed to mean. Ask the test: if your sentence were false (low turnout, but the body still tracks student need), would the argument still reach “does not represent us”? If no, you have it.";
+    } else {
+      msg = "Make the skipped rule visible. A strong version: this argument assumes that representation requires high turnout — that a senate chosen by a small electorate does not count as representing the rest. Then say what happens if that rule is false.";
+    }
+    fb.className = "feedback show " + cls;
+    fb.textContent = msg;
+  });
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Module 2 · Integrity Without Panic · Virgil Renfroe</title>
+<style>
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f7f4ee;
+  --panel: #efeae1;
+  --card: #ffffff;
+  --accent: #1f5c56;
+  --accent-ink: #143d39;
+  --accent-soft: #dceae7;
+  --banner: #1f2a28;
+  --banner-ink: #e8eee9;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #0d6e66;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #f3d3b0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top {
+  background: #fff;
+  border-bottom: 1px solid var(--rule);
+}
+.course-nav {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.85rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.8rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.spectrum { display: grid; gap: 0.45rem; }
+.spec-row { display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.5rem; }
+@media (max-width: 560px) { .spec-row { grid-template-columns: 1fr; } }
+.spec-label {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  border: 1px solid #b7d0cb;
+  border-radius: 8px;
+  padding: 0.55rem 0.4rem;
+  text-align: center;
+}
+.crisp-row { display: grid; grid-template-columns: 5.4rem 1fr; gap: 0.5rem; margin-bottom: 0.55rem; }
+@media (max-width: 560px) { .crisp-row { grid-template-columns: 1fr; } }
+.letter {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-weight: 800;
+  font-size: 0.78rem;
+  border-radius: 8px;
+  padding: 0.5rem 0.3rem;
+  text-align: center;
+  border: 1px solid #b7d0cb;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #c45c26; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. Not a live institutional course. Not submitted. No student data.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="module-1.html">1 · Literacy</a><a href="module-2.html" aria-current="page">2 · Ethics</a><a href="module-3.html">3 · Tools</a><a href="module-4.html">4 · Practice</a><a href="module-5.html">5 · Adoption</a></nav></div>
+<article class="wrap" id="main">
+  <p class="eyebrow">Module 2 · Ethics · async · ~25 minutes</p>
+  <h1>Integrity Without Panic</h1>
+  <p class="lede">Move past ban-it / ignore-it. Place uses on a spectrum. Keep authorship, privacy, bias, and labor as separate problems. Rewrite one line students can actually use.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Spectrum · rewrite · case</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this module you will be able to:</p>
+  <ol>
+    <li>Place common AI uses on an integrity spectrum (prohibited / disclose / required tool / redesign).</li>
+    <li>Separate authorship, privacy, bias, and labor so every issue is not “cheating.”</li>
+    <li>Rewrite foggy student-facing policy into language that names what is allowed, what needs disclosure, and what happens next.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+
+  <h3>A spectrum, not a switch</h3>
+  <p>Most rooms collapse to two positions: ban it, or pretend it is not in the room. Both waste a year. Students already have the tools. A binary rule teaches them to hide the work, not to think.</p>
+  <p>Integrity is a spectrum you publish, then teach.</p>
+  <div class="spectrum" style="margin:0.8rem 0 1rem">
+    <div class="spec-row"><div class="spec-label">Prohibited</div><div class="bubble">Submit AI text as your own graded essay with no process evidence.</div></div>
+    <div class="spec-row"><div class="spec-label">Disclose</div><div class="bubble">AI for brainstorming or outline only, with disclosure and teacher-visible process.</div></div>
+    <div class="spec-row"><div class="spec-label">Required tool</div><div class="bubble">Use AI to generate counterarguments you must critique. The critique is graded.</div></div>
+    <div class="spec-row"><div class="spec-label">Redesign</div><div class="bubble">Change the task so the product alone is weak evidence — conferences, drafts, oral defense, in-class writing.</div></div>
+  </div>
+  <p>You do not have to live in all four zones. You do have to say which zone a task sits in. “AI is cheating” does not tell a tenth grader whether an outline is allowed. “Students shall not employ generative artificial intelligence in any capacity whatsoever” does not tell a first-year what to do when the library chatbot is already in the search bar.</p>
+  <p>K–12: guardians, developmental fairness, mixed access at home, a school policy that may still be a paragraph. Higher ed: syllabus as contract, an integrity office, adult learners, program norms. Same spectrum. Different paperwork.</p>
+
+  <h3>Four problems. Do not mash them.</h3>
+  <p>If every hard moment is “cheating,” you will punish the wrong thing and miss the right one.</p>
+  <div class="grid2">
+    <div class="bubble"><div class="tag">Authorship</div>Who did the thinking? Process evidence matters — drafts, notes, a conference, an oral walk-through.</div>
+    <div class="bubble"><div class="tag">Privacy</div>Student data, unpublished keys, IEP or health notes. That is Module 1’s red line, still in force.</div>
+    <div class="bubble"><div class="tag">Bias / harm</div>Stereotypes, erased groups, a “fun dialect” skit, a fabricated quote from a real activist.</div>
+    <div class="bubble"><div class="tag">Labor / power</div>Who benefits from unpaid student AI labor? Who cannot afford the tool you just required? Who is locked to a vendor?</div>
+  </div>
+  <p>A worksheet that invents a historical quote is not a student-cheating case. It is fabricated authority in materials you assigned. A student who used AI for three thesis options, picked one, wrote the essay, and disclosed is not automatically dishonest. A student who cannot run the required tool at home is an equity case before it is an integrity case.</p>
+
+  <h3>Rewrite the fog</h3>
+  <p>Students should be able to answer three questions after reading your line: What may I do? What must I say I did? What happens if you are unsure I did the thinking?</p>
+  <p>Fog sounds official and does none of that. Plain language does. Name allowed use. Name disclosure. Name the ban (usually: the tool may not write the graded work). Name the privacy line. Say that authorship questions start with a conversation — then consequence if the rule was clearly broken.</p>
+  <p>You are not writing campus counsel’s policy. You are writing the sentence students will actually read. Link the official policy under it if you have one.</p>
+
+  <h3>Process conference first</h3>
+  <p>Detectors are weak evidence alone. Voice-change overnight is a signal, not a verdict. The first move on a borderline case is private and procedural: compare to prior work, ask them to walk the process, ask for drafts or a short oral defense, then decide redo versus consequence with the published rule in the room.</p>
+  <p>Automatic zero with no conversation teaches hide-it. Public shame teaches the same, plus fear. Silence teaches that polish is enough. A conference teaches the norm you actually want.</p>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Place three uses on the spectrum</h2>
+    <p>Choose the best default frame for each use. Local policy can tighten a frame; it should not turn every use into a ban.</p>
+    <div id="places"></div>
+    <div class="feedback" id="placefb" role="status"></div>
+    <div class="actions"><button type="button" class="btn" id="placeCheck">Check placements</button></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Rewrite one policy sentence</h2>
+    <p>Pick a lane. Foggy starter text appears below. Rewrite it so a student knows what is allowed, what needs disclosure, and what happens if authorship is unclear. One tight paragraph is enough.</p>
+    <div class="grid2">
+      <button type="button" class="lane" data-lane="k12" id="lane-k12"><strong>K–12</strong> Guardians, school policy, mixed access at home.</button>
+      <button type="button" class="lane" data-lane="he" id="lane-he"><strong>Higher ed</strong> Syllabus contract, integrity office, adult learners.</button>
+    </div>
+    <p class="muted" style="margin-top:0.7rem">Bad starting text:</p>
+    <div class="bubble" id="badPolicy">Choose a lane to see the starter sentence.</div>
+    <label class="field" for="policy">Your plain-language version</label>
+    <textarea id="policy" rows="6" placeholder="Write 4–8 sentences students can act on…"></textarea>
+    <p style="margin-top:0.6rem">Tick what your draft includes:</p>
+    <div class="checklist" id="polcheck"></div>
+    <div class="feedback" id="polfb" role="status"></div>
+    <div class="actions">
+      <button type="button" class="btn" id="fillPol">Show a strong sample</button>
+      <button type="button" class="btn" id="scorePol">Check my draft</button>
+    </div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>One borderline case</h2>
+    <p id="caseText">Choose a lane above, then decide the first move.</p>
+    <div id="q3"></div>
+    <div class="feedback" id="q3fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>Rewrite <em>your</em> syllabus or classroom AI line in plain language this week. Students should know what is allowed, what needs disclosure, what is not allowed, and that authorship questions start with a talk. If your school already has official language, write the student-facing version you will actually say. Paste it into an LMS journal, or keep it in the syllabus draft you will use.</p>
+  <blockquote class="prompt">Homework: Rewrite the AI line for one class you teach. Include: allowed / disclose / not allowed / privacy / what happens if authorship is unclear. Do not paste student work into a tool to do this.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Module">
+    <a href="module-1.html">← Module 1: What GenAI Actually Does</a>
+    <a href="module-3.html">Next: Tools That Transfer →</a>
+  </nav>
+  <footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185</footer>
+</article>
+<script>
+(function () {
+  const zones = [
+    { id: "prohibited", label: "Prohibited" },
+    { id: "disclose", label: "Disclose / conditional" },
+    { id: "required", label: "Required tool" },
+    { id: "redesign", label: "Redesign the task" }
+  ];
+  const uses = [
+    { t: "A student submits AI text as the graded essay. No drafts. No disclosure.", ok: "prohibited" },
+    { t: "A student uses AI for three thesis options, picks one, writes the essay, and discloses.", ok: "disclose" },
+    { t: "You require AI to generate two counterarguments; you grade the student’s critique, not the output.", ok: "required" }
+  ];
+  const box = document.getElementById("places");
+  uses.forEach((u, i) => {
+    const wrap = document.createElement("div");
+    wrap.style.marginBottom = "0.75rem";
+    const lab = document.createElement("p");
+    lab.style.marginBottom = "0.3rem";
+    lab.innerHTML = "<strong>" + (i + 1) + ".</strong> " + u.t;
+    const sel = document.createElement("select");
+    sel.id = "use" + i;
+    sel.innerHTML = '<option value="">Place this use…</option>' +
+      zones.map(z => '<option value="' + z.id + '">' + z.label + "</option>").join("");
+    wrap.appendChild(lab);
+    wrap.appendChild(sel);
+    box.appendChild(wrap);
+  });
+  document.getElementById("placeCheck").addEventListener("click", () => {
+    let good = 0;
+    const notes = [];
+    uses.forEach((u, i) => {
+      const v = document.getElementById("use" + i).value;
+      if (v === u.ok) good++;
+      else notes.push("Use " + (i + 1) + " sits better in “" + zones.find(z => z.id === u.ok).label + ".”");
+    });
+    const fb = document.getElementById("placefb");
+    fb.className = "feedback show " + (good === 3 ? "ok" : "bad");
+    fb.textContent = good === 3
+      ? "Yes. Product-with-no-process is prohibited. Brainstorm-plus-human-draft-plus-disclosure is conditional. Required tool is a design you chose — grade the critique. Redesign is available anytime product-alone is weak evidence."
+      : notes.join(" ");
+  });
+
+  const lanes = {
+    k12: {
+      bad: "AI is cheating. Do not use AI. Violations may result in consequences.",
+      sample: "In this class, AI tools may help you brainstorm or get unstuck — but they may not write your final graded work for you.\n\nIf you use AI at any stage, add a one-line disclosure (what tool, what you used it for). You must still show your thinking: notes, drafts, or a short process reflection.\n\nNever paste classmates’ work, private student info, or test answers into an AI tool.\n\nIf I am unsure about authorship, we will talk first. My goal is fair learning, not gotchas. Clear violations of the “AI wrote my assignment” rule can mean redo, reduced credit, or a referral per school policy.",
+      case: "A 10th grader turns in a literary paragraph that suddenly sounds unlike their usual voice. They say a sibling “helped with wording” and also mention ChatGPT “a little.”",
+      sc: [
+        { t: "Zero immediately, no conversation — send to the office.", ok: false, fb: "Skip straight to punishment loses learning data. Start with process." },
+        { t: "Private conference: compare to prior writing, ask for process and disclosure, then decide redo vs consequence with policy.", ok: true, fb: "Integrity without panic: clarify facts, teach norms, then apply fair outcomes." },
+        { t: "Ignore it — detection is imperfect anyway.", ok: false, fb: "Silence trains the wrong norm. You can act without claiming perfect detectors." }
+      ]
+    },
+    he: {
+      bad: "Students shall not employ generative artificial intelligence in any capacity whatsoever.",
+      sample: "For this course, generative AI is allowed for idea generation and clarity suggestions only when the assignment sheet says so — and only with disclosure (tool + purpose) in a short note at the end.\n\nAI may not produce the graded argument, analysis, or code you submit as your own. If AI is part of a required critique task, the graded work is your evaluation of the output, not the output itself.\n\nDo not upload other students’ work, unpublished exam content, or sensitive personal data to AI tools.\n\nAuthorship concerns start with a conversation and may include a process memo, oral defense, or revision. Sanctions follow the university integrity code when policy is clearly violated.",
+      case: "A first-year essay is fluent overnight after prior drafts were thin. The student claims “grammar only.” No disclosure appears.",
+      sc: [
+        { t: "Treat as proven misconduct solely because a detector flagged it.", ok: false, fb: "Detectors are weak evidence alone. Use process and policy." },
+        { t: "Request a process meeting and prior drafts; require disclosure going forward; assign redesign or redo if authorship is unclear.", ok: true, fb: "Right stack: process, teaching, proportionate response." },
+        { t: "Publicly shame the student in class as a warning.", ok: false, fb: "Harms trust and due process. Keep it private and procedural." }
+      ]
+    }
+  };
+
+  const checks = [
+    "States what is allowed",
+    "States what needs disclosure",
+    "States what is not allowed",
+    "Mentions privacy / no PII or secure keys",
+    "Describes what happens if authorship is unclear (talk / process first)"
+  ];
+  const pc = document.getElementById("polcheck");
+  checks.forEach((t) => {
+    const lab = document.createElement("label");
+    lab.innerHTML = '<input type="checkbox"> <span>' + t + "</span>";
+    pc.appendChild(lab);
+  });
+
+  let lane = null;
+  function applyLane() {
+    const d = lanes[lane];
+    document.getElementById("badPolicy").textContent = d.bad;
+    document.getElementById("caseText").textContent = d.case;
+    const q3 = document.getElementById("q3");
+    q3.innerHTML = "";
+    document.getElementById("q3fb").className = "feedback";
+    d.sc.forEach((o) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "choice";
+      b.textContent = o.t;
+      b.addEventListener("click", () => {
+        [...q3.children].forEach(c => c.disabled = true);
+        b.classList.add(o.ok ? "correct" : "wrong");
+        d.sc.forEach((oo, j) => { if (oo.ok) q3.children[j].classList.add("correct"); });
+        const fb = document.getElementById("q3fb");
+        fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+        fb.textContent = o.fb;
+      });
+      q3.appendChild(b);
+    });
+  }
+  document.querySelectorAll(".lane").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".lane").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      lane = btn.dataset.lane;
+      applyLane();
+    });
+  });
+
+  document.getElementById("fillPol").addEventListener("click", () => {
+    if (!lane) { document.getElementById("polfb").className = "feedback show bad"; document.getElementById("polfb").textContent = "Pick a lane first."; return; }
+    document.getElementById("policy").value = lanes[lane].sample;
+    [...pc.querySelectorAll("input")].forEach(c => c.checked = true);
+  });
+  document.getElementById("scorePol").addEventListener("click", () => {
+    const text = document.getElementById("policy").value.trim();
+    const n = [...pc.querySelectorAll("input")].filter(c => c.checked).length;
+    const fb = document.getElementById("polfb");
+    const ok = text.length > 120 && n >= 4;
+    fb.className = "feedback show " + (ok ? "ok" : "bad");
+    fb.textContent = ok
+      ? "Strong enough for a first draft. Tighten with your school or university official policy before you publish."
+      : "Need more substance: write a real paragraph and check at least four elements (allowed, disclose, not allowed, privacy or process).";
+  });
+
+  document.getElementById("copyHw").addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try { await navigator.clipboard.writeText(t); document.getElementById("copyHw").textContent = "Copied"; }
+    catch (_) { document.getElementById("copyHw").textContent = "Select the prompt to copy"; }
+  });
+})();
+</script>
+</body>
+</html>

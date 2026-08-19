@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 4 · Everyday numbers · Virgil Renfroe</title>
+<style>
+
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f7f4ee;
+  --panel: #efeae1;
+  --card: #ffffff;
+  --accent: #2a4a6e;
+  --accent-ink: #1a334d;
+  --accent-soft: #dce6f0;
+  --banner: #1a2433;
+  --banner-ink: #e6edf3;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #2a5a8c;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #e8c9a0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.course-nav {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2, .scenario h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 0.85rem;
+}
+@media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+.pair {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+.pair .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #2a4a6e; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. Not a live institutional course. Not official NC A&amp;T curriculum.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="unit-1.html">1 · Reasons</a><a href="unit-2.html">2 · Assumptions</a><a href="unit-3.html">3 · Valid/sound</a><a href="unit-4.html" aria-current="page">4 · Numbers</a><a href="unit-5.html">5 · Analogies</a><a href="unit-6.html">6 · Fallacies</a><a href="unit-7.html">7 · Short case</a><a href="unit-8.html">8 · Close</a></nav></div>
+<article class="wrap" id="main">
+
+  <p class="eyebrow">Unit 4 · Percents, base rates, “studies show” · ~40 minutes</p>
+  <h1>Everyday numbers</h1>
+  <p class="lede">Not a statistics course. A habit: name the base, ask what the percent is of, and do not let “studies show” do the arguing for you.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">Practice with feedback</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this unit you will be able to:</p>
+  <ol>
+    <li>Restate a percent once you know what it is a percent <em>of</em> — including the base count.</li>
+    <li>Spot a missing base rate — a number that sounds large until you see the group size.</li>
+    <li>Ask one check question of a “studies show” claim before you repeat it.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+  <p>Numbers show up in campus and civic talk as if they were reasons. Sometimes they are. Sometimes they are costumes. This unit is not Intro to Statistics. You will not compute a standard deviation. You will ask three ordinary questions: <em>Of what? Compared with what? Who was counted?</em></p>
+  <p>Start with percents. “80% of students want Sunday hours” is not yet a reason. 80% of whom? Of the 25 people who answered a hallway poll, or of a posted campus-wide survey with a response count you can see? 80% of 25 is 20 people. 80% of 4,000 is a different object. The percent sign does not tell you which world you are in. The base does. Write the base next to the percent, even in the margin: <em>80% (n = 25, hallway).</em> Now a classmate can check whether the costume fits the claim.</p>
+  <p>A close cousin is the raw number with no base. “200 students signed the petition.” Is that a surge or a quiet Tuesday? 200 of 500 in a residence hall is one story. 200 of a 12,000-person campus is another. Neither story is automatically “small.” Both stories are incomplete until the base is in the sentence. In a large-enrollment course this is the error that travels fastest: a number that feels big because it is a number.</p>
+  <p><strong>Base rate</strong> is the plain name for the usual rate in the larger group. If a headline says a test “catches 90% of cases,” you still need the usual rate of the thing being tested. If the thing is rare, most of the positive flags can still be false. You do not need the formula in your pocket to ask the question: <em>how common is this to begin with?</em> Campus version: “Half the people who used the late shuttle last month were commuters.” If almost everyone on that route is a commuter, “half” is not a finding. It is the weather.</p>
+  <p>“Studies show” is the civic version of a because that has not clocked in. Which study? How many people? Compared with what? Did the study measure the thing the speaker is now selling? A study of self-reported sleep in one residence hall does not, by itself, buy a campus-wide phone ban. A study can be real and still fail to reach the policy. That is Unit 3’s leaky pipe, wearing a lab coat.</p>
+  <p>You are not required to become a cynic. You are required to keep the step visible. A fair use of a number sounds like this: “The posted dining survey (spring, 412 responses) said 61% wanted a later weekday line. That is a majority of respondents, not of the whole campus. It is enough to put later hours on the table; it is not enough to call it ‘what students want’ as if the other 39% plus the non-respondents had vanished.” Notice what that paragraph did. It named the source, the count, the limit, and the claim the number can actually buy.</p>
+  <p>Two more traps that show up without any Latin.</p>
+  <p><strong>Percents of different bases, treated as twins.</strong> “Complaints rose 50% and staff only rose 10%.” If complaints went from 4 to 6, and staff went from 40 to 44, the percents are both true and the story they tell is not “the staff ignored a crisis.” Always ask: 50% of what starting number?</p>
+  <p><strong>A rate used as a count, or a count used as a rate.</strong> “Twice as many people failed after we changed the exam.” Twice as many as what, in a section that also doubled in size? If the fail <em>rate</em> held still, the count had to rise. The change you are blaming may be enrollment, not the exam.</p>
+  <p>The check question you will practice is small on purpose. You are not asked to rerun the study. You are asked to say what you would need next: the base, the comparison group, the time window, or the actual paper. In a 400-person room, that one question is the difference between repeating a costume and making a reason.</p>
+  <p>Practice: pick the missing base, mark a percent that changes meaning once the n is visible, and write one check question for a “studies show” sentence. Homework: do it to a real number you did not invent — a posted survey, a budget line, a news figure you can point to.</p>
+
+  <div class="practice" id="p-base">
+    <p class="eyebrow">Practice</p>
+    <h2>Name the base</h2>
+    <p>“80% of students want the late shuttle.” Which follow-up does the most work?</p>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-n">
+    <p class="eyebrow">Practice</p>
+    <h2>Same percent, different world</h2>
+    <p>Which sentence is the honest restatement?</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <div class="practice" id="p-study">
+    <p class="eyebrow">Practice</p>
+    <h2>Write one check question</h2>
+    <p>Someone says: <strong>“Studies show that later dining hours raise student success.”</strong></p>
+    <p>Write one question that would have to be answered before this sentence can work as a because. Not a speech. One question.</p>
+    <label class="field" for="study1">Your check question</label>
+    <textarea id="study1" rows="3" placeholder="Which study… / How many… / Compared with…"></textarea>
+    <div class="actions"><button type="button" class="btn primary" id="checkStudy">Check my question</button></div>
+    <div class="feedback" id="study1fb" role="status"></div>
+  </div>
+
+  <h2>Homework</h2>
+  <blockquote class="prompt">Find one number in the wild this week: a posted campus survey, a budget or enrollment figure, a city or county agenda packet, a news story you can link or name. Copy the sentence that uses the number. Then, in 150–220 words: (1) What is the number a percent or count <em>of</em>? If the source does not say, write that. (2) What comparison is missing? (3) What claim can the number actually buy, and what claim is too large? Do not invent a study to fill the gap.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Unit">
+    <a href="unit-3.html">← Unit 3: Valid vs sound</a>
+    <a href="unit-5.html">Next: Analogies →</a>
+  </nav>
+
+<footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185</footer>
+</article>
+<script>
+(function () {
+
+function mc(boxId, fbId, opts) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(fbId);
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.textContent = o.t;
+    b.addEventListener("click", () => {
+      [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+      b.classList.add(o.ok ? "correct" : "wrong");
+      opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+      fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+      fb.textContent = o.fb;
+    });
+    box.appendChild(b);
+  });
+}
+function checklist(boxId, items) {
+  const box = document.getElementById(boxId);
+  items.forEach((item) => {
+    const lab = document.createElement("label");
+    lab.innerHTML = '<input type="checkbox" /> <span>' + item.t + "</span>";
+    box.appendChild(lab);
+  });
+}
+function checkList(boxId, fbId, items, okMsg, badMsg) {
+  const box = document.getElementById(boxId);
+  let good = true;
+  [...box.querySelectorAll("input")].forEach((b, i) => {
+    if (items[i].must !== b.checked) good = false;
+  });
+  const fb = document.getElementById(fbId);
+  fb.className = "feedback show " + (good ? "ok" : "bad");
+  fb.textContent = good ? okMsg : badMsg;
+}
+function copyPrompt(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select the prompt to copy";
+    }
+  });
+}
+function revealButtons() {
+  document.querySelectorAll("[data-reveal]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const el = document.getElementById(btn.getAttribute("data-reveal"));
+      el.classList.add("show", "ok");
+    });
+  });
+}
+
+
+  mc("q1", "q1fb", [
+    { t: "Do students deserve a late shuttle?", ok: false, fb: "That restates a should-claim. The number problem is: 80% of whom? How many people? Which instrument?" },
+    { t: "80% of how many people, asked how, and is that the group the policy would cover?", ok: true, fb: "Yes. Of what, counted how, compared with the group we would actually serve. That is the base." },
+    { t: "What time should the shuttle run if we already know the 80% is true?", ok: false, fb: "You skipped the costume check. Time of run is a later design question. First: 80% of what." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "“80% want Sunday hours” and “20 of 25 hallway respondents want Sunday hours” are the same public fact.", ok: false, fb: "Same percent, different world. The hallway n belongs in the sentence. Without it, “students want” overclaims." },
+    { t: "If 20 of 25 hallway respondents said yes, the honest line is “80% of that hallway sample (n = 25),” not “students want.”", ok: true, fb: "Yes. Keep the percent, keep the n, shrink the claim to the group that was actually asked." },
+    { t: "A hallway poll is worthless, so ignore all percents.", ok: false, fb: "The poll can still put Sunday hours on the table. It cannot speak for a campus. Diagnosis, not a dumpster." }
+  ]);
+  document.getElementById("checkStudy").addEventListener("click", () => {
+    const raw = document.getElementById("study1").value.trim();
+    const t = raw.toLowerCase();
+    const fb = document.getElementById("study1fb");
+    const q = /\?/.test(raw) || /^(which|what|how|who|where|when|compared)/.test(t);
+    const hits = /(which study|how many|n\b|sample|compared|success|measure|who was|what counts|dining|hours|campus|peer)/.test(t);
+    let cls = "bad";
+    let msg;
+    if (raw.length < 12) {
+      msg = "Ask a full question. Which study, how many people, what “success” meant, compared with what.";
+    } else if (!q) {
+      msg = "Make it a question a speaker could answer. “Which study, with what n, measured what kind of success, against what comparison group?”";
+    } else if (hits) {
+      cls = "ok";
+      msg = "That is a check, not a speech. A strong version names the study, the n, the measure of “success,” or the comparison group. You do not have to rerun the paper. You have to stop the costume.";
+    } else {
+      msg = "Aim the question at the because: which study, how many people, what they measured, compared with whom. “Is this true?” is too wide. Make the missing piece specific.";
+    }
+    fb.className = "feedback show " + cls;
+    fb.textContent = msg;
+  });
+  copyPrompt("copyHw");
+
+})();
+</script>
+</body>
+</html>

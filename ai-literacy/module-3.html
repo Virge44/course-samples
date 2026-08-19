@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Module 3 · Tools That Transfer · Virgil Renfroe</title>
+<style>
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f7f4ee;
+  --panel: #efeae1;
+  --card: #ffffff;
+  --accent: #1f5c56;
+  --accent-ink: #143d39;
+  --accent-soft: #dceae7;
+  --banner: #1f2a28;
+  --banner-ink: #e8eee9;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #0d6e66;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #f3d3b0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top {
+  background: #fff;
+  border-bottom: 1px solid var(--rule);
+}
+.course-nav {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.85rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.8rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.spectrum { display: grid; gap: 0.45rem; }
+.spec-row { display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.5rem; }
+@media (max-width: 560px) { .spec-row { grid-template-columns: 1fr; } }
+.spec-label {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  border: 1px solid #b7d0cb;
+  border-radius: 8px;
+  padding: 0.55rem 0.4rem;
+  text-align: center;
+}
+.crisp-row { display: grid; grid-template-columns: 5.4rem 1fr; gap: 0.5rem; margin-bottom: 0.55rem; }
+@media (max-width: 560px) { .crisp-row { grid-template-columns: 1fr; } }
+.letter {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-weight: 800;
+  font-size: 0.78rem;
+  border-radius: 8px;
+  padding: 0.5rem 0.3rem;
+  text-align: center;
+  border: 1px solid #b7d0cb;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #c45c26; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. Not a live institutional course. Not submitted. No student data.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="module-1.html">1 · Literacy</a><a href="module-2.html">2 · Ethics</a><a href="module-3.html" aria-current="page">3 · Tools</a><a href="module-4.html">4 · Practice</a><a href="module-5.html">5 · Adoption</a></nav></div>
+<article class="wrap" id="main">
+  <p class="eyebrow">Module 3 · Tools · async · ~20 minutes</p>
+  <h1>Tools That Transfer</h1>
+  <p class="lede">Not a product tour. A checkable job (CRISP), a verify loop, and a decision about when a template already beats asking a model. Use any school-approved tool.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">CRISP rebuild</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this module you will be able to:</p>
+  <ol>
+    <li>Rebuild a weak educator prompt with CRISP (Context, Role, Instruction, Specs, Proof).</li>
+    <li>Name the verify steps you will run before anything student-facing.</li>
+    <li>Decide when a template or existing workflow beats asking a model again.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+
+  <h3>Any approved tool</h3>
+  <p>This is not a bake-off. The habit transfers. If your district or campus has named a system, use that one. If it has not, stay inside whatever policy you already have, and do not paste red-line material into a free phone app (Module 1).</p>
+  <p>A tool change next year should not erase this week’s work. Context, specs, and proof still matter in whatever box they hand you.</p>
+
+  <h3>CRISP turns a vague ask into a job</h3>
+  <p>“Make a quiz” is a wish. “Ten items, grade 7, our textbook’s mechanism, no new vocabulary, I will check each item against chapter 4” is a job you can verify.</p>
+  <div class="spectrum" style="margin:0.8rem 0 1rem">
+    <div class="spec-row"><div class="letter">C<br/>Context</div><div class="bubble">Who the learners are, and what constrains the task. Time, prior knowledge, devices, the chapter you actually taught.</div></div>
+    <div class="spec-row"><div class="letter">R<br/>Role</div><div class="bubble">Optional. A light persona, or none. Do not let “act as a world-class…” replace specs.</div></div>
+    <div class="spec-row"><div class="letter">I<br/>Instruction</div><div class="bubble">The actual job. What should it produce?</div></div>
+    <div class="spec-row"><div class="letter">S<br/>Specs</div><div class="bubble">Format, length, musts, avoids, reading level, what not to cover.</div></div>
+    <div class="spec-row"><div class="letter">P<br/>Proof</div><div class="bubble">How you will check. “Flag any fact you are unsure about” belongs here.</div></div>
+  </div>
+  <p>CRISP is a habit, not a brand and not a vendor. Fill Context, Instruction, Specs, and Proof at minimum. Role can stay light.</p>
+
+  <h3>Then the same verify loop</h3>
+  <p>You already have it from Module 1. Claim check. Bias skim. Level check. Own it. Layout polish is not a substitute. If you would not put your name on it, it is not ready for students.</p>
+
+  <h3>When a template beats a model</h3>
+  <p>A model is useful when you need options to critique, a first draft of non-graded material you will edit, or differentiated starting points. It is a poor weekly engine for work you already know how to structure.</p>
+  <p>If the discussion stem is the same every week and only the reading title changes, keep a template. If you already have a comment bank for three rubric moves, mail-merge or copy the bank. If the quiz items exist and are good, use the quiz bank. Asking a model to “make a quiz” each Sunday is how Failure A (confident wrongness) gets a standing invitation.</p>
+  <p>Automation — a saved prompt, an LMS item, a spreadsheet, a simple Zap that files a form response — wins when the job is repeatable and the quality bar is already set. A model wins when the job is new and you will still verify.</p>
+  <p>K–12 example: a Friday exit-ticket stem you reuse with a new content slot. Higher-ed example: a weekly discussion contract (quote + warrant + question) that does not need a new generated “richer prompt” every Monday — that was Module 1’s board problem.</p>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>When does a template beat a model?</h2>
+    <p>For each task, choose the better default this term.</p>
+    <div id="zap"></div>
+    <div class="feedback" id="zapfb" role="status"></div>
+    <div class="actions"><button type="button" class="btn" id="zapCheck">Check</button></div>
+  </div>
+
+  <div class="practice">
+    <p class="eyebrow">Practice</p>
+    <h2>Rebuild a weak prompt</h2>
+    <p>Same skills; examples tuned to your setting. Pick a lane, then fill CRISP. The page assembles a stronger prompt you can copy.</p>
+    <div class="grid2">
+      <button type="button" class="lane" data-lane="k12"><strong>K–12 lane</strong> Standards, mixed reading levels, classroom pacing.</button>
+      <button type="button" class="lane" data-lane="he"><strong>Higher ed lane</strong> Outcomes, adult learners, course design.</button>
+    </div>
+    <p style="margin-top:0.8rem"><span style="color:var(--muted)">Weak prompt you’ll fix:</span></p>
+    <div class="bubble" id="weakPrompt" style="margin-bottom:0.8rem">Choose a lane.</div>
+    <div id="crisp">
+      <div class="crisp-row"><div class="letter">C<br/>Context</div><div><label class="field" for="c_ctx">Who learners are + constraints</label><textarea id="c_ctx" rows="2"></textarea></div></div>
+      <div class="crisp-row"><div class="letter">R<br/>Role</div><div><label class="field" for="c_role">Optional persona (or leave light)</label><input id="c_role" type="text" /></div></div>
+      <div class="crisp-row"><div class="letter">I<br/>Instruction</div><div><label class="field" for="c_ins">The actual job</label><textarea id="c_ins" rows="2"></textarea></div></div>
+      <div class="crisp-row"><div class="letter">S<br/>Specs</div><div><label class="field" for="c_spec">Format, length, must / avoid, level</label><textarea id="c_spec" rows="2"></textarea></div></div>
+      <div class="crisp-row"><div class="letter">P<br/>Proof</div><div><label class="field" for="c_proof">How you will check the output</label><textarea id="c_proof" rows="2"></textarea></div></div>
+    </div>
+    <h3>Assembled prompt</h3>
+    <div class="outbox" id="assembled" aria-live="polite">(Fill Context, Instruction, Specs, and Proof.)</div>
+    <div class="actions">
+      <button type="button" class="btn" id="fillDemo">Fill demo values</button>
+      <button type="button" class="btn" id="copyPrompt">Copy prompt</button>
+    </div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>Write one CRISP prompt for a task you actually teach this term, plus the verify steps you will run. If you would not use a model for that task, say so and name the template you will use instead.</p>
+  <blockquote class="prompt">Homework: One class you teach. One CRISP prompt (Context, Role if any, Instruction, Specs, Proof). Then list the verify steps you will run before students see the output — or name the template you will use instead of a model, and why.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Module">
+    <a href="module-2.html">← Module 2: Integrity Without Panic</a>
+    <a href="module-4.html">Next: Classroom Activities That Hold →</a>
+  </nav>
+  <footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185</footer>
+</article>
+<script>
+(function () {
+  const zapItems = [
+    { t: "Same weekly discussion structure; only the reading title changes.", ok: "template", a: "Template", b: "Ask a model each week" },
+    { t: "First-draft exit tickets at three reading levels for a unit you have not taught this way before.", ok: "model", a: "Template you already have", b: "Model, then verify" },
+    { t: "Comment bank for the same three rubric moves, reused all term.", ok: "template", a: "Template / comment bank", b: "New model draft each paper" }
+  ];
+  const zap = document.getElementById("zap");
+  zapItems.forEach((u, i) => {
+    const wrap = document.createElement("div");
+    wrap.style.marginBottom = "0.75rem";
+    wrap.innerHTML = "<p style='margin-bottom:0.3rem'><strong>" + (i + 1) + ".</strong> " + u.t + "</p>";
+    const sel = document.createElement("select");
+    sel.id = "zap" + i;
+    sel.innerHTML = '<option value="">Choose…</option><option value="template">' + u.a + '</option><option value="model">' + u.b + "</option>";
+    wrap.appendChild(sel);
+    zap.appendChild(wrap);
+  });
+  document.getElementById("zapCheck").addEventListener("click", () => {
+    let good = 0;
+    zapItems.forEach((u, i) => { if (document.getElementById("zap" + i).value === u.ok) good++; });
+    const fb = document.getElementById("zapfb");
+    fb.className = "feedback show " + (good === 3 ? "ok" : "bad");
+    fb.textContent = good === 3
+      ? "Yes. Repeatable structure and a stable comment bank do not need a new generation. A new differentiated draft does — and then you verify."
+      : "1 and 3 are template jobs. 2 is a model job you will still check. A model is not a weekly engine for work you already structured.";
+  });
+
+  const demos = {
+    k12: {
+      weak: "Write a lesson about the Civil Rights Movement for my class.",
+      ctx: "Grade 8 U.S. History; 45-minute block; students just finished a primary-source day on local change-makers; mixed reading levels.",
+      role: "Experienced middle-school social studies teacher",
+      ins: "Draft a lesson outline with hook, two activities, and an exit ticket focused on how ordinary people created change.",
+      spec: "Plain language; one activity uses a short primary excerpt (provide a simplified excerpt under 120 words); avoid covering all decades — depth over survey; include 3 discussion prompts; no homework essay.",
+      proof: "List the historical claim students should leave able to support, and flag any fact you are unsure about for teacher verification against the textbook."
+    },
+    he: {
+      weak: "Write a lesson about the Civil Rights Movement for my class.",
+      ctx: "First-year composition; 50 minutes; students drafting rhetorical analyses; mixed preparation; AI use policy requires disclosure.",
+      role: "College writing instructor",
+      ins: "Design an in-class workshop where students compare two short public-domain primary excerpts and practice claim-evidence-warrant.",
+      spec: "Include timing; provide 4 discussion stems; require students to quote evidence; add one AI-optional step that generates counterarguments only (no full rewrite); include a disclosure sentence students can paste.",
+      proof: "State the learning outcome in observable terms and list two misconceptions the activity should surface."
+    }
+  };
+  let lane = null;
+  const fields = ["c_ctx", "c_role", "c_ins", "c_spec", "c_proof"];
+  function assemble() {
+    const v = Object.fromEntries(fields.map(id => [id, document.getElementById(id).value.trim()]));
+    const parts = [];
+    if (v.c_role) parts.push("Role: " + v.c_role + ".");
+    if (v.c_ctx) parts.push("Context: " + v.c_ctx);
+    if (v.c_ins) parts.push("Task: " + v.c_ins);
+    if (v.c_spec) parts.push("Specifications: " + v.c_spec);
+    if (v.c_proof) parts.push("Proof / verification aids: " + v.c_proof);
+    parts.push("If you are uncertain about a fact, say so explicitly rather than inventing.");
+    const ready = !!(v.c_ctx && v.c_ins && v.c_spec && v.c_proof);
+    document.getElementById("assembled").textContent = ready ? parts.join("\n") : "(Need at least Context, Instruction, Specs, and Proof.)";
+    return ready ? parts.join("\n") : "";
+  }
+  fields.forEach(id => document.getElementById(id).addEventListener("input", assemble));
+  document.querySelectorAll(".lane").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".lane").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      lane = btn.dataset.lane;
+      document.getElementById("weakPrompt").textContent = demos[lane].weak;
+    });
+  });
+  document.getElementById("fillDemo").addEventListener("click", () => {
+    if (!lane) lane = "k12";
+    const d = demos[lane];
+    document.querySelector('.lane[data-lane="' + lane + '"]').classList.add("active");
+    document.getElementById("weakPrompt").textContent = d.weak;
+    document.getElementById("c_ctx").value = d.ctx;
+    document.getElementById("c_role").value = d.role;
+    document.getElementById("c_ins").value = d.ins;
+    document.getElementById("c_spec").value = d.spec;
+    document.getElementById("c_proof").value = d.proof;
+    assemble();
+  });
+  document.getElementById("copyPrompt").addEventListener("click", async () => {
+    const t = assemble();
+    if (!t) return;
+    try { await navigator.clipboard.writeText(t); document.getElementById("copyPrompt").textContent = "Copied"; }
+    catch (_) { document.getElementById("copyPrompt").textContent = "Select text to copy"; }
+  });
+  document.getElementById("copyHw").addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try { await navigator.clipboard.writeText(t); document.getElementById("copyHw").textContent = "Copied"; }
+    catch (_) {}
+  });
+})();
+</script>
+</body>
+</html>

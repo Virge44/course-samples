@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Module 1 · What GenAI Actually Does · Virgil Renfroe</title>
+<style>
+:root {
+  --ink: #1c1916;
+  --muted: #5c564c;
+  --rule: #d4cfc4;
+  --paper: #f7f4ee;
+  --panel: #efeae1;
+  --card: #ffffff;
+  --accent: #1f5c56;
+  --accent-ink: #143d39;
+  --accent-soft: #dceae7;
+  --banner: #1f2a28;
+  --banner-ink: #e8eee9;
+  --ok: #1b5e3b;
+  --ok-bg: #e4f3ea;
+  --bad: #8b2e2e;
+  --bad-bg: #f8e6e4;
+  --warn: #8a4b12;
+  --focus: #0d6e66;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  line-height: 1.55;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff; padding: 0.4rem 0.7rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.sample {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.sample strong {
+  color: #f3d3b0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.top {
+  background: #fff;
+  border-bottom: 1px solid var(--rule);
+}
+.course-nav {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.85rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.8rem;
+}
+.course-nav a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.course-nav a:hover, .course-nav a:focus { border-bottom-color: var(--accent); }
+.course-nav a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+.wrap { max-width: 42rem; margin: 0 auto; padding: 1.6rem 1.25rem 3rem; }
+.eyebrow {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h1 { font-size: 1.85rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 0.35rem; }
+h2 {
+  font-size: 1.2rem;
+  margin: 1.55rem 0 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1.05rem; margin: 1.15rem 0 0.4rem; }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+p { margin: 0 0 0.85rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; font-size: 0.98rem; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0 0 0.9rem; padding-left: 1.25rem; }
+li { margin: 0.25rem 0; }
+blockquote {
+  margin: 0.9rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+}
+blockquote.prompt { font-size: 0.95rem; }
+a { color: var(--accent-ink); }
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.meta {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0 0 1.15rem;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.card, .blurb, .callout, .scenario, .practice {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.95rem 1rem 0.8rem;
+  margin: 0 0 1rem;
+}
+.blurb { background: var(--panel); }
+.callout { border-color: var(--accent); }
+.callout h2, .practice h2, .card h2 { border: 0; margin-top: 0; padding-top: 0; }
+.practice { border-color: var(--accent); background: #fff; }
+.practice > .eyebrow { margin-bottom: 0.35rem; }
+.stem { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.bubble {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.95rem;
+}
+.bubble .tag {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.choice, .lane {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 0.45rem;
+  cursor: pointer;
+}
+.choice:hover, .lane:hover { border-color: var(--accent); }
+.choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.choice:disabled { cursor: default; }
+.lane.active { border-color: var(--accent); background: var(--accent-soft); }
+.lane strong { display: block; color: var(--accent-ink); }
+button.btn, .btn {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0.55rem 0.9rem;
+}
+button.primary, a.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.feedback {
+  display: none;
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.feedback.show { display: block; }
+.feedback.ok { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.checklist label {
+  display: flex; gap: 0.55rem; align-items: flex-start;
+  padding: 0.5rem 0.6rem;
+  background: var(--panel);
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.checklist label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.checklist input { margin-top: 0.3rem; }
+label.field {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 5.5rem; resize: vertical; }
+.outbox {
+  white-space: pre-wrap;
+  background: var(--panel);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  min-height: 3.5rem;
+}
+.spectrum { display: grid; gap: 0.45rem; }
+.spec-row { display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.5rem; }
+@media (max-width: 560px) { .spec-row { grid-template-columns: 1fr; } }
+.spec-label {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  border: 1px solid #b7d0cb;
+  border-radius: 8px;
+  padding: 0.55rem 0.4rem;
+  text-align: center;
+}
+.crisp-row { display: grid; grid-template-columns: 5.4rem 1fr; gap: 0.5rem; margin-bottom: 0.55rem; }
+@media (max-width: 560px) { .crisp-row { grid-template-columns: 1fr; } }
+.letter {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-weight: 800;
+  font-size: 0.78rem;
+  border-radius: 8px;
+  padding: 0.5rem 0.3rem;
+  text-align: center;
+  border: 1px solid #b7d0cb;
+}
+.pager {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+  margin: 1.6rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+.pager a { color: var(--accent-ink); }
+table.syllabus {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+table.syllabus th, table.syllabus td {
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.syllabus th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.modlist { list-style: none; padding: 0; margin: 0 0 1rem; }
+.modlist li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.55rem;
+}
+.modlist a { font-weight: 700; color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.modlist .dur { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer a { color: var(--accent-ink); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+@media print {
+  html { font-size: 11.5pt; }
+  body { background: #fff; }
+  .sample { color: #111; background: #eee; border-bottom: 2px solid #c45c26; }
+  .top, .pager, .actions, button { display: none; }
+  .wrap { max-width: none; padding: 0.5in; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sample"><strong>Draft / sample</strong> Draft course sample by Virgil Renfroe. Not a live institutional course. Not submitted. No student data.</div>
+<div class="top"><nav class="course-nav" aria-label="Course"><a href="index.html">Course home</a><a href="module-1.html" aria-current="page">1 · Literacy</a><a href="module-2.html">2 · Ethics</a><a href="module-3.html">3 · Tools</a><a href="module-4.html">4 · Practice</a><a href="module-5.html">5 · Adoption</a></nav></div>
+<article class="wrap" id="main">
+  <p class="eyebrow">Module 1 · Literacy · async · ~25 minutes</p>
+  <h1>What GenAI Actually Does</h1>
+  <p class="lede">A usable mental model. Then practice: a check, two failure modes, red lines, a verify habit. Prompt craft comes in Module 3.</p>
+  <div class="meta">
+    <span class="chip">3 objectives</span>
+    <span class="chip">In-module practice</span>
+    <span class="chip">1 homework</span>
+  </div>
+
+  <h2>Learning objectives</h2>
+  <p>By the end of this module you will be able to:</p>
+  <ol>
+    <li>Explain generative AI in plain language without hype or fear.</li>
+    <li>Spot two classroom failure modes: confident wrongness and wrong level.</li>
+    <li>Name red lines (student PII, unpublished keys, IEP/health notes) and a verify habit before anything student-facing.</li>
+  </ol>
+
+  <h2>Lesson</h2>
+
+  <h3>A usable mental model</h3>
+  <p>You already have a working picture of generative AI. Most of us do. It writes. It drafts. It sounds finished. That picture is not wrong. It is too thin to take into a classroom.</p>
+  <p>This lesson is the mental model. After the reading you will practice here — not in a separate pack. Prompt rebuild (CRISP) is Module 3. This is Module 1 of a five-module sequence: literacy, then ethics, then tools, then classroom practice, then responsible adoption.</p>
+  <p>A text model does not look up the truth the way a library database does. It does not “know” photosynthesis, or your rubric, or what third period can handle on a Thursday. It predicts a plausible next stretch of language given your prompt and its training patterns. Image tools do a similar job with pixels. The output can be useful without being true. Fluency arrives for free. Accuracy does not.</p>
+  <p>Hold two sentences and you will not get lost later in the course:</p>
+  <blockquote><strong>Fluency is not the same as knowledge. Confidence is not the same as accuracy.</strong></blockquote>
+  <p>The model is good at sounding finished. That is the feature that gets people in trouble. A quiz that looks LMS-ready, a discussion stem that sounds like a veteran wrote it — those can arrive in thirty seconds. None of that is a quality check. Polish is a surface. You still have to own what it says.</p>
+  <p>Use it for drafting, brainstorming, rephrasing, generating examples you will critique, outlining, and differentiating starting points you will edit. Do not use it, unchecked, for facts you will grade against, citations, legal or medical advice, student information, or “final” materials you have not verified.</p>
+
+  <div class="practice" id="p-model">
+    <p class="eyebrow">Practice</p>
+    <h2>Mental-model check</h2>
+    <p>Which statement is the <strong>best</strong> classroom-safe summary?</p>
+    <div id="q1"></div>
+    <div class="feedback" id="q1fb" role="status"></div>
+  </div>
+
+  <h3>Two failures that matter in school</h3>
+  <p>Give the same request to a model: “Make a short quiz on photosynthesis for my class.”</p>
+  <p>Failure A is confident wrongness. The formatting is clean. The mechanism is wrong, stated as fact. A tired teacher pastes it into the LMS because it looks done. Students study the error. The quiz now measures whether they absorbed a false model.</p>
+  <p>Failure B is wrong level. The content is mostly accurate, but it is written like a graduate seminar. Sixth graders freeze. First-year students in a large-enrollment course spend the period translating instead of thinking. You spend the period translating for them.</p>
+  <p>There is not a single villain. Design for both. If you brief a new colleague on only one risk, start with confident wrongness: it hides. Wrong level announces itself when students stall. Confident wrongness looks like competence until someone who knows the content reads it.</p>
+  <p>The same pair shows up in a 400-student writing or reasoning course. A discussion prompt can be fluent and still ask for a move students have not been taught. A generated “model paragraph” can model a claim the reading does not support. Adult learners will often trust the polish. That is what polish is for.</p>
+
+  <div class="practice" id="p-fail">
+    <p class="eyebrow">Practice</p>
+    <h2>Which is more dangerous?</h2>
+    <p>There isn’t a single villain — design for both. Still: pick the risk you’d brief a new colleague on first.</p>
+    <div id="q2"></div>
+    <div class="feedback" id="q2fb" role="status"></div>
+  </div>
+
+  <h3>Red lines before you type</h3>
+  <p>Before you worry about prompt craft, decide what never goes into a general-purpose tool unless your district or campus system and policy explicitly allow it with safeguards.</p>
+  <p>Do not paste student names, emails, IDs, or work that identifies a person. Do not paste unpublished exam keys or items that are still live. Do not paste IEP notes, 504 plans, health information, or anything a guardian or registrar would treat as private. If you have to ask whether it is private, treat it as private.</p>
+  <p>This is not a fear lesson. It is a boundary. Clearer prompts only matter if the input was allowed. A clever prompt that includes a student’s name and an IEP line is still a privacy failure.</p>
+
+  <div class="practice" id="p-red">
+    <p class="eyebrow">Practice</p>
+    <h2>Red lines</h2>
+    <p>Check every item you agree should <strong>not</strong> go into a general-purpose AI prompt (unless your district or campus tool and policy explicitly allow it with safeguards).</p>
+    <div class="checklist" id="redlines"></div>
+    <div class="feedback" id="rlfb" role="status"></div>
+    <div class="actions"><button type="button" class="btn" id="rlcheck">Check my list</button></div>
+  </div>
+
+  <h3>A verify habit</h3>
+  <p>Later in this course you will rebuild a weak educator prompt with a simple frame: CRISP — Context, Role, Instruction, Specs, Proof. For now, the habit that matters is verify before anything student-facing.</p>
+  <p>Read the output as a colleague who knows the content, not as the person who asked for a draft. Check one claim you would grade against. Open the source. If you cannot name the source, you cannot assign the claim. Check the level: would your actual students, this week, know the words and the moves? Check the red lines again. Did any identifying detail sneak into the prompt or the output? Edit. Own the output before learners do. If you would not put your name on it, it is not ready.</p>
+  <p>You do not need to become an AI specialist this year. You need a picture of what the tool is doing, two failure modes you can name in a hallway, a short list of things that never go in the box, and a habit of checking before students see the work.</p>
+  <p>That is literacy. The rest of this course builds on it.</p>
+
+  <div class="practice" id="p-verify">
+    <p class="eyebrow">Practice</p>
+    <h2>Verify before students see it</h2>
+    <p>Imagine the model returned a polished draft. Check each step you would actually do.</p>
+    <div class="checklist" id="verify"></div>
+    <div class="feedback" id="vfb" role="status"></div>
+    <div class="actions"><button type="button" class="btn" id="vcheck">Check</button></div>
+  </div>
+
+  <h2>Three educator scenarios</h2>
+  <p>Read each case. Write a sentence or two before you reveal a strong response. These are for the course audience; they are not a claim about where the author has taught.</p>
+
+  <div class="scenario">
+    <h3>1. K–12 — the quiz that looked done</h3>
+    <p>A seventh-grade science teacher is two days behind after a week of fire drills and a shortened Friday. She asks a chatbot for a ten-item photosynthesis quiz. The output arrives numbered, with a tidy key and vocabulary that sounds like the textbook. She pastes it into the LMS before third period. She has not opened the chapter. One item states a wrong mechanism as fact. Another is written two grade levels above her class.</p>
+    <p class="stem">What’s the risk — to learning, not only to “getting caught”? What would you do before students saw this, or after, if it already went out?</p>
+    <label class="field" for="s1">Your note</label>
+    <textarea id="s1" rows="3" placeholder="A sentence or two…"></textarea>
+    <div class="actions"><button type="button" class="btn" data-reveal="r1">Show a strong response</button></div>
+    <div class="feedback" id="r1">Students will study a false mechanism, and some will stall on language they have not been taught. The quiz now measures absorption of an error. Before it goes out: open the chapter, check the mechanism, check the reading level, edit or throw it out. If it already went out: pull the quiz, tell the class one item was wrong, reteach the mechanism, replace it with items you own. Polish was not a check.</div>
+  </div>
+
+  <div class="scenario">
+    <h3>2. Higher ed — the prompt the board treated as the reading</h3>
+    <p>You teach a large-enrollment writing or analytical reasoning course. Adult learners, mixed preparation, a discussion board that has gone stale. You generate a “richer” weekly prompt. It is fluent. It asks students to evaluate a claim the assigned reading does not make, and it models a thesis move you have not taught yet. By Wednesday, several posts treat the generated stem as a reading of the text.</p>
+    <p class="stem">What’s the risk to learning, not only to integrity? What would you change before the next section goes live?</p>
+    <label class="field" for="s2">Your note</label>
+    <textarea id="s2" rows="3"></textarea>
+    <div class="actions"><button type="button" class="btn" data-reveal="r2">Show a strong response</button></div>
+    <div class="feedback" id="r2">Students practice a claim the text does not support and a move they have not been taught. Fluency taught the wrong lesson. Before the next section: write the stem yourself or check it against the assigned pages; name the claim the reading actually makes; teach the thesis move first or cut it. Own the prompt the way you own a quiz key.</div>
+  </div>
+
+  <div class="scenario">
+    <h3>3. Cross-cutting — the well-meant paste</h3>
+    <p>A colleague wants help differentiating a unit. They paste a student’s writing sample into the free chatbot on their phone, plus a sentence from the IEP about processing speed, and ask for “a version this kid can actually do.” In another tab they have an unpublished midterm and are considering pasting two items to “make practice versions.” The tool is not the district- or campus-approved system.</p>
+    <p class="stem">What’s the risk? Where is the red line, and what is a safer next step that still helps the student?</p>
+    <label class="field" for="s3">Your note</label>
+    <textarea id="s3" rows="3"></textarea>
+    <div class="actions"><button type="button" class="btn" data-reveal="r3">Show a strong response</button></div>
+    <div class="feedback" id="r3">The red line is identifying student work, IEP language, and live keys in an unapproved tool. Safer: describe the need without the student (“shorter sentences, more time, same standard”); differentiate from the released assignment; make practice versions from already-released items; use the approved system if one exists. Help the student. Do not paste the file.</div>
+  </div>
+
+  <h2>Homework</h2>
+  <p>Paste this into an LMS discussion or journal this week:</p>
+  <blockquote class="prompt">Name one class you actually teach this term (course title and, if you want, the week). In 150–200 words: (1) one place you might use a generated draft — a quiz, a discussion stem, a model paragraph, an exit ticket; (2) which failure mode is more likely there, confident wrongness or wrong level, and why; (3) what you will check before students see it; (4) what you will not paste into the tool. If you would not use a generated draft in that class, say so, and name the verify habit you will keep anyway.</blockquote>
+  <div class="actions"><button type="button" class="btn" id="copyHw">Copy homework prompt</button></div>
+
+  <nav class="pager" aria-label="Module">
+    <a href="index.html">← Course home</a>
+    <a href="module-2.html">Next: Integrity Without Panic →</a>
+  </nav>
+  <footer>Virgil Renfroe · Greensboro, NC · <a href="mailto:virgilrenfroe@gmail.com">virgilrenfroe@gmail.com</a> · 336-306-4185</footer>
+</article>
+<script>
+(function () {
+  function mc(boxId, fbId, opts) {
+    const box = document.getElementById(boxId);
+    const fb = document.getElementById(fbId);
+    opts.forEach((o, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "choice";
+      b.textContent = o.t;
+      b.addEventListener("click", () => {
+        [...box.querySelectorAll(".choice")].forEach(c => c.disabled = true);
+        b.classList.add(o.ok ? "correct" : "wrong");
+        opts.forEach((oo, j) => { if (oo.ok) box.children[j].classList.add("correct"); });
+        fb.className = "feedback show " + (o.ok ? "ok" : "bad");
+        fb.textContent = o.fb;
+      });
+      box.appendChild(b);
+    });
+  }
+  mc("q1", "q1fb", [
+    { t: "GenAI always retrieves verified facts from the internet before answering.", ok: false, fb: "Not reliably. Many tools can browse, but generation still fabricates. Treat claims as drafts." },
+    { t: "GenAI predicts plausible continuations from patterns — it can be useful and still be wrong.", ok: true, fb: "Yes. That mental model keeps you curious and careful." },
+    { t: "If the writing sounds professional, it is accurate enough for grades.", ok: false, fb: "Tone is a trap. Verification is a habit, not a vibe check." }
+  ]);
+  mc("q2", "q2fb", [
+    { t: "Only Failure A (wrong facts). Wrong level is just a differentiation issue.", ok: false, fb: "Wrong level still harms learning time and equity. Brief both." },
+    { t: "Only Failure B (wrong level). Facts are the model’s problem, not mine.", ok: false, fb: "You own what you assign. Facts are on you once you put them in front of students." },
+    { t: "Both — design prompts and verify loops that catch accuracy and audience fit.", ok: true, fb: "Exactly. Your job is judgment design, not picking a single villain." }
+  ]);
+
+  const redItems = [
+    { t: "Student names + grades in a spreadsheet dump", must: true },
+    { t: "Unpublished test answer keys for a high-stakes exam", must: true },
+    { t: "A generic request for discussion questions on a public novel", must: false },
+    { t: "IEP details or health notes", must: true },
+    { t: "A draft parent email with no identifying details, to revise for tone", must: false }
+  ];
+  const rl = document.getElementById("redlines");
+  redItems.forEach((item, i) => {
+    const lab = document.createElement("label");
+    lab.innerHTML = '<input type="checkbox" data-i="' + i + '" /> <span>' + item.t + "</span>";
+    rl.appendChild(lab);
+  });
+  document.getElementById("rlcheck").addEventListener("click", () => {
+    const boxes = [...rl.querySelectorAll("input")];
+    let good = true;
+    boxes.forEach((b, i) => {
+      if (redItems[i].must !== b.checked) good = false;
+    });
+    const fb = document.getElementById("rlfb");
+    fb.className = "feedback show " + (good ? "ok" : "bad");
+    fb.textContent = good
+      ? "Solid. Red-line private data and secure assessment content. Ordinary pedagogical brainstorming without PII is usually the safe zone — still follow local policy."
+      : "Not quite. Mark the three sensitive items (student records, secure keys, IEP/health). Leave ordinary non-PII brainstorming unchecked unless policy says otherwise.";
+  });
+
+  const vItems = [
+    { t: "Claim check: highlight factual claims; spot-check at least two against a trusted source", must: true },
+    { t: "Bias skim: names, stereotypes, whose stories are centered or missing", must: true },
+    { t: "Level check: reading load and prerequisites match learners", must: true },
+    { t: "Skip editing if the layout looks professional", must: false },
+    { t: "Own it: revise until you would put your name on it", must: true }
+  ];
+  const vf = document.getElementById("verify");
+  vItems.forEach((item, i) => {
+    const lab = document.createElement("label");
+    lab.innerHTML = '<input type="checkbox" /> <span>' + item.t + "</span>";
+    vf.appendChild(lab);
+  });
+  document.getElementById("vcheck").addEventListener("click", () => {
+    let good = true;
+    [...vf.querySelectorAll("input")].forEach((b, i) => {
+      if (vItems[i].must !== b.checked) good = false;
+    });
+    const fb = document.getElementById("vfb");
+    fb.className = "feedback show " + (good ? "ok" : "bad");
+    fb.textContent = good
+      ? "That’s the loop: claim check → bias skim → level check → own it. Layout polish is not a substitute."
+      : "Check the four real steps. Leave unchecked the idea that professional layout means you’re done.";
+  });
+
+  document.querySelectorAll("[data-reveal]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const el = document.getElementById(btn.getAttribute("data-reveal"));
+      el.classList.add("show", "ok");
+    });
+  });
+
+  document.getElementById("copyHw").addEventListener("click", async () => {
+    const t = document.querySelector("blockquote.prompt").textContent;
+    try {
+      await navigator.clipboard.writeText(t);
+      document.getElementById("copyHw").textContent = "Copied";
+    } catch (_) {
+      document.getElementById("copyHw").textContent = "Select the prompt to copy";
+    }
+  });
+})();
+</script>
+</body>
+</html>
