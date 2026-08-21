@@ -1,18 +1,18 @@
 # Facilitator note — Analytical Reasoning 101 (draft sample)
 
-Practice and homework run in this browser. Nothing is uploaded. Unit progress and homework drafts stay in this tab’s storage.
+Practice and homework run in this browser. Nothing is uploaded. Drafts stay in this tab.
 
-A colleague note, not a vendor deck and not official NC A&T curriculum. For someone who might run this compressed 101 as a sample, a bridge week, or a gen-ed lab. Do not treat it as a live institutional course. Do not apply it as credit.
+A colleague note. Not official NC A&T curriculum. Not a live institutional course. Do not apply it as credit.
 
-**Author frame (say this if asked; do not make it the opener).** Educator and online-learning lead. NC A&T Lecturer, University Studies (Analytical Reasoning at large enrollment — often 300–600 students a semester, many underprepared — Critical Writing, Humanities), 2004–2016. Director of Online Learning, 2008–2012. MFA, Creative Writing, UNCG. GRE/LSAT logic tutoring in the background; this sample is gen-ed, not test prep. Designs learning and ships working prototypes by directing AI coding agents; not a software engineer.
+**If asked about the author.** I am Virgil Renfroe. Lecturer, University Studies, NC A&T, 2004–2016. I taught the large-enrollment Analytical Reasoning course — often 300–600 students a semester, mixed prep — plus Critical Writing and Humanities. Director of Online Learning, 2008–2012. MFA, Creative Writing, UNCG. GRE/LSAT logic tutoring in the background; this sample is gen-ed, not test prep. Written in the grain of that large section. Not that course. Not currently taught at A&T.
 
 ## Time
 
-Eight units plus the syllabus home. About 4–6 hours if students do the practices; a live semester would stretch this with readings and more drafts. Each unit: lesson (~12–15 min), in-module practice with feedback (~15 min), homework prompt they could turn in (~5 min to copy; writing happens outside the file). Practice lives in `unit-1.html` … `unit-8.html`. Double-click `index.html`. Do not send people to a Drive preview.
+Eight units plus the syllabus home. About 4–6 hours if students do the practices. A live semester would stretch this with readings and more drafts. Each unit: lesson, in-page practice, a homework prompt they could turn in. Double-click `index.html`. Do not send people to a Drive preview.
 
 ## What “good” looks like
 
-The public habit: say why, show the step, leave something a classmate can check. Fluency is not the grade. A because with a time, a count, a posted rule, or a named standard is the grade. Homework is journal- or paper-sized. This file does not collect it.
+Say why. Show the step. Leave something a classmate can check. Fluency is not the grade. A because with a time, a count, a posted rule, or a named standard is the grade. This file does not collect homework.
 
 ## Sequence (do not skip 1–3)
 
@@ -33,11 +33,11 @@ The public habit: say why, show the step, leave something a classmate can check.
 - Repeating a percent with no *n*. Unit 4.
 - Hunting fallacies only in people they already oppose. Unit 6.
 - Inventing a quote, a study, or a headline to finish Unit 8. Send them back to a posted notice or a public agenda packet.
-- Asking for LSAT-style items. Refuse the costume. The muscle can stay; the game board cannot.
+- Asking for LSAT-style items. Refuse the costume.
 
 ## What not to claim
 
-Do not introduce the author as a software engineer. Do not call this official NC A&T curriculum or a current offering. Do not invent school partners or student data. Do not treat GRE/LSAT tutoring as the course identity. If you add a welcome note, keep the adult tone and the sample banner.
+Do not introduce me as a software engineer. Do not call this official NC A&T curriculum or a current offering. Do not invent school partners or student data. Do not treat GRE/LSAT tutoring as the course identity.
 
 ## Optional 20-minute live debrief
 
