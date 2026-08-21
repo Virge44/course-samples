@@ -35,7 +35,7 @@
   <ol class="obj-list">
     <li>Stay with one short passage long enough to point at a single line (or image-detail) as the turn.</li>
     <li>Say what that line is doing — turning, costing, refusing, recording — rather than what the work is “about.”</li>
-    <li>Reject a reading that replaces the passage with a theme, a plot recap, or a private vibe.</li>
+    <li>Reject a reading that replaces the passage with a theme, a plot recap, or a private feeling.</li>
   </ol>
 
   <h2>Lesson</h2>
@@ -76,7 +76,7 @@
   <div class="practice" id="p-mark">
     <p class="eyebrow">Practice</p>
     <h2>Mark the line that turns it</h2>
-    <p>Click the line where the poem spends the most — the place a tourist reading is most likely to skip. Then check. Keyboard: Tab to a line, Enter or Space to mark.</p>
+    <p>Click the line where the poem spends the most — the place a quick reading is most likely to skip. Then check. Keyboard: Tab to a line, Enter or Space to mark.</p>
     <div class="poem" id="mark-poem" role="group" aria-label="Clickable lines of Receipt"></div>
     <p class="muted" id="mark-status">No line marked.</p>
     <div class="actions"><button type="button" class="btn primary" id="mark-check">Check my line</button></div>
@@ -94,7 +94,7 @@
   <div class="homework">
     <h2>Homework</h2>
     <p>150–220 words.</p>
-    <blockquote class="prompt">Stay with <em>Receipt</em> or with the Elpenor retelling from Unit 1. Quote no more than two lines (or two short sentences). Name the turn. Write what that turn is doing — a verb other than “shows” or “is about.” Then write one sentence you are refusing: the theme-card this passage most invites. Do not invent symbols the lines do not earn. Do not write “life is a journey.”</blockquote>
+    <blockquote class="prompt">Stay with <em>Receipt</em> or with the Elpenor retelling from Unit 1. Quote no more than two lines (or two short sentences). Name the turn. Write what that turn is doing — a verb other than “shows” or “is about.” Then write one sentence you are refusing: the theme sentence this passage most invites. Do not invent symbols the lines do not earn. Do not write “life is a journey.”</blockquote>
     <label class="field" for="hw2">Draft here (not stored)</label>
     <textarea id="hw2" rows="8"></textarea>
     <p class="wc" id="hw2wc"></p>
@@ -181,7 +181,7 @@ function wordCount(taId, outId) {
     });
     if (picked === turn) {
       fb.className = "feedback show ok";
-      fb.textContent = "That is the spend. “As if the numbers could refuse” gives the count a power it does not have. The last stop arrives anyway. A tourist reading skips this and goes to “nobody gets off where they said” — the moral, already packaged. Stay with the counterfactual.";
+      fb.textContent = "That is the spend. “As if the numbers could refuse” gives the count a power it does not have. The last stop arrives anyway. A quick reading skips this and goes to “nobody gets off where they said” — the moral, already packaged. Stay with the counterfactual.";
     } else if (almost.has(picked)) {
       fb.className = "feedback show warn";
       fb.textContent = "Close. The receipt and “the last one” belong to the same turn. The spend is the counterfactual: numbers that could refuse. Mark “as if the numbers could refuse” and check again. If you want to argue for the line you picked, do that on the homework — say the spend.";
@@ -192,10 +192,10 @@ function wordCount(taId, outId) {
   });
 
   const opts = [
-    { t: "It shows that the woman is stressed about missing her stop, which many riders can relate to.", ok: false, fb: "Caption plus vibe. “Stressed” and “relate” leave the counterfactual on the floor." },
+    { t: "It shows that the woman is stressed about missing her stop, which many riders can relate to.", ok: false, fb: "Caption plus a feeling. “Stressed” and “relate” leave the counterfactual on the floor." },
     { t: "It symbolizes how capitalism numbers our lives and the bus is society.", ok: false, fb: "Decoder ring. You skipped the cheap paper and the “as if.” Symbols this large do not need the poem." },
     { t: "It gives the count a power it does not have — the power to refuse the last stop — and then lets the last stop arrive anyway.", ok: true, fb: "Yes. A doing: gives a power, then withholds it. You can point at “as if” and “refuse.” A classmate can say the line is only a manner of speaking. That is a real disagreement." },
-    { t: "It is about how life is a journey and we don’t always end up where we planned.", ok: false, fb: "Theme-card. Available before you read the twelve lines. If a sentence was available before you looked, it is not a reading." }
+    { t: "It is about how life is a journey and we don’t always end up where we planned.", ok: false, fb: "Theme sentence. Available before you read the twelve lines. If a sentence was available before you looked, it is not a reading." }
   ];
   const dbox = document.getElementById("do-box");
   const dfb = document.getElementById("do-fb");

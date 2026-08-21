@@ -35,7 +35,7 @@
   <ol class="obj-list">
     <li>Name what a reading values — who it treats as the center, whose pain it treats as scenery.</li>
     <li>Point to a person or position a complete-sounding account leaves out, using a line from the work.</li>
-    <li>Rewrite a heroic or theme-card sentence so the cost is visible to a living reader, without a sermon about “society.”</li>
+    <li>Rewrite a heroic or theme sentence sentence so the cost is visible to a living reader, without a sermon about “society.”</li>
   </ol>
 
   <h2>Lesson</h2>
@@ -44,7 +44,7 @@
   <p>This is not a hunt for villains in every stanza. It is a refusal to let a smooth reading pass as complete. Smooth is a power. Hero-stories are smooth. “Relatable” is smooth. If your paragraph could be printed on a poster next to the work, you have not named a stake.</p>
 
   <h3>Who gets the “we”</h3>
-  <p>Dunbar: “We wear the mask.” Who is we? A theme-card says “everyone hides.” That “everyone” is a theft. It takes a stanza that makes a grin into a debt paid in public — “torn and bleeding hearts we smile” — and sells it back as general manners. The cost of that reading is a living person for whom the grin is not optional. You do not need a lecture to say that. You need the word “debt” and a refusal to let “we” float free.</p>
+  <p>Dunbar: “We wear the mask.” Who is we? A theme sentence says “everyone hides.” That “everyone” is a theft. It takes a stanza that makes a grin into a debt paid in public — “torn and bleeding hearts we smile” — and sells it back as general manners. The cost of that reading is a living person for whom the grin is not optional. You do not need a lecture to say that. You need the word “debt” and a refusal to let “we” float free.</p>
   <p>A careful claim can still leave someone out. If you stop at a racial “we,” you may miss the other pressure: the mask is talk, “myriad subtleties,” a linguistic payment. Stakes include the people your own precision forgot.</p>
 
   <h3>Who is leftover labor</h3>
@@ -52,8 +52,8 @@
   <p>Ask the living question. Who, in a group you actually belong to, is the person whose name is used until the project ships and then dropped? You are not writing a diary. You are testing whether your account of the oar can survive contact with a leftover person who is not ancient and not fictional.</p>
 
   <h3>Who is looked at, who looks</h3>
-  <p>Equiano looks at chained people and a boiling copper, then faints. A theme-card: “He shows the cruelty of the slave trade.” The stake is in the look. He is looking at people he is about to be classed with, and the look ends his doubt about his own fate. A reading that treats those faces as background horror for Equiano’s later career has done to them what a ship’s inventory does: counted them as the scene.</p>
-  <p><em>Receipt</em> looks quieter, which is why students skip the stake. A theme-card stake: “modern isolation.” A humanities stake: whose weather does the bus keep, and who is not faced? Name the woman whose last number could not refuse, and the boy whose verse could not be sounded — even if the poem will not give them names.</p>
+  <p>Equiano looks at chained people and a boiling copper, then faints. A theme sentence: “He shows the cruelty of the slave trade.” The stake is in the look. He is looking at people he is about to be classed with, and the look ends his doubt about his own fate. A reading that treats those faces as background horror for Equiano’s later career has done to them what a ship’s inventory does: counted them as the scene.</p>
+  <p><em>Receipt</em> looks quieter, which is why students skip the stake. A theme sentence stake: “modern isolation.” A humanities stake: whose weather does the bus keep, and who is not faced? Name the woman whose last number could not refuse, and the boy whose verse could not be sounded — even if the poem will not give them names.</p>
 
   <h3>Rewrite so the cost is visible</h3>
   <p>Take a complete-sounding sentence. Ask three questions: What does it value? Who has the power to look, speak, or sail? Who would have to enter the sentence to make it less smooth? Then rewrite. Keep the object. Do not replace the rewrite with “society must do better.” Society is a cloud. A leftover crewman, a paid grin, a face in Equiano’s look, a woman with a receipt — those are visible.</p>
@@ -70,13 +70,13 @@
   <div class="practice" id="p-rewrite">
     <p class="eyebrow">Practice</p>
     <h2>Rewrite so the cost is visible</h2>
-    <p>Theme-card / heroic version: <em>“We Wear the Mask reminds us that everyone hides their pain, and we should be kinder.”</em></p>
+    <p>Theme sentence / heroic version: <em>“We Wear the Mask reminds us that everyone hides their pain, and we should be kinder.”</em></p>
     <p>Rewrite it as one or two sentences. Keep Dunbar’s doing. Name who the “everyone” reading leaves out. Avoid “everyone,” “reminds us,” “be kinder,” “society,” and “human condition.”</p>
     <label class="field" for="rewrite">Your rewrite</label>
     <textarea id="rewrite" rows="4" placeholder="A sentence that keeps the debt visible…"></textarea>
     <p class="wc" id="rwc"></p>
     <div class="actions">
-      <button type="button" class="btn primary" id="rw-check">Check the costumes</button>
+      <button type="button" class="btn primary" id="rw-check">Check the empty phrases</button>
       <button type="button" class="btn" id="rw-show">Show a strong rewrite</button>
     </div>
     <div class="feedback" id="rw-fb" role="status"></div>
@@ -159,10 +159,10 @@ function wordCount(taId, outId) {
     if (t.split(/\s+/).length < 10) hits.push("too short to keep a debt visible");
     if (hits.length === 0) {
       out.className = "feedback show ok";
-      out.textContent = "No sermon costumes in the wording. Last test: did you keep a Dunbar doing (debt, grin, mouth, we-that-is-not-everyone) and a living person who pays? If you only scolded the tourist, you still have not rewritten the claim.";
+      out.textContent = "No sermon filler in the wording. Last test: did you keep a Dunbar doing (debt, grin, mouth, we-that-is-not-everyone) and a living person who pays? If you only scolded the quick reading, you still have not rewritten the claim.";
     } else {
       out.className = "feedback show bad";
-      out.textContent = "Costumes still on the sentence: " + hits.join("; ") + ". Keep the debt. Name who “everyone” erases.";
+      out.textContent = "Empty phrases still on the sentence: " + hits.join("; ") + ". Keep the debt. Name who “everyone” erases.";
     }
   });
   document.getElementById("rw-show").addEventListener("click", () => {

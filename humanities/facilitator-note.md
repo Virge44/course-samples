@@ -16,14 +16,14 @@ Eight units, in order. About four to six hours if they do the practices. Compres
 | --- | --- | --- |
 | 1 | Two rewritten questions + one paragraph | A made thing, a doing verb, a living person. Flag “what happened,” “theme,” “I feel,” “human condition.” |
 | 2 | Marked line + 150–200 words on what it is doing | Stayed with one passage. Doing, not “about.” |
-| 3 | Context note they would keep, one they would cut, why | The kept note helps you hear a sentence. The cut one is a chapter in costume. |
-| 4 | Claim that can be wrong + one honest refusal | Not a theme-card. A classmate could start “No, because…” |
+| 3 | Context note they would keep, one they would cut, why | The kept note helps you hear a sentence. The cut one is a chapter in disguise. |
+| 4 | Claim that can be wrong + one honest refusal | Not a theme sentence. A classmate could start “No, because…” |
 | 5 | Two voices in pressure, 200–250 words | Conversation, not a quote stack. Each voice does a job. |
 | 6 | Who is left out + rewritten heroic sentence | A named someone, not “society.” Cost visible. |
 | 7 | Interpretive essay, 500–700 words | Claim, stayed-with evidence, one other voice, a local stake. No biography dump opening. |
-| 8 | One work, one claim, one public sentence | The public sentence could be said off campus without a theme-card. |
+| 8 | One work, one claim, one public sentence | The public sentence could be said off campus without a theme sentence. |
 
-Grade a claim a stranger could refuse by pointing at the same lines. Not fluency. Not “appreciation.”
+Grade a claim a stranger could disagree with by pointing at the same lines. Not fluency. Not “appreciation.”
 
 ## Common snags
 
@@ -40,7 +40,7 @@ Do not introduce me as a software engineer. Do not call this official NC A&T cur
 
 ## Optional live 20 minutes
 
-Only if a cohort exists. Three volunteers read their Unit 1 rewritten question. Class says whether it names a doing and a living person. One Unit 4 theme-card rewritten on the board. Stop.
+Only if a cohort exists. Three volunteers read their Unit 1 rewritten question. Class says whether it names a doing and a living person. One Unit 4 theme sentence rewritten on the board. Stop.
 
 ## Accessibility
 

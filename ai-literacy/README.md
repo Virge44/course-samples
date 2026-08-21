@@ -15,7 +15,7 @@ I am Virgil Renfroe. Lecturer at NC A&T: Critical Writing, large-enrollment Anal
 | `module-2.html` | Integrity Without Panic (~25 min) |
 | `module-3.html` | Tools That Transfer (~20 min) |
 | `module-4.html` | Classroom Activities That Hold (~25 min) |
-| `module-5.html` | Take It Back (~20 min) |
+| `module-5.html` | A note for Monday (~20 min) |
 | `facilitator-note.md` | One page. What not to claim. |
 | `facilitator-m1.md` … `facilitator-m5.md` | Times and snags |
 

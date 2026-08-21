@@ -6,7 +6,7 @@ About 20 minutes: lesson (~7), CRISP rebuild + template-vs-model check in `modul
 
 One CRISP prompt for a task they actually teach, plus the verify steps they will run. If they would not use a model for that task, they say so and name the template they will use instead.
 
-Snags: which chatbot is “best” — approved tool, checkable job. They fill CRISP as decoration and skip Proof. They use a model for a weekly task that already has a stable template. They paste student work or live keys into the builder.
+Snags: which chatbot is “best” — approved tool, a job you can check. They fill CRISP as decoration and skip Proof. They use a model for a weekly task that already has a stable template. They paste student work or live keys into the builder.
 
 Do not demo a paid tool as required. Do not brand CRISP as a vendor method.
 

@@ -24,7 +24,7 @@ Eight units, in order. About four to six hours. Conceptual 101, not a lab. If yo
 
 | Unit | Turn-in | Skim for |
 | --- | --- | --- |
-| 1 | Rewrite of a just-so story | Parts, interaction, a consequence that could be wrong |
+| 1 | Rewrite of a tidy made-up reason | Parts, interaction, a consequence that could be wrong |
 | 2 | One cell job as a system | Membrane or traffic. A job that depends on another. |
 | 3 | Roommate paragraph: DNA and proteins | What the molecule *does*. Flag CRISPR. |
 | 4 | Food → work chain | Transformation, not “energy boost.” |

@@ -27,14 +27,14 @@
   <p class="lede">Leave with three things you would stand behind: a work, a claim that can be wrong, and one sentence you could say outside class.</p>
   <div class="meta">
     <span class="chip">3 objectives</span>
-    <span class="chip">Assemble + refuse</span>
+    <span class="chip">Assemble + say no</span>
     <span class="chip">1 close</span>
   </div>
 
   <h2>When you finish</h2>
   <ol class="obj-list">
     <li>Choose one work from this course (or another public-domain work you name) and say why it is the one you will stand behind — not why it is “your favorite.”</li>
-    <li>State one claim about that work that a classmate could refuse by pointing at a line.</li>
+    <li>State one claim about that work that a classmate could disagree with by pointing at a line.</li>
     <li>Write one public sentence: what this made thing makes of a living person — a sentence you could say off campus without “theme,” “relatable,” or “human condition.”</li>
   </ol>
 
@@ -45,8 +45,8 @@
   <p>“Favorite” is not a reason. Favorite is a mood. A reason sounds like: “This is the work I can still be wrong about.” Or: “This is the work whose leftover person I keep seeing on my campus.” If your reason is “I relate to buses” or “I like Greek myths,” pick again. Relating and liking are allowed in a life. They are not this close.</p>
 
   <h3>One claim that can still break</h3>
-  <p>Take the claim from Unit 4 or Unit 7 and make it smaller if it got proud. A close claim is not a summary of your essay. It is the sentence you would defend in a hallway. “Dunbar’s opening makes speech a payment, not a face-covering.” “The retelling stops a prophet for a crewman’s oar.” “Douglass names reading as a pit without a ladder, so the sentence will not work as a school poster.” Each of those can be refused. If your close claim is “this work is powerful and still relevant,” you have advertised.</p>
-  <p>Write the refusal next to it. The refusal is how you know the claim is live. “No, because the last couplet is the turn.” “No, because later Douglass supplies a ladder and you froze a midpoint.” If you cannot imagine that “no,” the claim is still a theme-card. Change it here, cheaply, before you make it public.</p>
+  <p>Take the claim from Unit 4 or Unit 7 and make it smaller if it got proud. A close claim is not a summary of your essay. It is the sentence you would defend in a hallway. “Dunbar’s opening makes speech a payment, not a face-covering.” “The retelling stops a prophet for a crewman’s oar.” “Douglass names reading as a pit without a ladder, so the sentence will not work as a school poster.” Each of those can be disagreed with. If your close claim is “this work is powerful and still relevant,” you have advertised.</p>
+  <p>Write the refusal next to it. The refusal is how you know the claim is live. “No, because the last couplet is the turn.” “No, because later Douglass supplies a ladder and you froze a midpoint.” If you cannot imagine that “no,” the claim is still a theme sentence. Change it here, cheaply, before you make it public.</p>
 
   <h3>One public sentence</h3>
   <p>The public sentence is not a thesis and not a slogan. It is what the work makes of a living person — said so that a roommate, a supervisor, a younger cousin, or a stranger on a bus could hear it without a glossary. It has to keep the object. “Be kind; everyone is fighting a battle” is a public sentence that does not need Dunbar. Useless here. “Dunbar’s ‘we’ will not let me treat a workplace grin as a private mood; somebody is paying” is public and still on the stanza.</p>
@@ -56,7 +56,7 @@
 
   <div class="practice" id="p-build">
     <p class="eyebrow">Practice</p>
-    <h2>Build a close — or refuse a souvenir</h2>
+    <h2>Build a close — or reject a souvenir</h2>
     <p>Check every piece that could go in a real close. Leave souvenirs unchecked.</p>
     <div class="checklist" id="build-list"></div>
     <div class="actions"><button type="button" class="btn primary" id="build-check">Check my set</button></div>
@@ -71,7 +71,7 @@
     <textarea id="pub" rows="3" placeholder="A sentence you could say off campus…"></textarea>
     <p class="wc" id="pwc"></p>
     <div class="actions">
-      <button type="button" class="btn primary" id="pub-check">Check the costumes</button>
+      <button type="button" class="btn primary" id="pub-check">Check the empty phrases</button>
       <button type="button" class="btn" id="pub-show">Show a strong sentence</button>
     </div>
     <div class="feedback" id="pub-fb" role="status"></div>
@@ -81,7 +81,7 @@
   <div class="homework">
     <h2>Homework — the close</h2>
     <p>180–280 words, counting the three labeled sentences.</p>
-    <blockquote class="prompt">Write three labeled sentences, then a short paragraph. (1) <em>Work:</em> which object, and why you will stand behind it — not why it is your favorite. (2) <em>Claim:</em> what it is doing, in a form that can be wrong. (3) <em>Public:</em> what it makes of a living person, said so a stranger off campus could hear it. Paragraph: what theme-card you arrived with, and what the work did to it. No invented classmates. No “I learned so much.” If you use a teaching text, say so.</blockquote>
+    <blockquote class="prompt">Write three labeled sentences, then a short paragraph. (1) <em>Work:</em> which object, and why you will stand behind it — not why it is your favorite. (2) <em>Claim:</em> what it is doing, in a form that can be wrong. (3) <em>Public:</em> what it makes of a living person, said so a stranger off campus could hear it. Paragraph: what theme sentence you arrived with, and what the work did to it. No invented classmates. No “I learned so much.” If you use a teaching text, say so.</blockquote>
     <label class="field" for="hw8">Draft here (not stored)</label>
     <textarea id="hw8" rows="10"></textarea>
     <p class="wc" id="hw8wc"></p>
@@ -160,10 +160,10 @@ function wordCount(taId, outId) {
     if (n > 70) hits.push("too long for one public sentence — cut toward a hallway");
     if (hits.length === 0) {
       out.className = "feedback show ok";
-      out.textContent = "No plaque costumes the scanner knows. Last test: would you say it to a roommate who did not take the course? If you would have to add “in the poem,” you may still be in seminar voice — that can be fine if the doing is concrete. If you would have to add “the theme is,” start over.";
+      out.textContent = "No plaque filler the scanner knows. Last test: would you say it to a roommate who did not take the course? If you would have to add “in the poem,” you may still be in seminar voice — that can be fine if the doing is concrete. If you would have to add “the theme is,” start over.";
     } else {
       out.className = "feedback show bad";
-      out.textContent = "Costumes: " + hits.join("; ") + ". Keep the object. Name a living person. Cut the poster.";
+      out.textContent = "Empty phrases: " + hits.join("; ") + ". Keep the object. Name a living person. Cut the poster.";
     }
   });
   document.getElementById("pub-show").addEventListener("click", () => {

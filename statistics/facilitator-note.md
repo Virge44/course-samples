@@ -21,7 +21,7 @@ Eight units plus the home. About 4–6 hours. Keep `styles.css` beside the HTML.
 | 1 | Rewrite of a real public number | Group named; denominator in the sentence; no invented poll |
 | 2 | 8–12 measurements + mean, median, one spread sentence | Both centers; the tail is mentioned |
 | 3 | A real public chart + what it hides | Axis, window, n, or missing group |
-| 4 | Who is missing from a real sample | Missing group is a people, not “bias” as a vibe |
+| 4 | Who is missing from a real sample | Missing group is a people, not “bias” as a slogan |
 | 5 | One probability restated as “how often, if…” | Process named |
 | 6 | Causal headline rewritten | Confounder or reverse causation named |
 | 7 | “Significant” restated | Not “important”; assumptions named or flagged |

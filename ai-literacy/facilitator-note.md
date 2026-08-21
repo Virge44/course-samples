@@ -17,13 +17,13 @@ I am Virgil Renfroe. Lecturer at NC A&T: Critical Writing, large-enrollment Anal
 
 ## What this is
 
-Five modules, about two hours. Literacy, integrity, tools, a classroom activity, take it back. Practice lives in the HTML. Homework happens in their class. No student records in this file. Nothing uploads.
+Five modules, about two hours. Literacy, integrity, tools, a classroom activity, a note for Monday. Practice lives in the HTML. Homework happens in their class. No student records in this file. Nothing uploads.
 
 If someone asks who wrote the seventh-grade case: I did, for the audience. Point at the bio. Do not imply I taught that room.
 
 ## Time
 
-1 Literacy ~25 · 2 Integrity ~25 · 3 Tools ~20 · 4 Activities ~25 · 5 Take it back ~20.
+1 Literacy ~25 · 2 Integrity ~25 · 3 Tools ~20 · 4 Activities ~25 · 5 A note for Monday ~20.
 
 Optional live debrief, only if a cohort exists: one confident-wrongness example, one red-line check, one person reads a rewrite or a card. Stop. Do not turn it into a tool bake-off.
 

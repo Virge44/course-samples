@@ -51,7 +51,7 @@
 
   <h3>Invented sources, real habit</h3>
   <p>You will practice on invented lines labeled as invented. Do not treat them as research. Do not invent a school, a journal, or a student to make a citation look live. If you use a real assigned text from another class in the homework, name it honestly. If you do not have one, use the invented lines and say they are invented.</p>
-  <p>Then close. A compressed 101 does not pretend it was fifteen weeks. It does ask you to stand behind one short argument: a reader, a claim that can be wrong, reasons and evidence, a source that did not eat you, a last paragraph that is not a costume. Look back at Unit 1. If the reader-sentence has changed, that is the course working. Say what changed.</p>
+  <p>Then close. A compressed 101 does not pretend it was fifteen weeks. It does ask you to stand behind one short argument: a reader, a claim that can be wrong, reasons and evidence, a source that did not eat you, a last paragraph that is not “this is important.” Look back at Unit 1. If the reader-sentence has changed, that is the course working. Say what changed.</p>
 
   <h3>A short close is still an argument</h3>
   <p>The portfolio close is not a reflection about your feelings as a writer. It is a short argument plus a few sentences on what changed. If you write “I learned a lot about my voice,” you missed the course. If you write “My reader was a director who treated absences as motivation; the claim narrowed from ‘attendance policies are unfair’ to ‘the appeal process is built for rare emergencies, not weekly shifts,’” you did the work. The second version can be tested.</p>
@@ -148,9 +148,9 @@ function wordCount(taId, outId) {
 
 (function () {
   mc("q-use", "q-use-fb", [
-    { t: "Ortiz says shared grades measure the product, not the coordination. Collaboration is a learning outcome. Fairness is essential. Therefore group work is important.", ok: false, fb: "Tour of sentences. No host. The claim about hiding the writer never appears. Decoration plus a costume closer." },
+    { t: "Ortiz says shared grades measure the product, not the coordination. Collaboration is a learning outcome. Fairness is essential. Therefore group work is important.", ok: false, fb: "Tour of sentences. No host. The claim about hiding the writer never appears. Decoration plus a filler closer." },
     { t: "When the assigned product is one paper, a shared letter hides the writer. Ortiz’s line (invented) — that shared grades measure the product, not the coordination — names the mechanism. It does not license a shared letter for prose; it argues for grading coordination separately.", ok: true, fb: "Yes. Claim first. Source as a voice that names a mechanism. Then the writer is still there, limiting what the source gets to settle. Guest, not replacement." },
-    { t: "According to sources, it is clear that experts agree, and I feel like that is true in today’s world (Ortiz, invented, 2019).", ok: false, fb: "Mood + “sources” with no work. The invented citation is bolted on. The writer disappeared into costumes." }
+    { t: "According to sources, it is clear that experts agree, and I feel like that is true in today’s world (Ortiz, invented, 2019).", ok: false, fb: "Mood + “sources” with no work. The invented citation is bolted on. The writer disappeared into empty phrases." }
   ]);
   wordCount("patch","patchwc");
   document.getElementById("patch-check").addEventListener("click", () => {
@@ -161,12 +161,12 @@ function wordCount(taId, outId) {
     const hits = [];
     const notes = [];
     if (t.split(/\s+/).length < 40) hits.push("too short to show claim → source → still-your-claim");
-    if (/in conclusion|important|today'?s world|experts agree/.test(low)) hits.push("costume closer still on the page");
+    if (/in conclusion|important|today'?s world|experts agree/.test(low)) hits.push("filler closer still on the page");
     if (!/invent/.test(low) && /ortiz/.test(low)) notes.push("If you keep Ortiz, keep “invented” in the citation so you do not fake a source.");
     if (!/hid|writer|letter|coordination|prose|paper/.test(low)) hits.push("the original claim (hiding the writer / shared letter / coordination) is hard to see");
     if (hits.length === 0) {
       fb.className = "feedback show ok";
-      fb.textContent = "No costume closer, and the claim is visible in the wording. " + (notes[0] || "Read it once more: could a stranger find your position if they skipped the quote?") ;
+      fb.textContent = "No filler closer, and the claim is visible in the wording. " + (notes[0] || "Read it once more: could a stranger find your position if they skipped the quote?") ;
     } else {
       fb.className = "feedback show bad";
       fb.textContent = hits.join("; ") + (notes[0] ? " — " + notes[0] : ".");

@@ -33,7 +33,7 @@ Say why. Show the step. Leave something a classmate can check. Fluency is not th
 - Repeating a percent with no *n*. Unit 4.
 - Hunting fallacies only in people they already oppose. Unit 6.
 - Inventing a quote, a study, or a headline to finish Unit 8. Send them back to a posted notice or a public agenda packet.
-- Asking for LSAT-style items. Refuse the costume.
+- Asking for LSAT-style items. Skip the test-prep look.
 
 ## What not to claim
 
@@ -41,7 +41,7 @@ Do not introduce me as a software engineer. Do not call this official NC A&T cur
 
 ## Optional 20-minute live debrief
 
-Only if a section exists. One because that was actually checkable. One assumption named. One Unit 8 pointer (URL or door notice). Stop. Do not turn it into a current-events fight.
+Only if a section exists. One because a classmate could actually check. One assumption named. One Unit 8 pointer (URL or door notice). Stop. Do not turn it into a current-events fight.
 
 ---
 

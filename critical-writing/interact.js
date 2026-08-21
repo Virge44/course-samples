@@ -420,10 +420,10 @@
       if (!text.trim()) return hits;
       if (/\bi think\b|\bi believe\b|\bi feel\b/.test(low)) hits.push("“I think / I believe / I feel” is a mood, not a claim.");
       if (/\bimportant\b|\binteresting\b/.test(low)) hits.push("“Important” / “interesting” is a shrug.");
-      if (/today'?s world|in this day and age|throughout history/.test(low)) hits.push("“Today’s world” is a costume.");
+      if (/today'?s world|in this day and age|throughout history/.test(low)) hits.push("“Today’s world” is filler.");
       if (text.indexOf("?") !== -1) hits.push("A question is a prompt, not a thesis.");
       if (/both sides|pros and cons/.test(low)) hits.push("A both-sides promise refuses to stand somewhere.");
-      if (text.trim().split(/\s+/).length < 8) hits.push("Too short to be a position a classmate could refuse.");
+      if (text.trim().split(/\s+/).length < 8) hits.push("Too short to be a position a classmate could disagree with.");
       return hits;
     }
     function paint() {
@@ -441,7 +441,7 @@
           "</ul>";
       } else {
         box.className = "ix-live show ok";
-        box.textContent = "No dead-thesis costumes in the wording. Last test: could a classmate start “No, because…” and still be talking about your claim?";
+        box.textContent = "No empty “I think / important / both sides” phrases in the wording. Last test: could a classmate start “No, because…” and still be talking about your claim?";
       }
     }
     ta.addEventListener("input", paint);
@@ -515,7 +515,7 @@
         } else if (c.getAttribute("data-id") === "c3") {
           msg = "“Obviously matters” asks the skeptic to join the choir. Swap the closer for a line or a time.";
         } else {
-          msg = "One half is checkable. The other half still circles. You need a time or a count in both halves, or the sentence slides back into mood.";
+          msg = "One half is something a classmate could check. The other half still circles. You need a time or a count in both halves, or the sentence slides back into mood.";
         }
         fb.className = "feedback show " + cls;
         fb.textContent = msg;

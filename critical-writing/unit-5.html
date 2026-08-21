@@ -61,7 +61,7 @@
   <p>Five sentences that earn a claim beat twenty that circle a noun.</p>
 
   <h3>Read your own paragraph the way you read Unit 2</h3>
-  <p>After each sentence, say the job: claim, reason, evidence, concession, restatement, transition, or dead. If three sentences in a row are restatement, you do not have a long paragraph. You have a short one wearing a costume. Cut two. If the first sentence is a label and the third sentence is the actual claim, promote sentence three.</p>
+  <p>After each sentence, say the job: claim, reason, evidence, concession, restatement, transition, or dead. If three sentences in a row are restatement, you do not have a long paragraph. You have a short one wearing extra words. Cut two. If the first sentence is a label and the third sentence is the actual claim, promote sentence three.</p>
   <p>Aloud is a way of hearing the pile. A paragraph that does two jobs will usually change pitch in the middle — from a story to a handbook, from parking to group work. That pitch change is the slash.</p>
   <p>Do not decorate the topic sentence with “indeed,” “thus,” or “it is evident that.” Those words do not make a move. Put the move in ordinary words. Sample paragraphs here are invented.</p>
 
@@ -201,7 +201,7 @@ function wordCount(taId, outId) {
     paras.forEach((p, i) => { if (assigned[String(i)] === p.job) n++; });
     fb.className = "feedback show " + (n === 4 ? "ok" : "bad");
     fb.textContent = n === 4
-      ? "1 claims. 2 puts a checkable count and a handwriting-level detail on the table. 3 gives the other side a real point, then limits it. 4 is a pile: importance costume, a story, a handbook line, parking, and a closer that says “looked at more closely.” Slash it after the story. The parking sentence is another paper."
+      ? "1 claims. 2 puts a count a classmate could check, and a handwriting-level detail, on the table. 3 gives the other side a real point, then limits it. 4 is a pile: “important,” a story, a handbook line, parking, and a closer that says “looked at more closely.” Slash it after the story. The parking sentence is another paper."
       : "You have " + n + " of 4. 1 claim. 2 evidence. 3 concession. 4 two (or five) jobs — split it.";
   });
 
@@ -212,13 +212,13 @@ function wordCount(taId, outId) {
     if (!t) { fb.className = "feedback show bad"; fb.textContent = "Write a sentence first."; return; }
     const low = t.toLowerCase();
     const hits = [];
-    if (/another (thing|aspect|way)|when it comes to|communication is key/.test(low)) hits.push("label costume (“another aspect / communication is key”)");
+    if (/another (thing|aspect|way)|when it comes to|communication is key/.test(low)) hits.push("label filler (“another aspect / communication is key”)");
     if (/\bimportant\b|\binteresting\b/.test(low)) hits.push("important/interesting");
     if (/i think|i feel/.test(low)) hits.push("mood");
     if (t.split(/\s+/).length < 6) hits.push("too short to be a move");
     if (hits.length === 0) {
       fb.className = "feedback show ok";
-      fb.textContent = "No label-costumes in the wording. Last check, which this page cannot grade: would the sentences under this topic sentence have a single job? If you cannot say the job in a verb, rewrite once more.";
+      fb.textContent = "No label-filler in the wording. Last check, which this page cannot grade: would the sentences under this topic sentence have a single job? If you cannot say the job in a verb, rewrite once more.";
     } else {
       fb.className = "feedback show bad";
       fb.textContent = "Still a label or a mood: " + hits.join("; ") + ".";

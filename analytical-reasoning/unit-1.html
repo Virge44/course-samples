@@ -346,9 +346,9 @@ footer a { color: var(--accent-ink); }
 
   <h2>After the practice</h2>
   <ol>
-    <li>Split a short passage into a claim and a because-clause.</li>
+    <li>Split a short passage into a claim and a because.</li>
     <li>Mark a “because” that only restates the claim instead of supporting it.</li>
-    <li>Write a because-clause a classmate could check without already agreeing with you.</li>
+    <li>Write a because a classmate could check without already agreeing with you.</li>
   </ol>
 
   <h2>Lesson</h2>
@@ -395,17 +395,17 @@ footer a { color: var(--accent-ink); }
   <div class="practice" id="p-fake">
     <p class="eyebrow">Practice</p>
     <h2>Which because is doing work?</h2>
-    <p>Same claim: <em>The dining hall should stay open until 9.</em> Pick the because-clause that a classmate could actually check.</p>
+    <p>Same claim: <em>The dining hall should stay open until 9.</em> Pick the because that a classmate could actually check.</p>
     <div id="q2"></div>
     <div class="feedback" id="q2fb" role="status"></div>
   </div>
 
   <div class="practice" id="p-write">
     <p class="eyebrow">Practice</p>
-    <h2>Write a because-clause</h2>
+    <h2>Write a because</h2>
     <p>Claim: <strong>The library should keep the second floor open until midnight during exam week.</strong></p>
     <p>Write one sentence that starts with <em>because</em> and gives something a roommate could check — a time, a count, a posted rule, a comparison. Do not restate “students need a quiet place.” That is the claim in a softer coat.</p>
-    <label class="field" for="because1">Your because-clause</label>
+    <label class="field" for="because1">Your because</label>
     <textarea id="because1" rows="3" placeholder="because …"></textarea>
     <div class="actions"><button type="button" class="btn primary" id="checkBecause">Check my because</button></div>
     <div class="feedback" id="because1fb" role="status"></div>
@@ -414,7 +414,7 @@ footer a { color: var(--accent-ink); }
     <div class="homework" id="homework">
     <h2>Homework</h2>
     <p>If a section wants it, turn it in. The box stays in this tab.</p>
-    <blockquote class="prompt">Find one claim in ordinary campus talk this week — dining hours, parking, attendance, a posted notice, a roommate argument. Do not invent a story. Copy or paraphrase the claim in one sentence. Then write a because-clause that would support it (or that the speaker seemed to mean). Then write one more sentence: how could a classmate check that because without already agreeing? 150–200 words. If you cannot find a checkable because, say so, and write the because the speaker would need.</blockquote>
+    <blockquote class="prompt">Find one claim in ordinary campus talk this week — dining hours, parking, attendance, a posted notice, a roommate argument. Do not invent a story. Copy or paraphrase the claim in one sentence. Then write a because that would support it (or that the speaker seemed to mean). Then write one more sentence: how could a classmate check that because without already agreeing? 150–200 words. If you cannot find a because a classmate could check, say so, and write the because the speaker would need.</blockquote>
     <label class="field" for="hw1">Draft here — saved in this browser only. Nothing is uploaded.</label>
     <textarea id="hw1" rows="8" placeholder="Write it here. Leave and come back in this browser — it will still be here."></textarea>
     <p class="wc" id="hw1wc"></p>
@@ -496,22 +496,22 @@ function revealButtons() {
   ]);
   mc("q2", "q2fb", [
     { t: "…because students deserve a real dinner after class.", ok: false, fb: "Deserve restates the should-claim. Warm, and not yet a reason. What time does class end? What is open now?" },
-    { t: "…because the last class block ends at 8:10 and the line is still thirty people at closing.", ok: true, fb: "Checkable. Times and a count. A skeptic can dispute the count. They cannot say you hid the step." },
+    { t: "…because the last class block ends at 8:10 and the line is still thirty people at closing.", ok: true, fb: "A classmate could check this. Times and a count. A skeptic can dispute the count. They cannot say you hid the step." },
     { t: "…because everyone knows the food situation is a mess.", ok: false, fb: "Everyone knows is a crowd, not a because. Unit 6 will name that move. For now: no one can check a crowd." }
   ]);
   document.getElementById("checkBecause").addEventListener("click", () => {
     const raw = document.getElementById("because1").value.trim();
     const t = raw.toLowerCase();
     const fb = document.getElementById("because1fb");
-    const checkable = /(hour|midnight|night|exam|sign.?in|waitlist|seat|room|posted|schedule|count|%|percent|\d)/.test(t);
+    const hasDoor = /(hour|midnight|night|exam|sign.?in|waitlist|seat|room|posted|schedule|count|%|percent|\d)/.test(t);
     const circle = /(deserve|need a quiet|students need|obviously|everyone knows|just makes sense)/.test(t);
     let cls = "bad";
     let msg;
     if (raw.length < 20) {
-      msg = "Too thin. Write a full because-clause — one sentence a roommate could read aloud.";
-    } else if (circle && !checkable) {
+      msg = "Too thin. Write a full because — one sentence a roommate could read aloud.";
+    } else if (circle && !hasDoor) {
       msg = "That still restates the claim. Drop deserve / need / obviously. Add a time, a count, a posted rule, or a comparison someone can look up.";
-    } else if (checkable) {
+    } else if (hasDoor) {
       cls = "ok";
       msg = "You gave the skeptic a door — a time, a count, a posted rule, or a number. Next: could a classmate check it without already agreeing? If yes, you have a reason.";
     } else {

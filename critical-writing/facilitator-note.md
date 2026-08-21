@@ -18,7 +18,7 @@ Eight units, in order. Each sitting: a lesson, a practice with feedback, one tur
 | --- | --- | --- |
 | 1 | Reader / purpose / stakes sentence + one paragraph | Named reader with a belief; a verb you can watch; a local cost. Flag “people,” “society,” “it matters.” |
 | 2 | Four sentence-moves + two sentences of analysis | Moves named; analysis that does not recap. |
-| 3 | Thesis + honest objection + what would change | Thesis a classmate could refuse; objection that is not a dummy. |
+| 3 | Thesis + honest objection + what would change | Thesis a classmate could disagree with; objection that is not a dummy. |
 | 4 | Claim, two reasons, one evidence, one gap | Reasons that fail differently; evidence labeled by kind; no “I feel,” no “studies show” with no study. |
 | 5 | Paragraph rewrite, one job | A verb for the job; split if it was a pile. |
 | 6 | Bad full draft, 300–400 words | Complete object: claim, two reasons, honest evidence, an ending that is not “important.” Ugly is allowed. |

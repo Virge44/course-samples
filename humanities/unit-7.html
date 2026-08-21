@@ -33,9 +33,9 @@
 
   <h2>When you finish</h2>
   <ol class="obj-list">
-    <li>Reject an opening that is biography, plot, or a theme-card, and start from a claim about a doing.</li>
+    <li>Reject an opening that is biography, plot, or a theme sentence, and start from a claim about a doing.</li>
     <li>Sequence an interpretive essay: claim, stay with one passage, one hearing-aid fact, one other voice, a named stake.</li>
-    <li>Produce a 500–700 word draft that a classmate could refuse by pointing at the same lines.</li>
+    <li>Produce a 500–700 word draft that a classmate could disagree with by pointing at the same lines.</li>
   </ol>
 
   <h2>Lesson</h2>
@@ -65,7 +65,7 @@
   <p>Claim, line, doing, stake — in four sentences. The rest of the essay has work to do: stay with “mouth,” bring one hearing-aid fact about the market for his voice, let Douglass’s published “I” pressure Dunbar’s “we,” and return to who “we” leaves available. That is a 600-word job. The course texts are enough. Do not paste a critic.</p>
 
   <h3>Ugly is allowed; empty is not</h3>
-  <p>The draft you turn in can be uneven. It cannot be a theme paper with better adjectives. Write past the fear of being wrong. A live claim you later revise is the course working. If you stall, steal your Unit 4 claim and your Unit 2 marked line and start typing. Do not outline five boxes.</p>
+  <p>The draft you turn in can be uneven. It cannot be a theme paper with better adjectives. Write past the fear of being wrong. A real claim you later revise is the course working. If you stall, steal your Unit 4 claim and your Unit 2 marked line and start typing. Do not outline five boxes.</p>
   <p>Under 500 usually means you never stayed or never let a second voice in. Over 800 usually means you drowned or sermonized. Aim 500–700. Quote under a few dozen words at a time. The Elpenor piece is a teaching retelling: say so if you use it. <em>Receipt</em> is a teaching poem: say so. Douglass, Dunbar, Equiano are 1845, 1896, 1789. Name the year once. Then work.</p>
 
   <div class="practice" id="p-open">
@@ -88,13 +88,13 @@
   <div class="homework">
     <h2>Homework — the essay</h2>
     <p>500–700 words. If a section is running, turn it in where they say.</p>
-    <blockquote class="prompt">Write a short interpretive essay on one course text, with one other course text in pressure. Open from a claim about a doing, not from a biography or a theme-card. Stay with a passage. Use at most one hearing-aid fact. Name a stake (who is left out) for a living person by role. Quote little. Do not write “human condition,” “since the dawn of time,” “in this essay I will,” or “we as a society.” If you use the Elpenor retelling or <em>Receipt</em>, label them teaching texts. Copy the essay out of this box; the file does not keep it.</blockquote>
+    <blockquote class="prompt">Write a short interpretive essay on one course text, with one other course text in pressure. Open from a claim about a doing, not from a biography or a theme sentence. Stay with a passage. Use at most one hearing-aid fact. Name a stake (who is left out) for a living person by role. Quote little. Do not write “human condition,” “since the dawn of time,” “in this essay I will,” or “we as a society.” If you use the Elpenor retelling or <em>Receipt</em>, label them teaching texts. Copy the essay out of this box; the file does not keep it.</blockquote>
     <label class="field" for="hw7">Draft here (not stored)</label>
     <textarea id="hw7" rows="14" placeholder="Claim first, or a line and then the claim…"></textarea>
     <p class="wc" id="hw7wc"></p>
     <div class="actions">
       <button type="button" class="btn" id="copyHw">Copy homework prompt</button>
-      <button type="button" class="btn" id="hw-scan">Scan for costumes</button>
+      <button type="button" class="btn" id="hw-scan">Scan for empty phrases</button>
     </div>
     <div class="feedback" id="hw-fb" role="status"></div>
   </div>
@@ -130,7 +130,7 @@ function wordCount(taId, outId) {
 (function () {
   const opts = [
     { t: "It is a solid academic start: credentials first, then the theme, then a plan.", ok: false, fb: "That is the school object this unit is refusing. Credentials and a plan can be written without looking at a line." },
-    { t: "It is a biography dump plus a theme-card. It can be written about any work. It has not named a doing.", ok: true, fb: "Yes. Born-in, “many poems,” today’s world, everyone, important theme, human condition, I will discuss, be more understanding. Delete it. Start at a doing." },
+    { t: "It is a biography dump plus a theme sentence. It can be written about any work. It has not named a doing.", ok: true, fb: "Yes. Born-in, “many poems,” today’s world, everyone, important theme, human condition, I will discuss, be more understanding. Delete it. Start at a doing." },
     { t: "It is too negative about Dunbar and should praise him more.", ok: false, fb: "Praise is appreciation. The failure is not tone. The failure is that the paragraph never arrives at a line." },
     { t: "It needs more historical context — add Reconstruction and several dates.", ok: false, fb: "That would drown it. Context is a hearing aid after a claim, not a longer lobby before one." }
   ];
@@ -231,7 +231,7 @@ function wordCount(taId, outId) {
     if (n > 850) hits.push("over 850 — probably drowned or sermonized; cut toward 700");
     if (hits.length === 0) {
       out.className = "feedback show ok";
-      out.textContent = "No costume phrases the scanner knows, and the length is in range. The real test is still human: can a classmate refuse the claim by pointing at a line? Copy the draft out. The file will not keep it.";
+      out.textContent = "No empty phrases the scanner knows, and the length is in range. The real test is still human: can a classmate disagree with the claim by pointing at a line? Copy the draft out. The file will not keep it.";
     } else {
       out.className = "feedback show bad";
       out.textContent = "Still on the draft: " + hits.join("; ") + ". Cut those and return to a doing.";
