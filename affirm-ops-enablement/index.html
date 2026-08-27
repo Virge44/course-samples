@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Two clocks (Reg E) — Operations enablement sample</title>
-<meta name="description" content="I designed this sit-down for a servicing-ops lead and the agents they coach. Two public Reg E clocks. Draft sample. Not Affirm. Not submitted." />
-<meta property="og:title" content="Two clocks (Reg E) — Virgil Renfroe" />
-<meta property="og:description" content="A Monday sit-down: name two public dispute clocks before you promise a day. Draft. Not Affirm." />
+<title>Operations enablement — year one</title>
+<meta name="description" content="I designed this as a 12-month Operations Enablement plan. Week one is a specimen, not the job. Draft sample. Not Affirm. Not submitted." />
+<meta property="og:title" content="Operations enablement — year one — Virgil Renfroe" />
+<meta property="og:description" content="A 12-month Operations Enablement plan. Week one is a public Reg E specimen. Draft. Not Affirm." />
 <meta property="og:image" content="https://virge44.github.io/course-samples/og.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:url" content="https://virge44.github.io/course-samples/affirm-ops-enablement/" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Two clocks (Reg E) — Virgil Renfroe" />
-<meta name="twitter:description" content="A Monday sit-down: name two public dispute clocks before you promise a day. Draft. Not Affirm." />
+<meta name="twitter:title" content="Operations enablement — year one — Virgil Renfroe" />
+<meta name="twitter:description" content="A 12-month Operations Enablement plan. Week one is a public Reg E specimen. Draft. Not Affirm." />
 <meta name="twitter:image" content="https://virge44.github.io/course-samples/og.jpg" />
 <style>
   :root { --ink:#1c1916; --muted:#5c564c; --paper:#f7f4ee; --card:#fff; --accent:#1f5c56; --rule:#d4cfc4; --banner:#1f2a28; --warm:#8a3a2a; }
@@ -38,6 +38,16 @@
   a { color:var(--accent); }
   ul.plain { margin:0.4rem 0 1rem; padding-left:1.2rem; }
   ul.plain li { margin:0 0 0.45rem; }
+  .streams { display:grid; gap:0.8rem; margin:0.4rem 0 1.25rem; }
+  .stream { background:var(--card); border:1px solid var(--rule); border-radius:8px; padding:1rem 1.1rem 0.95rem; }
+  .stream h3 { margin:0 0 0.15rem; font-size:1.05rem; color:var(--accent); }
+  .stream .horizon { font-family:"Segoe UI",system-ui,sans-serif; font-size:0.72rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--muted); margin:0.7rem 0 0.2rem; font-weight:700; }
+  .stream .horizon:first-of-type { margin-top:0.45rem; }
+  .stream p { margin:0 0 0.15rem; font-size:0.97rem; }
+  .plan-close { margin:0.2rem 0 0; }
+  #specimen { padding-top:1.4rem; border-top:1px solid var(--rule); }
+  .specimen-title { font-size:1.15rem; margin:0 0 0.35rem; }
+  .frame { background:var(--card); border:1px solid var(--rule); border-left:4px solid var(--accent); border-radius:6px; padding:0.7rem 0.9rem; margin:0 0 1.1rem; font-size:0.95rem; }
   .aid { background:var(--card); border:2px solid var(--ink); border-radius:2px; padding:1.2rem 1.25rem 1.1rem; box-shadow:3px 3px 0 rgba(31,92,86,0.12); }
   .aid h3 { margin-top:0.9rem; font-size:0.95rem; letter-spacing:0.02em; text-transform:uppercase; font-family:"Segoe UI",system-ui,sans-serif; color:var(--accent); }
   .aid h3:first-child { margin-top:0; }
@@ -70,7 +80,7 @@
   @media print {
     .sample, nav.jump, #practice .actions, button.copy { display:none !important; }
     body { background:#fff; }
-    .aid, .spec-wrap, .same { break-inside:avoid; }
+    .aid, .spec-wrap, .same, .stream { break-inside:avoid; }
     a { color:inherit; text-decoration:none; }
   }
 </style>
@@ -78,85 +88,146 @@
 <body>
 <p class="sample"><strong>Draft sample. Not Affirm. Not a live SOP. Not submitted.</strong> Public regulation only.</p>
 <main class="wrap">
-  <p class="kicker">Operations enablement · Monday sit-down</p>
-  <h1>Two clocks</h1>
-  <p class="lede">I designed this sit-down for a servicing-ops lead and the agents the lead coaches — human and AI. A public dispute-window change. Not an Affirm-internal system.</p>
-  <p class="note">30–60 minutes. You will leave with a job aid, an AI-agent instruction, and one practice. Not a catalog.</p>
+  <p class="kicker">Operations enablement — year one</p>
+  <h1>Year one</h1>
+  <p class="lede">I designed this as a 12-month Operations Enablement plan for the public posting (Operations Enablement Manager). The posting is longer than a 45-minute sit-down. This page is the year. Week one is a specimen, not the job.</p>
 
-  <nav class="jump" aria-label="Parts of this sit-down">
-    <a href="#why">1. Why this matters</a>
-    <a href="#aid">2. Job aid</a>
-    <a href="#ai">3. AI instructions</a>
-    <a href="#practice">4. Practice</a>
+  <nav class="jump" aria-label="On this page">
+    <a href="#year-one">Year one</a>
+    <a href="#specimen">Week-one specimen</a>
   </nav>
 
-  <section id="why">
-    <p class="time">~10 minutes</p>
-    <h2>Why this matters</h2>
-    <p>I designed this for Monday. A clock got named. That is the whole change.</p>
-    <p>Agents must name <strong>two public clocks</strong> out loud before they promise a day. People mash them into one. That mash is the quality miss.</p>
-    <p>If an agent promises “we’ll have this in 10 days” when the 60-day notice window is already the live question, they have taught the customer the wrong clock. If they invent a tighter internal deadline and speak it as law, they have made a regulated promise they cannot keep.</p>
-    <p>The public job this is for — Operations Enablement Manager, from Affirm’s public careers page, paraphrased, not pasted — writes SOPs, job aids, learning, and manuals for human and AI agents, and walks change through a regulated shop. This sit-down is that job in one change.</p>
-    <p>Affirm’s public brand line is honest credit, no hidden fees or compounding interest. A mashed clock is a hidden one. I am not describing how Affirm runs Regulation E. I am teaching the public rule.</p>
+  <section id="year-one">
+    <h2>The year, in four workstreams</h2>
+    <p class="note">Realistic time. No invented Affirm metrics, systems, or org chart. I do not promise a transformed shop in a quarter.</p>
 
-    <h3>The two clocks — lock these</h3>
-    <p class="note">Source: <a href="https://www.consumerfinance.gov/rules-policy/regulations/1005/11">12 CFR 1005.11</a> (CFPB). I did not invent a third clock.</p>
-    <ul class="plain">
-      <li><strong>Clock A — consumer notice window.</strong> Notice of error is timely if the institution receives it no later than 60 days after it sends the periodic statement on which the alleged error first appears. That is 1005.11(b)(1). If the notice is late, the institution is not required to follow 1005.11 for that notice. For an unauthorized electronic fund transfer it must still comply with 1005.6 before imposing liability. Do not tell the customer “you’re too late, goodbye.”</li>
-      <li><strong>Clock B — institution investigation window.</strong> Determine whether an error occurred within 10 business days of receiving the notice. Report results within 3 business days after completing the investigation. Correct within 1 business day after determining an error occurred. If more time is needed: up to 45 days <em>if</em> the institution provisionally credits (including interest where applicable) within 10 business days, tells the consumer the amount and date within 2 business days, and gives full use of the funds. Use 20 business days instead of 10 if the transfer is within 30 days of the first deposit (new account). Use 90 days instead of 45 for a foreign-initiated transfer, a point-of-sale debit-card transfer, or a new-account transfer.</li>
-    </ul>
-    <p>You will leave with a job aid, an AI-agent instruction, and one practice. Not a catalog.</p>
-  </section>
+    <div class="streams">
+      <article class="stream">
+        <h3>Learning and training</h3>
+        <p class="horizon">30 days</p>
+        <p>Map what people already take. Write one onboarding path. Write one rollout ritual — the same ritual every product or compliance change uses.</p>
+        <p class="horizon">Days 31–90</p>
+        <p>Two measured rollouts. Not ten. Measure means: did the agent use the job aid on a live case, and did the AI block stay in lockstep. Not a satisfaction score I invented.</p>
+        <p class="horizon">Months 4–12</p>
+        <p>Quarterly curriculum. One quarter, one theme. I do not promise a transformed shop in a quarter.</p>
+      </article>
 
-  <section id="aid">
-    <p class="time">Keep-open card · human agent, live case</p>
-    <h2>Job aid</h2>
-    <p>Print this. Or leave it open. Short lines on purpose.</p>
-    <div class="aid">
-      <h3>Take the notice</h3>
-      <ul>
-        <li>Oral counts. Start the investigation promptly.</li>
-        <li>Do not wait for a written confirmation to begin.</li>
-        <li>If written confirmation is required, say so and give the address.</li>
-      </ul>
-      <h3>Collect</h3>
-      <ul>
-        <li>Enough to identify the person and the account.</li>
-        <li>Why the customer believes an error exists.</li>
-        <li>Type, date, and amount — if the customer has them.</li>
-      </ul>
-      <h3>Name clock A</h3>
-      <ul>
-        <li>60-day notice window, from the day the statement was sent.</li>
-        <li>If the statement-sent date is unknown, say you will confirm it. Do not guess.</li>
-      </ul>
-      <h3>Name clock B</h3>
-      <ul>
-        <li>10 business days to determine — or 45 with timely provisional credit.</li>
-        <li>Do not promise a calendar Tuesday unless a lead has given you one.</li>
-      </ul>
-      <h3>Do not</h3>
-      <ul>
-        <li>Do not decide “this is unauthorized” on the call.</li>
-        <li>Do not invent a system name.</li>
-        <li>Do not charge the customer for asking.</li>
-      </ul>
-      <h3>If the notice looks late</h3>
-      <ul>
-        <li>Still take it. Flag it.</li>
-        <li>A human lead decides 1005.11 vs 1005.6.</li>
-        <li>You do not close the door.</li>
-      </ul>
+      <article class="stream">
+        <h3>Knowledge for humans and AI</h3>
+        <p class="horizon">30 days</p>
+        <p>Inventory live SOPs and job aids. Mark which have no AI block, and which have a block that can drift.</p>
+        <p class="horizon">Days 31–90</p>
+        <p>One source of truth. Every live SOP has a human card and an AI block that cannot diverge — same rule, two mouths. If they diverge, the SOP is not live.</p>
+        <p class="horizon">Months 4–12</p>
+        <p>A review cycle. Nothing stays “done.”</p>
+      </article>
+
+      <article class="stream">
+        <h3>Change end-to-end</h3>
+        <p class="horizon">30 days</p>
+        <p>A one-page change ticket: what changes, who is affected, human card, AI block, how we know it landed. Not a new platform. A page.</p>
+        <p class="horizon">Days 31–90</p>
+        <p>Three real changes walked through that ticket, plus an exec status that names risks in English.</p>
+        <p class="horizon">Months 4–12</p>
+        <p>The ticket is how Product and Compliance hand work to Ops. If work arrives as a Slack ping, it is not handed.</p>
+      </article>
+
+      <article class="stream">
+        <h3>Operational excellence / Lean</h3>
+        <p class="horizon">90 days</p>
+        <p>One DMAIC on one recurring miss, with a defendable baseline I can show — count of the miss this month, from a log a lead already has. I do not invent the number. Define, measure, analyze, improve, control. One miss.</p>
+        <p class="horizon">Months 4–9</p>
+        <p>Two more DMAICs only if the first one moved. If it did not move, I do not start a second to look busy.</p>
+        <p class="horizon">Months 10–12</p>
+        <p>A one-minute VP before/after. Same miss. Two numbers. No deck.</p>
+      </article>
     </div>
+
+    <p class="plan-close">Week one is below. It is a specimen so you can see how I teach one change. It is not the year.</p>
   </section>
 
-  <section id="ai">
-    <p class="time">Copy-paste spec · not a chatbot demo</p>
-    <h2>Same rule, for an AI agent</h2>
-    <p>This is a constrained instruction, not a toy chat. Paste it where the model reads its job.</p>
-    <div class="spec-wrap">
-      <button type="button" class="copy" id="copy-spec" aria-label="Copy AI-agent instructions">Copy instructions</button>
-      <pre class="spec" id="ai-spec">Role: servicing assistant.
+  <section id="specimen">
+    <p class="kicker">Week-one specimen</p>
+    <h2 class="specimen-title">Week one · a specimen (not the job)</h2>
+    <h2>Two clocks</h2>
+    <p class="frame">“Two clocks” is a teaching frame I wrote. Affirm did not. The public rule is 12 CFR 1005.11 (60-day notice vs 10/45 investigate).</p>
+    <p class="lede">I designed this sit-down for a servicing-ops lead and the agents the lead coaches — human and AI. A public dispute-window change. Not an Affirm-internal system.</p>
+    <p class="note">30–60 minutes. You will leave with a job aid, an AI-agent instruction, and one practice. Not a catalog.</p>
+
+    <nav class="jump" aria-label="Parts of this sit-down">
+      <a href="#why">1. Why this matters</a>
+      <a href="#aid">2. Job aid</a>
+      <a href="#ai">3. AI instructions</a>
+      <a href="#practice">4. Practice</a>
+    </nav>
+
+    <section id="why">
+      <p class="time">~10 minutes</p>
+      <h2>Why this matters</h2>
+      <p>I designed this for Monday. A clock got named. That is the whole change.</p>
+      <p>Agents must name <strong>two public clocks</strong> out loud before they promise a day. People mash them into one. That mash is the quality miss.</p>
+      <p>If an agent promises “we’ll have this in 10 days” when the 60-day notice window is already the live question, they have taught the customer the wrong clock. If they invent a tighter internal deadline and speak it as law, they have made a regulated promise they cannot keep.</p>
+      <p>The public job this is for — Operations Enablement Manager, from Affirm’s public careers page, paraphrased, not pasted — writes SOPs, job aids, learning, and manuals for human and AI agents, and walks change through a regulated shop. This sit-down is that job in one change.</p>
+      <p>Affirm’s public brand line is honest credit, no hidden fees or compounding interest. A mashed clock is a hidden one. I am not describing how Affirm runs Regulation E. I am teaching the public rule.</p>
+
+      <h3>The two clocks — lock these</h3>
+      <p class="note">Source: <a href="https://www.consumerfinance.gov/rules-policy/regulations/1005/11">12 CFR 1005.11</a> (CFPB). I did not invent a third clock.</p>
+      <ul class="plain">
+        <li><strong>Clock A — consumer notice window.</strong> Notice of error is timely if the institution receives it no later than 60 days after it sends the periodic statement on which the alleged error first appears. That is 1005.11(b)(1). If the notice is late, the institution is not required to follow 1005.11 for that notice. For an unauthorized electronic fund transfer it must still comply with 1005.6 before imposing liability. Do not tell the customer “you’re too late, goodbye.”</li>
+        <li><strong>Clock B — institution investigation window.</strong> Determine whether an error occurred within 10 business days of receiving the notice. Report results within 3 business days after completing the investigation. Correct within 1 business day after determining an error occurred. If more time is needed: up to 45 days <em>if</em> the institution provisionally credits (including interest where applicable) within 10 business days, tells the consumer the amount and date within 2 business days, and gives full use of the funds. Use 20 business days instead of 10 if the transfer is within 30 days of the first deposit (new account). Use 90 days instead of 45 for a foreign-initiated transfer, a point-of-sale debit-card transfer, or a new-account transfer.</li>
+      </ul>
+      <p>You will leave with a job aid, an AI-agent instruction, and one practice. Not a catalog.</p>
+    </section>
+
+    <section id="aid">
+      <p class="time">Keep-open card · human agent, live case</p>
+      <h2>Job aid</h2>
+      <p>Print this. Or leave it open. Short lines on purpose.</p>
+      <div class="aid">
+        <h3>Take the notice</h3>
+        <ul>
+          <li>Oral counts. Start the investigation promptly.</li>
+          <li>Do not wait for a written confirmation to begin.</li>
+          <li>If written confirmation is required, say so and give the address.</li>
+        </ul>
+        <h3>Collect</h3>
+        <ul>
+          <li>Enough to identify the person and the account.</li>
+          <li>Why the customer believes an error exists.</li>
+          <li>Type, date, and amount — if the customer has them.</li>
+        </ul>
+        <h3>Name clock A</h3>
+        <ul>
+          <li>60-day notice window, from the day the statement was sent.</li>
+          <li>If the statement-sent date is unknown, say you will confirm it. Do not guess.</li>
+        </ul>
+        <h3>Name clock B</h3>
+        <ul>
+          <li>10 business days to determine — or 45 with timely provisional credit.</li>
+          <li>Do not promise a calendar Tuesday unless a lead has given you one.</li>
+        </ul>
+        <h3>Do not</h3>
+        <ul>
+          <li>Do not decide “this is unauthorized” on the call.</li>
+          <li>Do not invent a system name.</li>
+          <li>Do not charge the customer for asking.</li>
+        </ul>
+        <h3>If the notice looks late</h3>
+        <ul>
+          <li>Still take it. Flag it.</li>
+          <li>A human lead decides 1005.11 vs 1005.6.</li>
+          <li>You do not close the door.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="ai">
+      <p class="time">Copy-paste spec · not a chatbot demo</p>
+      <h2>Same rule, for an AI agent</h2>
+      <p>This is a constrained instruction, not a toy chat. Paste it where the model reads its job.</p>
+      <div class="spec-wrap">
+        <button type="button" class="copy" id="copy-spec" aria-label="Copy AI-agent instructions">Copy instructions</button>
+        <pre class="spec" id="ai-spec">Role: servicing assistant.
 
 You do not determine whether an error occurred.
 
@@ -178,30 +249,31 @@ If the customer asks “so you’ll refund me today”: do not promise final cre
 Never tell the customer they are too late as a closer. If the notice looks late for 1005.11, still take it, flag it, and escalate. A human lead decides 1005.11 vs 1005.6.
 
 Never fabricate ticket IDs, merchant names, or account activity. Never invent a system name. Do not charge the customer for asking.</pre>
-    </div>
-    <div class="same">
-      <p><strong>Same rule, two mouths.</strong> The card is what a human agent says on a live case. The block is what an AI agent is allowed to say. If those two diverge, the mash is already in the room. I wrote both from the same public clocks. I did not write an Affirm system.</p>
-    </div>
-  </section>
-
-  <section id="practice">
-    <p class="time">One case · feedback, not an answer key</p>
-    <h2>Practice</h2>
-    <div class="case">
-      <p><strong>Jordan calls.</strong> A $214 transfer. “It isn’t mine. Reverse it today.”</p>
-      <p><strong>Your notes</strong> (given; you do not hunt for them): the statement that first showed the $214 was sent 72 days ago. The statement-sent date is known.</p>
-    </div>
-    <form id="drill" novalidate>
-      <label for="clocks">What two clocks do you name, in one sentence each?</label>
-      <textarea id="clocks" name="clocks" required maxlength="800" placeholder="Clock A in one sentence. Clock B in one sentence."></textarea>
-      <label for="refuse">What do you refuse to promise on this call?</label>
-      <textarea id="refuse" name="refuse" required maxlength="800" placeholder="One or two sentences."></textarea>
-      <div class="actions">
-        <button type="submit" class="go" id="submit-btn">Check my process</button>
-        <span class="note" id="tries-left" style="margin:0;">Two tries. No answer dump.</span>
       </div>
-    </form>
-    <div id="feedback" role="status" aria-live="polite"></div>
+      <div class="same">
+        <p><strong>Same rule, two mouths.</strong> The card is what a human agent says on a live case. The block is what an AI agent is allowed to say. If those two diverge, the mash is already in the room. I wrote both from the same public clocks. I did not write an Affirm system.</p>
+      </div>
+    </section>
+
+    <section id="practice">
+      <p class="time">One case · feedback, not an answer key</p>
+      <h2>Practice</h2>
+      <div class="case">
+        <p><strong>Jordan calls.</strong> A $214 transfer. “It isn’t mine. Reverse it today.”</p>
+        <p><strong>Your notes</strong> (given; you do not hunt for them): the statement that first showed the $214 was sent 72 days ago. The statement-sent date is known.</p>
+      </div>
+      <form id="drill" novalidate>
+        <label for="clocks">What two clocks do you name, in one sentence each?</label>
+        <textarea id="clocks" name="clocks" required maxlength="800" placeholder="Clock A in one sentence. Clock B in one sentence."></textarea>
+        <label for="refuse">What do you refuse to promise on this call?</label>
+        <textarea id="refuse" name="refuse" required maxlength="800" placeholder="One or two sentences."></textarea>
+        <div class="actions">
+          <button type="submit" class="go" id="submit-btn">Check my process</button>
+          <span class="note" id="tries-left" style="margin:0;">Two tries. No answer dump.</span>
+        </div>
+      </form>
+      <div id="feedback" role="status" aria-live="polite"></div>
+    </section>
   </section>
 
   <footer>
