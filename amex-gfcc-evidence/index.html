@@ -444,59 +444,51 @@ renderAsOf();
 
 const screens = [
   {
-    t: "Objective",
+    t: "The number",
     h: function() {
       return `<p class="label">Screen 1 of 5</p>
-      <h3>After this sitting you can do three things</h3>
-      <ol>
-        <li>Name the CIP minimums before you open the account.</li>
-        <li>Keep the record so it can be produced later.</li>
-        <li>Screen before you send.</li>
-      </ol>
-      <p class="note">SAMPLE lesson. Not Amex policy text. Not a claim about current bank training quality.</p>`;
+      <h3>Don&rsquo;t send it without the number</h3>
+      <p>You already get the name. Date of birth. A street address. Those are not the hard part.</p>
+      <p>The identification number is. For a person, a taxpayer identification number. For a U.S. business, typically an EIN.</p>
+      <p>Riverside Outfitters LLC (SAMPLE) is ready to go live. If the EIN is not in the file, you do not have a CIP record. Do not send the account.</p>
+      <p class="note">SAMPLE lesson. Not Amex policy text.</p>`;
     }
   },
   {
-    t: "CIP minimums",
+    t: "The other three",
     h: function() {
       return `<p class="label">Screen 2 of 5</p>
-      <h3>Four facts, before the account is open</h3>
-      <p>Under <a href="https://www.ecfr.gov/current/title-31/subtitle-B/chapter-X/part-1020/subpart-B/section-1020.220">31 CFR 1020.220</a>, a bank CIP must obtain, at a minimum:</p>
-      <ul>
-        <li><strong>Name</strong></li>
-        <li><strong>Date of birth</strong>, for an individual</li>
-        <li><strong>Address</strong> (street address rules differ for people and entities)</li>
-        <li><strong>Identification number</strong> — for a U.S. person, a taxpayer identification number. For a U.S. business, that is typically an EIN.</li>
-      </ul>
-      <p class="note">Check the four. If one is missing, you do not have a CIP record yet. SAMPLE.</p>`;
+      <h3>Name, date of birth, address still count</h3>
+      <p>They are in the rule because they have to be there. They are also the ones everyone thinks they already did.</p>
+      <p>Four minimums, <a href="https://www.ecfr.gov/current/title-31/subtitle-B/chapter-X/part-1020/subpart-B/section-1020.220">31 CFR 1020.220</a>. Name. Date of birth for a person. Address. Identification number.</p>
+      <p>If the fourth is missing, the first three do not save you. SAMPLE.</p>`;
     }
   },
   {
-    t: "EIN / the record",
+    t: "The file",
     h: function() {
-      return `<p class="label">Screen 3 of 5 · teaching case</p>
-      <h3>Why &ldquo;we trained them&rdquo; is not the same as &ldquo;here is the record&rdquo;</h3>
-      <p>Public findings, OCC Consent Order <a href="https://www.occ.gov/static/enforcement-actions/ea2023-020.pdf">2023-020</a> (July 24, 2023), American Express National Bank, Sandy, Utah. Civil money penalty $15,000,000. Docket AA-ENF-2023-27. The Bank neither admitted nor denied the Comptroller&rsquo;s findings.</p>
-      <p>In 2015&ndash;2017, as part of large-scale efforts to retain small-business customers, the Comptroller found the Bank failed to gather employer identification numbers for certain of those customers and properly maintain CIP records; and failed to properly maintain records related to that retention effort and, later, produce them in response to OCC requests. The order states those violations and practices were part of a pattern of misconduct.</p>
-      <p><strong>Teaching point for a TPS ID, not a remediation claim:</strong> if someone asks what was live on date X, and whether the record can be produced, the answer has to be a file, not a memory. This sample does not say I remediated that 2015&ndash;2017 matter. It does not say current training is deficient.</p>
-      <p class="note">SAMPLE customer for practice: Riverside Outfitters LLC (SAMPLE). Ask for the EIN. File it. Do not send the account live on a missing number.</p>`;
+      return `<p class="label">Screen 3 of 5</p>
+      <h3>&ldquo;We asked&rdquo; is not the record</h3>
+      <p>If someone asks later for Riverside&rsquo;s EIN, the answer is a file. Not &ldquo;I remember we got it.&rdquo;</p>
+      <p>Public why it matters: <a href="https://www.occ.gov/static/enforcement-actions/ea2023-020.pdf">OCC 2023-020</a>. Small-business customers. EINs not gathered. CIP records not produced when asked. This sample does not say I fixed that matter, and it does not say current training is deficient.</p>
+      <p>Ask. File it. Keep it where you can produce it. SAMPLE.</p>`;
     }
   },
   {
-    t: "Screen before you send",
+    t: "Before you send",
     h: function() {
       return `<p class="label">Screen 4 of 5</p>
-      <h3>Screen before you send</h3>
-      <p>OFAC&rsquo;s public framework names five components of a sanctions compliance program. Training is one of them. It should reach appropriate personnel at least annually, be job-specific, communicate each person&rsquo;s responsibilities, and hold people accountable through assessments. Primary: <a href="https://ofac.treasury.gov/system/files/126/framework_ofac_cc.pdf">A Framework for OFAC Compliance Commitments</a> (May 2019).</p>
-      <p>The beat in this lesson is operational and small: do not release the payment, the card, or the wire until screening has run. &ldquo;I will screen it after it goes&rdquo; is not screening.</p>
-      <p class="note">SAMPLE. This CIP lesson is not an OFAC exam binder and not a NYDFS Part 504 certification.</p>`;
+      <h3>Screen it first</h3>
+      <p>Do not release the payment, the card, or the wire until screening has run. After it goes is not screening.</p>
+      <p>OFAC names training as part of a sanctions program. This sitting is the small operational beat, not an exam binder. Primary: <a href="https://ofac.treasury.gov/system/files/126/framework_ofac_cc.pdf">A Framework for OFAC Compliance Commitments</a> (May 2019).</p>
+      <p class="note">SAMPLE. Not a NYDFS Part 504 certification.</p>`;
     }
   },
   {
-    t: "Check + attest",
+    t: "Then you sign",
     h: function() {
       return `<p class="label">Screen 5 of 5</p>
-      <h3>Two questions, then you sign</h3>
+      <h3>Three questions, then you sign</h3>
       <p>1. For a U.S. business customer, which identifier is the CIP identification number?</p>
       <ul class="check" id="q1">
         <li role="button" tabindex="0" data-ok="0">Store loyalty number (SAMPLE distractor)</li>
@@ -505,9 +497,9 @@ const screens = [
       </ul>
       <p>2. Why does the record have to be kept in a place you can produce?</p>
       <ul class="check" id="q2">
-        <li role="button" tabindex="0" data-ok="1">An examiner or auditor may ask what was collected, and whether it still exists.</li>
+        <li role="button" tabindex="0" data-ok="1">Someone may ask what was collected, and whether it still exists.</li>
         <li role="button" tabindex="0" data-ok="0">So marketing can build a lookalike list.</li>
-        <li role="button" tabindex="0" data-ok="0">Because Captivate requires a 80% quiz score.</li>
+        <li role="button" tabindex="0" data-ok="0">Because Captivate requires an 80% quiz score.</li>
       </ul>
       <p>3. When do you screen for sanctions?</p>
       <ul class="check" id="q3">
