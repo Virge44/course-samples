@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>What was live, who finished it, who signed — training evidence pack</title>
+<meta name="description" content="TPS evidence pack sample: Internal Audit vs OCC exam packets from the same short CIP lesson. Public BSA/AML + OFAC. Not an American Express product. Not confidential policy." />
+<style>
+  :root {
+    --ink: #1c1916;
+    --ink-2: #26221e;
+    --paper: #f4efe6;
+    --cream: #f7f4ee;
+    --muted: #b7afa3;
+    --muted-ink: #5c564c;
+    --sage: #9bb8ad;
+    --sage-deep: #3d6b63;
+    --accent: #8fafa3;
+    --rule: #3a3530;
+    --warn: #c4a574;
+    --bad: #c9897a;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+    color: var(--cream);
+    background: var(--ink);
+    line-height: 1.55;
+  }
+  a { color: var(--sage); }
+  a:hover { color: var(--cream); }
+  .banner {
+    background: #141210;
+    color: #d7d0c5;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.78rem;
+    padding: 0.7rem 1.25rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .wrap { max-width: 42rem; margin: 0 auto; padding: 2rem 1.25rem 3.5rem; }
+  .kicker {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin: 0 0 0.55rem;
+  }
+  h1 { font-size: 2.05rem; letter-spacing: -0.02em; line-height: 1.2; margin: 0 0 0.85rem; font-weight: 700; }
+  h2 { font-size: 1.28rem; margin: 2.1rem 0 0.55rem; letter-spacing: -0.01em; }
+  h3 { font-size: 1.05rem; margin: 0 0 0.4rem; }
+  p { margin: 0 0 0.9rem; }
+  .lede { font-size: 1.12rem; color: #ece6da; }
+  .note, .small { color: var(--muted); font-size: 0.95rem; }
+  .label {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin: 0 0 0.35rem;
+  }
+  .who { display: grid; gap: 0.75rem; margin: 1rem 0 0.4rem; }
+  .card {
+    background: var(--ink-2);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.1rem;
+  }
+  .card.exam { border-left: 3px solid var(--sage); }
+  .card.audit { border-left: 3px solid #c4a574; }
+  .card.second { border-left: 3px solid #8aa0c4; }
+  .card.not { border-left: 3px solid var(--bad); }
+  .card ul { margin: 0.35rem 0 0; padding-left: 1.15rem; }
+  .card li { margin: 0.2rem 0; }
+  .module {
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 1.15rem 1.2rem 1.25rem;
+    margin: 0.8rem 0 0.4rem;
+  }
+  .module h3 { margin-top: 0; }
+  .module .label { color: var(--sage-deep); }
+  .module p, .module li { color: var(--ink); }
+  .module .note { color: var(--muted-ink); }
+  .screens { min-height: 16rem; }
+  .nav-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; align-items: center; }
+  button, .btn {
+    font-family: Georgia, Palatino, serif;
+    font-size: 1rem;
+    background: var(--sage-deep);
+    color: var(--cream);
+    border: 0;
+    border-radius: 6px;
+    padding: 0.45rem 0.9rem;
+    cursor: pointer;
+  }
+  button.ghost, .btn.ghost {
+    background: transparent;
+    color: var(--sage-deep);
+    border: 1px solid #b7c9c2;
+  }
+  button:hover { filter: brightness(1.08); }
+  button:disabled { opacity: 0.45; cursor: not-allowed; filter: none; }
+  .dots { margin-left: auto; color: var(--muted-ink); font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.8rem; }
+  .check { list-style: none; padding: 0; margin: 0.4rem 0 0.8rem; }
+  .check li {
+    border: 1px solid #d4cfc4;
+    border-radius: 6px;
+    padding: 0.55rem 0.7rem;
+    margin: 0.4rem 0;
+    cursor: pointer;
+    background: #fff;
+  }
+  .check li[aria-pressed="true"] { border-color: var(--sage-deep); background: #e8f0ed; }
+  .check li.right { border-color: var(--sage-deep); }
+  .check li.wrong { border-color: var(--bad); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  th, td { text-align: left; padding: 0.45rem 0.4rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .module table th, .module table td { border-bottom: 1px solid #d4cfc4; }
+  .status { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; }
+  .ok { color: var(--sage); }
+  .over { color: var(--bad); }
+  .asg { color: var(--warn); }
+  .oos { color: var(--muted); }
+  .module .ok { color: var(--sage-deep); }
+  .module .over { color: #9a4e3e; }
+  .module .asg { color: #8a6a32; }
+  .module .oos { color: var(--muted-ink); }
+  form.attest label { display: block; margin: 0.35rem 0 0.15rem; font-size: 0.92rem; }
+  form.attest input[type="text"], form.attest input[type="date"], select, input[type="date"] {
+    width: 100%;
+    max-width: 22rem;
+    font: inherit;
+    padding: 0.4rem 0.5rem;
+    border: 1px solid #c9c3b6;
+    border-radius: 5px;
+    background: #fff;
+    color: var(--ink);
+  }
+  .consent { display: flex; gap: 0.55rem; align-items: flex-start; margin: 0.8rem 0; }
+  .consent input { margin-top: 0.25rem; }
+  .sign { font-size: 0.92rem; }
+  .sign dt { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sage); margin-top: 0.55rem; }
+  .sign dd { margin: 0.1rem 0 0; }
+  .packet-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.8rem 0 1rem; }
+  .packet-bar button[aria-pressed="true"] { outline: 2px solid var(--sage); }
+  #bundle {
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 1.2rem 1.25rem 1.4rem;
+    min-height: 8rem;
+  }
+  #bundle h2, #bundle h3 { color: var(--ink); }
+  #bundle p, #bundle li, #bundle td, #bundle th { color: var(--ink); }
+  #bundle .note { color: var(--muted-ink); }
+  #bundle .label { color: var(--sage-deep); }
+  #bundle .callout {
+    border: 1px solid #d4cfc4;
+    background: #fff;
+    padding: 0.7rem 0.85rem;
+    border-radius: 6px;
+    margin: 0.7rem 0;
+  }
+  .empty { color: var(--muted-ink); font-style: italic; }
+  footer { margin-top: 2.4rem; font-size: 0.9rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 1.1rem; }
+  .toc { font-size: 0.95rem; }
+  .toc a { margin-right: 0.7rem; }
+  @media (max-width: 640px) {
+    h1 { font-size: 1.7rem; }
+    .wrap { padding-top: 1.4rem; }
+    table { font-size: 0.84rem; }
+  }
+  @media print {
+    body { background: #fff; color: #111; }
+    .banner, .toc, .packet-bar, .nav-row, button { display: none !important; }
+    .wrap { max-width: none; padding: 0; }
+    .card, .module, #bundle { background: #fff; color: #111; border-color: #ccc; }
+    a { color: #111; text-decoration: none; }
+    #bundle { display: block !important; }
+  }
+</style>
+</head>
+<body>
+<p class="banner"><strong>Draft sample.</strong> Not an American Express product. Not confidential policy. Not submitted. All people, completions, and sign-offs below are labeled SAMPLE.</p>
+<main class="wrap">
+  <p class="kicker">GFCC Training · evidence design · instructional sample</p>
+  <h1>What was live, who finished it, who signed.</h1>
+  <p class="lede">I designed this so a TPS instructional designer can hand Internal Audit one packet and an OCC examiner a different packet, from the same short lesson, without rebuilding the course. This is evidence design. I do not claim AML tenure.</p>
+  <p class="note">Virgil Renfroe. MFA, Creative Writing, UNCG. Lecturer and Director of Online Learning, NC A&amp;T. I directed this prototype. It is a teaching object: what an ID gathers when someone asks for training-related audit or exam support. It is not a CAMS resume, not a live Amex course, and not the firm&rsquo;s Training Global Standard.</p>
+  <p class="toc">
+    <a href="#who">Who asks</a>
+    <a href="#lesson">Lesson</a>
+    <a href="#attest">Attestation</a>
+    <a href="#versions">Versions</a>
+    <a href="#sme">SME sign-off</a>
+    <a href="#roster">Completions</a>
+    <a href="#map">Mapping</a>
+    <a href="#frame">Teaching frame</a>
+    <a href="#packets">Assemble a packet</a>
+  </p>
+
+  <h2 id="who">Who asks &mdash; keep these labeled, not mashed</h2>
+  <p class="note">An examiner, an internal auditor, and second-line testing are not the same request. A Captivate vendor score is not a request at all.</p>
+  <div class="who">
+    <article class="card exam">
+      <p class="label">Exam &mdash; outside</p>
+      <h3>Who examines, and for what</h3>
+      <ul>
+        <li><strong>OCC</strong> examines American Express National Bank (BSA/AML). Public example of why records matter: OCC Civil Money Penalty Order <a href="https://www.occ.gov/static/enforcement-actions/ea2023-020.pdf">2023-020</a> (July 24, 2023), docket AA-ENF-2023-27, $15,000,000; the Bank neither admitted nor denied the findings.</li>
+        <li><strong>Federal Reserve</strong> examines the bank holding company. Other possible requestor &mdash; not this OCC packet.</li>
+        <li><strong>OFAC</strong> for sanctions. Other possible requestor &mdash; not this OCC packet.</li>
+        <li><strong>NYDFS</strong> Part 504 can show up on other GFCC jobs: periodic training of Transaction Monitoring and Filtering Program stakeholders, <a href="https://www.law.cornell.edu/regulations/new-york/3-NYCRR-504.3">3 NYCRR 504.3(c)(8)</a>. Possible other requestor. This short CIP lesson is not a Part 504 certification.</li>
+        <li><strong>Not</strong> a third-party e-learning vendor scoring Captivate.</li>
+      </ul>
+    </article>
+    <article class="card audit">
+      <p class="label">Audit &mdash; in-house third line</p>
+      <h3>American Express Internal Audit</h3>
+      <p>Third line looking at whether TPS followed the training standard: version control, SME sign-off, attestation design, and a complete evidence trail. Completions here are a control sample, not the exam population story.</p>
+    </article>
+    <article class="card second">
+      <p class="label">Second line &mdash; in-house, not TPS</p>
+      <h3>Independent compliance testing (GC&amp;E / GFCC testing)</h3>
+      <p>Separate from TPS, who <em>builds</em> the training. Testing may sample whether assigned people finished a live version. They are not the course author and not Internal Audit.</p>
+    </article>
+    <article class="card not">
+      <p class="label">Not a requestor</p>
+      <h3>A Captivate / Storyline vendor</h3>
+      <p>A SCORM score or an authoring-tool QA ticket is not an OCC exam request and not an Internal Audit workpaper. This pack is what you hand a person who has to prove training, not a person who scores a published file.</p>
+    </article>
+  </div>
+
+  <h2 id="lesson">One short lesson &mdash; CIP, the record, screen before you send</h2>
+  <p class="note">Public-domain-style teaching copy. No fake Amex policy numbers. Names marked SAMPLE. Click through; the same beats feed both packets.</p>
+  <div class="module" id="lesson-mod">
+    <p class="label">SAMPLE module &middot; not a policy number &middot; ~8 minutes</p>
+    <div class="screens" id="screens"></div>
+    <div class="nav-row">
+      <button type="button" class="ghost" id="prevBtn">Back</button>
+      <button type="button" id="nextBtn">Next</button>
+      <span class="dots" id="dots"></span>
+    </div>
+  </div>
+
+  <h2 id="attest">Attestation &mdash; SAMPLE</h2>
+  <p class="note">The checkbox language is the control. A packet without who signed, in what role, on what date, is a slide deck, not evidence.</p>
+  <div class="module">
+    <form class="attest" id="attestForm" onsubmit="return saveAttest(event)">
+      <p class="label">SAMPLE attestation &middot; not a live LMS record</p>
+      <label for="aname">Name</label>
+      <input id="aname" name="name" type="text" value="A. Chen (SAMPLE)" autocomplete="off" />
+      <label for="arole">Role</label>
+      <input id="arole" name="role" type="text" value="Small Business Onboarding (SAMPLE)" autocomplete="off" />
+      <label for="adate">Date</label>
+      <input id="adate" name="date" type="date" value="2026-08-14" />
+      <div class="consent">
+        <input id="abox" type="checkbox" />
+        <label for="abox">I completed this and understand I must collect CIP minimums and keep the record.</label>
+      </div>
+      <button type="submit">Record SAMPLE attestation</button>
+      <p class="note" id="attestOut" style="margin:0.7rem 0 0;"></p>
+    </form>
+  </div>
+
+  <h2 id="versions">Version history and as-of date</h2>
+  <p class="note">Exams ask what was live on date X. One older version has no EIN example, so that story is visible. I am not claiming current American Express training is deficient, and I am not remediating the 2015&ndash;2017 matter in OCC 2023-020. I am showing why a TPS ID versions the file.</p>
+  <div class="card">
+    <p class="label">As-of date control</p>
+    <p>What was live on
+      <input type="date" id="asof" value="2026-09-01" onchange="renderAsOf()" />
+    </p>
+    <p id="asofOut"></p>
+    <table>
+      <thead>
+        <tr><th>Version</th><th>Live from</th><th>What changed</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1.0</td>
+          <td>12 Jun 2024</td>
+          <td>CIP minimums only. No EIN / small-business record example. No OFAC beat. No structured attestation.</td>
+        </tr>
+        <tr>
+          <td>1.1</td>
+          <td>3 Feb 2025</td>
+          <td>Added the EIN / produce-the-record teaching case, citing public OCC 2023-020 as a why-records-matter case.</td>
+        </tr>
+        <tr>
+          <td>1.2 (current)</td>
+          <td>20 Jan 2026</td>
+          <td>Added OFAC &ldquo;screen before you send,&rdquo; the attestation checkbox, and this evidence trail.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="sme">SME sign-off &mdash; DEMO NAMES</h2>
+  <p class="note">Not real American Express employees. A TPS ID does not self-certify BSA content.</p>
+  <div class="card">
+    <dl class="sign">
+      <dt>Module</dt>
+      <dd>SAMPLE CIP lesson v1.2 (current)</dd>
+      <dt>BSA policy SME (SAMPLE)</dt>
+      <dd>Jordan Hale &mdash; signed 12 Jan 2026. Scope: CIP minimums and recordkeeping beats against 31 CFR 1020.220 as teaching copy, not as Amex policy text.</dd>
+      <dt>GFCC policy (SAMPLE)</dt>
+      <dd>Morgan Ellis &mdash; signed 15 Jan 2026. Scope: OFAC screen-before-send beat against the public OFAC Framework training component; attestation language.</dd>
+      <dt>TPS instructional designer (SAMPLE role, this demo)</dt>
+      <dd>Virgil Renfroe &mdash; built the evidence objects, version table, and packet split. Not a BSA officer.</dd>
+    </dl>
+  </div>
+
+  <h2 id="roster">Completions extract &mdash; SAMPLE</h2>
+  <p class="note">Eight rows so a reader can see assigned / completed / overdue / not-in-scope. Internal Audit uses this as a control sample. An OCC packet uses in-scope rows as the population story for this tiny demo.</p>
+  <div class="card" style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Role</th><th>Assigned</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>A. Chen (SAMPLE)</td><td>Small Business Onboarding</td><td>1 Aug 2026</td><td class="status ok">Completed 14 Aug</td></tr>
+        <tr><td>B. Okonkwo (SAMPLE)</td><td>Small Business Onboarding</td><td>1 Aug 2026</td><td class="status ok">Completed 9 Aug</td></tr>
+        <tr><td>C. Patel (SAMPLE)</td><td>Sanctions operations</td><td>1 Aug 2026</td><td class="status ok">Completed 18 Aug</td></tr>
+        <tr><td>D. Ruiz (SAMPLE)</td><td>Small Business Onboarding</td><td>1 Aug 2026</td><td class="status over">Overdue</td></tr>
+        <tr><td>E. Walsh (SAMPLE)</td><td>Small Business Retention</td><td>1 Aug 2026</td><td class="status asg">Assigned</td></tr>
+        <tr><td>F. Nguyen (SAMPLE)</td><td>Facilities</td><td>&mdash;</td><td class="status oos">Not in scope</td></tr>
+        <tr><td>G. Ibrahim (SAMPLE)</td><td>CIP operations</td><td>1 Aug 2026</td><td class="status ok">Completed 4 Aug</td></tr>
+        <tr><td>H. Brooks (SAMPLE)</td><td>Retention call desk</td><td>1 Aug 2026</td><td class="status over">Overdue</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="map">Lesson beat &rarr; public expectation &rarr; source</h2>
+  <div class="card" style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Beat</th><th>Public expectation</th><th>Source</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CIP minimums (name, DOB, address, ID number)</td>
+          <td>Bank CIP must obtain, at minimum, name; date of birth (individual); address; identification number (TIN for a U.S. person).</td>
+          <td><a href="https://www.ecfr.gov/current/title-31/subtitle-B/chapter-X/part-1020/subpart-B/section-1020.220">31 CFR 1020.220</a>; FFIEC CIP, <a href="https://bsaaml.ffiec.gov/manual/AssessingComplianceWithBSARegulatoryRequirements/01">manual</a></td>
+        </tr>
+        <tr>
+          <td>Keep the record; be able to produce it</td>
+          <td>CIP recordkeeping; independent testing looks at supporting documentation for training. Public teaching case: 2015&ndash;2017 small-business retention &mdash; failed to gather EINs for certain customers, maintain CIP records, and later produce records to OCC.</td>
+          <td>31 CFR 1020.220(a)(3); OCC Order <a href="https://www.occ.gov/static/enforcement-actions/ea2023-020.pdf">2023-020</a> (primary PDF); <a href="https://www.occ.gov/news-issuances/news-releases/2023/nr-occ-2023-78.html">OCC NR 2023-78</a></td>
+        </tr>
+        <tr>
+          <td>Training exists, is tailored, and leaves a file</td>
+          <td>BSA/AML program pillar: training for appropriate personnel. Independent testing should review whether training is provided, tailored to function, with supporting documentation. OCC program rule: 12 CFR 21.21.</td>
+          <td>FFIEC <a href="https://bsaaml.ffiec.gov/manual/AssessingTheBSAAMLComplianceProgram/01">program / training pillar</a>; <a href="https://bsaaml.ffiec.gov/manual/AssessingTheBSAAMLComplianceProgram/03">independent testing</a></td>
+        </tr>
+        <tr>
+          <td>Screen before you send</td>
+          <td>OFAC Framework: training is one of five SCP components; at least annually; job-specific; communicate responsibilities; hold accountable via assessments.</td>
+          <td><a href="https://ofac.treasury.gov/system/files/126/framework_ofac_cc.pdf">A Framework for OFAC Compliance Commitments</a> (May 2019)</td>
+        </tr>
+        <tr>
+          <td>Note only &mdash; not a claim this module satisfies Part 504</td>
+          <td>Possible other requestor: periodic training of all stakeholders re: Transaction Monitoring and Filtering Program.</td>
+          <td><a href="https://www.law.cornell.edu/regulations/new-york/3-NYCRR-504.3">3 NYCRR 504.3(c)(8)</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="frame">TPS evidence checklist &mdash; teaching frame</h2>
+  <p class="note">What an instructional designer would gather. Not confidential American Express policy. Not clauses of the Training Global Standard. I did not invent that standard&rsquo;s text.</p>
+  <div class="card">
+    <ul>
+      <li>The version that was live on the as-of date, not only the file on the author&rsquo;s laptop today.</li>
+      <li>SME sign-off on that version (BSA policy / GFCC policy), with date and scope.</li>
+      <li>Who was in scope, who was assigned, who completed, who is overdue, who is not in scope.</li>
+      <li>Attestation language the learner actually saw.</li>
+      <li>A map from each beat to a public requirement (not an invented internal clause).</li>
+      <li>A trail complete enough that Internal Audit can test whether TPS followed its own evidence practice, and an examiner can see assignment, live content, and in-scope completions without a rebuilt course.</li>
+    </ul>
+  </div>
+
+  <h2 id="packets">Assemble a packet</h2>
+  <p class="note">One control, two audiences. The bundle is on the page (print-friendly). It is not an alert().</p>
+  <div class="packet-bar">
+    <button type="button" id="btnAudit" onclick="assemble('audit')">Packet for Internal Audit</button>
+    <button type="button" class="ghost" id="btnOcc" onclick="assemble('occ')">Packet for OCC exam</button>
+  </div>
+  <div id="bundle" aria-live="polite">
+    <p class="empty">Choose a packet. Internal Audit gets the evidence trail. OCC gets what was assigned, what was live on the as-of date, and in-scope completions.</p>
+  </div>
+
+  <footer>
+    Virgil Renfroe &middot; Greensboro, NC &middot; draft sample.<br />
+    Not an American Express product. Not confidential policy. Not submitted.
+  </footer>
+</main>
+<script>
+const VERSIONS = [
+  { id: "1.0", from: "2024-06-12", beats: ["CIP minimums"], ein: false, ofac: false, attest: false,
+    sme: "Jordan Hale (SAMPLE), BSA policy SME — CIP minimums only." },
+  { id: "1.1", from: "2025-02-03", beats: ["CIP minimums", "EIN / produce-the-record teaching case"], ein: true, ofac: false, attest: false,
+    sme: "Jordan Hale (SAMPLE), BSA policy SME — CIP + EIN teaching case." },
+  { id: "1.2", from: "2026-01-20", beats: ["CIP minimums", "EIN / produce-the-record teaching case", "OFAC screen before you send", "Check + attestation"], ein: true, ofac: true, attest: true,
+    sme: "Jordan Hale (SAMPLE), BSA policy SME; Morgan Ellis (SAMPLE), GFCC policy — CIP, EIN case, OFAC beat, attestation." }
+];
+function liveOn(iso) {
+  let v = VERSIONS[0];
+  for (const x of VERSIONS) if (iso >= x.from) v = x;
+  return v;
+}
+function renderAsOf() {
+  const iso = document.getElementById("asof").value || "2026-09-01";
+  const v = liveOn(iso);
+  const ein = v.ein ? "EIN example present." : "EIN example not in this version — that is the exam-as-of story.";
+  document.getElementById("asofOut").innerHTML =
+    "<strong>Live on " + iso + ": v" + v.id + ".</strong> Beats: " + v.beats.join("; ") + ". " + ein;
+}
+renderAsOf();
+
+const screens = [
+  {
+    t: "Objective",
+    h: function() {
+      return `<p class="label">Screen 1 of 5</p>
+      <h3>After this sitting you can do three things</h3>
+      <ol>
+        <li>Name the CIP minimums before you open the account.</li>
+        <li>Keep the record so it can be produced later.</li>
+        <li>Screen before you send.</li>
+      </ol>
+      <p class="note">SAMPLE lesson. Not Amex policy text. Not a claim about current bank training quality.</p>`;
+    }
+  },
+  {
+    t: "CIP minimums",
+    h: function() {
+      return `<p class="label">Screen 2 of 5</p>
+      <h3>Four facts, before the account is open</h3>
+      <p>Under <a href="https://www.ecfr.gov/current/title-31/subtitle-B/chapter-X/part-1020/subpart-B/section-1020.220">31 CFR 1020.220</a>, a bank CIP must obtain, at a minimum:</p>
+      <ul>
+        <li><strong>Name</strong></li>
+        <li><strong>Date of birth</strong>, for an individual</li>
+        <li><strong>Address</strong> (street address rules differ for people and entities)</li>
+        <li><strong>Identification number</strong> — for a U.S. person, a taxpayer identification number. For a U.S. business, that is typically an EIN.</li>
+      </ul>
+      <p class="note">Check the four. If one is missing, you do not have a CIP record yet. SAMPLE.</p>`;
+    }
+  },
+  {
+    t: "EIN / the record",
+    h: function() {
+      return `<p class="label">Screen 3 of 5 · teaching case</p>
+      <h3>Why &ldquo;we trained them&rdquo; is not the same as &ldquo;here is the record&rdquo;</h3>
+      <p>Public findings, OCC Consent Order <a href="https://www.occ.gov/static/enforcement-actions/ea2023-020.pdf">2023-020</a> (July 24, 2023), American Express National Bank, Sandy, Utah. Civil money penalty $15,000,000. Docket AA-ENF-2023-27. The Bank neither admitted nor denied the Comptroller&rsquo;s findings.</p>
+      <p>In 2015&ndash;2017, as part of large-scale efforts to retain small-business customers, the Comptroller found the Bank failed to gather employer identification numbers for certain of those customers and properly maintain CIP records; and failed to properly maintain records related to that retention effort and, later, produce them in response to OCC requests. The order states those violations and practices were part of a pattern of misconduct.</p>
+      <p><strong>Teaching point for a TPS ID, not a remediation claim:</strong> if someone asks what was live on date X, and whether the record can be produced, the answer has to be a file, not a memory. This sample does not say I remediated that 2015&ndash;2017 matter. It does not say current training is deficient.</p>
+      <p class="note">SAMPLE customer for practice: Riverside Outfitters LLC (SAMPLE). Ask for the EIN. File it. Do not send the account live on a missing number.</p>`;
+    }
+  },
+  {
+    t: "Screen before you send",
+    h: function() {
+      return `<p class="label">Screen 4 of 5</p>
+      <h3>Screen before you send</h3>
+      <p>OFAC&rsquo;s public framework names five components of a sanctions compliance program. Training is one of them. It should reach appropriate personnel at least annually, be job-specific, communicate each person&rsquo;s responsibilities, and hold people accountable through assessments. Primary: <a href="https://ofac.treasury.gov/system/files/126/framework_ofac_cc.pdf">A Framework for OFAC Compliance Commitments</a> (May 2019).</p>
+      <p>The beat in this lesson is operational and small: do not release the payment, the card, or the wire until screening has run. &ldquo;I will screen it after it goes&rdquo; is not screening.</p>
+      <p class="note">SAMPLE. This CIP lesson is not an OFAC exam binder and not a NYDFS Part 504 certification.</p>`;
+    }
+  },
+  {
+    t: "Check + attest",
+    h: function() {
+      return `<p class="label">Screen 5 of 5</p>
+      <h3>Two questions, then you sign</h3>
+      <p>1. For a U.S. business customer, which identifier is the CIP identification number?</p>
+      <ul class="check" id="q1">
+        <li role="button" tabindex="0" data-ok="0">Store loyalty number (SAMPLE distractor)</li>
+        <li role="button" tabindex="0" data-ok="1">Taxpayer identification number (typically an EIN)</li>
+        <li role="button" tabindex="0" data-ok="0">The agent&rsquo;s employee ID</li>
+      </ul>
+      <p>2. Why does the record have to be kept in a place you can produce?</p>
+      <ul class="check" id="q2">
+        <li role="button" tabindex="0" data-ok="1">An examiner or auditor may ask what was collected, and whether it still exists.</li>
+        <li role="button" tabindex="0" data-ok="0">So marketing can build a lookalike list.</li>
+        <li role="button" tabindex="0" data-ok="0">Because Captivate requires a 80% quiz score.</li>
+      </ul>
+      <p>3. When do you screen for sanctions?</p>
+      <ul class="check" id="q3">
+        <li role="button" tabindex="0" data-ok="0">After the payment has already gone, if you have time.</li>
+        <li role="button" tabindex="0" data-ok="1">Before you send.</li>
+      </ul>
+      <p class="note">Attestation is the next block on this page. SAMPLE.</p>`;
+    }
+  }
+];
+let si = 0;
+function paintLesson() {
+  document.getElementById("screens").innerHTML = screens[si].h();
+  document.getElementById("dots").textContent = (si + 1) + " / " + screens.length + " · " + screens[si].t;
+  document.getElementById("prevBtn").disabled = si === 0;
+  document.getElementById("nextBtn").textContent = si === screens.length - 1 ? "End of lesson" : "Next";
+  document.getElementById("nextBtn").disabled = si === screens.length - 1;
+  document.querySelectorAll(".check li").forEach(li => {
+    const go = () => {
+      li.parentElement.querySelectorAll("li").forEach(x => x.setAttribute("aria-pressed", "false"));
+      li.setAttribute("aria-pressed", "true");
+      li.classList.toggle("right", li.dataset.ok === "1");
+      li.classList.toggle("wrong", li.dataset.ok !== "1");
+    };
+    li.addEventListener("click", go);
+    li.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+  });
+}
+document.getElementById("prevBtn").onclick = () => { if (si > 0) { si--; paintLesson(); } };
+document.getElementById("nextBtn").onclick = () => { if (si < screens.length - 1) { si++; paintLesson(); } };
+paintLesson();
+
+let lastAttest = null;
+function saveAttest(e) {
+  e.preventDefault();
+  const box = document.getElementById("abox").checked;
+  lastAttest = {
+    name: document.getElementById("aname").value,
+    role: document.getElementById("arole").value,
+    date: document.getElementById("adate").value,
+    box: box
+  };
+  document.getElementById("attestOut").textContent = box
+    ? "SAMPLE attestation recorded on this page only — " + lastAttest.name + ", " + lastAttest.date + "."
+    : "Check the box to record the SAMPLE attestation. The checkbox is the control.";
+  return false;
+}
+
+function assemble(kind) {
+  const iso = document.getElementById("asof").value || "2026-09-01";
+  const v = liveOn(iso);
+  document.getElementById("btnAudit").setAttribute("aria-pressed", kind === "audit" ? "true" : "false");
+  document.getElementById("btnOcc").setAttribute("aria-pressed", kind === "occ" ? "true" : "false");
+  document.getElementById("btnAudit").className = kind === "audit" ? "" : "ghost";
+  document.getElementById("btnOcc").className = kind === "occ" ? "" : "ghost";
+  const attestLine = lastAttest && lastAttest.box
+    ? lastAttest.name + " · " + lastAttest.role + " · " + lastAttest.date + " · checkbox accepted."
+    : "Design of the control: name, role, date, and the sentence “I completed this and understand I must collect CIP minimums and keep the record.” SAMPLE. (Record one above to pin a demo row.)";
+  let html = "";
+  if (kind === "audit") {
+    html = `
+      <p class="label">Assembled packet · Internal Audit (third line)</p>
+      <h2>Did TPS follow the evidence practice?</h2>
+      <p>Audience: American Express Internal Audit. Question: whether Training, Policies, and Standards left a trail an auditor can test &mdash; not whether every in-scope person worldwide finished. Completions below are a <strong>control sample</strong>, not the exam population story.</p>
+      <div class="callout">
+        <p class="label">SME sign-off (SAMPLE names)</p>
+        <p>${v.sme} Version live on ${iso}: <strong>v${v.id}</strong>.</p>
+      </div>
+      <div class="callout">
+        <p class="label">Version control</p>
+        <p>Three versions on file. v1.0 (12 Jun 2024) has no EIN example. v1.1 (3 Feb 2025) adds the public OCC 2023-020 teaching case. v1.2 (20 Jan 2026) adds OFAC screen-before-send and attestation. As-of ${iso} resolves to v${v.id}. Beats: ${v.beats.join("; ")}.</p>
+      </div>
+      <div class="callout">
+        <p class="label">Attestation design</p>
+        <p>${attestLine}</p>
+      </div>
+      <div class="callout">
+        <p class="label">Mapped to the teaching-frame checklist</p>
+        <ul>
+          <li>Live version on as-of date: v${v.id}.</li>
+          <li>SME sign-off dated and scoped: yes (SAMPLE).</li>
+          <li>In-scope / assigned / completed / overdue / not-in-scope: yes, eight-row sample.</li>
+          <li>Attestation language the learner sees: on the page.</li>
+          <li>Beat &rarr; public source map: on the page (no invented Amex clauses).</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <p class="label">Completions as a control sample (not the exam population)</p>
+        <p>8 SAMPLE rows. 4 completed, 2 overdue, 1 assigned, 1 not in scope. An auditor can ask: is the status field produced from the LMS, and does overdue have an owner? That is a design-of-control question.</p>
+      </div>
+      <p class="note">Evidence trail completeness: version table, SME names and dates, attestation object, mapping table, roster extract. Second-line GFCC testing is a different requestor and is not this packet. A Captivate vendor score is not this packet.</p>
+    `;
+  } else {
+    html = `
+      <p class="label">Assembled packet · OCC exam (outside)</p>
+      <h2>What was assigned, what was live, who in scope finished</h2>
+      <p>Audience: OCC examining American Express National Bank (BSA/AML). Public CIP hook is <a href="https://www.occ.gov/static/enforcement-actions/ea2023-020.pdf">OCC 2023-020</a> as a why-records-matter teaching case, not a claim that this sample remediates 2015&ndash;2017 or that current training is deficient.</p>
+      <div class="callout">
+        <p class="label">What was live on the as-of date</p>
+        <p><strong>${iso} → this SAMPLE module v${v.id}.</strong> Beats actually in that file: ${v.beats.join("; ")}.</p>
+        <p>${v.ein ? "EIN / produce-the-record teaching case is in this version." : "<strong>EIN example is not in this version.</strong> An examiner asking as-of a 2024 date would receive CIP minimums only. That is the point of versioning."}</p>
+        <p>${v.ofac ? "OFAC screen-before-send beat is in this version." : "OFAC beat not yet in this version."}</p>
+      </div>
+      <div class="callout">
+        <p class="label">What was assigned (in-scope population for this SAMPLE)</p>
+        <p>Assigned 1 Aug 2026 to Small Business Onboarding, Small Business Retention, CIP operations, sanctions operations, retention call desk. Facilities is not in scope. SAMPLE names only.</p>
+      </div>
+      <div class="callout">
+        <p class="label">Completions for the in-scope population (SAMPLE)</p>
+        <p>In scope: 7 people. Completed: A. Chen, B. Okonkwo, C. Patel, G. Ibrahim. Overdue: D. Ruiz, H. Brooks. Assigned not yet done: E. Walsh. Excluded: F. Nguyen (not in scope).</p>
+      </div>
+      <div class="callout">
+        <p class="label">Mapped to BSA training pillar + CIP</p>
+        <ul>
+          <li>Training for appropriate personnel — FFIEC BSA/AML program pillars, <a href="https://bsaaml.ffiec.gov/manual/AssessingTheBSAAMLComplianceProgram/01">Assessing the BSA/AML Compliance Program</a>. OCC independent-testing / program cite: 12 CFR 21.21.</li>
+          <li>Independent testing looks for training provided, tailored, with supporting documentation — <a href="https://bsaaml.ffiec.gov/manual/AssessingTheBSAAMLComplianceProgram/03">FFIEC independent testing</a>.</li>
+          <li>CIP minimums and recordkeeping — <a href="https://www.ecfr.gov/current/title-31/subtitle-B/chapter-X/part-1020/subpart-B/section-1020.220">31 CFR 1020.220</a>.</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <p class="label">Other possible requestors — not mashed into this OCC packet</p>
+        <p>Federal Reserve (bank holding company). OFAC (sanctions program). NYDFS Part 504, including 3 NYCRR 504.3(c)(8) periodic training of TM/filtering stakeholders. If those bodies ask, assemble a different packet. This CIP lesson is not a Part 504 certification.</p>
+      </div>
+    `;
+  }
+  document.getElementById("bundle").innerHTML = html;
+  document.getElementById("bundle").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+</script>
+</body>
+</html>
