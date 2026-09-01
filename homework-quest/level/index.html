@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Find the level — Homework Quest</title>
-<meta name="description" content="I designed a two-minute grown-up flow that finds a band, not a grade, and one task for tonight." />
+<title>What can they read tonight — Homework Quest</title>
+<meta name="description" content="I designed a two-minute grown-up check: what can they read out loud tonight, and one sentence to try (or skip)." />
 <meta name="robots" content="noindex,nofollow" />
-<meta property="og:title" content="Find the level — Homework Quest" />
+<meta property="og:title" content="What can they read tonight — Homework Quest" />
 <meta property="og:image" content="../og.jpg" />
 <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
 <style>
@@ -17,7 +17,7 @@
     --sage: #8fad8a;
     --line: #2a3530;
     --elev: #1a221e;
-    --gold: #c4a574;
+    --warm: #c4a574;
   }
   * { box-sizing: border-box; }
   body {
@@ -44,7 +44,7 @@
   }
   .wrap { max-width: 40rem; margin: 0 auto; padding: 1.25rem 1.25rem 3rem; position: relative; }
   .kicker { letter-spacing: .22em; text-transform: uppercase; font-size: .72rem; color: var(--sage); font-family: "Segoe UI", system-ui, sans-serif; }
-  h1 { font-size: 2.1rem; line-height: 1.05; margin: .35rem 0 .6rem; font-weight: 600; }
+  h1 { font-size: 2.05rem; line-height: 1.08; margin: .35rem 0 .6rem; font-weight: 600; }
   h2 { font-size: 1.2rem; margin: 1.6rem 0 .4rem; }
   .lede, .note, .hint { color: var(--muted); }
   .note { font-size: .95rem; }
@@ -56,7 +56,10 @@
     padding: 1rem 1.1rem;
     margin: 0 0 .85rem;
   }
-  .item { font-size: 1.05rem; color: var(--cream); margin: .2rem 0 .8rem; }
+  .item { font-size: 1.08rem; color: var(--cream); margin: .2rem 0 .85rem; }
+  .legend { font-size: .92rem; color: var(--muted); margin: 0 0 .85rem; }
+  .legend p { margin: .25rem 0; }
+  .legend strong { color: var(--cream); font-weight: 600; }
   .choices { display: flex; flex-wrap: wrap; gap: .45rem; }
   .choices button, .go, .ghost {
     font: inherit;
@@ -74,14 +77,13 @@
     font-weight: 600;
   }
   .go { display: inline-block; margin-top: .4rem; font-size: 1rem; padding: .7rem 1.1rem; }
-  .go[disabled] { opacity: .45; cursor: not-allowed; }
   .ghost { background: transparent; }
   .band {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
     color: var(--sage);
     margin: .2rem 0 .5rem;
   }
-  .gold { color: var(--gold); }
+  .warm { color: var(--warm); }
   table { width: 100%; border-collapse: collapse; font-size: .92rem; }
   th, td { text-align: left; padding: .4rem .35rem; border-bottom: 1px solid var(--line); vertical-align: top; }
   th { color: var(--muted); font-weight: 600; }
@@ -98,28 +100,32 @@
   <div class="veil"></div>
   <div class="wrap">
     <p class="kicker">Homework Quest · grown-ups</p>
-    <h1>Find the level</h1>
+    <h1>What can they read tonight?</h1>
   </div>
 </header>
 <main class="wrap">
-  <p class="lede">I designed this so a grown-up can find a band in two minutes. Not a grade. Not a test score. The game stays the adventure. This door is the teaching move.</p>
-  <p class="note">I am not applying as a software engineer. I design learning. I ship a working prototype so you can click it.</p>
-  <p class="note">Example items only. Not a published test. I did not claim validated psychometrics here.</p>
+  <p class="lede">I designed this so a grown-up can check, in two minutes, what a child can read out loud tonight. Not a test score. Not a grade. The game stays the adventure.</p>
+  <p class="note">Four example lines. Not a published test.</p>
 
   <section id="step-intro">
-    <h2>The case</h2>
-    <p>I wrote a tiny gold set for a child who can already read short decodable lines and is stretching into two-clause sentences. That child is a teaching case, not a real student.</p>
-    <p>The gold key for the set is <strong class="gold">instructional</strong>. You will mark four example lines the way that child would meet them tonight. Then I will tell you the band the tool landed, the one task I would do today, and whether that matched the gold key.</p>
-    <p class="hint">Alone = independent on that line. A little help = instructional. Not tonight = too hard for tonight.</p>
+    <h2>How this works</h2>
+    <p>I already know how a child at this spot would do on these four lines. That child is a teaching case, not a real student. They can read a short line like “The fox ran to the hill.” They are stretching into longer sentences. The science sentence is too much for tonight.</p>
+    <p>You mark the four lines the way that child would meet them. Then I show whether your marks match what I already knew, and one sentence to read — or not — today.</p>
     <button type="button" class="go" id="start">Mark the four lines</button>
   </section>
 
   <section id="step-items">
     <h2>Tonight’s lines</h2>
-    <p class="hint" id="progress">Example items. Not a published test. 1 of 4</p>
+    <p class="hint" id="progress">Example lines. 1 of 4</p>
     <div class="card">
       <p class="item" id="item-text"></p>
-      <div class="choices" role="group" aria-label="How tonight">
+      <div class="legend">
+        <p>This is reading the sentence out loud tonight, not writing it.</p>
+        <p><strong>Alone</strong> — they can read this sentence tonight without help.</p>
+        <p><strong>A little help</strong> — they can read it if you sit with them.</p>
+        <p><strong>Not tonight</strong> — don’t ask them to read this sentence tonight.</p>
+      </div>
+      <div class="choices" role="group" aria-label="Can they read this sentence out loud tonight?">
         <button type="button" data-mark="alone">Alone</button>
         <button type="button" data-mark="help">A little help</button>
         <button type="button" data-mark="not">Not tonight</button>
@@ -128,55 +134,60 @@
   </section>
 
   <section id="step-result">
-    <h2>The band</h2>
+    <h2>Tonight</h2>
     <p class="band" id="band-label"></p>
     <p id="task"></p>
 
-    <h2>Accuracy — shown, not hidden</h2>
-    <p>I keyed this gold set as <strong class="gold">instructional</strong> when I wrote it. After your run:</p>
+    <h2>Did that match?</h2>
+    <p>I already marked how this child would do. Here’s whether your marks match that.</p>
     <p id="accuracy"></p>
     <div class="card">
       <table>
         <thead>
-          <tr><th>Example item</th><th>Gold key</th><th>You marked</th></tr>
+          <tr><th>Line</th><th>What I expected</th><th>You marked</th></tr>
         </thead>
         <tbody id="acc-body"></tbody>
       </table>
     </div>
-    <p class="note">A real check is not this page agreeing with itself. A real check is: a parent or teacher agrees tonight’s homework is in that band, and the next night the recommended task got done.</p>
+    <p class="note">A real check is not this page agreeing with itself. A real check is: a parent or teacher agrees that’s what they can read tonight, and tomorrow the one sentence got done — or honestly skipped.</p>
 
     <h2>If you know the child</h2>
-    <p class="hint">Human override. The tool does not get the last word.</p>
+    <p class="hint">You get the last word.</p>
     <div class="choices" id="override">
-      <button type="button" data-over="independent">Use independent</button>
-      <button type="button" data-over="instructional">Use instructional</button>
-      <button type="button" data-over="too-hard">Use too-hard</button>
+      <button type="button" data-over="independent">They can read it alone</button>
+      <button type="button" data-over="instructional">Sit with them</button>
+      <button type="button" data-over="too-hard">Not tonight</button>
     </div>
     <p id="over-echo" class="hint"></p>
 
     <p style="margin-top:1.2rem">
-      <button type="button" class="ghost" id="again">Run it again</button>
+      <button type="button" class="ghost" id="again">Mark them again</button>
       <a class="back" href="../">Back to the adventure</a>
     </p>
   </section>
 
   <footer>
-    Virgil Renfroe · Greensboro, NC · draft sample on Homework Quest. Not a live school product. Not Nestlight.
+    Virgil Renfroe · Greensboro, NC · draft sample on Homework Quest. Not a live school product.
   </footer>
 </main>
 <script>
 (function () {
   var ITEMS = [
-    { id: "fox", text: "The fox ran to the hill.", gold: "independent" },
-    { id: "maya", text: "Maya kept the library book an extra day because the last chapter would not let her sleep.", gold: "instructional" },
-    { id: "rain", text: "When the rain started, we pulled the chairs onto the porch and waited.", gold: "instructional" },
-    { id: "photo", text: "Photosynthesis converts light energy into chemical energy stored in glucose.", gold: "too-hard" }
+    { id: "fox", text: "The fox ran to the hill.", expect: "alone" },
+    { id: "maya", text: "Maya kept the library book an extra day because the last chapter would not let her sleep.", expect: "help" },
+    { id: "rain", text: "When the rain started, we pulled the chairs onto the porch and waited.", expect: "help" },
+    { id: "photo", text: "Photosynthesis converts light energy into chemical energy stored in glucose.", expect: "not" }
   ];
-  var GOLD_SET = "instructional";
+  var EXPECTED_TONIGHT = "instructional";
+  var TONIGHT = {
+    independent: "They can read this kind of line alone tonight.",
+    instructional: "Sit with them for this kind of line tonight.",
+    "too-hard": "Don’t ask them to read the hard line tonight."
+  };
   var TASK = {
-    independent: "Do this today: read the hard line’s first six words out loud. Stop. Tell me what those words are doing. Do not finish the sentence unless you want to.",
-    instructional: "Do this today: we read this together once — the Maya line. You read that same sentence back. One sentence, not the page.",
-    "too-hard": "Do this today: park the hard page. Three short lines like the fox line, out loud. Tomorrow we try one sentence from tonight’s page."
+    independent: "One sentence today: read the hard line’s first six words out loud. Stop. Tell me what those words are doing. Don’t finish it unless you want to.",
+    instructional: "One sentence today: we read the Maya line together once. They read that same sentence back. One sentence, not the page.",
+    "too-hard": "Don’t ask for the hard line tonight. Three short lines like the fox line, out loud. Tomorrow, one sentence from tonight’s page."
   };
   var marks = [];
   var i = 0;
@@ -190,7 +201,7 @@
   }
 
   function renderItem() {
-    $("progress").textContent = "Example items. Not a published test. " + (i + 1) + " of " + ITEMS.length;
+    $("progress").textContent = "Example lines. " + (i + 1) + " of " + ITEMS.length;
     $("item-text").textContent = ITEMS[i].text;
     var btns = document.querySelectorAll("#step-items .choices button");
     for (var b = 0; b < btns.length; b++) btns[b].setAttribute("aria-pressed", "false");
@@ -206,24 +217,21 @@
     return "instructional";
   }
 
-  function label(m) {
+  function markLabel(m) {
     return m === "alone" ? "Alone" : m === "help" ? "A little help" : "Not tonight";
-  }
-  function goldLabel(g) {
-    return g === "too-hard" ? "too-hard" : g;
   }
 
   function finish() {
     band = decide(marks);
-    var match = band === GOLD_SET;
-    $("band-label").textContent = band;
+    var match = band === EXPECTED_TONIGHT;
+    $("band-label").textContent = TONIGHT[band];
     $("task").textContent = TASK[band];
     $("accuracy").innerHTML = match
-      ? "The tool landed <strong class=\"match\">instructional</strong> — same as the gold key."
-      : "The tool landed <strong class=\"miss\">" + band + "</strong>. The gold key is instructional. Miss. You can override below.";
+      ? "Your marks <strong class=\"match\">match</strong> what I already knew for this child: sit with them tonight."
+      : "Your marks <strong class=\"miss\">don’t match</strong> what I already knew (sit with them tonight). You can still choose below.";
     var body = "";
     for (var n = 0; n < ITEMS.length; n++) {
-      body += "<tr><td>" + ITEMS[n].text + "</td><td class=\"gold\">" + goldLabel(ITEMS[n].gold) + "</td><td>" + label(marks[n]) + "</td></tr>";
+      body += "<tr><td>" + ITEMS[n].text + "</td><td>" + markLabel(ITEMS[n].expect) + "</td><td>" + markLabel(marks[n]) + "</td></tr>";
     }
     $("acc-body").innerHTML = body;
     $("over-echo").textContent = "";
@@ -256,9 +264,9 @@
       document.querySelectorAll("#override button").forEach(function (b) {
         b.setAttribute("aria-pressed", b === btn ? "true" : "false");
       });
-      $("band-label").textContent = over + " (your call)";
+      $("band-label").textContent = TONIGHT[over] + " That’s your call.";
       $("task").textContent = TASK[over];
-      $("over-echo").textContent = "Override is in. Tonight we use " + over + ". The gold key is still instructional so you can see what the tool did.";
+      $("over-echo").textContent = "Tonight we use your call. I still show what I expected, so you can see the difference.";
     });
   });
 
