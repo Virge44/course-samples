@@ -94,9 +94,16 @@
   #step-items.show, #step-result.show { display: block; }
   #match-block, #own-note { display: none; }
   #match-block.show, #own-note.show { display: block; }
-  .hear { margin: .85rem 0 .2rem; }
-  .hear p { margin: 0 0 .4rem; color: var(--muted); font-size: .95rem; }
-  .hear audio { width: 100%; display: block; }
+  .hear {
+    margin: .85rem 0 .55rem;
+    padding: .85rem .95rem;
+    background: var(--cream);
+    color: var(--ink);
+    border-radius: 10px;
+  }
+  .hear p { margin: 0 0 .55rem; color: var(--ink); font-size: .95rem; }
+  .hear .go { margin-top: 0; }
+  .hear audio { display: none; }
   footer { margin-top: 2rem; color: var(--muted); font-size: .9rem; }
 </style>
 </head>
@@ -119,7 +126,7 @@
     <p>Try the sample to see how the check works.</p>
     <div class="hear">
       <p>Hear the ten sample lines read out loud. Adult narrator, not a child.</p>
-      <audio controls preload="none" src="audio/hq-level-ten-lines-us.mp3">Your browser does not play audio here.</audio>
+      <button type="button" class="go" data-play-sample>Play the sample lines</button>
     </div>
     <div class="intro-actions">
       <button type="button" class="go" id="start-sample">Try the sample child</button>
@@ -132,7 +139,7 @@
     <p class="hint" id="progress">Example lines. 1 of 10</p>
     <div class="hear">
       <p>Hear the ten sample lines read out loud. Adult narrator, not a child.</p>
-      <audio controls preload="none" src="audio/hq-level-ten-lines-us.mp3">Your browser does not play audio here.</audio>
+      <button type="button" class="go" data-play-sample>Play the sample lines</button>
     </div>
     <div class="card">
       <p class="item" id="item-text"></p>
@@ -189,6 +196,7 @@
   <footer>
     Virgil Renfroe · Greensboro, NC · draft sample on Homework Quest. Not a live school product.
   </footer>
+  <audio id="sample-audio" preload="none" src="audio/hq-level-ten-lines-us.mp3"></audio>
 </main>
 <script>
 (function () {
@@ -296,6 +304,26 @@
     }
     show("result");
   }
+
+
+  function syncPlayLabels() {
+    var a = $("sample-audio");
+    var playing = a && !a.paused;
+    document.querySelectorAll("[data-play-sample]").forEach(function (b) {
+      b.textContent = playing ? "Pause" : "Play the sample lines";
+    });
+  }
+  document.querySelectorAll("[data-play-sample]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var a = $("sample-audio");
+      if (a.paused) a.play();
+      else a.pause();
+      syncPlayLabels();
+    });
+  });
+  $("sample-audio").addEventListener("play", syncPlayLabels);
+  $("sample-audio").addEventListener("pause", syncPlayLabels);
+  $("sample-audio").addEventListener("ended", syncPlayLabels);
 
   $("start-sample").addEventListener("click", function () { begin("sample"); });
   $("start-own").addEventListener("click", function () { begin("own"); });
