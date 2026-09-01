@@ -170,6 +170,20 @@
   footer { margin-top: 2.4rem; font-size: 0.9rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 1.1rem; }
   .toc { font-size: 0.95rem; }
   .toc a { margin-right: 0.7rem; }
+  .vid { margin: 1.15rem 0 1.5rem; }
+  .vid video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    background: #0e1210;
+    border: 1px solid var(--rule);
+  }
+  .vid figcaption {
+    font-size: 0.92rem;
+    color: var(--muted);
+    margin: 0.45rem 0 0;
+  }
   @media (max-width: 640px) {
     h1 { font-size: 1.7rem; }
     .wrap { padding-top: 1.4rem; }
@@ -191,6 +205,13 @@
   <p class="kicker">GFCC Training · evidence design · instructional sample</p>
   <h1>What was live, who finished it, who signed.</h1>
   <p class="lede">I designed this so a TPS instructional designer can hand Internal Audit one packet and an OCC examiner a different packet, from the same short lesson, without rebuilding the course. This is evidence design. I do not claim AML tenure.</p>
+  <p>I made a short teaching video of this sample lesson and the two packets. Not a Captivate file.</p>
+  <figure class="vid">
+    <video controls preload="metadata" width="1920" height="1080">
+      <source src="cip-evidence-pack.mp4" type="video/mp4" />
+    </video>
+    <figcaption>A teaching video of this sample CIP lesson and the two packets. SAMPLE throughout.</figcaption>
+  </figure>
   <p class="note">Virgil Renfroe. MFA, Creative Writing, UNCG. Lecturer and Director of Online Learning, NC A&amp;T. I directed this prototype. It is a teaching object: what an ID gathers when someone asks for training-related audit or exam support. It is not a CAMS resume, not a live Amex course, and not the firm&rsquo;s Training Global Standard.</p>
   <p class="toc">
     <a href="#who">Who asks</a>
