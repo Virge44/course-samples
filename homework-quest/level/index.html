@@ -124,10 +124,6 @@
     <h2>How this works</h2>
     <p>These ten lines are for a sample child, not yours. Tonight can look like this: they can read a short line like “The fox ran to the hill,” or they are stretching into longer sentences, or the science sentence is too much for tonight.</p>
     <p>Try the sample to see how the check works.</p>
-    <div class="hear">
-      <p>Hear the ten sample lines read out loud. Adult narrator, not a child.</p>
-      <button type="button" class="go" data-play-sample>Play the sample lines</button>
-    </div>
     <div class="intro-actions">
       <button type="button" class="go" id="start-sample">Try the sample child</button>
       <button type="button" class="ghost" id="start-own">Assess tonight’s reading</button>
@@ -138,8 +134,8 @@
     <h2 id="items-heading">Tonight’s lines</h2>
     <p class="hint" id="progress">Example lines. 1 of 10</p>
     <div class="hear">
-      <p>Hear the ten sample lines read out loud. Adult narrator, not a child.</p>
-      <button type="button" class="go" data-play-sample>Play the sample lines</button>
+      <p>Hear this line read out loud. Then mark how tonight goes.</p>
+      <button type="button" class="go" id="play-line">Play this line</button>
     </div>
     <div class="card">
       <p class="item" id="item-text"></p>
@@ -196,24 +192,24 @@
   <footer>
     Virgil Renfroe · Greensboro, NC · draft sample on Homework Quest. Not a live school product.
   </footer>
-  <audio id="sample-audio" preload="none" src="audio/hq-level-ten-lines-us.mp3"></audio>
+  <audio id="line-audio" preload="none"></audio>
 </main>
 <script>
 (function () {
   var ITEMS = [
     // Alone (short)
-    { id: "fox", text: "The fox ran to the hill.", expect: "alone" },
-    { id: "dog", text: "The dog sat by the door.", expect: "alone" },
-    { id: "park", text: "We went to the park.", expect: "alone" },
+    { id: "fox", text: "The fox ran to the hill.", expect: "alone", audio: "audio/hq-line-01-fox.mp3" },
+    { id: "dog", text: "The dog sat by the door.", expect: "alone", audio: "audio/hq-line-02-dog.mp3" },
+    { id: "park", text: "We went to the park.", expect: "alone", audio: "audio/hq-line-03-park.mp3" },
     // A little help (longer story sentences)
-    { id: "maya", text: "Maya kept the library book an extra day because the last chapter would not let her sleep.", expect: "help" },
-    { id: "rain", text: "When the rain started, we pulled the chairs onto the porch and waited.", expect: "help" },
-    { id: "garden", text: "The class voted to keep the garden even though the frost had already come.", expect: "help" },
-    { id: "store", text: "He asked if we could stop at the store before the library closed.", expect: "help" },
+    { id: "maya", text: "Maya kept the library book an extra day because the last chapter would not let her sleep.", expect: "help", audio: "audio/hq-line-04-maya.mp3" },
+    { id: "rain", text: "When the rain started, we pulled the chairs onto the porch and waited.", expect: "help", audio: "audio/hq-line-05-rain.mp3" },
+    { id: "garden", text: "The class voted to keep the garden even though the frost had already come.", expect: "help", audio: "audio/hq-line-06-garden.mp3" },
+    { id: "store", text: "He asked if we could stop at the store before the library closed.", expect: "help", audio: "audio/hq-line-07-store.mp3" },
     // Not tonight (dense/academic)
-    { id: "photo", text: "Photosynthesis converts light energy into chemical energy stored in glucose.", expect: "not" },
-    { id: "quorum", text: "The committee postponed ratification pending a quorum of the board.", expect: "not" },
-    { id: "evap", text: "Evaporation is the process by which a liquid becomes a gas at the surface.", expect: "not" }
+    { id: "photo", text: "Photosynthesis converts light energy into chemical energy stored in glucose.", expect: "not", audio: "audio/hq-line-08-photo.mp3" },
+    { id: "quorum", text: "The committee postponed ratification pending a quorum of the board.", expect: "not", audio: "audio/hq-line-09-quorum.mp3" },
+    { id: "evap", text: "Evaporation is the process by which a liquid becomes a gas at the surface.", expect: "not", audio: "audio/hq-line-10-evap.mp3" }
   ];
   var EXPECTED_TONIGHT = "instructional";
   var TONIGHT = {
@@ -254,6 +250,7 @@
     }
     $("progress").textContent = "Example lines. " + (i + 1) + " of " + ITEMS.length;
     $("item-text").textContent = ITEMS[i].text;
+    loadLineAudio();
     var btns = document.querySelectorAll("#step-items .choices button");
     for (var b = 0; b < btns.length; b++) btns[b].setAttribute("aria-pressed", "false");
   }
@@ -306,24 +303,31 @@
   }
 
 
-  function syncPlayLabels() {
-    var a = $("sample-audio");
-    var playing = a && !a.paused;
-    document.querySelectorAll("[data-play-sample]").forEach(function (b) {
-      b.textContent = playing ? "Pause" : "Play the sample lines";
-    });
+  function syncLineLabel() {
+    var a = $("line-audio");
+    var playing = a && !a.paused && a.currentTime > 0 && !a.ended;
+    $("play-line").textContent = playing ? "Pause" : "Play this line";
   }
-  document.querySelectorAll("[data-play-sample]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var a = $("sample-audio");
-      if (a.paused) a.play();
-      else a.pause();
-      syncPlayLabels();
-    });
+  function loadLineAudio() {
+    var a = $("line-audio");
+    a.pause();
+    a.removeAttribute("src");
+    a.src = ITEMS[i].audio;
+    a.load();
+    $("play-line").textContent = "Play this line";
+  }
+  $("play-line").addEventListener("click", function () {
+    var a = $("line-audio");
+    if (!a.src || a.getAttribute("src") !== ITEMS[i].audio) loadLineAudio();
+    if (a.paused) a.play();
+    else a.pause();
+    syncLineLabel();
   });
-  $("sample-audio").addEventListener("play", syncPlayLabels);
-  $("sample-audio").addEventListener("pause", syncPlayLabels);
-  $("sample-audio").addEventListener("ended", syncPlayLabels);
+  $("line-audio").addEventListener("play", syncLineLabel);
+  $("line-audio").addEventListener("pause", syncLineLabel);
+  $("line-audio").addEventListener("ended", function () {
+    $("play-line").textContent = "Play this line";
+  });
 
   $("start-sample").addEventListener("click", function () { begin("sample"); });
   $("start-own").addEventListener("click", function () { begin("own"); });
