@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Find the level — Homework Quest</title>
+<meta name="description" content="I designed a two-minute grown-up flow that finds a band, not a grade, and one task for tonight." />
+<meta name="robots" content="noindex,nofollow" />
+<meta property="og:title" content="Find the level — Homework Quest" />
+<meta property="og:image" content="../og.jpg" />
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+<style>
+  :root {
+    --ink: #121816;
+    --cream: #f3eee3;
+    --muted: #b7c0b6;
+    --sage: #8fad8a;
+    --line: #2a3530;
+    --elev: #1a221e;
+    --gold: #c4a574;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Georgia, "Iowan Old Style", Palatino, serif;
+    color: var(--cream);
+    background: var(--ink);
+    line-height: 1.55;
+  }
+  .hero {
+    position: relative;
+    min-height: 16rem;
+    display: flex;
+    align-items: flex-end;
+  }
+  .hero img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .hero .veil {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, var(--ink) 8%, rgba(18,24,22,.55) 55%, rgba(18,24,22,.2));
+  }
+  .wrap { max-width: 40rem; margin: 0 auto; padding: 1.25rem 1.25rem 3rem; position: relative; }
+  .kicker { letter-spacing: .22em; text-transform: uppercase; font-size: .72rem; color: var(--sage); font-family: "Segoe UI", system-ui, sans-serif; }
+  h1 { font-size: 2.1rem; line-height: 1.05; margin: .35rem 0 .6rem; font-weight: 600; }
+  h2 { font-size: 1.2rem; margin: 1.6rem 0 .4rem; }
+  .lede, .note, .hint { color: var(--muted); }
+  .note { font-size: .95rem; }
+  a.back { color: var(--sage); }
+  .card {
+    background: var(--elev);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    margin: 0 0 .85rem;
+  }
+  .item { font-size: 1.05rem; color: var(--cream); margin: .2rem 0 .8rem; }
+  .choices { display: flex; flex-wrap: wrap; gap: .45rem; }
+  .choices button, .go, .ghost {
+    font: inherit;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--ink);
+    color: var(--cream);
+    padding: .55rem .8rem;
+  }
+  .choices button[aria-pressed="true"], .go {
+    background: var(--sage);
+    color: var(--ink);
+    border-color: var(--sage);
+    font-weight: 600;
+  }
+  .go { display: inline-block; margin-top: .4rem; font-size: 1rem; padding: .7rem 1.1rem; }
+  .go[disabled] { opacity: .45; cursor: not-allowed; }
+  .ghost { background: transparent; }
+  .band {
+    font-size: 1.35rem;
+    color: var(--sage);
+    margin: .2rem 0 .5rem;
+  }
+  .gold { color: var(--gold); }
+  table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+  th, td { text-align: left; padding: .4rem .35rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; }
+  .match { color: var(--sage); }
+  .miss { color: #d4a39a; }
+  #step-result, #step-items { display: none; }
+  #step-items.show, #step-result.show { display: block; }
+  footer { margin-top: 2rem; color: var(--muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+<header class="hero">
+  <img src="../art/title.jpg" alt="" />
+  <div class="veil"></div>
+  <div class="wrap">
+    <p class="kicker">Homework Quest · grown-ups</p>
+    <h1>Find the level</h1>
+  </div>
+</header>
+<main class="wrap">
+  <p class="lede">I designed this so a grown-up can find a band in two minutes. Not a grade. Not a test score. The game stays the adventure. This door is the teaching move.</p>
+  <p class="note">I am not applying as a software engineer. I design learning. I ship a working prototype so you can click it.</p>
+  <p class="note">Example items only. Not a published test. I did not claim validated psychometrics here.</p>
+
+  <section id="step-intro">
+    <h2>The case</h2>
+    <p>I wrote a tiny gold set for a child who can already read short decodable lines and is stretching into two-clause sentences. That child is a teaching case, not a real student.</p>
+    <p>The gold key for the set is <strong class="gold">instructional</strong>. You will mark four example lines the way that child would meet them tonight. Then I will tell you the band the tool landed, the one task I would do today, and whether that matched the gold key.</p>
+    <p class="hint">Alone = independent on that line. A little help = instructional. Not tonight = too hard for tonight.</p>
+    <button type="button" class="go" id="start">Mark the four lines</button>
+  </section>
+
+  <section id="step-items">
+    <h2>Tonight’s lines</h2>
+    <p class="hint" id="progress">Example items. Not a published test. 1 of 4</p>
+    <div class="card">
+      <p class="item" id="item-text"></p>
+      <div class="choices" role="group" aria-label="How tonight">
+        <button type="button" data-mark="alone">Alone</button>
+        <button type="button" data-mark="help">A little help</button>
+        <button type="button" data-mark="not">Not tonight</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="step-result">
+    <h2>The band</h2>
+    <p class="band" id="band-label"></p>
+    <p id="task"></p>
+
+    <h2>Accuracy — shown, not hidden</h2>
+    <p>I keyed this gold set as <strong class="gold">instructional</strong> when I wrote it. After your run:</p>
+    <p id="accuracy"></p>
+    <div class="card">
+      <table>
+        <thead>
+          <tr><th>Example item</th><th>Gold key</th><th>You marked</th></tr>
+        </thead>
+        <tbody id="acc-body"></tbody>
+      </table>
+    </div>
+    <p class="note">A real check is not this page agreeing with itself. A real check is: a parent or teacher agrees tonight’s homework is in that band, and the next night the recommended task got done.</p>
+
+    <h2>If you know the child</h2>
+    <p class="hint">Human override. The tool does not get the last word.</p>
+    <div class="choices" id="override">
+      <button type="button" data-over="independent">Use independent</button>
+      <button type="button" data-over="instructional">Use instructional</button>
+      <button type="button" data-over="too-hard">Use too-hard</button>
+    </div>
+    <p id="over-echo" class="hint"></p>
+
+    <p style="margin-top:1.2rem">
+      <button type="button" class="ghost" id="again">Run it again</button>
+      <a class="back" href="../">Back to the adventure</a>
+    </p>
+  </section>
+
+  <footer>
+    Virgil Renfroe · Greensboro, NC · draft sample on Homework Quest. Not a live school product. Not Nestlight.
+  </footer>
+</main>
+<script>
+(function () {
+  var ITEMS = [
+    { id: "fox", text: "The fox ran to the hill.", gold: "independent" },
+    { id: "maya", text: "Maya kept the library book an extra day because the last chapter would not let her sleep.", gold: "instructional" },
+    { id: "rain", text: "When the rain started, we pulled the chairs onto the porch and waited.", gold: "instructional" },
+    { id: "photo", text: "Photosynthesis converts light energy into chemical energy stored in glucose.", gold: "too-hard" }
+  ];
+  var GOLD_SET = "instructional";
+  var TASK = {
+    independent: "Do this today: read the hard line’s first six words out loud. Stop. Tell me what those words are doing. Do not finish the sentence unless you want to.",
+    instructional: "Do this today: we read this together once — the Maya line. You read that same sentence back. One sentence, not the page.",
+    "too-hard": "Do this today: park the hard page. Three short lines like the fox line, out loud. Tomorrow we try one sentence from tonight’s page."
+  };
+  var marks = [];
+  var i = 0;
+  var band = "";
+  var $ = function (id) { return document.getElementById(id); };
+
+  function show(id) {
+    $("step-intro").style.display = id === "intro" ? "block" : "none";
+    $("step-items").className = id === "items" ? "show" : "";
+    $("step-result").className = id === "result" ? "show" : "";
+  }
+
+  function renderItem() {
+    $("progress").textContent = "Example items. Not a published test. " + (i + 1) + " of " + ITEMS.length;
+    $("item-text").textContent = ITEMS[i].text;
+    var btns = document.querySelectorAll("#step-items .choices button");
+    for (var b = 0; b < btns.length; b++) btns[b].setAttribute("aria-pressed", "false");
+  }
+
+  function decide(list) {
+    var fox = list[0];
+    var hard = list[3];
+    var mid = list[1] + list[2];
+    if (fox === "not") return "too-hard";
+    if (fox === "alone" && mid.indexOf("not") === -1 && mid.indexOf("help") === -1 && hard !== "not") return "independent";
+    if (hard === "alone" && fox === "alone" && list[1] === "alone" && list[2] === "alone") return "independent";
+    return "instructional";
+  }
+
+  function label(m) {
+    return m === "alone" ? "Alone" : m === "help" ? "A little help" : "Not tonight";
+  }
+  function goldLabel(g) {
+    return g === "too-hard" ? "too-hard" : g;
+  }
+
+  function finish() {
+    band = decide(marks);
+    var match = band === GOLD_SET;
+    $("band-label").textContent = band;
+    $("task").textContent = TASK[band];
+    $("accuracy").innerHTML = match
+      ? "The tool landed <strong class=\"match\">instructional</strong> — same as the gold key."
+      : "The tool landed <strong class=\"miss\">" + band + "</strong>. The gold key is instructional. Miss. You can override below.";
+    var body = "";
+    for (var n = 0; n < ITEMS.length; n++) {
+      body += "<tr><td>" + ITEMS[n].text + "</td><td class=\"gold\">" + goldLabel(ITEMS[n].gold) + "</td><td>" + label(marks[n]) + "</td></tr>";
+    }
+    $("acc-body").innerHTML = body;
+    $("over-echo").textContent = "";
+    show("result");
+  }
+
+  $("start").addEventListener("click", function () {
+    marks = [];
+    i = 0;
+    show("items");
+    renderItem();
+  });
+
+  document.querySelectorAll("#step-items .choices button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      marks[i] = btn.getAttribute("data-mark");
+      var btns = document.querySelectorAll("#step-items .choices button");
+      for (var b = 0; b < btns.length; b++) btns[b].setAttribute("aria-pressed", btns[b] === btn ? "true" : "false");
+      setTimeout(function () {
+        i += 1;
+        if (i >= ITEMS.length) finish();
+        else renderItem();
+      }, 180);
+    });
+  });
+
+  document.querySelectorAll("#override button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var over = btn.getAttribute("data-over");
+      document.querySelectorAll("#override button").forEach(function (b) {
+        b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+      });
+      $("band-label").textContent = over + " (your call)";
+      $("task").textContent = TASK[over];
+      $("over-echo").textContent = "Override is in. Tonight we use " + over + ". The gold key is still instructional so you can see what the tool did.";
+    });
+  });
+
+  $("again").addEventListener("click", function () {
+    marks = [];
+    i = 0;
+    show("intro");
+  });
+})();
+</script>
+</body>
+</html>

@@ -35,5 +35,28 @@
 <!--$--><main class="min-h-dvh bg-ink text-cream"><section class="relative flex min-h-dvh flex-col overflow-hidden"><img src="./art/title.jpg" alt="" class="ken-burns pointer-events-none absolute inset-0 z-0 size-full object-cover"/><div class="pointer-events-none absolute inset-0 z-0 bg-gradient-to-t from-ink via-ink/55 to-ink/20"></div><div class="lantern-glow pointer-events-none absolute inset-x-[15%] top-[18%] z-0 h-[32%] rounded-full"></div><div class="pointer-events-none absolute inset-0 z-0"><canvas class="pointer-events-none absolute inset-0 z-[1] size-full" aria-hidden="true"></canvas></div><div class="relative z-50 mt-auto flex flex-col items-center px-6 pt-16 pb-[max(5rem,env(safe-area-inset-bottom)+2rem)] text-center"><p class="rise-in text-xs tracking-[0.28em] text-sage uppercase">A study adventure</p><h1 class="font-display mt-2 max-w-lg text-[clamp(2.4rem,8vw,4.4rem)] leading-[0.95] font-semibold text-cream">Homework<span class="block italic text-parchment">Quest</span></h1><p class="mt-4 max-w-md text-sm text-muted sm:text-base">Pick a hero. Walk the realms. Battle knowledge creatures by answering well.</p><button type="button" class="relative z-50 mt-10 flex h-16 w-full max-w-sm touch-manipulation items-center justify-center rounded-xl bg-sage text-lg font-medium text-ink">Begin</button><div class="mt-3 flex w-full max-w-sm gap-2"><button type="button" class="relative z-50 flex h-12 flex-1 touch-manipulation items-center justify-center rounded-lg border border-line bg-elevated text-sm font-medium text-cream">Grown-ups</button><button type="button" class="relative z-50 flex h-12 flex-1 touch-manipulation items-center justify-center rounded-lg border border-line bg-elevated text-sm font-medium text-cream">Settings</button></div></div></section></main><!--/$-->
 <script class="$tsr" id="$tsr-stream-barrier">(self.$R=self.$R||{})["tsr"]=[];self.$_TSR={h(){this.hydrated=!0,this.c()},e(){this.streamEnded=!0,this.c()},c(){this.hydrated&&this.streamEnded&&(delete self.$_TSR,delete self.$R.tsr)},p(e){this.initialized?e():this.buffer.push(e)},buffer:[]};$_TSR.router=($R=>$R[0]={manifest:$R[1]={routes:$R[2]={__root__:$R[3]={preloads:$R[4]=["./assets/index-HqBase26.js"],scripts:$R[5]=[$R[6]={attrs:$R[7]={type:"module",async:!0,src:"./assets/index-HqBase26.js"}}]},"/":$R[8]={preloads:$R[9]=["./assets/routes-Bp1yrgeY.js"]}}},matches:$R[10]=[$R[11]={i:"__root__",u:1787756329931,s:"success",ssr:!0},$R[12]={i:"",u:1787756329931,s:"success",ssr:!0}]})($R["tsr"]);$_TSR.e();document.currentScript.remove()</script>
 <script type="module" async="" src="./assets/index-HqBase26.js"></script>
+
+<script>
+(function(){
+  function bind(){
+    var buttons = document.querySelectorAll("button");
+    for (var i = 0; i < buttons.length; i++) {
+      var b = buttons[i];
+      if ((b.textContent || "").trim() !== "Grown-ups") continue;
+      if (b.getAttribute("data-level-door") === "1") continue;
+      b.setAttribute("data-level-door", "1");
+      b.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        location.href = "./level/";
+      }, true);
+    }
+  }
+  bind();
+  setTimeout(bind, 400);
+  setTimeout(bind, 1400);
+  new MutationObserver(bind).observe(document.body, { childList: true, subtree: true });
+})();
+</script>
 </body>
 </html>
