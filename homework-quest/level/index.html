@@ -108,21 +108,21 @@
 </header>
 <main class="wrap">
   <p class="lede">I made this demo so a grown-up can check, in two minutes, what a child can read out loud tonight. Not a test score. Not a grade. The game stays the adventure.</p>
-  <p class="note">Four lines. Not a published test.</p>
+  <p class="note">Ten lines. Not a published test.</p>
 
   <section id="step-intro">
     <h2>How this works</h2>
-    <p>These four lines are for a sample child, not yours. Tonight can look like this: they can read a short line like “The fox ran to the hill,” or they are stretching into longer sentences, or the science sentence is too much for tonight.</p>
+    <p>These ten lines are for a sample child, not yours. Tonight can look like this: they can read a short line like “The fox ran to the hill,” or they are stretching into longer sentences, or the science sentence is too much for tonight.</p>
     <p>Try the sample to see how the check works.</p>
     <div class="intro-actions">
       <button type="button" class="go" id="start-sample">Try the sample child</button>
-      <button type="button" class="ghost" id="start-own">Mark my child tonight</button>
+      <button type="button" class="ghost" id="start-own">Assess tonight’s reading</button>
     </div>
   </section>
 
   <section id="step-items">
     <h2 id="items-heading">Tonight’s lines</h2>
-    <p class="hint" id="progress">1 of 4</p>
+    <p class="hint" id="progress">Example lines. 1 of 10</p>
     <div class="card">
       <p class="item" id="item-text"></p>
       <div class="legend">
@@ -182,10 +182,19 @@
 <script>
 (function () {
   var ITEMS = [
+    // Alone (short)
     { id: "fox", text: "The fox ran to the hill.", expect: "alone" },
+    { id: "dog", text: "The dog sat by the door.", expect: "alone" },
+    { id: "park", text: "We went to the park.", expect: "alone" },
+    // A little help (longer story sentences)
     { id: "maya", text: "Maya kept the library book an extra day because the last chapter would not let her sleep.", expect: "help" },
     { id: "rain", text: "When the rain started, we pulled the chairs onto the porch and waited.", expect: "help" },
-    { id: "photo", text: "Photosynthesis converts light energy into chemical energy stored in glucose.", expect: "not" }
+    { id: "garden", text: "The class voted to keep the garden even though the frost had already come.", expect: "help" },
+    { id: "store", text: "He asked if we could stop at the store before the library closed.", expect: "help" },
+    // Not tonight (dense/academic)
+    { id: "photo", text: "Photosynthesis converts light energy into chemical energy stored in glucose.", expect: "not" },
+    { id: "quorum", text: "The committee postponed ratification pending a quorum of the board.", expect: "not" },
+    { id: "evap", text: "Evaporation is the process by which a liquid becomes a gas at the surface.", expect: "not" }
   ];
   var EXPECTED_TONIGHT = "instructional";
   var TONIGHT = {
@@ -221,23 +230,23 @@
   function renderItem() {
     if (path === "sample") {
       $("items-heading").textContent = "Sample child’s lines";
-      $("progress").textContent = "Sample child, not yours. " + (i + 1) + " of " + ITEMS.length;
     } else {
       $("items-heading").textContent = "Tonight’s lines";
-      $("progress").textContent = "Your child. I don’t already know them. " + (i + 1) + " of " + ITEMS.length;
     }
+    $("progress").textContent = "Example lines. " + (i + 1) + " of " + ITEMS.length;
     $("item-text").textContent = ITEMS[i].text;
     var btns = document.querySelectorAll("#step-items .choices button");
     for (var b = 0; b < btns.length; b++) btns[b].setAttribute("aria-pressed", "false");
   }
 
   function decide(list) {
-    var fox = list[0];
-    var hard = list[3];
-    var mid = list[1] + list[2];
-    if (fox === "not") return "too-hard";
-    if (fox === "alone" && mid.indexOf("not") === -1 && mid.indexOf("help") === -1 && hard !== "not") return "independent";
-    if (hard === "alone" && fox === "alone" && list[1] === "alone" && list[2] === "alone") return "independent";
+    var shortNot = 0;
+    var denseAlone = 0;
+    var n;
+    for (n = 0; n < 3; n++) if (list[n] === "not") shortNot += 1;
+    for (n = 7; n < 10; n++) if (list[n] === "alone") denseAlone += 1;
+    if (shortNot >= 2) return "too-hard";
+    if (list[0] === "alone" && list[1] === "alone" && list[2] === "alone" && denseAlone >= 2) return "independent";
     return "instructional";
   }
 
