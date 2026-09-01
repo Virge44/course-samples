@@ -94,6 +94,9 @@
   #step-items.show, #step-result.show { display: block; }
   #match-block, #own-note { display: none; }
   #match-block.show, #own-note.show { display: block; }
+  .hear { margin: .85rem 0 .2rem; }
+  .hear p { margin: 0 0 .4rem; color: var(--muted); font-size: .95rem; }
+  .hear audio { width: 100%; display: block; }
   footer { margin-top: 2rem; color: var(--muted); font-size: .9rem; }
 </style>
 </head>
@@ -114,6 +117,10 @@
     <h2>How this works</h2>
     <p>These ten lines are for a sample child, not yours. Tonight can look like this: they can read a short line like “The fox ran to the hill,” or they are stretching into longer sentences, or the science sentence is too much for tonight.</p>
     <p>Try the sample to see how the check works.</p>
+    <div class="hear">
+      <p>Hear the ten sample lines read out loud. Adult narrator, not a child.</p>
+      <audio controls preload="none" src="audio/hq-level-ten-lines-us.mp3">Your browser does not play audio here.</audio>
+    </div>
     <div class="intro-actions">
       <button type="button" class="go" id="start-sample">Try the sample child</button>
       <button type="button" class="ghost" id="start-own">Assess tonight’s reading</button>
@@ -123,6 +130,10 @@
   <section id="step-items">
     <h2 id="items-heading">Tonight’s lines</h2>
     <p class="hint" id="progress">Example lines. 1 of 10</p>
+    <div class="hear">
+      <p>Hear the ten sample lines read out loud. Adult narrator, not a child.</p>
+      <audio controls preload="none" src="audio/hq-level-ten-lines-us.mp3">Your browser does not play audio here.</audio>
+    </div>
     <div class="card">
       <p class="item" id="item-text"></p>
       <div class="legend">
