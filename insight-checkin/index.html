@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Twelve minutes. Three questions. A flag. — first-week manager check-in</title>
+<meta name="description" content="SAMPLE 12-minute first-week manager check-in. Three questions, a readiness flag from the answers, one next step. Not an Insight Global product. Not a Figma file. Not a Product Designer sample." />
+<meta property="og:title" content="Twelve minutes. Three questions. A flag." />
+<meta property="og:description" content="12-minute first-week manager check-in. Not Figma. Not an Insight Global product." />
+<meta property="og:url" content="https://virgilrenfroe.github.io/course-samples/insight-checkin/" />
+<meta property="og:type" content="website" />
+<style>
+  :root {
+    --ink: #1c1916;
+    --ink-2: #26221e;
+    --paper: #f4efe6;
+    --cream: #f7f4ee;
+    --muted: #b7afa3;
+    --muted-ink: #5c564c;
+    --sage: #9bb8ad;
+    --sage-deep: #3d6b63;
+    --accent: #8fafa3;
+    --rule: #3a3530;
+    --rule-paper: #d4cfc4;
+    --warn: #c4a574;
+    --bad: #c9897a;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+    color: var(--cream);
+    background: var(--ink);
+    line-height: 1.55;
+  }
+  a { color: var(--sage); }
+  a:hover { color: var(--cream); }
+  .wm {
+    position: fixed;
+    inset: -30%;
+    z-index: 40;
+    pointer-events: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: space-around;
+    gap: 4rem 6rem;
+    transform: rotate(-22deg);
+    user-select: none;
+    color: rgba(247, 244, 238, 0.055);
+    font-size: clamp(2.4rem, 8vw, 4.6rem);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .wm span { display: block; }
+  .banner {
+    position: relative;
+    z-index: 2;
+    background: #141210;
+    color: #d7d0c5;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.78rem;
+    padding: 0.7rem 1.25rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .wrap {
+    position: relative;
+    z-index: 2;
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 3.5rem;
+  }
+  .kicker {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin: 0 0 0.55rem;
+  }
+  h1 {
+    font-size: 2.05rem;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 0 0 0.85rem;
+    font-weight: 700;
+  }
+  h2 { font-size: 1.28rem; margin: 0 0 0.55rem; letter-spacing: -0.01em; }
+  p { margin: 0 0 0.9rem; }
+  .lede { font-size: 1.12rem; color: #ece6da; }
+  .note, .small { color: var(--muted); font-size: 0.95rem; }
+  .problem {
+    border-left: 3px solid var(--sage-deep);
+    padding: 0.15rem 0 0.15rem 0.9rem;
+    margin: 0 0 1.2rem;
+    color: #ece6da;
+  }
+  .label {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin: 0 0 0.35rem;
+  }
+  .role {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    margin: 1.1rem 0 1.2rem;
+  }
+  .role button {
+    font-family: Georgia, Palatino, serif;
+    font-size: 1rem;
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 0.5rem 0.95rem;
+    cursor: pointer;
+  }
+  .role button[aria-pressed="true"] {
+    background: var(--sage-deep);
+    border-color: var(--sage-deep);
+    color: var(--cream);
+  }
+  .role button:hover { filter: brightness(1.08); }
+  .role .who { color: var(--muted); font-size: 0.95rem; }
+  .desk {
+    opacity: 0.38;
+    pointer-events: none;
+    filter: grayscale(0.2);
+  }
+  .desk.is-on {
+    opacity: 1;
+    pointer-events: auto;
+    filter: none;
+  }
+  .paper {
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 1.2rem 1.25rem 1.4rem;
+    margin: 0 0 1.1rem;
+  }
+  .paper h2 { color: var(--ink); }
+  .paper p { color: var(--ink); }
+  .paper .note { color: var(--muted-ink); }
+  .paper .label { color: var(--sage-deep); }
+  .q {
+    background: #fff;
+    border: 1px solid var(--rule-paper);
+    border-left: 3px solid var(--sage-deep);
+    border-radius: 6px;
+    padding: 0.9rem 0.95rem;
+    margin: 0.7rem 0;
+  }
+  .q h3 {
+    font-size: 1.05rem;
+    margin: 0 0 0.55rem;
+  }
+  .q .n {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+  .choices { display: flex; flex-direction: column; gap: 0.4rem; }
+  .choices button {
+    font-family: Georgia, Palatino, serif;
+    font-size: 0.98rem;
+    text-align: left;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid #b7c9c2;
+    border-radius: 6px;
+    padding: 0.45rem 0.7rem;
+    cursor: pointer;
+  }
+  .choices button:hover { border-color: var(--sage-deep); }
+  .choices button[aria-pressed="true"] {
+    background: var(--sage-deep);
+    border-color: var(--sage-deep);
+    color: var(--cream);
+  }
+  .write {
+    margin: 0.65rem 0 0;
+    width: 100%;
+    font: inherit;
+    font-size: 0.98rem;
+    color: var(--ink);
+    background: var(--cream);
+    border: 1px solid var(--rule-paper);
+    border-radius: 6px;
+    padding: 0.5rem 0.65rem;
+    min-height: 2.6rem;
+    resize: vertical;
+  }
+  .write:focus { outline: 2px solid var(--sage-deep); outline-offset: 1px; }
+  .flag {
+    background: var(--ink-2);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.1rem;
+    margin: 0 0 1.1rem;
+  }
+  .flag .mark {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.35rem;
+  }
+  .flag.wait .mark { color: var(--muted); }
+  .flag.ready .mark { color: var(--sage); }
+  .flag.needs .mark { color: var(--warn); }
+  .flag.off .mark { color: var(--bad); }
+  .flag .why { margin: 0; color: #ece6da; }
+  .note-card {
+    background: #fff;
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 1.1rem 1.15rem 1.2rem;
+    border: 1px solid var(--rule);
+  }
+  .note-card h2 { color: var(--ink); }
+  .note-card .label { color: var(--sage-deep); }
+  .send {
+    white-space: pre-wrap;
+    background: var(--paper);
+    border: 1px solid var(--rule-paper);
+    border-radius: 6px;
+    padding: 0.85rem 0.95rem;
+    margin: 0.5rem 0 0.85rem;
+    min-height: 6.5rem;
+    color: var(--ink);
+  }
+  .go {
+    font-family: Georgia, Palatino, serif;
+    font-size: 1rem;
+    background: var(--sage-deep);
+    color: var(--cream);
+    border: 0;
+    border-radius: 6px;
+    padding: 0.5rem 0.95rem;
+    cursor: pointer;
+  }
+  .go:hover { filter: brightness(1.08); }
+  .copied { margin: 0.5rem 0 0; color: var(--sage-deep); font-size: 0.95rem; min-height: 1.2em; }
+  .end {
+    margin-top: 2rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.95rem;
+    color: var(--muted);
+    word-break: break-word;
+  }
+  footer { margin-top: 1.4rem; font-size: 0.9rem; color: var(--muted); }
+  @media (max-width: 640px) {
+    h1 { font-size: 1.7rem; }
+    .wrap { padding-top: 1.4rem; }
+    .choices button { font-size: 0.95rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wm" aria-hidden="true">
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+</div>
+<p class="banner"><strong>SAMPLE.</strong> Not an Insight Global product. Not a client deliverable. Not taught at Insight Global. Not a Figma file. Not a Product Designer sample. Names below are labeled SAMPLE.</p>
+<main class="wrap">
+  <p class="kicker">Instructional design sample · first-week manager check-in · 12 minutes</p>
+  <h1>Twelve minutes. Three questions. A flag.</h1>
+  <p class="lede">I sat with a stakeholder. They had a deck. This is the 12-minute check-in instead. Three questions. A flag. One next step. You can click it now.</p>
+  <p class="problem">New people managers dump a 40-slide deck and still lose people in week two.</p>
+  <p class="note">I am Virgil Renfroe. I made this so a manager leaves the sitting with a picture of the week, a readiness flag from what they actually said, and one thing to send. Not another walkthrough.</p>
+
+  <div class="role">
+    <button type="button" id="btnMgr" aria-pressed="false">Click as the manager</button>
+    <span class="who">SAMPLE new hire: Jordan Hale. You have twelve minutes.</span>
+  </div>
+
+  <div class="desk" id="desk" aria-disabled="true">
+    <div class="paper">
+      <p class="label">First-week check-in · you are the manager</p>
+      <h2>Ask these three. Then send one thing.</h2>
+      <p class="note">Do not recap the deck. Click what is true. Type the line you would actually say. The flag moves with your answers.</p>
+
+      <div class="q" data-q="q1">
+        <span class="n">Question 1</span>
+        <h3>What did they actually do this week?</h3>
+        <div class="choices" role="group" aria-label="What they actually did">
+          <button type="button" data-val="owned">Owned a real piece of work — their name is on it</button>
+          <button type="button" data-val="shadow">Shadowed or sat in. Nothing with their name on it yet</button>
+          <button type="button" data-val="meetings">Mostly decks, systems, and meetings</button>
+          <button type="button" data-val="unknown">I cannot say. I do not actually know</button>
+        </div>
+        <label class="label" for="t1" style="display:block;margin-top:0.7rem">Name one thing they did (SAMPLE is fine)</label>
+        <textarea class="write" id="t1" rows="2" placeholder="e.g. Jordan took two intake calls and wrote the notes."></textarea>
+      </div>
+
+      <div class="q" data-q="q2">
+        <span class="n">Question 2</span>
+        <h3>Where did they get stuck?</h3>
+        <div class="choices" role="group" aria-label="Where they got stuck">
+          <button type="button" data-val="task">A specific task they could not finish</button>
+          <button type="button" data-val="access">Access, a tool, or who to ask</button>
+          <button type="button" data-val="unclear">The work itself is still unclear</button>
+          <button type="button" data-val="none">They did not say they got stuck</button>
+          <button type="button" data-val="unasked">I have not asked yet</button>
+        </div>
+        <label class="label" for="t2" style="display:block;margin-top:0.7rem">Name the stuck, if you have it</label>
+        <textarea class="write" id="t2" rows="2" placeholder="e.g. Could not send the Friday report — no template, no named reviewer."></textarea>
+      </div>
+
+      <div class="q" data-q="q3">
+        <span class="n">Question 3</span>
+        <h3>One next step by Friday</h3>
+        <div class="choices" role="group" aria-label="One next step by Friday">
+          <button type="button" data-val="named">A named piece of work they will finish by Friday</button>
+          <button type="button" data-val="meeting">Another meeting or more shadowing</button>
+          <button type="button" data-val="onboarding">Keep going through onboarding</button>
+          <button type="button" data-val="none">I do not have one yet</button>
+        </div>
+        <label class="label" for="t3" style="display:block;margin-top:0.7rem">The Friday step, in one line</label>
+        <textarea class="write" id="t3" rows="2" placeholder="e.g. Finish the two-call write-up and send it to me by Friday 3 p.m."></textarea>
+      </div>
+    </div>
+
+    <section class="flag wait" id="flagBox" aria-live="polite">
+      <p class="label">Readiness flag · from these answers</p>
+      <p class="mark" id="flagMark">Answer the three questions</p>
+      <p class="why" id="flagWhy">The flag is not a score. It changes when you change what you clicked or typed.</p>
+    </section>
+
+    <section class="note-card">
+      <p class="label">Assignable next step · SAMPLE names only</p>
+      <h2>What you can send</h2>
+      <p class="note" style="color:#5c564c;margin:0 0 0.55rem">Plain language. Copy it. Send it. Not a 40-slide recap.</p>
+      <div class="send" id="sendNote">Click as the manager, then answer the three questions. A sendable note will land here.</div>
+      <button type="button" class="go" id="btnCopy">Copy the note</button>
+      <p class="copied" id="copyMsg" hidden></p>
+    </section>
+  </div>
+
+  <p class="end">
+    SAMPLE. Not an Insight Global product. Not a client deliverable. Not taught at Insight Global. Not a Figma file. Not a Product Designer sample.<br />
+    <a href="https://virgilrenfroe.github.io/course-samples/insight-checkin/">virgilrenfroe.github.io/course-samples/insight-checkin/</a>
+  </p>
+  <footer>
+    Virgil Renfroe · Greensboro, NC · <a href="../index.html">Course samples</a>
+  </footer>
+</main>
+<script>
+(function () {
+  var answers = { q1: null, q2: null, q3: null };
+  var mgrOn = false;
+  var btnMgr = document.getElementById("btnMgr");
+  var desk = document.getElementById("desk");
+  var flagBox = document.getElementById("flagBox");
+  var flagMark = document.getElementById("flagMark");
+  var flagWhy = document.getElementById("flagWhy");
+  var sendNote = document.getElementById("sendNote");
+  var copyMsg = document.getElementById("copyMsg");
+
+  function text(id) {
+    var el = document.getElementById(id);
+    return el ? el.value.trim() : "";
+  }
+
+  function namedFriday() {
+    return answers.q3 === "named" && text("t3").length > 0;
+  }
+
+  function compute() {
+    var q1 = answers.q1;
+    var q2 = answers.q2;
+    var q3 = answers.q3;
+    if (!mgrOn) {
+      return {
+        id: "wait",
+        mark: "Click as the manager",
+        why: "You run this sitting as the manager. The flag waits until you sit down."
+      };
+    }
+    if (!q1 || !q2 || !q3) {
+      return {
+        id: "wait",
+        mark: "Answer the three questions",
+        why: "The flag is computed from what you click and type. It is not a preset metric."
+      };
+    }
+
+    var noPicture = q1 === "unknown" || q2 === "unasked";
+    var weekWasDeck = q1 === "meetings";
+    var vagueFriday = q3 === "meeting" || q3 === "onboarding" || q3 === "none" || (q3 === "named" && !namedFriday());
+    var stuckUnclear = q2 === "unclear";
+    var owned = q1 === "owned";
+    var stuckNamed = q2 === "task" || q2 === "access" || q2 === "none";
+
+    if (noPicture || (weekWasDeck && vagueFriday) || (stuckUnclear && vagueFriday && !owned)) {
+      return {
+        id: "off",
+        mark: "Off-track",
+        why: reasonOff(q1, q2, q3)
+      };
+    }
+
+    if (owned && namedFriday() && stuckNamed) {
+      return {
+        id: "ready",
+        mark: "Ready",
+        why: "They owned work this week, the stuck is named or they were not stuck, and Friday is a real assignment you can read back."
+      };
+    }
+
+    return {
+      id: "needs",
+      mark: "Needs a next step",
+      why: reasonNeeds(q1, q3)
+    };
+  }
+
+  function reasonOff(q1, q2, q3) {
+    if (q1 === "unknown") return "Off-track because you cannot say what they actually did. A deck does not fix that.";
+    if (q2 === "unasked") return "Off-track because you have not asked where they got stuck. Twelve minutes starts with that question.";
+    if (q1 === "meetings") return "Off-track because week one was decks and meetings, and Friday is still not a named piece of work.";
+    if (q3 === "none") return "Off-track because there is no Friday step, and the week is not a picture you can stand behind.";
+    return "Off-track because the work is still unclear and Friday is another meeting, a deck, or missing.";
+  }
+
+  function reasonNeeds(q1, q3) {
+    if (q3 === "named" && !namedFriday()) return "Needs a next step because you chose a named Friday assignment and have not named it yet. Type the line.";
+    if (q3 === "meeting") return "Needs a next step because Friday is another meeting or more shadowing. That is not an assignment.";
+    if (q3 === "onboarding") return "Needs a next step because Friday is more onboarding. That is the 40-slide problem again.";
+    if (q3 === "none") return "Needs a next step because you have a picture of the week and no Friday assignment yet.";
+    if (q1 === "shadow") return "Needs a next step because they watched. Friday has to put their name on one piece of work.";
+    return "Needs a next step because the week has a picture, but Friday is not yet a sendable assignment.";
+  }
+
+  function fridayLine() {
+    var typed = text("t3");
+    if (typed) return typed;
+    if (answers.q2 === "access") return "Get the access or the named person who can grant it, then do one real task with it by Friday 3 p.m.";
+    if (answers.q2 === "task") return "Finish the task you got stuck on, or send me one sentence on what is blocking it, by Friday 3 p.m.";
+    if (answers.q1 === "shadow") return "Do one piece of work with your name on it by Friday 3 p.m. Not another shadow session.";
+    return "Name one piece of work you will finish by Friday 3 p.m., and send it when it is done.";
+  }
+
+  function noteFor(flag) {
+    var did = text("t1");
+    var stuck = text("t2");
+    var didLine = did ? "What I heard you did: " + did + "\n\n" : "";
+    var stuckLine = stuck ? "Where you got stuck: " + stuck + "\n\n" : "";
+    if (!mgrOn) {
+      return "Click as the manager, then answer the three questions. A sendable note will land here.";
+    }
+    if (flag.id === "wait") {
+      return "Answer all three questions. The note is built from those answers — SAMPLE names only.";
+    }
+    if (flag.id === "ready") {
+      return "Jordan Hale (SAMPLE) —\n\n" +
+        didLine +
+        stuckLine +
+        "One thing by Friday, 3 p.m.: " + fridayLine() + "\n\n" +
+        "Send me when it is done. Not a recap of the deck.\n\n" +
+        "— your manager (SAMPLE first-week check-in)";
+    }
+    if (flag.id === "needs") {
+      return "Jordan Hale (SAMPLE) —\n\n" +
+        "We have a picture of the week. We do not have Friday yet.\n\n" +
+        didLine +
+        stuckLine +
+        "By Friday: " + fridayLine() + "\n\n" +
+        "Reply when it is done.\n\n" +
+        "— your manager (SAMPLE first-week check-in)";
+    }
+    return "Jordan Hale (SAMPLE) —\n\n" +
+      "Week one is not a picture yet. We are not sending you another deck.\n\n" +
+      "By Wednesday: three sentences — what you actually did, where you got stuck, one thing you will finish Friday. Then we lock the Friday step.\n\n" +
+      "— your manager (SAMPLE first-week check-in)";
+  }
+
+  function render() {
+    var flag = compute();
+    flagBox.className = "flag " + flag.id;
+    flagMark.textContent = flag.mark;
+    flagWhy.textContent = flag.why;
+    sendNote.textContent = noteFor(flag);
+  }
+
+  btnMgr.addEventListener("click", function () {
+    mgrOn = !mgrOn;
+    btnMgr.setAttribute("aria-pressed", mgrOn ? "true" : "false");
+    btnMgr.textContent = mgrOn ? "You are the manager" : "Click as the manager";
+    desk.classList.toggle("is-on", mgrOn);
+    desk.setAttribute("aria-disabled", mgrOn ? "false" : "true");
+    render();
+    if (mgrOn) {
+      var first = desk.querySelector(".choices button");
+      if (first) first.focus();
+    }
+  });
+
+  document.querySelectorAll(".q").forEach(function (q) {
+    var key = q.getAttribute("data-q");
+    q.querySelectorAll(".choices button").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        q.querySelectorAll(".choices button").forEach(function (b) {
+          b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+        });
+        answers[key] = btn.getAttribute("data-val");
+        render();
+      });
+    });
+  });
+
+  ["t1", "t2", "t3"].forEach(function (id) {
+    document.getElementById(id).addEventListener("input", render);
+  });
+
+  document.getElementById("btnCopy").addEventListener("click", function () {
+    var body = sendNote.textContent || "";
+    function ok() {
+      copyMsg.hidden = false;
+      copyMsg.textContent = "Copied. SAMPLE note only — not a client send.";
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(body).then(ok).catch(function () {
+        copyMsg.hidden = false;
+        copyMsg.textContent = "Select the note and copy it. Clipboard blocked in this browser.";
+      });
+    } else {
+      copyMsg.hidden = false;
+      copyMsg.textContent = "Select the note and copy it.";
+    }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
