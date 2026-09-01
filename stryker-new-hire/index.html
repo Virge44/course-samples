@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Week one until a trainer signs you off — sample lesson</title>
+<meta name="description" content="SAMPLE week-one new-hire lesson. Two views from the same page: the new-hire path, and trainer/LMS evidence. Not a Stryker product. Not Stryker policy. Not taught at Stryker." />
+<meta property="og:title" content="Week one until a trainer signs you off — sample" />
+<meta property="og:description" content="Week-one new-hire lesson, two views, not a Stryker product." />
+<meta property="og:url" content="https://virgilrenfroe.github.io/course-samples/stryker-new-hire/" />
+<meta property="og:type" content="website" />
+<style>
+  :root {
+    --ink: #1c1916;
+    --ink-2: #26221e;
+    --paper: #f4efe6;
+    --cream: #f7f4ee;
+    --muted: #b7afa3;
+    --muted-ink: #5c564c;
+    --sage: #9bb8ad;
+    --sage-deep: #3d6b63;
+    --accent: #8fafa3;
+    --rule: #3a3530;
+    --rule-paper: #d4cfc4;
+    --warn: #c4a574;
+    --bad: #c9897a;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+    color: var(--cream);
+    background: var(--ink);
+    line-height: 1.55;
+  }
+  a { color: var(--sage); }
+  a:hover { color: var(--cream); }
+  .wm {
+    position: fixed;
+    inset: -30%;
+    z-index: 40;
+    pointer-events: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: space-around;
+    gap: 4rem 6rem;
+    transform: rotate(-22deg);
+    user-select: none;
+    color: rgba(247, 244, 238, 0.055);
+    font-size: clamp(2.4rem, 8vw, 4.6rem);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .wm span { display: block; }
+  .banner {
+    position: relative;
+    z-index: 2;
+    background: #141210;
+    color: #d7d0c5;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.78rem;
+    padding: 0.7rem 1.25rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .wrap {
+    position: relative;
+    z-index: 2;
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 3.5rem;
+  }
+  .kicker {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin: 0 0 0.55rem;
+  }
+  h1 {
+    font-size: 2.05rem;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 0 0 0.85rem;
+    font-weight: 700;
+  }
+  h2 { font-size: 1.28rem; margin: 0 0 0.55rem; letter-spacing: -0.01em; }
+  h3 { font-size: 1.05rem; margin: 0 0 0.4rem; }
+  p { margin: 0 0 0.9rem; }
+  .lede { font-size: 1.12rem; color: #ece6da; }
+  .note, .small { color: var(--muted); font-size: 0.95rem; }
+  .label {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin: 0 0 0.35rem;
+  }
+  .views {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.15rem 0 1.1rem;
+  }
+  .views button {
+    font-family: Georgia, Palatino, serif;
+    font-size: 1rem;
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 0.5rem 0.95rem;
+    cursor: pointer;
+  }
+  .views button[aria-pressed="true"] {
+    background: var(--sage-deep);
+    border-color: var(--sage-deep);
+    color: var(--cream);
+  }
+  .views button:hover { filter: brightness(1.08); }
+  .panel { display: none; }
+  .panel.is-on { display: block; }
+  .paper {
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 1.2rem 1.25rem 1.4rem;
+  }
+  .paper h2, .paper h3 { color: var(--ink); }
+  .paper p, .paper li { color: var(--ink); }
+  .paper .note { color: var(--muted-ink); }
+  .paper .label { color: var(--sage-deep); }
+  .stops { list-style: none; padding: 0; margin: 0.4rem 0 1rem; }
+  .stops li {
+    background: #fff;
+    border: 1px solid var(--rule-paper);
+    border-left: 3px solid var(--sage-deep);
+    border-radius: 6px;
+    padding: 0.85rem 0.95rem;
+    margin: 0.55rem 0;
+  }
+  .stops .n {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  .callout {
+    border: 1px solid var(--rule-paper);
+    background: #fff;
+    padding: 0.75rem 0.9rem;
+    border-radius: 6px;
+    margin: 0.7rem 0 1rem;
+  }
+  .check { margin: 1rem 0 0.2rem; }
+  .item {
+    background: #fff;
+    border: 1px solid var(--rule-paper);
+    border-radius: 6px;
+    padding: 0.85rem 0.95rem;
+    margin: 0.6rem 0;
+  }
+  .item p { margin-bottom: 0.55rem; }
+  .item .btns { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .item button, .ghost, .go {
+    font-family: Georgia, Palatino, serif;
+    font-size: 0.95rem;
+    background: var(--sage-deep);
+    color: var(--cream);
+    border: 0;
+    border-radius: 6px;
+    padding: 0.4rem 0.75rem;
+    cursor: pointer;
+    text-align: left;
+  }
+  .item button.alt {
+    background: transparent;
+    color: var(--sage-deep);
+    border: 1px solid #b7c9c2;
+  }
+  .item button[aria-pressed="true"] { outline: 2px solid var(--sage-deep); }
+  .fb {
+    margin: 0.65rem 0 0;
+    font-size: 0.98rem;
+    min-height: 0;
+  }
+  .fb.ok { color: var(--sage-deep); }
+  .fb.no { color: #9a4e3e; }
+  .ink-card {
+    background: var(--ink-2);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.1rem;
+    margin: 0.7rem 0;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  th, td { text-align: left; padding: 0.5rem 0.4rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-weight: 700; color: var(--sage); font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; font-family: "Segoe UI", system-ui, sans-serif; }
+  .asof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+    margin: 0.6rem 0 0.8rem;
+  }
+  .asof label { font-size: 0.95rem; }
+  input[type="date"] {
+    font: inherit;
+    padding: 0.35rem 0.45rem;
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+    background: #fff;
+    color: var(--ink);
+  }
+  .strip {
+    display: grid;
+    gap: 0.65rem;
+    margin: 0.6rem 0 0.2rem;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.35rem 0.8rem;
+    background: var(--ink-2);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+  }
+  .row dt {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin: 0.15rem 0 0;
+  }
+  .row dd { margin: 0 0 0.35rem; }
+  .status {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    align-self: start;
+    padding: 0.28rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--rule);
+    height: fit-content;
+  }
+  .status.done { color: var(--sage); border-color: var(--sage-deep); }
+  .status.open { color: var(--warn); border-color: #8a6a32; }
+  .end {
+    margin-top: 2rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.95rem;
+    color: var(--muted);
+    word-break: break-word;
+  }
+  footer { margin-top: 1.4rem; font-size: 0.9rem; color: var(--muted); }
+  @media (max-width: 640px) {
+    h1 { font-size: 1.7rem; }
+    .wrap { padding-top: 1.4rem; }
+    table { font-size: 0.84rem; }
+    .row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wm" aria-hidden="true">
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+</div>
+<p class="banner"><strong>SAMPLE.</strong> Not a Stryker product. Not Stryker policy. Not taught at Stryker. I made this as a clickable teaching object. Names, dates, and completions below are labeled SAMPLE.</p>
+<main class="wrap">
+  <p class="kicker">Instructional design sample · week one · mixed-readiness field new hire</p>
+  <h1>Week one. Three stops until a trainer signs you off.</h1>
+  <p class="lede">I made this so a new hire and a trainer do not need two different lessons. Same page. Two views. I am Virgil Renfroe. This is a sample I wrote &mdash; public-safe stops for a regulated product, not a device IFU, not a Stryker SOP.</p>
+  <p class="note">If you have done this kind of work before, you still take this version. Prior experience is not the sign-off. The assignment is.</p>
+
+  <div class="views" role="tablist" aria-label="Lesson views">
+    <button type="button" id="btnHire" role="tab" aria-pressed="true" aria-controls="viewHire">New-hire path</button>
+    <button type="button" id="btnLms" role="tab" aria-pressed="false" aria-controls="viewLms">Trainer / LMS evidence</button>
+  </div>
+
+  <section class="panel is-on" id="viewHire" role="tabpanel" aria-labelledby="btnHire">
+    <div class="paper">
+      <p class="label">New-hire path · version 1.1 live</p>
+      <h2>Three stops. Then someone signs you off.</h2>
+      <p>You support a regulated product. Until a trainer signs you off on <em>this</em> assignment, these are the stops. Not last year’s habit. Not a product you used somewhere else.</p>
+      <ol class="stops">
+        <li>
+          <span class="n">Stop 1 · operate / demonstrate</span>
+          Do not operate or demonstrate a product you have not been assigned. Do not in-service others on it.
+        </li>
+        <li>
+          <span class="n">Stop 2 · improvise</span>
+          Do not improvise a repair, substitute a part, or work off last year’s printout. Use the current Instructions for Use.
+        </li>
+        <li>
+          <span class="n">Stop 3 · escalate</span>
+          Stop and escalate: compromised packaging, missing IFU, a request outside your assigned scope.
+        </li>
+      </ol>
+      <div class="callout">
+        <p class="label">Mixed readiness</p>
+        <p>Prior experience is not the sign-off. The assignment is. You still take this version.</p>
+      </div>
+
+      <div class="check">
+        <p class="label">Three-item check</p>
+        <p class="note">Click what you would do. You get a sentence, not a score.</p>
+
+        <article class="item">
+          <p><strong>Operate / demonstrate.</strong> A customer asks you to power on a product that is not on your assignment. A colleague asks you to in-service it for the room.</p>
+          <div class="btns">
+            <button type="button" class="alt" data-q="op" data-ok="0">I will run it. I have done this before.</button>
+            <button type="button" data-q="op" data-ok="1">I will not operate or demonstrate it.</button>
+          </div>
+          <p class="fb" id="fb-op" hidden></p>
+        </article>
+
+        <article class="item">
+          <p><strong>Improvise.</strong> The current IFU is not in the kit. Last year’s printout is in the van. The part you need is close enough.</p>
+          <div class="btns">
+            <button type="button" class="alt" data-q="imp" data-ok="0">Use the printout. Swap the close part.</button>
+            <button type="button" data-q="imp" data-ok="1">Stop. Get the current IFU. Do not substitute.</button>
+          </div>
+          <p class="fb" id="fb-imp" hidden></p>
+        </article>
+
+        <article class="item">
+          <p><strong>Escalate.</strong> Packaging is torn. The IFU is missing. Someone asks you to keep going, outside your assigned scope.</p>
+          <div class="btns">
+            <button type="button" class="alt" data-q="esc" data-ok="0">Keep going. I know this product.</button>
+            <button type="button" data-q="esc" data-ok="1">Stop. Escalate to the trainer.</button>
+          </div>
+          <p class="fb" id="fb-esc" hidden></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="viewLms" role="tabpanel" aria-labelledby="btnLms" hidden>
+    <p class="label">Trainer / LMS evidence · same lesson</p>
+    <h2>Who was assigned, on what date, on what version.</h2>
+    <p>QA asks what was live on date X. The new-hire path above is version 1.1. Version 1.0 had two stops. This view is the control, not a second course.</p>
+
+    <div class="ink-card">
+      <p class="label">As-of control (SAMPLE dates)</p>
+      <p class="note">Pick a date. The table does not change; the line below tells you what was live that day.</p>
+      <div class="asof">
+        <label for="asof">As of</label>
+        <input type="date" id="asof" value="2026-09-01" min="2026-03-12" max="2026-09-01" />
+      </div>
+      <p id="asofOut"></p>
+    </div>
+
+    <div class="ink-card">
+      <p class="label">Version table</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Version</th>
+            <th>Live from (SAMPLE)</th>
+            <th>What was in it</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1.0</td>
+            <td>12 Mar 2026</td>
+            <td>Two stops: do not operate a product you have not been assigned; do not improvise a repair, substitute a part, or work off last year’s printout &mdash; use the current IFU.</td>
+          </tr>
+          <tr>
+            <td>1.1</td>
+            <td>15 Jul 2026</td>
+            <td>Adds “do not demonstrate / in-service others” because a new hire got asked. Current path is three stops, including stop-and-escalate (compromised packaging, missing IFU, request outside assigned scope).</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">Labeled dates so a QA question &mdash; what was live on date X &mdash; has an answer on this page.</p>
+    </div>
+
+    <h2>Assignment strip</h2>
+    <p class="note">SAMPLE trainer. SAMPLE new hire. Names labeled SAMPLE. This is not a live roster.</p>
+    <div class="strip">
+      <article class="row">
+        <div>
+          <dt>New hire</dt>
+          <dd>Jordan Kim (SAMPLE)</dd>
+          <dt>Trainer</dt>
+          <dd>Alex Rivera (SAMPLE)</dd>
+          <dt>Assigned</dt>
+          <dd>20 Aug 2026 · version 1.1</dd>
+        </div>
+        <p class="status done">Complete</p>
+      </article>
+      <article class="row">
+        <div>
+          <dt>New hire</dt>
+          <dd>Casey Holt (SAMPLE)</dd>
+          <dt>Trainer</dt>
+          <dd>Alex Rivera (SAMPLE)</dd>
+          <dt>Assigned</dt>
+          <dd>28 Aug 2026 · version 1.1</dd>
+        </div>
+        <p class="status open">Not complete</p>
+      </article>
+    </div>
+  </section>
+
+  <p class="end">
+    SAMPLE. Not a Stryker product. Not Stryker policy. Not taught at Stryker.<br />
+    <a href="https://virgilrenfroe.github.io/course-samples/stryker-new-hire/">virgilrenfroe.github.io/course-samples/stryker-new-hire/</a>
+  </p>
+  <footer>
+    Virgil Renfroe · Greensboro, NC · <a href="../index.html">Course samples</a>
+  </footer>
+</main>
+<script>
+(function () {
+  const hire = document.getElementById("viewHire");
+  const lms = document.getElementById("viewLms");
+  const btnH = document.getElementById("btnHire");
+  const btnL = document.getElementById("btnLms");
+  function show(which) {
+    const onHire = which === "hire";
+    hire.classList.toggle("is-on", onHire);
+    lms.classList.toggle("is-on", !onHire);
+    hire.hidden = !onHire;
+    lms.hidden = onHire;
+    btnH.setAttribute("aria-pressed", onHire ? "true" : "false");
+    btnL.setAttribute("aria-pressed", onHire ? "false" : "true");
+  }
+  btnH.addEventListener("click", function () { show("hire"); });
+  btnL.addEventListener("click", function () { show("lms"); });
+
+  const say = {
+    op: {
+      "1": "That is the stop. Do not operate or demonstrate a product you have not been assigned. Do not in-service others on it.",
+      "0": "Stop. Do not operate or demonstrate it. Prior experience is not the sign-off. The assignment is."
+    },
+    imp: {
+      "1": "That is the stop. Current Instructions for Use. No substitute part. No last year’s printout.",
+      "0": "Do not improvise a repair, substitute a part, or work off last year’s printout. Use the current IFU."
+    },
+    esc: {
+      "1": "That is the stop. Compromised packaging, missing IFU, or a request outside your assigned scope: escalate.",
+      "0": "Stop and escalate. Knowing the product is not the sign-off. Torn packaging and a missing IFU are stops."
+    }
+  };
+  document.querySelectorAll(".item button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      const q = btn.getAttribute("data-q");
+      const ok = btn.getAttribute("data-ok") === "1";
+      btn.parentElement.querySelectorAll("button").forEach(function (b) {
+        b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+      });
+      const fb = document.getElementById("fb-" + q);
+      fb.hidden = false;
+      fb.className = "fb " + (ok ? "ok" : "no");
+      fb.textContent = say[q][ok ? "1" : "0"];
+    });
+  });
+
+  const VERSIONS = [
+    { id: "1.0", from: "2026-03-12", line: "Two stops: do not operate unassigned; current IFU, no improvise. Demonstrate / in-service is not in this version yet." },
+    { id: "1.1", from: "2026-07-15", line: "Adds “do not demonstrate / in-service others” because a new hire got asked. Three stops on the new-hire path." }
+  ];
+  function liveOn(iso) {
+    var v = VERSIONS[0];
+    for (var i = 0; i < VERSIONS.length; i++) {
+      if (iso >= VERSIONS[i].from) v = VERSIONS[i];
+    }
+    return v;
+  }
+  function renderAsOf() {
+    var iso = document.getElementById("asof").value || "2026-09-01";
+    var v = liveOn(iso);
+    document.getElementById("asofOut").innerHTML =
+      "<strong>Live on " + iso + ": version " + v.id + ".</strong> " + v.line + " SAMPLE dates.";
+  }
+  document.getElementById("asof").addEventListener("input", renderAsOf);
+  renderAsOf();
+})();
+</script>
+</body>
+</html>
