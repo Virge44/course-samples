@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Before you paste — faculty/staff AI session (SAMPLE)</title>
+<meta name="description" content="SAMPLE 45-minute faculty/staff session. Student work stays out of public tools. Write a syllabus line that holds. If the case is messy, book 20 minutes. Not a Duke product. Not taught at Duke. Not K–12." />
+<meta property="og:title" content="Before you paste — faculty/staff AI session (SAMPLE)" />
+<meta property="og:description" content="45-minute faculty/staff session. Not a Duke product. Not K–12." />
+<meta property="og:url" content="https://virgilrenfroe.github.io/course-samples/duke-ai-faculty/" />
+<meta property="og:type" content="website" />
+<style>
+  :root {
+    --ink: #1c1916;
+    --ink-2: #26221e;
+    --paper: #f4efe6;
+    --cream: #f7f4ee;
+    --muted: #b7afa3;
+    --muted-ink: #5c564c;
+    --sage: #9bb8ad;
+    --sage-deep: #3d6b63;
+    --accent: #8fafa3;
+    --rule: #3a3530;
+    --rule-paper: #d4cfc4;
+    --warn: #c4a574;
+    --bad: #c9897a;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+    color: var(--cream);
+    background: var(--ink);
+    line-height: 1.55;
+  }
+  a { color: var(--sage); }
+  a:hover { color: var(--cream); }
+  .wm {
+    position: fixed;
+    inset: -30%;
+    z-index: 40;
+    pointer-events: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: space-around;
+    gap: 4rem 6rem;
+    transform: rotate(-22deg);
+    user-select: none;
+    color: rgba(247, 244, 238, 0.055);
+    font-size: clamp(2.4rem, 8vw, 4.6rem);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .wm span { display: block; }
+  .banner {
+    position: relative;
+    z-index: 2;
+    background: #141210;
+    color: #d7d0c5;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.78rem;
+    padding: 0.7rem 1.25rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .wrap {
+    position: relative;
+    z-index: 2;
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 3.5rem;
+  }
+  .kicker {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin: 0 0 0.55rem;
+  }
+  h1 {
+    font-size: 2.05rem;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 0 0 0.85rem;
+    font-weight: 700;
+  }
+  h2 { font-size: 1.28rem; margin: 0 0 0.55rem; letter-spacing: -0.01em; }
+  h3 { font-size: 1.05rem; margin: 0 0 0.4rem; }
+  p { margin: 0 0 0.9rem; }
+  .lede { font-size: 1.12rem; color: #ece6da; }
+  .note, .small { color: var(--muted); font-size: 0.95rem; }
+  .label {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin: 0 0 0.35rem;
+  }
+  .cal {
+    display: grid;
+    grid-template-columns: 5.4rem 1fr;
+    gap: 0;
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+    margin: 1.15rem 0 1.4rem;
+  }
+  .cal-date {
+    background: var(--sage-deep);
+    color: var(--cream);
+    padding: 0.95rem 0.7rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .cal-date .dow {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .cal-date .num {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin: 0.15rem 0 0.1rem;
+  }
+  .cal-date .mon {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .cal-body { padding: 0.95rem 1.05rem 1.05rem; }
+  .cal-body h2 { margin: 0 0 0.35rem; color: var(--ink); }
+  .cal-body p { margin: 0 0 0.35rem; color: var(--ink); }
+  .cal-body .meta {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    margin: 0 0 0.45rem;
+  }
+  .cal-body .not-listing {
+    color: var(--muted-ink);
+    font-size: 0.9rem;
+    margin: 0.45rem 0 0;
+  }
+  .beats { margin: 0 0 1.3rem; }
+  .beat {
+    background: var(--ink-2);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--sage-deep);
+    border-radius: 8px;
+    padding: 1rem 1.1rem 1.05rem;
+    margin: 0.7rem 0;
+  }
+  .beat .n {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sage);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  .beat h2 { color: var(--cream); }
+  .beat p { margin-bottom: 0.55rem; }
+  .paper {
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 1.2rem 1.25rem 1.4rem;
+    margin: 0.85rem 0 1.15rem;
+  }
+  .paper h2, .paper h3 { color: var(--ink); }
+  .paper p { color: var(--ink); }
+  .paper .note { color: var(--muted-ink); }
+  .paper .label { color: var(--sage-deep); }
+  .write {
+    margin: 0.35rem 0 0.7rem;
+    width: 100%;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--rule-paper);
+    border-radius: 6px;
+    padding: 0.6rem 0.7rem;
+    min-height: 4.4rem;
+    resize: vertical;
+    line-height: 1.45;
+  }
+  .write:focus { outline: 2px solid var(--sage-deep); outline-offset: 1px; }
+  .starter {
+    background: #fff;
+    border: 1px dashed var(--rule-paper);
+    border-radius: 6px;
+    padding: 0.7rem 0.8rem;
+    font-size: 0.95rem;
+    color: var(--muted-ink);
+    margin: 0 0 0.7rem;
+  }
+  .q {
+    background: #fff;
+    border: 1px solid var(--rule-paper);
+    border-left: 3px solid var(--sage-deep);
+    border-radius: 6px;
+    padding: 0.9rem 0.95rem;
+    margin: 0.7rem 0;
+  }
+  .q h3 { font-size: 1.05rem; margin: 0 0 0.55rem; }
+  .q .n {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+  .choices { display: flex; flex-direction: column; gap: 0.4rem; }
+  .choices button {
+    font-family: Georgia, Palatino, serif;
+    font-size: 0.98rem;
+    text-align: left;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid #b7c9c2;
+    border-radius: 6px;
+    padding: 0.45rem 0.7rem;
+    cursor: pointer;
+  }
+  .choices button:hover { border-color: var(--sage-deep); }
+  .choices button[aria-pressed="true"] {
+    background: var(--sage-deep);
+    border-color: var(--sage-deep);
+    color: var(--cream);
+  }
+  .fb {
+    margin: 0.65rem 0 0;
+    font-size: 0.98rem;
+    min-height: 0;
+    color: var(--sage-deep);
+  }
+  .fb.no { color: #9a4e3e; }
+  .check-line {
+    margin: 0.9rem 0 0;
+    padding-top: 0.7rem;
+    border-top: 1px solid var(--rule-paper);
+    color: var(--muted-ink);
+    font-size: 0.95rem;
+  }
+  .send {
+    white-space: pre-wrap;
+    background: #fff;
+    border: 1px solid var(--rule-paper);
+    border-radius: 6px;
+    padding: 0.85rem 0.95rem;
+    margin: 0.5rem 0 0.85rem;
+    min-height: 5.2rem;
+    color: var(--ink);
+  }
+  .go, .ghost {
+    font-family: Georgia, Palatino, serif;
+    font-size: 1rem;
+    background: var(--sage-deep);
+    color: var(--cream);
+    border: 0;
+    border-radius: 6px;
+    padding: 0.5rem 0.95rem;
+    cursor: pointer;
+  }
+  .go:hover { filter: brightness(1.08); }
+  .ghost {
+    background: transparent;
+    color: var(--sage-deep);
+    border: 1px solid #b7c9c2;
+    margin-right: 0.45rem;
+  }
+  .copied { margin: 0.5rem 0 0; color: var(--sage-deep); font-size: 0.95rem; min-height: 1.2em; }
+  .honesty {
+    background: var(--ink-2);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.1rem;
+    margin: 1.2rem 0 0;
+  }
+  .honesty p { margin: 0; color: #d7d0c5; }
+  .end {
+    margin-top: 2rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.95rem;
+    color: var(--muted);
+    word-break: break-word;
+  }
+  footer { margin-top: 1.4rem; font-size: 0.9rem; color: var(--muted); }
+  @media (max-width: 640px) {
+    h1 { font-size: 1.7rem; }
+    .wrap { padding-top: 1.4rem; }
+    .cal { grid-template-columns: 4.6rem 1fr; }
+    .cal-date .num { font-size: 1.7rem; }
+    .choices button { font-size: 0.95rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wm" aria-hidden="true">
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+</div>
+<p class="banner"><strong>SAMPLE.</strong> Not a Duke product. Not taught at Duke. Not Duke AI Suite. Not K–12. Draft sample, not a course taught at A&amp;T. I made this as a clickable teaching object. The date below is labeled SAMPLE.</p>
+<main class="wrap">
+  <p class="kicker">Faculty / staff session · 45 minutes · SAMPLE</p>
+  <h1>Before you paste.</h1>
+  <p class="lede">This is a 45-minute session for faculty and staff, not a prompt class. Student work stays out of public tools. Write a syllabus line that holds. If the case is messy, book 20 minutes. That is the teaching. Not a Duke listing.</p>
+  <p class="note">I am Virgil Renfroe. I made this for people who do not live in the tools. A rule you can use this week. A consultation if the case is messy. A light check that you got it. University faculty and staff — not a K–12 classroom activity, not a course I taught at A&amp;T.</p>
+
+  <article class="cal" aria-label="Sample calendar card">
+    <div class="cal-date">
+      <span class="dow">Thu</span>
+      <span class="num">10</span>
+      <span class="mon">Sep</span>
+    </div>
+    <div class="cal-body">
+      <p class="meta">SAMPLE date · 2:00–2:45 p.m. · 45 min</p>
+      <h2>Before you paste</h2>
+      <p>Faculty / staff</p>
+      <p class="not-listing">Not a Duke listing. SAMPLE date. Draft sample only.</p>
+    </div>
+  </article>
+
+  <section class="beats" aria-label="Three beats">
+    <p class="label">Three beats · literacy, then integrity, then a next step</p>
+
+    <article class="beat">
+      <span class="n">Beat 1 · about 12 minutes · literacy</span>
+      <h2>Student work stays out of public tools.</h2>
+      <p>The rule you can use this week: do not paste student writing, names, grades, unpublished exams, or research that is not yours into a public tool. If you would not pin it on a board outside your office, it does not go in the box.</p>
+      <p class="note" style="margin:0">This is not a tools tour. Fluency is not the point. The point is what does not leave the room.</p>
+    </article>
+
+    <article class="beat">
+      <span class="n">Beat 2 · about 16 minutes · integrity</span>
+      <h2>A syllabus line that holds.</h2>
+      <p>One line students can actually follow. Not “don’t cheat.” Not a ban you will not keep. Allowed, disclose, or out of bounds — in a sentence you would read aloud on day one.</p>
+    </article>
+
+    <article class="beat">
+      <span class="n">Beat 3 · about 12 minutes · a next step</span>
+      <h2>This session, or book 20 minutes.</h2>
+      <p>This session is enough if you leave with the rule and a syllabus line you would actually post. Book 20 minutes if the case is messy: a student file, unpublished exam questions, a department that disagrees, research data, a FERPA edge. I translate. I do not pretend the 45 minutes covers the edge.</p>
+    </article>
+  </section>
+
+  <section class="paper" aria-label="Draft a syllabus line">
+    <p class="label">On the page · draft or edit a one-line syllabus statement</p>
+    <h2>Write the line you would post.</h2>
+    <p class="note">Starter, if you want it. Change it. It has to be a line you would read in the room.</p>
+    <p class="starter" id="starter">Student work — drafts, names, grades, unpublished exams — does not go into a public AI tool. If you use a tool on your own writing, say so in one line.</p>
+    <label class="label" for="syllabus">Your syllabus line</label>
+    <textarea class="write" id="syllabus" rows="3" placeholder="Write or paste a one-line statement."></textarea>
+    <button type="button" class="ghost" id="btnStarter">Use the starter</button>
+    <button type="button" class="go" id="btnKeep">Keep this line</button>
+    <p class="copied" id="keepMsg" hidden></p>
+  </section>
+
+  <section class="paper" aria-label="Light three-question check">
+    <p class="label">Light check · three questions · not a test score</p>
+    <h2>Did the three beats land.</h2>
+    <p class="note">Click what you would do. You get a sentence, not a score.</p>
+
+    <article class="q" data-q="q1">
+      <span class="n">Question 1 · literacy</span>
+      <h3>A colleague wants to paste a student’s draft into a public chatbot to “help them revise.”</h3>
+      <div class="choices" role="group" aria-label="Student work in a public tool">
+        <button type="button" data-ok="0">Fine if we delete the chat after.</button>
+        <button type="button" data-ok="1">Student work stays out of public tools. Sit with the student instead.</button>
+        <button type="button" data-ok="0">Fine if the student asked us to paste it.</button>
+      </div>
+      <p class="fb" id="fb-q1" hidden></p>
+    </article>
+
+    <article class="q" data-q="q2">
+      <span class="n">Question 2 · integrity</span>
+      <h3>Which syllabus line holds.</h3>
+      <div class="choices" role="group" aria-label="Syllabus line that holds">
+        <button type="button" data-ok="0">Don’t cheat with AI.</button>
+        <button type="button" data-ok="1">Student work does not go into a public AI tool. If you use a tool on your own writing, say so in one line.</button>
+        <button type="button" data-ok="0">AI is banned in every form. No exceptions, no conversation.</button>
+      </div>
+      <p class="fb" id="fb-q2" hidden></p>
+    </article>
+
+    <article class="q" data-q="q3">
+      <span class="n">Question 3 · next step</span>
+      <h3>You have a student case, unpublished exam questions, and a department that disagrees.</h3>
+      <div class="choices" role="group" aria-label="Session enough or book 20 minutes">
+        <button type="button" data-ok="0">The 45 minutes already covered it. Send them off.</button>
+        <button type="button" data-ok="1">Book 20 minutes. Name the messy part. This session was not the consult.</button>
+        <button type="button" data-ok="0">Point them at a two-hour PD and close the calendar.</button>
+      </div>
+      <p class="fb" id="fb-q3" hidden></p>
+    </article>
+
+    <p class="check-line" id="checkLine">Answer all three. This is a check that you got it — not a grade.</p>
+  </section>
+
+  <section class="paper" aria-label="Consultation next-step sentence">
+    <p class="label">Consultation · a sentence you can send</p>
+    <h2>If the case is messy, send this.</h2>
+    <p class="note">Fill the blank. Copy it. That is the next step — not another session of the same 45 minutes.</p>
+    <label class="label" for="messy">The messy part (SAMPLE is fine)</label>
+    <textarea class="write" id="messy" rows="2" placeholder="e.g. unpublished midterm questions a student put in a public tool."></textarea>
+    <div class="send" id="sendNote"></div>
+    <button type="button" class="go" id="btnCopy">Copy the sentence</button>
+    <p class="copied" id="copyMsg" hidden></p>
+  </section>
+
+  <aside class="honesty">
+    <p class="label">Honesty</p>
+    <p>SAMPLE. Not a Duke product. Not taught at Duke. Not Duke AI Suite. Not K–12. Draft sample, not a course taught at A&amp;T. I did not teach this at Duke. I made the demo.</p>
+  </aside>
+
+  <p class="end">
+    SAMPLE. Not a Duke listing.<br />
+    <a href="https://virgilrenfroe.github.io/course-samples/duke-ai-faculty/">virgilrenfroe.github.io/course-samples/duke-ai-faculty/</a>
+  </p>
+  <footer>
+    Virgil Renfroe · Greensboro, NC · <a href="../index.html">Course samples</a>
+  </footer>
+</main>
+<script>
+(function () {
+  var answers = { q1: null, q2: null, q3: null };
+  var kept = "";
+  var syllabus = document.getElementById("syllabus");
+  var keepMsg = document.getElementById("keepMsg");
+  var messy = document.getElementById("messy");
+  var sendNote = document.getElementById("sendNote");
+  var copyMsg = document.getElementById("copyMsg");
+  var checkLine = document.getElementById("checkLine");
+  var starter = document.getElementById("starter").textContent.trim();
+
+  var fb = {
+    q1: {
+      ok: "Yes. Student work stays out of public tools. That is the rule this week.",
+      no: "No. Deleting the chat, or a student asking you to paste, does not make student work public-safe. Sit with the student. Do not paste the draft."
+    },
+    q2: {
+      ok: "That line holds. Students can follow it. You can keep it.",
+      no: "Too foggy, or too total. “Don’t cheat” does not tell them what to do. A blanket ban you will not keep does not hold. Write a line you would read aloud."
+    },
+    q3: {
+      ok: "Book 20 minutes. Name the messy part. The 45 minutes taught the rule. The edge is a consult.",
+      no: "The 45 minutes is not the consult. A two-hour PD is a different object. If the case is messy, book 20 minutes."
+    }
+  };
+
+  function sentence() {
+    var line = (kept || syllabus.value.trim() || "a draft syllabus line");
+    var gap = messy.value.trim() || "___";
+    return "I sat the 45-minute session (Before you paste). I have the rule — student work stays out of public tools — and this syllabus line: \u201c" + line + "\u201d I\u2019d like 20 minutes on: " + gap + ".";
+  }
+
+  function renderSend() {
+    sendNote.textContent = sentence();
+  }
+
+  function renderCheck() {
+    var n = (answers.q1 ? 1 : 0) + (answers.q2 ? 1 : 0) + (answers.q3 ? 1 : 0);
+    if (n < 3) {
+      checkLine.textContent = "Answer all three. This is a check that you got it — not a grade.";
+      return;
+    }
+    var allOk = answers.q1 === "1" && answers.q2 === "1" && answers.q3 === "1";
+    checkLine.textContent = allOk
+      ? "You have the three moves: the rule, a line that holds, and when to book 20 minutes. Not a score."
+      : "Look again at any beat that did not land. Still not a score — the session is the rule, the line, and the consult.";
+  }
+
+  document.querySelectorAll(".q").forEach(function (block) {
+    var key = block.getAttribute("data-q");
+    block.querySelectorAll(".choices button").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        block.querySelectorAll(".choices button").forEach(function (b) {
+          b.setAttribute("aria-pressed", "false");
+        });
+        btn.setAttribute("aria-pressed", "true");
+        var ok = btn.getAttribute("data-ok") === "1";
+        answers[key] = btn.getAttribute("data-ok");
+        var out = document.getElementById("fb-" + key);
+        out.hidden = false;
+        out.className = "fb" + (ok ? "" : " no");
+        out.textContent = ok ? fb[key].ok : fb[key].no;
+        renderCheck();
+      });
+    });
+  });
+
+  document.getElementById("btnStarter").addEventListener("click", function () {
+    syllabus.value = starter;
+    syllabus.focus();
+  });
+
+  document.getElementById("btnKeep").addEventListener("click", function () {
+    var t = syllabus.value.trim();
+    if (!t) {
+      keepMsg.hidden = false;
+      keepMsg.textContent = "Write a line, or use the starter, then keep it.";
+      return;
+    }
+    kept = t;
+    keepMsg.hidden = false;
+    keepMsg.textContent = "Kept. It will sit in the sentence you can send.";
+    renderSend();
+  });
+
+  messy.addEventListener("input", renderSend);
+  syllabus.addEventListener("input", function () {
+    if (kept) kept = syllabus.value.trim();
+    renderSend();
+  });
+
+  document.getElementById("btnCopy").addEventListener("click", function () {
+    var t = sentence();
+    function ok() {
+      copyMsg.hidden = false;
+      copyMsg.textContent = "Copied. Send it.";
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(t).then(ok).catch(function () {
+        copyMsg.hidden = false;
+        copyMsg.textContent = "Select the sentence and copy it.";
+      });
+    } else {
+      copyMsg.hidden = false;
+      copyMsg.textContent = "Select the sentence and copy it.";
+    }
+  });
+
+  renderSend();
+})();
+</script>
+</body>
+</html>
