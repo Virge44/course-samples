@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>You still take this version — mixed-readiness field lesson (SAMPLE)</title>
+<meta name="description" content="SAMPLE product technical training for mixed-readiness utility implementers. Clickable lesson plus trainer view. Not an Itron product. Not a meter IFU." />
+<meta property="og:title" content="You still take this version — sample field lesson" />
+<meta property="og:description" content="Mixed-readiness field lesson + trainer view. Not an Itron product. SAMPLE." />
+<meta property="og:url" content="https://virgilrenfroe.github.io/course-samples/itron-training/" />
+<meta property="og:type" content="website" />
+<style>
+  :root {
+    --ink: #1c1916;
+    --ink-2: #26221e;
+    --paper: #f4efe6;
+    --cream: #f7f4ee;
+    --muted: #b7afa3;
+    --muted-ink: #5c564c;
+    --sage: #9bb8ad;
+    --sage-deep: #3d6b63;
+    --rule: #3a3530;
+    --rule-paper: #d4cfc4;
+    --warn: #c4a574;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+    color: var(--cream);
+    background: var(--ink);
+    line-height: 1.55;
+  }
+  a { color: var(--sage); }
+  a:hover { color: var(--cream); }
+  a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 2px solid var(--sage);
+    outline-offset: 2px;
+  }
+  .skip { position: absolute; left: -9999px; top: 0; }
+  .skip:focus {
+    left: 1rem; top: 0.6rem; z-index: 50;
+    background: var(--ink); color: var(--cream); padding: 0.4rem 0.7rem;
+  }
+  .wm {
+    position: fixed; inset: -30%; z-index: 40; pointer-events: none;
+    display: flex; flex-wrap: wrap; align-content: space-around; justify-content: space-around;
+    gap: 4rem 6rem; transform: rotate(-22deg); user-select: none;
+    color: rgba(247, 244, 238, 0.055);
+    font-size: clamp(2.4rem, 8vw, 4.6rem); font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .wm span { display: block; }
+  .banner {
+    position: relative; z-index: 2; background: #141210; color: #d7d0c5;
+    font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem;
+    padding: 0.7rem 1.25rem; border-bottom: 1px solid var(--rule);
+  }
+  .wrap {
+    position: relative; z-index: 2; max-width: 42rem;
+    margin: 0 auto; padding: 2rem 1.25rem 3.5rem;
+  }
+  .kicker {
+    font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--sage);
+    margin: 0 0 0.55rem;
+  }
+  h1 { font-size: 2.05rem; letter-spacing: -0.02em; line-height: 1.2; margin: 0 0 0.85rem; font-weight: 700; }
+  h2 { font-size: 1.28rem; margin: 0 0 0.55rem; letter-spacing: -0.01em; }
+  h3 { font-size: 1.05rem; margin: 0 0 0.4rem; }
+  p { margin: 0 0 0.9rem; }
+  .lede { font-size: 1.12rem; color: #ece6da; }
+  .note { color: var(--muted); font-size: 0.95rem; }
+  .label {
+    font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.72rem;
+    letter-spacing: 0.07em; text-transform: uppercase; color: var(--sage); margin: 0 0 0.35rem;
+  }
+  .views { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.15rem 0 1.1rem; }
+  .views button {
+    font-family: Georgia, Palatino, serif; font-size: 1rem;
+    background: transparent; color: var(--cream);
+    border: 1px solid var(--rule); border-radius: 6px;
+    padding: 0.5rem 0.95rem; cursor: pointer;
+  }
+  .views button[aria-pressed="true"] {
+    background: var(--sage-deep); border-color: var(--sage-deep); color: var(--cream);
+  }
+  .panel { display: none; }
+  .panel.is-on { display: block; }
+  .paper {
+    background: var(--paper); color: var(--ink);
+    border-radius: 8px; padding: 1.2rem 1.25rem 1.4rem;
+  }
+  .paper h2, .paper h3, .paper p, .paper li { color: var(--ink); }
+  .paper .note { color: var(--muted-ink); }
+  .paper .label { color: var(--sage-deep); }
+  .beats {
+    display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 0.9rem;
+  }
+  .beats button {
+    font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.82rem;
+    background: #fff; color: var(--sage-deep);
+    border: 1px solid var(--rule-paper); border-radius: 6px;
+    padding: 0.35rem 0.6rem; cursor: pointer;
+  }
+  .beats button[aria-current="true"] {
+    background: var(--sage-deep); color: var(--cream); border-color: var(--sage-deep);
+  }
+  .beat {
+    background: #fff; border: 1px solid var(--rule-paper); border-radius: 6px;
+    padding: 0.95rem 1rem; min-height: 11rem;
+  }
+  .beat .n {
+    font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.72rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--sage-deep);
+    display: block; margin-bottom: 0.35rem;
+  }
+  .navrow { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.9rem; }
+  .go, .ghost {
+    font-family: Georgia, Palatino, serif; font-size: 0.95rem;
+    background: var(--sage-deep); color: var(--cream);
+    border: 0; border-radius: 6px; padding: 0.45rem 0.85rem; cursor: pointer;
+  }
+  .ghost {
+    background: transparent; color: var(--sage-deep); border: 1px solid #b7c9c2;
+  }
+  .item {
+    background: #fff; border: 1px solid var(--rule-paper); border-radius: 6px;
+    padding: 0.85rem 0.95rem; margin: 0.5rem 0 0;
+  }
+  .item .btns { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .item button {
+    font-family: Georgia, Palatino, serif; font-size: 0.95rem;
+    background: var(--sage-deep); color: var(--cream);
+    border: 0; border-radius: 6px; padding: 0.4rem 0.75rem;
+    cursor: pointer; text-align: left;
+  }
+  .item button.alt {
+    background: transparent; color: var(--sage-deep); border: 1px solid #b7c9c2;
+  }
+  .fb { margin: 0.65rem 0 0; font-size: 0.98rem; }
+  .fb.ok { color: var(--sage-deep); }
+  .fb.no { color: #9a4e3e; }
+  .ink-card {
+    background: var(--ink-2); border: 1px solid var(--rule);
+    border-radius: 8px; padding: 1rem 1.1rem; margin: 0.7rem 0;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  th, td { text-align: left; padding: 0.5rem 0.4rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th {
+    font-weight: 700; color: var(--sage); font-size: 0.78rem;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    font-family: "Segoe UI", system-ui, sans-serif;
+  }
+  .asof { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin: 0.6rem 0 0.8rem; }
+  .asof label { font-size: 0.95rem; }
+  input[type="date"] {
+    font: inherit; padding: 0.35rem 0.45rem; border: 1px solid var(--rule);
+    border-radius: 5px; background: #fff; color: var(--ink);
+  }
+  .strip { display: grid; gap: 0.65rem; margin: 0.6rem 0 0.2rem; }
+  .row {
+    display: grid; grid-template-columns: 1fr auto; gap: 0.35rem 0.8rem;
+    background: var(--ink-2); border: 1px solid var(--rule);
+    border-radius: 8px; padding: 0.85rem 1rem;
+  }
+  .row dt {
+    font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.72rem;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--sage); margin: 0.15rem 0 0;
+  }
+  .row dd { margin: 0 0 0.35rem; }
+  .status {
+    font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.75rem;
+    letter-spacing: 0.05em; text-transform: uppercase; align-self: start;
+    padding: 0.28rem 0.5rem; border-radius: 4px; border: 1px solid var(--rule); height: fit-content;
+  }
+  .status.done { color: var(--sage); border-color: var(--sage-deep); }
+  .status.open { color: var(--warn); border-color: #8a6a32; }
+  .end {
+    margin-top: 2rem; padding-top: 1.1rem; border-top: 1px solid var(--rule);
+    font-size: 0.95rem; color: var(--muted); word-break: break-word;
+  }
+  footer { margin-top: 1.4rem; font-size: 0.9rem; color: var(--muted); }
+  @media (max-width: 640px) {
+    h1 { font-size: 1.7rem; }
+    .wrap { padding-top: 1.4rem; }
+    table { font-size: 0.84rem; }
+    .row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wm" aria-hidden="true">
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+</div>
+<p class="banner"><strong>SAMPLE.</strong> Not an Itron product. Not a meter IFU. No utility-metering tenure. Names, dates, and completions below are labeled SAMPLE. I made this as a clickable teaching object — not an authoring-tool player.</p>
+<main class="wrap" id="main">
+  <p class="kicker">Instructional design sample · mixed-readiness field · product technical training</p>
+  <h1>You still take this version. Prior experience is not the sign-off.</h1>
+  <p class="lede">I wrote this for mixed-readiness people putting in a site endpoint — electric, water, or gas. Same stops. I am Virgil Renfroe. This is a sample lesson plus a trainer view, not an Itron product, not a claim that I installed meters.</p>
+  <p class="note">If you have done this kind of work before, you still take this version. Prior experience is not the sign-off. The assignment is.</p>
+
+  <div class="views" role="tablist" aria-label="Lesson views">
+    <button type="button" id="btnLesson" role="tab" aria-pressed="true" aria-controls="viewLesson">Lesson</button>
+    <button type="button" id="btnTrain" role="tab" aria-pressed="false" aria-controls="viewTrain">Trainer view</button>
+  </div>
+
+  <section class="panel is-on" id="viewLesson" role="tabpanel" aria-labelledby="btnLesson">
+    <div class="paper">
+      <p class="label">Lesson · four beats · version 1.1 live · SAMPLE</p>
+      <h2>Field install of a site endpoint. Click through.</h2>
+      <p class="note">A short lesson, not a slide deck and not a player chrome. Jump any beat, or go in order.</p>
+      <div class="beats" role="navigation" aria-label="Lesson beats">
+        <button type="button" data-beat="0" aria-current="true">1 · Assigned</button>
+        <button type="button" data-beat="1">2 · Current sheet</button>
+        <button type="button" data-beat="2">3 · Stop and escalate</button>
+        <button type="button" data-beat="3">4 · Check</button>
+      </div>
+      <div id="beatBox" class="beat" aria-live="polite"></div>
+      <div class="navrow">
+        <button type="button" class="ghost" id="btnPrev">Previous beat</button>
+        <button type="button" class="go" id="btnNext">Next beat</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="viewTrain" role="tabpanel" aria-labelledby="btnTrain" hidden>
+    <p class="label">Trainer view · same lesson</p>
+    <h2>Who was assigned, on what date, on what version.</h2>
+    <p>The lesson above is version 1.1. Version 1.0 did not say “do not commission others’ sites.” This view is the control, not a second course.</p>
+
+    <div class="ink-card">
+      <p class="label">As-of control (SAMPLE dates)</p>
+      <p class="note">Pick a date. The table does not change; the line below tells you what was live that day.</p>
+      <div class="asof">
+        <label for="asof">As of</label>
+        <input type="date" id="asof" value="2026-09-01" min="2026-04-02" max="2026-09-01" />
+      </div>
+      <p id="asofOut"></p>
+    </div>
+
+    <div class="ink-card">
+      <p class="label">Version table</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Version</th>
+            <th>Live from (SAMPLE)</th>
+            <th>What was in it</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1.0</td>
+            <td>2 Apr 2026</td>
+            <td>Assigned endpoint only. Current field sheet, not last year’s printout. Stop-and-escalate if the site is not the one on the sheet (electric / water / gas share that rule).</td>
+          </tr>
+          <tr>
+            <td>1.1</td>
+            <td>18 Aug 2026</td>
+            <td>Adds “do not commission others’ sites” because someone got asked. Current path still starts with assigned + current sheet + shared stop-and-escalate.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">SAMPLE dates. So a question — what was live on date X — has an answer on this page.</p>
+    </div>
+
+    <h2>Assignment strip</h2>
+    <p class="note">SAMPLE trainer. SAMPLE implementer. Names labeled SAMPLE. This is not a live roster. Not an Itron product.</p>
+    <div class="strip">
+      <article class="row">
+        <div>
+          <dt>Implementer</dt>
+          <dd>Jordan Kim (SAMPLE)</dd>
+          <dt>Trainer</dt>
+          <dd>Alex Rivera (SAMPLE)</dd>
+          <dt>Assigned</dt>
+          <dd>21 Aug 2026 · version 1.1 · electric site endpoint (SAMPLE)</dd>
+        </div>
+        <p class="status done">Complete</p>
+      </article>
+      <article class="row">
+        <div>
+          <dt>Implementer</dt>
+          <dd>Casey Holt (SAMPLE)</dd>
+          <dt>Trainer</dt>
+          <dd>Alex Rivera (SAMPLE)</dd>
+          <dt>Assigned</dt>
+          <dd>29 Aug 2026 · version 1.1 · water site endpoint (SAMPLE)</dd>
+        </div>
+        <p class="status open">Not complete</p>
+      </article>
+    </div>
+  </section>
+
+  <p class="end">
+    SAMPLE. Not an Itron product. Not a meter IFU. No utility-metering tenure.<br />
+    <a href="https://virgilrenfroe.github.io/course-samples/itron-training/">virgilrenfroe.github.io/course-samples/itron-training/</a>
+  </p>
+  <footer>
+    Virgil Renfroe · Greensboro, NC · <a href="../index.html">Course samples</a>
+  </footer>
+</main>
+<script>
+(function () {
+  var lesson = document.getElementById("viewLesson");
+  var train = document.getElementById("viewTrain");
+  var btnL = document.getElementById("btnLesson");
+  var btnT = document.getElementById("btnTrain");
+  function show(which) {
+    var onL = which === "lesson";
+    lesson.classList.toggle("is-on", onL);
+    train.classList.toggle("is-on", !onL);
+    lesson.hidden = !onL;
+    train.hidden = onL;
+    btnL.setAttribute("aria-pressed", onL ? "true" : "false");
+    btnT.setAttribute("aria-pressed", onL ? "false" : "true");
+  }
+  btnL.addEventListener("click", function () { show("lesson"); });
+  btnT.addEventListener("click", function () { show("train"); });
+
+  var beats = [
+    {
+      n: "Beat 1 of 4 · assigned",
+      h: "Do not install an endpoint you have not been assigned.",
+      p: "Two units are in the van. One is on your sheet. One is not. You have done this kind of work before. You still do not install the one that is not yours. The assignment is the sign-off."
+    },
+    {
+      n: "Beat 2 of 4 · current sheet",
+      h: "Use the current field sheet, not last year’s printout.",
+      p: "Last year’s printout is in the door pocket. The current field sheet is in this week’s packet. Electric, water, and gas sites all use the sheet dated for this job. A photo of last year is not the sheet."
+    },
+    {
+      n: "Beat 3 of 4 · stop and escalate",
+      h: "If the site is not the one on the sheet, stop. Electric, water, and gas share this rule.",
+      p: "The house number, the yard, the meter pit — if it is not the site on the sheet, you do not make it work. You stop. You escalate. You do not commission a site that belongs to someone else. That last line is why version 1.1 exists."
+    },
+    {
+      n: "Beat 4 of 4 · check",
+      h: "Click what you would do. You get a sentence, not a score.",
+      check: true
+    }
+  ];
+  var i = 0;
+  var box = document.getElementById("beatBox");
+  var tabs = document.querySelectorAll(".beats button");
+  function render() {
+    var b = beats[i];
+    tabs.forEach(function (t, idx) {
+      t.setAttribute("aria-current", idx === i ? "true" : "false");
+    });
+    if (b.check) {
+      box.innerHTML =
+        '<span class="n">' + b.n + '</span><h3>' + b.h + '</h3>' +
+        '<p>A colleague asks you to commission their water site while you are finishing your electric one. You have done water work before. Last year’s printout for their site is in the truck.</p>' +
+        '<div class="item"><div class="btns">' +
+        '<button type="button" class="alt" data-ok="0">Commission theirs. I have done water. Use the printout.</button>' +
+        '<button type="button" data-ok="1">I will not commission a site I was not assigned. Current sheet or I stop.</button>' +
+        '</div><p class="fb" id="fbBeat" hidden></p></div>';
+      box.querySelectorAll(".item button").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var ok = btn.getAttribute("data-ok") === "1";
+          btn.parentElement.querySelectorAll("button").forEach(function (x) {
+            x.setAttribute("aria-pressed", x === btn ? "true" : "false");
+          });
+          var fb = document.getElementById("fbBeat");
+          fb.hidden = false;
+          fb.className = "fb " + (ok ? "ok" : "no");
+          fb.textContent = ok
+            ? "That is the stop. Prior experience is not the sign-off. Do not commission others’ sites. Use the current field sheet."
+            : "Stop. You still take this version. Do not install or commission an endpoint you have not been assigned. Last year’s printout is not the sheet.";
+        });
+      });
+    } else {
+      box.innerHTML = '<span class="n">' + b.n + '</span><h3>' + b.h + '</h3><p>' + b.p + '</p>';
+    }
+    document.getElementById("btnPrev").disabled = i === 0;
+    document.getElementById("btnNext").disabled = i === beats.length - 1;
+  }
+  tabs.forEach(function (t) {
+    t.addEventListener("click", function () {
+      i = Number(t.getAttribute("data-beat"));
+      render();
+    });
+  });
+  document.getElementById("btnPrev").addEventListener("click", function () {
+    if (i > 0) { i -= 1; render(); }
+  });
+  document.getElementById("btnNext").addEventListener("click", function () {
+    if (i < beats.length - 1) { i += 1; render(); }
+  });
+  render();
+
+  var VERSIONS = [
+    { id: "1.0", from: "2026-04-02", line: "Assigned endpoint only. Current field sheet. Shared stop-and-escalate if the site is not on the sheet. “Do not commission others’ sites” is not in this version yet." },
+    { id: "1.1", from: "2026-08-18", line: "Adds “do not commission others’ sites” because someone got asked. Four beats on the lesson path." }
+  ];
+  function liveOn(iso) {
+    var v = VERSIONS[0];
+    for (var n = 0; n < VERSIONS.length; n++) {
+      if (iso >= VERSIONS[n].from) v = VERSIONS[n];
+    }
+    return v;
+  }
+  function renderAsOf() {
+    var iso = document.getElementById("asof").value || "2026-09-01";
+    var v = liveOn(iso);
+    document.getElementById("asofOut").innerHTML =
+      "<strong>Live on " + iso + ": version " + v.id + ".</strong> " + v.line + " SAMPLE dates.";
+  }
+  document.getElementById("asof").addEventListener("input", renderAsOf);
+  renderAsOf();
+})();
+</script>
+</body>
+</html>

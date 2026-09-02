@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The card they can find in the flow of work — sample</title>
+<meta name="description" content="SAMPLE in-the-flow job-aid cards with search. Generic fleet/field enablement. Not a Samsara product. Not a 40-slide deck." />
+<meta property="og:title" content="The card they can find in the flow of work — sample" />
+<meta property="og:description" content="Searchable job-aid cards. Not a Samsara product. SAMPLE." />
+<meta property="og:url" content="https://virgilrenfroe.github.io/course-samples/samsara-job-aid/" />
+<meta property="og:type" content="website" />
+<style>
+  :root {
+    --ink: #1c1916;
+    --ink-2: #26221e;
+    --paper: #f4efe6;
+    --cream: #f7f4ee;
+    --muted: #b7afa3;
+    --muted-ink: #5c564c;
+    --sage: #9bb8ad;
+    --sage-deep: #3d6b63;
+    --rule: #3a3530;
+    --rule-paper: #d4cfc4;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+    color: var(--cream);
+    background: var(--ink);
+    line-height: 1.55;
+  }
+  a { color: var(--sage); }
+  a:hover { color: var(--cream); }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--sage);
+    outline-offset: 2px;
+  }
+  .skip { position: absolute; left: -9999px; top: 0; }
+  .skip:focus {
+    left: 1rem; top: 0.6rem; z-index: 50;
+    background: var(--ink); color: var(--cream); padding: 0.4rem 0.7rem;
+  }
+  .wm {
+    position: fixed; inset: -30%; z-index: 40; pointer-events: none;
+    display: flex; flex-wrap: wrap; align-content: space-around; justify-content: space-around;
+    gap: 4rem 6rem; transform: rotate(-22deg); user-select: none;
+    color: rgba(247, 244, 238, 0.055);
+    font-size: clamp(2.4rem, 8vw, 4.6rem); font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .wm span { display: block; }
+  .banner {
+    position: relative; z-index: 2; background: #141210; color: #d7d0c5;
+    font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem;
+    padding: 0.7rem 1.25rem; border-bottom: 1px solid var(--rule);
+  }
+  .wrap {
+    position: relative; z-index: 2; max-width: 42rem;
+    margin: 0 auto; padding: 2rem 1.25rem 3.5rem;
+  }
+  .kicker {
+    font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--sage);
+    margin: 0 0 0.55rem;
+  }
+  h1 { font-size: 2.05rem; letter-spacing: -0.02em; line-height: 1.2; margin: 0 0 0.85rem; font-weight: 700; }
+  h2 { font-size: 1.28rem; margin: 0 0 0.55rem; letter-spacing: -0.01em; }
+  h3 { font-size: 1.08rem; margin: 0 0 0.4rem; }
+  p { margin: 0 0 0.9rem; }
+  .lede { font-size: 1.12rem; color: #ece6da; }
+  .note { color: var(--muted); font-size: 0.95rem; }
+  .label {
+    font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.72rem;
+    letter-spacing: 0.07em; text-transform: uppercase; color: var(--sage); margin: 0 0 0.35rem;
+  }
+  .find {
+    background: var(--ink-2); border: 1px solid var(--rule);
+    border-radius: 8px; padding: 1rem 1.1rem; margin: 0.4rem 0 1.1rem;
+  }
+  .find label {
+    display: block; font-size: 0.95rem; color: var(--cream); margin: 0 0 0.35rem;
+  }
+  .find input, .find textarea {
+    width: 100%; font: inherit; font-size: 1rem;
+    padding: 0.5rem 0.6rem; border: 1px solid var(--rule);
+    border-radius: 6px; background: #fff; color: var(--ink);
+  }
+  .find textarea { min-height: 4.2rem; resize: vertical; }
+  .find .row { margin: 0 0 0.85rem; }
+  .go, .ghost {
+    font-family: Georgia, Palatino, serif; font-size: 0.95rem;
+    background: var(--sage-deep); color: var(--cream);
+    border: 0; border-radius: 6px; padding: 0.45rem 0.85rem; cursor: pointer;
+  }
+  .ghost {
+    background: transparent; color: var(--sage); border: 1px solid var(--rule);
+  }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0.2rem 0 0; }
+  #live {
+    min-height: 1.4rem; margin: 0.65rem 0 0; font-size: 0.95rem; color: var(--sage);
+  }
+  .cards { display: grid; gap: 0.85rem; }
+  .card {
+    background: var(--paper); color: var(--ink);
+    border-radius: 8px; padding: 1.1rem 1.15rem 1.2rem;
+  }
+  .card h2, .card h3, .card p, .card li { color: var(--ink); }
+  .card .note { color: var(--muted-ink); }
+  .card .label { color: var(--sage-deep); }
+  .card ol, .card ul { margin: 0.2rem 0 0.7rem; padding-left: 1.2rem; }
+  .card li { margin: 0.35rem 0; }
+  .end {
+    margin-top: 2rem; padding-top: 1.1rem; border-top: 1px solid var(--rule);
+    font-size: 0.95rem; color: var(--muted); word-break: break-word;
+  }
+  footer { margin-top: 1.4rem; font-size: 0.9rem; color: var(--muted); }
+  @media (max-width: 640px) {
+    h1 { font-size: 1.7rem; }
+    .wrap { padding-top: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wm" aria-hidden="true">
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+  <span>SAMPLE</span><span>SAMPLE</span><span>SAMPLE</span>
+</div>
+<p class="banner"><strong>SAMPLE.</strong> Not a Samsara product. Not a telematics IFU. Not a billed model. Names below are labeled SAMPLE. I made this as in-the-flow performance support — a card you can find, not a course player.</p>
+<main class="wrap" id="main">
+  <p class="kicker">Instructional design sample · in-the-flow performance support</p>
+  <h1>The card they can find. Not a 40-slide deck.</h1>
+  <p class="lede">I sat with people who did not know where to start. This is the card they can find in the flow of work, not a 40-slide deck. I am Virgil Renfroe. Search filters SAMPLE cards. “Ask in plain words” matches keywords on this page. It is not a Samsara product. It is not a billed API.</p>
+  <p class="note">Generic fleet / field enablement. Three cards. If none match, the page says so. SAMPLE throughout.</p>
+
+  <form class="find" id="findForm" role="search">
+    <p class="label">Find a card</p>
+    <div class="row">
+      <label for="q">Search the cards</label>
+      <input type="search" id="q" name="q" autocomplete="off" placeholder="driver, offline, coaching…" />
+    </div>
+    <div class="row">
+      <label for="ask">Ask in plain words (optional)</label>
+      <textarea id="ask" name="ask" placeholder="The vehicle unit is not showing. What do I try first?"></textarea>
+    </div>
+    <div class="actions">
+      <button type="submit" class="go">Find matching cards</button>
+      <button type="button" class="ghost" id="btnClear">Show all three</button>
+    </div>
+    <p id="live" role="status" aria-live="polite"></p>
+    <p class="note" style="margin:0.55rem 0 0;">This matches words you typed to SAMPLE cards on this page. It does not call a model. It is not a Samsara AI product.</p>
+  </form>
+
+  <div class="cards" id="cards">
+    <article class="card" data-keys="new driver first week run check assignment vehicle dispatcher pre-trip start day one hire">
+      <p class="label">Card 1 · SAMPLE · new driver</p>
+      <h2>First week. What to check before the first run.</h2>
+      <p>Do not start the run to “figure it out on the road.” Three checks. If any one is missing, stop and ask.</p>
+      <ol>
+        <li>Today’s assignment is in your hand — who, where, by when. Not yesterday’s list.</li>
+        <li>The vehicle you were given is the vehicle on that assignment.</li>
+        <li>You have a working way to call in (the number on the current sheet, not a number someone texted last year).</li>
+      </ol>
+      <p class="note">If any check fails: do not start the run. Ask the dispatcher (SAMPLE: M. Chen). Not a product tour. Not a telematics IFU.</p>
+    </article>
+
+    <article class="card" data-keys="device offline unit not showing connecting power cable dead zone escalate try three vehicle">
+      <p class="label">Card 2 · SAMPLE · when a device is offline</p>
+      <h2>When a device is offline: three things to try, then escalate.</h2>
+      <p>Do not keep guessing. Do not improvise a bypass. Try these three. Then hand it off.</p>
+      <ol>
+        <li>Confirm you are looking at the vehicle you were assigned — the ID on the sheet, not the one next to it.</li>
+        <li>The obvious: is it powered, is the cable seated, did it just leave a stretch with no signal.</li>
+        <li>Write the time and what you already tried, in one line.</li>
+      </ol>
+      <p class="note">Then escalate with that line. SAMPLE contact: yard desk, R. Patel. Not a repair. Not a product model.</p>
+    </article>
+
+    <article class="card" data-keys="coach coaching stuck teammate question next step help new person enablement talk">
+      <p class="label">Card 3 · SAMPLE · coaching a stuck teammate</p>
+      <h2>Coaching a stuck teammate: one question, one next step.</h2>
+      <p>They do not need a deck. They need one question, then one thing to do.</p>
+      <ul>
+        <li><strong>One question:</strong> “What did you already try?” Wait for the answer. Do not recap the week.</li>
+        <li><strong>One next step:</strong> name the card that matches (first run, or offline), or escalate with them. Sit with the card. Do not send forty slides.</li>
+      </ul>
+      <p class="note">SAMPLE names only. This is enablement in the flow of work, not a sales script, not a titled sales-enablement course.</p>
+    </article>
+  </div>
+
+  <p class="end">
+    SAMPLE. Not a Samsara product. Not a telematics IFU. Not a billed model.<br />
+    <a href="https://virgilrenfroe.github.io/course-samples/samsara-job-aid/">virgilrenfroe.github.io/course-samples/samsara-job-aid/</a>
+  </p>
+  <footer>
+    Virgil Renfroe · Greensboro, NC · <a href="../index.html">Course samples</a>
+  </footer>
+</main>
+<script>
+(function () {
+  var cards = Array.prototype.slice.call(document.querySelectorAll("#cards .card"));
+  var live = document.getElementById("live");
+  var q = document.getElementById("q");
+  var ask = document.getElementById("ask");
+
+  function tokens(s) {
+    return (s || "").toLowerCase().replace(/[^a-z0-9\s]/g, " ").split(/\s+/).filter(function (w) {
+      return w.length > 2;
+    });
+  }
+  function score(card, words) {
+    if (!words.length) return 1;
+    var hay = (card.getAttribute("data-keys") + " " + card.textContent).toLowerCase();
+    var hits = 0;
+    words.forEach(function (w) {
+      if (hay.indexOf(w) !== -1) hits += 1;
+    });
+    return hits;
+  }
+  function apply(words, source) {
+    var shown = 0;
+    cards.forEach(function (c) {
+      var n = score(c, words);
+      var on = !words.length || n > 0;
+      c.hidden = !on;
+      if (on) shown += 1;
+    });
+    if (!words.length) {
+      live.textContent = "All three SAMPLE cards.";
+    } else if (shown === 0) {
+      live.textContent = "No SAMPLE card matched those words. Try driver, offline, or coaching — or show all three.";
+    } else {
+      live.textContent = shown + " SAMPLE card" + (shown === 1 ? "" : "s") + " matched" + (source ? " (" + source + ")" : "") + ".";
+    }
+  }
+  document.getElementById("findForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var words = tokens(q.value + " " + ask.value);
+    var source = ask.value.trim() ? "plain words + search" : "search";
+    apply(words, source);
+  });
+  q.addEventListener("input", function () {
+    apply(tokens(q.value), "search");
+  });
+  document.getElementById("btnClear").addEventListener("click", function () {
+    q.value = "";
+    ask.value = "";
+    apply([], "");
+    q.focus();
+  });
+  apply([], "");
+})();
+</script>
+</body>
+</html>
